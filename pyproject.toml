@@ -125,6 +125,8 @@ omit = [
     "*/settings/*",
     "*/tests/*",
     "*/__pycache__/*",
+    # Gerador das ilustrações (ferramenta de desenvolvimento, saída versionada)
+    "scripts/generate_deco.py",
 ]
 
 [tool.coverage.report]
