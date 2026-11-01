@@ -15,7 +15,7 @@
 
 <section class="container-page py-8 md:py-12" id="favoritesContent" aria-label="{% translate 'Lugares salvos' %}">
   {% if favorites %}
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-reveal-stagger>
     {% for place in favorites %}
     <c-place-card :place="place" eager="{% if forloop.counter <= 4 %}1{% endif %}" remove="1" level="2" sizes="(min-width: 1280px) 300px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
     {% endfor %}

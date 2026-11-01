@@ -26,7 +26,7 @@
 
 <section class="container-page py-8 md:py-12" aria-label="{% translate 'Lugares' %}">
   {% if all_places %}
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-reveal-stagger>
     {% for place in all_places %}
     <c-place-card :place="place" eager="{% if forloop.counter <= 4 %}1{% endif %}" level="2" sizes="(min-width: 1280px) 300px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
     {% endfor %}

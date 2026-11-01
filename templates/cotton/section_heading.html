@@ -1,6 +1,6 @@
 {% load i18n icons %}
 <c-vars title="" eyebrow="" subtitle="" href="" link_text="" id="" level="2" align="start" class="" />
-<div class="mb-8 flex flex-wrap gap-x-6 gap-y-3 {% if align == 'center' %}flex-col items-center text-center{% else %}items-end justify-between{% endif %} {{ class }}" {{ attrs }}>
+<div class="mb-8 flex flex-wrap gap-x-6 gap-y-3 {% if align == 'center' %}flex-col items-center text-center{% else %}items-end justify-between{% endif %} {{ class }}" data-reveal {{ attrs }}>
   <div class="max-w-2xl">
     {% if eyebrow %}<p class="mb-2 text-sm font-semibold text-brand">{{ eyebrow }}</p>{% endif %}
     {% if level == "1" %}

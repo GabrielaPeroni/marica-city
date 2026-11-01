@@ -23,7 +23,7 @@
   <section aria-labelledby="agendaHeading">
     <c-section-heading id="agendaHeading" title="{% translate 'Próximos eventos' %}" />
     {% if agenda %}
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal-stagger>
       {% for event in agenda %}
       {% if forloop.first %}
       <c-event-card :event="event" lead eager class="sm:col-span-2 lg:col-span-3" sizes="(min-width: 768px) 50vw, 100vw" />

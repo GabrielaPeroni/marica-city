@@ -1,7 +1,7 @@
 {% load i18n content_i18n thumbs icons %}
 <c-vars place eager=False morph=True remove=False level="3" sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw" class="" />
 {% with image=place.primary_image.image category=place.categories.all.0 %}
-<article class="group relative isolate flex flex-col overflow-hidden rounded-xl bg-card text-card-foreground shadow-card ring-1 ring-foreground/8 transition duration-300 hover:-translate-y-0.5 hover:shadow-lift has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ring/50 {{ class }}" data-favorite-item {{ attrs }}>
+<article class="group relative isolate flex flex-col overflow-hidden rounded-xl bg-card text-card-foreground shadow-card ring-1 ring-foreground/8 transition duration-300 hover:-translate-y-0.5 hover:shadow-lift has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-ring/50 {{ class }}" data-favorite-item data-spotlight {{ attrs }}>
   <a href="{% url 'explore:place_detail' place.pk %}" class="flex flex-1 flex-col outline-none">
     <div class="relative aspect-[4/3] overflow-hidden bg-muted">
       {% if image %}

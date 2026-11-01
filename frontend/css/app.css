@@ -255,38 +255,81 @@
     @apply bg-info-tint text-info;
   }
 
-  /* Navbar: sólida por padrão; data-variant="transparent" fica sobre o hero até rolar */
+  /* Navbar: barra clara flutuante (vidro) em todas as páginas; sobre o hero
+     (data-variant="transparent") fica fixa por cima da foto. Ao rolar compacta
+     (data-scrolled) e some enquanto se desce a página (data-hidden). */
   .site-nav {
     view-transition-name: site-nav;
-    @apply sticky top-0 z-40 border-b border-border/70 bg-background/85 text-foreground backdrop-blur-md backdrop-saturate-150 transition-[background-color,color,border-color,box-shadow] duration-300;
+    @apply pointer-events-none sticky top-0 z-40 pt-3 text-foreground transition-[translate,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:pt-4;
   }
 
   .site-nav[data-variant='transparent'] {
-    @apply fixed inset-x-0 border-transparent bg-transparent text-white backdrop-blur-none;
-    background-image: linear-gradient(to bottom, rgb(0 0 0 / 0.45), transparent);
+    @apply fixed inset-x-0;
   }
 
-  .site-nav[data-variant='transparent'][data-scrolled] {
-    @apply border-border/70 bg-background/85 text-foreground shadow-sm backdrop-blur-md;
-    background-image: none;
+  .site-nav[data-scrolled] {
+    @apply pt-2;
+  }
+
+  .site-nav[data-hidden] {
+    translate: 0 -120%;
+  }
+
+  .site-nav-bar {
+    @apply pointer-events-auto flex h-14 items-center gap-1 rounded-2xl bg-background/80 ps-4 pe-2 shadow-card ring-1 ring-foreground/8 backdrop-blur-xl backdrop-saturate-150 transition-[height,box-shadow,background-color] duration-500 sm:ps-5;
+  }
+
+  .site-nav[data-variant='transparent']:not([data-scrolled]) .site-nav-bar {
+    @apply bg-background/70 shadow-lift ring-white/40;
+  }
+
+  .site-nav[data-scrolled] .site-nav-bar {
+    @apply h-12 bg-background/90 shadow-lift;
+  }
+
+  /* Barras grudadas logo abaixo do navbar (filtros); sobem quando ele some */
+  .sticky-under-nav {
+    @apply sticky top-16 transition-[top] duration-500;
+  }
+
+  html:has(.site-nav[data-hidden]) .sticky-under-nav {
+    @apply top-0;
+  }
+
+  .site-nav-brand {
+    @apply inline-flex items-center gap-2 font-display text-xl font-semibold tracking-tight;
+  }
+
+  .site-nav-dot {
+    @apply size-2 rounded-full bg-brand transition-transform duration-500;
+  }
+
+  .site-nav-brand:hover .site-nav-dot {
+    @apply scale-150;
+  }
+
+  .site-nav-links {
+    @apply relative gap-0.5;
   }
 
   .site-nav-link {
-    @apply relative inline-flex h-9 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-foreground/5;
+    @apply relative z-10 inline-flex h-9 items-center rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground aria-[current=page]:text-foreground;
   }
 
-  .site-nav:is([data-variant='transparent']:not([data-scrolled])) .site-nav-link {
-    @apply hover:bg-white/15;
+  /* Pílula que desliza até o link sob o cursor e volta para a página atual */
+  .site-nav-indicator {
+    @apply pointer-events-none absolute top-0 left-0 h-9 rounded-full bg-foreground/6 opacity-0 transition-[translate,width,opacity] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)];
+    width: var(--indicator-w, 0);
+    translate: var(--indicator-x, 0) 0;
+  }
+
+  .site-nav-indicator[data-ready] {
+    @apply opacity-100;
   }
 
   .site-nav-link[aria-current='page']::after {
     content: '';
-    @apply absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-brand;
-  }
-
-  .site-nav:is([data-variant='transparent']:not([data-scrolled]))
-    .btn[data-variant='ghost'] {
-    @apply hover:bg-white/15 hover:text-white aria-expanded:bg-white/15 aria-expanded:text-white;
+    @apply absolute bottom-1 left-1/2 size-1 -translate-x-1/2 rounded-full bg-brand;
   }
 
   /* Seletor de idioma: segmentado, no navbar e no menu móvel */
@@ -438,9 +481,25 @@
   navigation: auto;
 }
 
-::view-transition-old(root),
+::view-transition-old(root) {
+  animation: 180ms ease both vt-out;
+}
+
 ::view-transition-new(root) {
-  animation-duration: 160ms;
+  animation: 380ms cubic-bezier(0.22, 1, 0.36, 1) both vt-in;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -456,4 +515,45 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Revelar ao rolar: só com a classe .motion (posta no <head>), então sem JS
+   ou com movimento reduzido tudo aparece normalmente */
+.motion :is([data-reveal], [data-reveal-stagger] > *) {
+  transition:
+    opacity 0.7s ease,
+    translate 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s ease;
+  transition-delay: calc(var(--reveal-i, 0) * 70ms);
+}
+
+.motion :is([data-reveal], [data-reveal-stagger] > *):not(.is-revealed) {
+  opacity: 0;
+  translate: 0 2rem;
+  filter: blur(4px);
+}
+
+/* Luz que segue o cursor nos cards (posição em --mx/--my, via motion.js) */
+[data-spotlight]::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 255 255 / 0.18),
+    transparent 60%
+  );
+  transition: opacity 0.4s ease;
+}
+
+[data-spotlight]:hover::after {
+  opacity: 1;
+}
+
+html {
+  scroll-behavior: smooth;
 }

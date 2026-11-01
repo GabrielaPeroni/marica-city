@@ -14,31 +14,31 @@
 {% block content %}
 {% include 'includes/navbar.html' with transparent=True %}
 
-<section id="heroSection" class="hero-section relative isolate h-[clamp(34rem,88svh,56rem)] overflow-hidden bg-foreground text-white" aria-roledescription="{% translate 'carrossel' %}" aria-label="{% translate 'Destaques' %}">
+<section id="heroSection" class="hero-section relative isolate h-svh min-h-[34rem] overflow-hidden bg-foreground text-white" data-hero aria-roledescription="{% translate 'carrossel' %}" aria-label="{% translate 'Destaques' %}">
   <div class="swiper hero-swiper size-full">
     <div class="swiper-wrapper">
       {% url 'explore:explore' as explore_url %}{% url 'news:news_list' as news_url %}{% url 'explore:place_create' as create_url %}
       {% for n in "123" %}
-      <div class="swiper-slide relative">
-        <div class="hero-bg hero-bg--{{ n }} absolute inset-0 -z-10 bg-cover bg-center">
-          <img src="{% static 'images/hero/hero_'|add:n|add:'-1920.webp' %}" srcset="{% static 'images/hero/hero_'|add:n|add:'-1280.webp' %} 1280w, {% static 'images/hero/hero_'|add:n|add:'-1920.webp' %} 1920w" sizes="100vw" width="1920" height="1080" alt="" class="size-full object-cover" decoding="async" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
-          <div class="absolute inset-0 bg-linear-to-r from-black/65 via-black/35 to-black/10"></div>
-          <div class="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/45 to-transparent"></div>
+      <div class="swiper-slide relative" data-label="{% if n == "1" %}{% translate "Descubra" %}{% elif n == "2" %}{% translate "Eventos" %}{% else %}{% translate "Participe" %}{% endif %}">
+        <div class="hero-bg hero-bg--{{ n }} absolute inset-0 -z-10 overflow-hidden bg-cover bg-center">
+          <img src="{% static 'images/hero/hero_'|add:n|add:'-1920.webp' %}" srcset="{% static 'images/hero/hero_'|add:n|add:'-1280.webp' %} 1280w, {% static 'images/hero/hero_'|add:n|add:'-1920.webp' %} 1920w" sizes="100vw" width="1920" height="1080" alt="" class="hero-img size-full object-cover" decoding="async" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+          <div class="absolute inset-0 bg-linear-to-r from-black/60 via-black/25 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/55 to-transparent"></div>
         </div>
-        <div class="container-page flex h-full flex-col justify-center pt-16 pb-20">
-          <div class="max-w-3xl">
+        <div class="container-page flex h-full flex-col justify-end pt-28 pb-32 md:justify-center md:pb-24">
+          <div class="hero-copy max-w-3xl" data-hero-parallax>
             {% if forloop.first %}
-            <h1 class="font-display text-display-xl font-semibold text-balance drop-shadow-sm">{% translate "Descubra as Maravilhas de Maricá" %}</h1>
-            <p class="mt-5 max-w-xl text-lg text-white/90 md:text-xl">{% translate "Explore a beleza de praias intocadas, lagoas cristalinas e uma cultura vibrante. Embarque em uma jornada repleta de aventura e memórias inesquecíveis." %}</p>
-            <a href="{{ explore_url }}" class="btn group mt-8" data-variant="brand" data-size="lg">{% translate "Começar a Explorar" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
+            <h1 class="hero-line font-display text-display-xl font-semibold text-balance drop-shadow-sm">{% translate "Descubra as Maravilhas de Maricá" %}</h1>
+            <p class="hero-line mt-5 max-w-xl text-lg text-white/90 md:text-xl">{% translate "Explore a beleza de praias intocadas, lagoas cristalinas e uma cultura vibrante. Embarque em uma jornada repleta de aventura e memórias inesquecíveis." %}</p>
+            <a href="{{ explore_url }}" class="hero-line btn group mt-8" data-variant="brand" data-size="lg">{% translate "Começar a Explorar" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
             {% elif n == "2" %}
-            <h2 class="font-display text-display-xl font-semibold text-balance drop-shadow-sm">{% translate "Viva Experiências Únicas" %}</h2>
-            <p class="mt-5 max-w-xl text-lg text-white/90 md:text-xl">{% translate "Descubra eventos locais, gastronomia autêntica e lugares escondidos. Maricá oferece experiências que vão além do comum." %}</p>
-            <a href="{{ news_url }}" class="btn group mt-8" data-variant="brand" data-size="lg">{% translate "Ver Eventos" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
+            <h2 class="hero-line font-display text-display-xl font-semibold text-balance drop-shadow-sm">{% translate "Viva Experiências Únicas" %}</h2>
+            <p class="hero-line mt-5 max-w-xl text-lg text-white/90 md:text-xl">{% translate "Descubra eventos locais, gastronomia autêntica e lugares escondidos. Maricá oferece experiências que vão além do comum." %}</p>
+            <a href="{{ news_url }}" class="hero-line btn group mt-8" data-variant="brand" data-size="lg">{% translate "Ver Eventos" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
             {% else %}
-            <h2 class="font-display text-display-xl font-semibold text-balance drop-shadow-sm">{% translate "Compartilhe Seus Lugares Favoritos" %}</h2>
-            <p class="mt-5 max-w-xl text-lg text-white/90 md:text-xl">{% translate "Contribua com a comunidade e ajude outros a descobrirem Maricá. Adicione lugares especiais e conte sua história." %}</p>
-            <a href="{{ create_url }}" class="btn group mt-8" data-variant="brand" data-size="lg">{% translate "Cadastrar lugar" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
+            <h2 class="hero-line font-display text-display-xl font-semibold text-balance drop-shadow-sm">{% translate "Compartilhe Seus Lugares Favoritos" %}</h2>
+            <p class="hero-line mt-5 max-w-xl text-lg text-white/90 md:text-xl">{% translate "Contribua com a comunidade e ajude outros a descobrirem Maricá. Adicione lugares especiais e conte sua história." %}</p>
+            <a href="{{ create_url }}" class="hero-line btn group mt-8" data-variant="brand" data-size="lg">{% translate "Cadastrar lugar" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
             {% endif %}
           </div>
         </div>
@@ -48,7 +48,7 @@
   </div>
 
   {% if request.GET.next and not user.is_authenticated %}
-  <div class="absolute inset-x-0 top-20 z-20">
+  <div class="absolute inset-x-0 top-24 z-20">
     <div class="container-page">
       <div role="status" class="flex max-w-xl items-start gap-3 rounded-xl bg-background/95 px-4 py-3 text-sm text-foreground shadow-lift backdrop-blur [&_a]:font-semibold [&_a]:text-brand [&_a]:underline [&_a]:underline-offset-2">
         {% icon "log-in" class="mt-0.5 size-4 shrink-0 text-brand" %}
@@ -58,13 +58,16 @@
   </div>
   {% endif %}
 
-  <div class="absolute inset-x-0 bottom-6 z-20 md:bottom-8">
-    <div class="container-page flex items-center gap-3">
-      <div class="hero-pagination flex w-auto! items-center"></div>
+  <div class="absolute inset-x-0 bottom-6 z-20 md:bottom-10">
+    <div class="container-page flex items-end gap-4">
+      <div class="hero-pagination flex w-auto! flex-1 items-end gap-3 sm:max-w-md"></div>
       <button class="hero-pause-btn group btn rounded-full text-white hover:bg-white/15 hover:text-white" data-variant="ghost" data-size="icon-sm" type="button" aria-pressed="false" aria-label="{% translate 'Pausar apresentação' %}">
         {% icon "pause" class="size-4 fill-current group-aria-pressed:hidden" %}
         {% icon "play" class="hidden size-4 fill-current group-aria-pressed:block" %}
       </button>
+      <a href="#trendingSection" class="hero-scroll ms-auto hidden flex-col items-center gap-2 text-xs font-medium tracking-widest text-white/80 uppercase transition-colors hover:text-white md:flex">
+        {% translate "Role" %}<span class="hero-scroll-line" aria-hidden="true"></span>
+      </a>
     </div>
   </div>
 </section>
@@ -75,7 +78,7 @@
     {% url 'explore:explore' as explore_url %}
     {% translate "Em alta agora" as trending_title %}{% translate "Destinos populares este mês" as trending_sub %}{% translate "Ver todos" as see_all %}
     <c-section-heading id="trendingHeading" :title="trending_title" :subtitle="trending_sub" :href="explore_url" :link_text="see_all" />
-    <div id="trendingPlaceGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div id="trendingPlaceGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-reveal-stagger>
       {% for place in trending_places %}
       <c-place-card :place="place" sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" />
       {% endfor %}
@@ -95,7 +98,7 @@
       <a id="featuredSectionCta" href="{% url 'explore:explore' %}" class="btn group mt-6" data-variant="outline">{% translate "Veja mais" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
     </div>
 
-    <div id="featuredSwiper" class="swiper featured-swiper -mx-4! px-4! sm:mx-0! sm:px-0! sm:[mask-image:linear-gradient(to_right,black_85%,transparent)]">
+    <div id="featuredSwiper" data-reveal class="swiper featured-swiper -mx-4! px-4! sm:mx-0! sm:px-0! sm:[mask-image:linear-gradient(to_right,black_85%,transparent)]">
       <div class="swiper-wrapper py-2">
         {% for place in featured_places %}
         <div class="swiper-slide w-72! h-auto!">
@@ -125,9 +128,9 @@
     <c-section-heading :title="events_title" :href="news_url" :link_text="agenda_link" />
     {% with events=upcoming_events|default:recent_events %}
     {% if events|length == 1 %}
-    <c-event-card :event="events.0" :lead="True" sizes="(min-width: 768px) 640px, 100vw" />
+    <c-event-card :event="events.0" :lead="True" sizes="(min-width: 768px) 640px, 100vw" data-reveal />
     {% else %}
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-reveal-stagger>
       {% for event in events %}
       <c-event-card :event="event" class="h-full" sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" />
       {% endfor %}
@@ -143,10 +146,10 @@
   <div class="container-page">
     {% url 'explore:explore' as explore_url %}{% translate "Explorar por categoria" as categories_title %}{% translate "Encontre exatamente o que você procura" as categories_sub %}{% translate "Ver todos" as see_all %}
     <c-section-heading :title="categories_title" :subtitle="categories_sub" :href="explore_url" :link_text="see_all" />
-    <ul class="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3">
+    <ul class="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3" data-reveal-stagger>
       {% for category in categories %}
       <li>
-        <a href="{% url 'explore:category_detail' category.slug %}" class="group relative isolate flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-xl bg-secondary shadow-card ring-1 ring-foreground/8 transition duration-300 outline-none hover:-translate-y-0.5 hover:shadow-lift focus-visible:ring-3 focus-visible:ring-ring/50 sm:aspect-[3/2]">
+        <a href="{% url 'explore:category_detail' category.slug %}" data-spotlight class="group relative isolate flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-xl bg-secondary shadow-card ring-1 ring-foreground/8 transition duration-300 outline-none hover:-translate-y-0.5 hover:shadow-lift focus-visible:ring-3 focus-visible:ring-ring/50 sm:aspect-[3/2]">
           {% if category.cover %}
           <img src="{{ category.cover.image|thumb:960 }}" srcset="{{ category.cover.image|srcset:'480,960' }}" sizes="(min-width: 768px) 33vw, 50vw" alt="" class="img-ph absolute inset-0 -z-10 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="lazy" decoding="async" style="{{ category.cover.image|placeholder }}">
           <div class="absolute inset-0 -z-10 bg-linear-to-t from-black/75 via-black/25 to-transparent"></div>
@@ -169,7 +172,7 @@
   <div class="container-page">
     {% translate "Explore no mapa" as map_eyebrow %}{% translate "Navegue pelos Lugares de Maricá" as map_title %}{% translate "Todos os lugares cadastrados, no mapa interativo" as map_sub %}
     <c-section-heading :eyebrow="map_eyebrow" :title="map_title" :subtitle="map_sub" />
-    <div id="landing-map" class="relative h-[28rem] overflow-hidden rounded-xl bg-muted shadow-card ring-1 ring-foreground/8 md:h-[32rem]" aria-busy="true">
+    <div id="landing-map" data-reveal class="relative h-[28rem] overflow-hidden rounded-xl bg-muted shadow-card ring-1 ring-foreground/8 md:h-[32rem]" aria-busy="true">
       <c-skeleton class="absolute inset-0" />
       <p class="absolute inset-0 grid place-items-center text-sm text-muted-foreground" role="status">{% translate "Carregando mapa interativo..." %}</p>
     </div>

@@ -2,12 +2,14 @@
 {# Páginas com hero no topo: {% include 'includes/navbar.html' with transparent=True %} #}
 {% with ns=request.resolver_match.namespace route=request.resolver_match.url_name %}
 <header class="site-nav" data-site-nav {% if transparent %}data-variant="transparent"{% endif %}>
-  <nav class="container-page flex h-16 items-center gap-1" aria-label="{% translate 'Navegação principal' %}">
-    <a class="me-auto inline-flex items-center gap-2 font-display text-xl font-semibold tracking-tight lg:me-6" href="{% url 'core:landing' %}">
-      <span class="size-2 rounded-full bg-brand" aria-hidden="true"></span>MaricaCity
+  <div class="container-page">
+  <nav class="site-nav-bar" aria-label="{% translate 'Navegação principal' %}">
+    <a class="site-nav-brand me-auto lg:me-6" href="{% url 'core:landing' %}">
+      <span class="site-nav-dot" aria-hidden="true"></span>MaricaCity
     </a>
 
-    <ul class="me-auto hidden items-center gap-1 lg:flex">
+    <ul class="site-nav-links me-auto hidden items-center lg:flex" data-nav-links>
+      <li class="site-nav-indicator" aria-hidden="true"></li>
       <li><a class="site-nav-link" {% if route == 'landing' %}aria-current="page"{% endif %} href="{% url 'core:landing' %}">{% translate "Início" %}</a></li>
       <li><a class="site-nav-link" {% if ns == 'explore' %}aria-current="page"{% endif %} href="{% url 'explore:explore' %}">{% translate "Explorar" %}</a></li>
       <li><a class="site-nav-link" {% if ns == 'news' %}aria-current="page"{% endif %} href="{% url 'news:news_list' %}">{% translate "Eventos" %}</a></li>
@@ -54,6 +56,7 @@
       {% icon "menu" class="size-5" %}
     </button>
   </nav>
+  </div>
 </header>
 
 <div id="site-menu" class="site-sheet" popover role="dialog" aria-label="{% translate 'Menu' %}">

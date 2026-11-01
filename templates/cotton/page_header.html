@@ -1,13 +1,13 @@
 {% load i18n %}
 <c-vars title="" eyebrow="" subtitle="" class="" />
-<header class="border-b bg-card {{ class }}" {{ attrs }}>
+<header class="border-b {{ class }}" {{ attrs }}>
   <div class="container-page py-8 md:py-12">
     {% if crumbs %}
     <nav class="mb-4" aria-label="{% translate 'Trilha de navegação' %}">
       <ol class="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground [&_a]:transition-colors [&_a:hover]:text-foreground [&>li:not(:last-child)]:after:ms-1.5 [&>li:not(:last-child)]:after:content-['/']">{{ crumbs }}</ol>
     </nav>
     {% endif %}
-    <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+    <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-4" data-reveal>
       <div class="max-w-3xl">
         {% if eyebrow %}<p class="mb-2 text-sm font-semibold text-brand">{{ eyebrow }}</p>{% endif %}
         <h1 class="font-display text-display-lg font-semibold">{{ title }}</h1>
