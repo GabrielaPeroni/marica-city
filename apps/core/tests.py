@@ -821,3 +821,17 @@ class CottonComponentTests(TestCase):
         self.assertNotIn("form-control", html)
         self.assertIn('<fieldset class="field', html)
         self.assertIn('role="alert"', html)
+
+
+class VercelAnalyticsTests(TestCase):
+    @override_settings(VERCEL_ANALYTICS=True)
+    def test_script_loads_on_vercel(self):
+        self.assertContains(
+            self.client.get(reverse("core:landing")), "/_vercel/insights/script.js"
+        )
+
+    @override_settings(VERCEL_ANALYTICS=False)
+    def test_script_absent_elsewhere(self):
+        self.assertNotContains(
+            self.client.get(reverse("core:landing")), "/_vercel/insights/"
+        )

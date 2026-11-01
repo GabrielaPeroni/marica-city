@@ -14,6 +14,11 @@ def google_oauth(request):
     }
 
 
+def vercel_analytics(request):
+    """Liga o Vercel Web Analytics só quando o site roda na Vercel."""
+    return {"VERCEL_ANALYTICS": settings.VERCEL_ANALYTICS}
+
+
 def footer_categories(request):
     """Categorias ativas para os links do rodapé (avaliadas só se usadas)."""
     from apps.explore.models import Category

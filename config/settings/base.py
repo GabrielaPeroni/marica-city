@@ -57,6 +57,7 @@ TEMPLATES = [
                 "apps.core.context_processors.google_oauth",
                 "apps.core.context_processors.admin_stats",
                 "apps.core.context_processors.footer_categories",
+                "apps.core.context_processors.vercel_analytics",
             ],
         },
     },
@@ -260,3 +261,6 @@ LOGGING = {
         "PIL": {"level": "INFO"},
     },
 }
+
+# A Vercel define VERCEL=1 nas funções; fora dela o script de analytics daria 404
+VERCEL_ANALYTICS = config("VERCEL", default=False, cast=bool)
