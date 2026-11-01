@@ -63,6 +63,6 @@ package-lock.json
 *.min.css
 *.min.js
 
-# Compiled by npm run build:css
-static/css/app.css
-static/vendor/
+# Compiled by npm run build:css (paths here are relative to .github/, hence **/)
+**/static/css/app.css
+**/static/vendor/

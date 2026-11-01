@@ -48,12 +48,15 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      # A real deployment needs a shared cache (accounts.W001); the check only
+      # inspects the setting, so no Redis has to be running.
       - name: Deployment checks (default production settings)
         run: |
           docker run --rm \
             -e SECRET_KEY="$(openssl rand -base64 48)" \
             -e ALLOWED_HOSTS=example.com \
             -e GOOGLE_OAUTH_CLIENT_ID=ci \
+            -e CACHE_URL=redis://localhost:6379/0 \
             maricacity:ci python manage.py check --deploy --fail-level WARNING
 
       # CI has no TLS proxy in front, so the HTTPS redirect is the one setting
