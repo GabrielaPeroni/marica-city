@@ -171,10 +171,12 @@
       "translations": {
         "source": "79fa8dfe1f33a749",
         "en": {
-          "description": "Maricá Beach with a sandy bottom, good for surfers of all levels and easily accessible via Amaral Peixoto Highway, with signs indicating the entrance. It is near Ponta Negra Lighthouse and Lagoa de Guarapina, and the area has several guest houses. Photo: Wilfredor / Wikimedia Commons (CC0)."
+          "description": "Maricá Beach with a sandy bottom, good for surfers of all levels and easily accessible via Amaral Peixoto Highway, with signs indicating the entrance. It is near Ponta Negra Lighthouse and Lagoa de Guarapina, and the area has several guest houses. Photo: Wilfredor / Wikimedia Commons (CC0).",
+          "name": "Ponta Negra Beach"
         },
         "es": {
-          "description": "Playa de Maricá con fondo de arena, buena para surfistas de todos los niveles y de fácil acceso por la Rodovia Amaral Peixoto, con carteles indicando la entrada. Está cerca del Faro de Ponta Negra y de la Laguna de Guarapina, y la región concentra varias posadas. Foto: Wilfredor / Wikimedia Commons (CC0)."
+          "description": "Playa de Maricá con fondo de arena, buena para surfistas de todos los niveles y de fácil acceso por la Rodovia Amaral Peixoto, con carteles indicando la entrada. Está cerca del Faro de Ponta Negra y de la Laguna de Guarapina, y la región concentra varias posadas. Foto: Wilfredor / Wikimedia Commons (CC0).",
+          "name": "Playa de Ponta Negra"
         }
       },
       "created_at": "2026-10-25T11:31:09.383724+00:00",
@@ -260,10 +262,12 @@
       "translations": {
         "source": "c6f76679dbb9412e",
         "en": {
-          "description": "The Pedra do Elefante viewpoint, surrounded by the preserved forest of Serra da Tiririca Park, is located at the border between the municipalities of Maricá and Niterói. It is one of the most beautiful landscapes in the city with a beautiful view of the entire oceanic coastline of Maricá. There is a telescope at the location so you don't miss any detail.\r\n\r\nPedra do Elefante has an altitude of 412 meters, the highest point in the city. From this privileged location, the view reaches as far as the beaches of Saquarema, already in the Lagos Region of Rio de Janeiro. On days with good visibility, it is possible to see the Ilha de Cabo Frio, and the Ilhas Maricás.\r\n\r\nThe region is also known as Falso Pão de Açúcar, Pedra de Itaipuaçu and Alto Mourão."
+          "description": "The Pedra do Elefante viewpoint, surrounded by the preserved forest of Serra da Tiririca Park, is located at the border between the municipalities of Maricá and Niterói. It is one of the most beautiful landscapes in the city with a beautiful view of the entire oceanic coastline of Maricá. There is a telescope at the location so you don't miss any detail.\r\n\r\nPedra do Elefante has an altitude of 412 meters, the highest point in the city. From this privileged location, the view reaches as far as the beaches of Saquarema, already in the Lagos Region of Rio de Janeiro. On days with good visibility, it is possible to see the Ilha de Cabo Frio, and the Ilhas Maricás.\r\n\r\nThe region is also known as Falso Pão de Açúcar, Pedra de Itaipuaçu and Alto Mourão.",
+          "name": "Pedra do Elefante Lookout"
         },
         "es": {
-          "description": "El Mirador de la Piedra del Elefante, rodeado por la mata preservada del Parque de la Sierra de Tiririca, se encuentra en la frontera entre los municipios de Maricá y Niterói. Es una de las vistas más hermosas de la ciudad con una vista impresionante de toda la orla oceánica de Maricá. En el lugar existe un telescopio para que no se pierda ningún detalle.\r\n\r\nLa Piedra del Elefante tiene una altura de 412 metros, el punto más alto de la ciudad. Desde este lugar privilegiado la vista alcanza hasta las playas de Saquarema, ya en la Región de los Lagos de Río de Janeiro. En días con buena visibilidad, es posible ver la Isla de Cabo Frio, y las Islas Maricás.\r\n\r\nLa región también es conocida como Falso Pão de Açúcar, Piedra de Itaipuaçu y Alto Mourão."
+          "description": "El Mirador de la Piedra del Elefante, rodeado por la mata preservada del Parque de la Sierra de Tiririca, se encuentra en la frontera entre los municipios de Maricá y Niterói. Es una de las vistas más hermosas de la ciudad con una vista impresionante de toda la orla oceánica de Maricá. En el lugar existe un telescopio para que no se pierda ningún detalle.\r\n\r\nLa Piedra del Elefante tiene una altura de 412 metros, el punto más alto de la ciudad. Desde este lugar privilegiado la vista alcanza hasta las playas de Saquarema, ya en la Región de los Lagos de Río de Janeiro. En días con buena visibilidad, es posible ver la Isla de Cabo Frio, y las Islas Maricás.\r\n\r\nLa región también es conocida como Falso Pão de Açúcar, Piedra de Itaipuaçu y Alto Mourão.",
+          "name": "Mirador Pedra do Elefante"
         }
       },
       "created_at": "2026-10-24T13:31:09.383724+00:00",
@@ -334,10 +338,12 @@
       "translations": {
         "source": "00541d1d5bdc8a41",
         "en": {
-          "description": "Beautiful lake perfect for kayaking, stand-up paddleboarding and relaxation. Surrounded by nature.\n\nPhoto: Daniel Souza Lima / Wikimedia Commons (CC BY-SA 4.0)"
+          "description": "Beautiful lake perfect for kayaking, stand-up paddleboarding and relaxation. Surrounded by nature.\n\nPhoto: Daniel Souza Lima / Wikimedia Commons (CC BY-SA 4.0)",
+          "name": "Araçatiba Lagoon"
         },
         "es": {
-          "description": "Linda laguna perfecta para kayak, stand-up paddle y relajación. Rodeada de la naturaleza.\n\nFoto: Daniel Souza Lima / Wikimedia Commons (CC BY-SA 4.0)"
+          "description": "Linda laguna perfecta para kayak, stand-up paddle y relajación. Rodeada de la naturaleza.\n\nFoto: Daniel Souza Lima / Wikimedia Commons (CC BY-SA 4.0)",
+          "name": "Laguna de Araçatiba"
         }
       },
       "created_at": "2026-10-22T10:31:09.383724+00:00",
@@ -408,10 +414,12 @@
       "translations": {
         "source": "9e52f8178e42ad14",
         "en": {
-          "description": "A colonial building from the 19th century listed by Inepac, which was formerly a public jail, city hall, and the seat of the Municipal Chamber. Restored between 2015 and the beginning of 2020, it now houses the Cultural House and is the headquarters of the Maricá Historical Museum, dedicated to preserving and promoting the history of the municipality. It hosts exhibitions and is one of the stops on the cultural city tour of the historic center. Photo: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "A colonial building from the 19th century listed by Inepac, which was formerly a public jail, city hall, and the seat of the Municipal Chamber. Restored between 2015 and the beginning of 2020, it now houses the Cultural House and is the headquarters of the Maricá Historical Museum, dedicated to preserving and promoting the history of the municipality. It hosts exhibitions and is one of the stops on the cultural city tour of the historic center. Photo: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Maricá House of Culture and History Museum"
         },
         "es": {
-          "description": "Edificio colonial del siglo XIX declarado patrimonio por el Inepac, que fue en su momento cárcel pública, ayuntamiento y sede del Concejo Municipal. Restaurado entre 2015 y principios de 2020, hoy alberga la Casa de Cultura y es la sede del Museo Histórico de Maricá, dedicado a preservar y divulgar la historia del municipio. Recibe exposiciones y es una de las paradas del city tour cultural del centro histórico. Foto: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Edificio colonial del siglo XIX declarado patrimonio por el Inepac, que fue en su momento cárcel pública, ayuntamiento y sede del Concejo Municipal. Restaurado entre 2015 y principios de 2020, hoy alberga la Casa de Cultura y es la sede del Museo Histórico de Maricá, dedicado a preservar y divulgar la historia del municipio. Recibe exposiciones y es una de las paradas del city tour cultural del centro histórico. Foto: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Casa de Cultura y Museo Histórico de Maricá"
         }
       },
       "created_at": "2026-10-20T22:31:09.383724+00:00",
@@ -467,10 +475,12 @@
       "translations": {
         "source": "c53670da9539be48",
         "en": {
-          "description": "Guesthouse in the Itaipuaçu neighborhood, near the beach. Illustrative image (sunset in Itaipuaçu): MiPorto / Wikimedia Commons (CC BY-SA 3.0)."
+          "description": "Guesthouse in the Itaipuaçu neighborhood, near the beach. Illustrative image (sunset in Itaipuaçu): MiPorto / Wikimedia Commons (CC BY-SA 3.0).",
+          "name": "Pousada das Estrelas"
         },
         "es": {
-          "description": "Posada en el barrio de Itaipuaçu, cerca de la playa. Imagen ilustrativa (puesta de sol en Itaipuaçu): MiPorto / Wikimedia Commons (CC BY-SA 3.0)."
+          "description": "Posada en el barrio de Itaipuaçu, cerca de la playa. Imagen ilustrativa (puesta de sol en Itaipuaçu): MiPorto / Wikimedia Commons (CC BY-SA 3.0).",
+          "name": "Pousada das Estrelas"
         }
       },
       "created_at": "2026-10-14T23:31:09.383724+00:00",
@@ -495,10 +505,12 @@
       "translations": {
         "source": "3aca1d8f9ebda39f",
         "en": {
-          "description": "Brazilian cuisine and barbecue ranch in Espraiado, in the rural area of Maricá. Participates in the Espraiado Open Doors circuit, which brings together restaurants, farms, and cultural attractions in the region. Illustrative image (fire-roasted ribs): Jonas Joaquim Tavares… / Wikimedia Commons (CC BY-SA 3.0)."
+          "description": "Brazilian cuisine and barbecue ranch in Espraiado, in the rural area of Maricá. Participates in the Espraiado Open Doors circuit, which brings together restaurants, farms, and cultural attractions in the region. Illustrative image (fire-roasted ribs): Jonas Joaquim Tavares… / Wikimedia Commons (CC BY-SA 3.0).",
+          "name": "Restaurante Costela Fogo de Chão"
         },
         "es": {
-          "description": "Rancho de comida brasileña y asado en Espraiado, en la zona rural de Maricá. Participa del circuito Espraiado de Puertas Abiertas, que reúne restaurantes, fincas y atracciones culturales de la región. Imagen ilustrativa (costilla de fuego de leña): Jonas Joaquim Tavares… / Wikimedia Commons (CC BY-SA 3.0)."
+          "description": "Rancho de comida brasileña y asado en Espraiado, en la zona rural de Maricá. Participa del circuito Espraiado de Puertas Abiertas, que reúne restaurantes, fincas y atracciones culturales de la región. Imagen ilustrativa (costilla de fuego de leña): Jonas Joaquim Tavares… / Wikimedia Commons (CC BY-SA 3.0).",
+          "name": "Restaurante Costela Fogo de Chão"
         }
       },
       "created_at": "2026-10-14T08:31:09.383724+00:00",
@@ -539,10 +551,12 @@
       "translations": {
         "source": "4766f371445df3b5",
         "en": {
-          "description": "Shopping in Maricá's Downtown, opened in 2021, with shops and services and parking that also hosts city fairs and events. Illustrative image (Maricá's Downtown): Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Shopping in Maricá's Downtown, opened in 2021, with shops and services and parking that also hosts city fairs and events. Illustrative image (Maricá's Downtown): Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Boulevard Maricá"
         },
         "es": {
-          "description": "Centro comercial de Maricá, inaugurado en 2021, con tiendas y servicios y estacionamiento que también alberga ferias y eventos de la ciudad. Imagen ilustrativa (Centro de Maricá): Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Centro comercial de Maricá, inaugurado en 2021, con tiendas y servicios y estacionamiento que también alberga ferias y eventos de la ciudad. Imagen ilustrativa (Centro de Maricá): Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Boulevard Maricá"
         }
       },
       "created_at": "2026-10-06T07:31:09.383724+00:00",
@@ -567,10 +581,12 @@
       "translations": {
         "source": "39358deffbdf0d6f",
         "en": {
-          "description": "Craft fair organized by the Tourism Secretariat, which brings together local artisans in city squares. It is part of ArteMar, a hub that coordinates local fairs in Maricá. The locations and dates vary, so it's worth checking the city hall's schedule. Illustrative image (craft fair): Mateus S. Figueiredo / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Craft fair organized by the Tourism Secretariat, which brings together local artisans in city squares. It is part of ArteMar, a hub that coordinates local fairs in Maricá. The locations and dates vary, so it's worth checking the city hall's schedule. Illustrative image (craft fair): Mateus S. Figueiredo / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Feirarte"
         },
         "es": {
-          "description": "Feria de artesanía organizada por la Secretaría de Turismo, que reúne a artesanos locales en plazas de la ciudad. Forma parte del ArteMar, núcleo que articula las ferias locales de Maricá. Los lugares y fechas varían, entonces es conveniente consultar la programación del municipio. Imagen ilustrativa (feria de artesanía): Mateus S. Figueiredo / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Feria de artesanía organizada por la Secretaría de Turismo, que reúne a artesanos locales en plazas de la ciudad. Forma parte del ArteMar, núcleo que articula las ferias locales de Maricá. Los lugares y fechas varían, entonces es conveniente consultar la programación del municipio. Imagen ilustrativa (feria de artesanía): Mateus S. Figueiredo / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Feirarte"
         }
       },
       "created_at": "2026-10-04T04:31:09.383724+00:00",
@@ -611,10 +627,12 @@
       "translations": {
         "source": "5db0eb7709f68ffc",
         "en": {
-          "description": "The main historical symbol of Maricá's downtown, the church of Nossa Senhora do Amparo, is linked to the origin of the city, whose parish was created in 1755. It is one of the few constructions in the municipality that is over a hundred years old. Its patron saint is celebrated on August 15, and the church's staircase hosts ceremonies of African-derived religions. Photo: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "The main historical symbol of Maricá's downtown, the church of Nossa Senhora do Amparo, is linked to the origin of the city, whose parish was created in 1755. It is one of the few constructions in the municipality that is over a hundred years old. Its patron saint is celebrated on August 15, and the church's staircase hosts ceremonies of African-derived religions. Photo: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Nossa Senhora do Amparo Mother Church"
         },
         "es": {
-          "description": "Símbolo histórico principal del centro de Maricá, la matriz de Nuestra Señora del Amparo está ligada al origen de la ciudad, cuya parroquia fue creada en 1755. Es una de las pocas construcciones del municipio con más de cien años. Su patrona es celebrada el 15 de agosto, y la escalinata de la iglesia recibe ceremonias de religiones de matriz africana. Foto: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Símbolo histórico principal del centro de Maricá, la matriz de Nuestra Señora del Amparo está ligada al origen de la ciudad, cuya parroquia fue creada en 1755. Es una de las pocas construcciones del municipio con más de cien años. Su patrona es celebrada el 15 de agosto, y la escalinata de la iglesia recibe ceremonias de religiones de matriz africana. Foto: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Iglesia Matriz Nuestra Señora del Amparo"
         }
       },
       "created_at": "2026-09-28T19:31:09.383724+00:00",
@@ -655,10 +673,12 @@
       "translations": {
         "source": "0357e55be0151c6e",
         "en": {
-          "description": "One of the main beaches in the municipality, between the open sea and the protected lagoon system within the Maricá Environmental Protection Area (APA). The Barra neighborhood has inns and restaurants by the lagoon. Photo: MICROLARM / Wikimedia Commons (CC BY-SA 3.0)."
+          "description": "One of the main beaches in the municipality, between the open sea and the protected lagoon system within the Maricá Environmental Protection Area (APA). The Barra neighborhood has inns and restaurants by the lagoon. Photo: MICROLARM / Wikimedia Commons (CC BY-SA 3.0).",
+          "name": "Barra de Maricá Beach"
         },
         "es": {
-          "description": "Una de las principales playas del municipio, entre el mar abierto y el sistema de lagunas protegido por la APA de Maricá. El barrio de la Barra tiene posadas y restaurantes a orillas de la laguna. Foto: MICROLARM / Wikimedia Commons (CC BY-SA 3.0)."
+          "description": "Una de las principales playas del municipio, entre el mar abierto y el sistema de lagunas protegido por la APA de Maricá. El barrio de la Barra tiene posadas y restaurantes a orillas de la laguna. Foto: MICROLARM / Wikimedia Commons (CC BY-SA 3.0).",
+          "name": "Playa de Barra de Maricá"
         }
       },
       "created_at": "2026-09-27T03:31:09.383724+00:00",
@@ -699,10 +719,12 @@
       "translations": {
         "source": "209ced40641f6d00",
         "en": {
-          "description": "Brazilian barbecue and cuisine restaurant in Maricá's downtown. There is also a unit in the Cordeirinho neighborhood. Illustrative image (barbecue): Afrank99 / Wikimedia Commons (CC BY-SA 2.5)."
+          "description": "Brazilian barbecue and cuisine restaurant in Maricá's downtown. There is also a unit in the Cordeirinho neighborhood. Illustrative image (barbecue): Afrank99 / Wikimedia Commons (CC BY-SA 2.5).",
+          "name": "Restaurante João & João"
         },
         "es": {
-          "description": "Restaurante de asado y comida brasileña en el Centro de Maricá. También hay una unidad en el barrio de Cordeirinho. Imagen ilustrativa (asado): Afrank99 / Wikimedia Commons (CC BY-SA 2.5)."
+          "description": "Restaurante de asado y comida brasileña en el Centro de Maricá. También hay una unidad en el barrio de Cordeirinho. Imagen ilustrativa (asado): Afrank99 / Wikimedia Commons (CC BY-SA 2.5).",
+          "name": "Restaurante João & João"
         }
       },
       "created_at": "2026-09-22T03:31:09.383724+00:00",
@@ -727,10 +749,12 @@
       "translations": {
         "source": "13baaff334d3bc32",
         "en": {
-          "description": "Guesthouse in Araçatiba, near the lake and the center of Maricá. Illustrative image (sunset at Lagoa de Araçatiba): Filipo tardim / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Guesthouse in Araçatiba, near the lake and the center of Maricá. Illustrative image (sunset at Lagoa de Araçatiba): Filipo tardim / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Pousada Tamarindos"
         },
         "es": {
-          "description": "Posada en Araçatiba, cerca de la laguna y del Centro de Maricá. Imagen ilustrativa (puesta de sol en la Lagoa de Araçatiba): Filipo tardim / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Posada en Araçatiba, cerca de la laguna y del Centro de Maricá. Imagen ilustrativa (puesta de sol en la Lagoa de Araçatiba): Filipo tardim / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Pousada Tamarindos"
         }
       },
       "created_at": "2026-09-20T18:31:09.383724+00:00",
@@ -771,10 +795,12 @@
       "translations": {
         "source": "4f0db7a41df66dfb",
         "en": {
-          "description": "Thursday to Sunday (Thursday from 5pm)\r\nFriday to Sunday from 11:30am to midnight\r\n🎤Live music Fri,Sat and Sun"
+          "description": "Thursday to Sunday (Thursday from 5pm)\r\nFriday to Sunday from 11:30am to midnight\r\n🎤Live music Fri,Sat and Sun",
+          "name": "Rancho Tempero Maranhense"
         },
         "es": {
-          "description": "Quinta a Domingo (quinta a partir de las 17h)\r\nSexta a domingo de 11:30 a 00h\r\n🎤Música en vivo Vie,Sáb y dom"
+          "description": "Quinta a Domingo (quinta a partir de las 17h)\r\nSexta a domingo de 11:30 a 00h\r\n🎤Música en vivo Vie,Sáb y dom",
+          "name": "Rancho Tempero Maranhense"
         }
       },
       "created_at": "2026-09-15T00:31:09.383724+00:00",
@@ -827,10 +853,12 @@
       "translations": {
         "source": "9e4aefb979440aae",
         "en": {
-          "description": "Atlantic Forest Conservation Unit divided between Niterói and Maricá, covering 3,493 hectares, including a marine section. The highest point is Morro do Elefante, at 412 meters. It features trails such as the Alto Mourão trail and the Andorinhas trail, and visitation hours and rules must be confirmed with the Inea. Photo: Felipe Chermont / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Atlantic Forest Conservation Unit divided between Niterói and Maricá, covering 3,493 hectares, including a marine section. The highest point is Morro do Elefante, at 412 meters. It features trails such as the Alto Mourão trail and the Andorinhas trail, and visitation hours and rules must be confirmed with the Inea. Photo: Felipe Chermont / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Serra da Tiririca State Park"
         },
         "es": {
-          "description": "Unidad de conservación de Mata Atlántica dividida entre Niterói y Maricá, con 3.493 hectáreas, incluyendo un tramo marino. El punto más alto es el Morro do Elefante, con 412 metros. Tiene senderos como el de Alto Mourão y el de las Golondrinas, y los horarios y reglas de visita deben confirmarse con el Inea. Foto: Felipe Chermont / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Unidad de conservación de Mata Atlántica dividida entre Niterói y Maricá, con 3.493 hectáreas, incluyendo un tramo marino. El punto más alto es el Morro do Elefante, con 412 metros. Tiene senderos como el de Alto Mourão y el de las Golondrinas, y los horarios y reglas de visita deben confirmarse con el Inea. Foto: Felipe Chermont / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Parque Estatal de la Serra da Tiririca"
         }
       },
       "created_at": "2026-09-13T01:31:09.383724+00:00",
@@ -886,10 +914,12 @@
       "translations": {
         "source": "ce0ed84abd5d3022",
         "en": {
-          "description": "Municipal cinema in Maricá's downtown with 200 seats, including spaces reserved for wheelchair users, people with reduced mobility, and people with obesity. Entry is free, with ticket reservations made online. The program mixes recent Brazilian films, children's animations, and showcases, and there are sessions adapted for people with autism spectrum disorder. Illustrative image (cinema room): Dalto.Ruiz / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Municipal cinema in Maricá's downtown with 200 seats, including spaces reserved for wheelchair users, people with reduced mobility, and people with obesity. Entry is free, with ticket reservations made online. The program mixes recent Brazilian films, children's animations, and showcases, and there are sessions adapted for people with autism spectrum disorder. Illustrative image (cinema room): Dalto.Ruiz / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Cine Henfil"
         },
         "es": {
-          "description": "Cine municipal en el Centro de Maricá con 200 asientos, incluyendo espacios reservados para personas con sillas de ruedas, con movilidad reducida y personas con obesidad. La entrada es gratuita, con reservas de entradas por internet. La programación mezcla películas brasileñas recientes, animaciones infantiles y muestras, y hay sesiones adaptadas para personas con TEA. Imagen ilustrativa (sala de cine): Dalto.Ruiz / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Cine municipal en el Centro de Maricá con 200 asientos, incluyendo espacios reservados para personas con sillas de ruedas, con movilidad reducida y personas con obesidad. La entrada es gratuita, con reservas de entradas por internet. La programación mezcla películas brasileñas recientes, animaciones infantiles y muestras, y hay sesiones adaptadas para personas con TEA. Imagen ilustrativa (sala de cine): Dalto.Ruiz / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Cine Henfil"
         }
       },
       "created_at": "2026-09-04T22:31:09.383724+00:00",
@@ -945,10 +975,12 @@
       "translations": {
         "source": "feb37a875883e378",
         "en": {
-          "description": "One of the main beaches in Maricá, stretching about 15 km with a parallel bike path used for cycling and running. From the Itaipuaçu Cliffs, a trail offers a view of the Elephant Rock. The open sea has strong return currents; the Recanto, where the sea meets a channel, is the area most recommended for families with children. Photo: Gustavoolimiranda / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "One of the main beaches in Maricá, stretching about 15 km with a parallel bike path used for cycling and running. From the Itaipuaçu Cliffs, a trail offers a view of the Elephant Rock. The open sea has strong return currents; the Recanto, where the sea meets a channel, is the area most recommended for families with children. Photo: Gustavoolimiranda / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Itaipuaçu Beach"
         },
         "es": {
-          "description": "Una de las principales playas de Maricá, con una extensión de aproximadamente 15 km y una ciclovía paralela a la orilla, utilizada para andar en bicicleta y correr. Desde el Costão de Itaipuaçu parte un sendero con vista al Elefante de Piedra. El mar abierto tiene fuertes corrientes de retorno; el Recinto, donde el mar se encuentra con un canal, es la zona más indicada para familias con niños. Foto: Gustavoolimiranda / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Una de las principales playas de Maricá, con una extensión de aproximadamente 15 km y una ciclovía paralela a la orilla, utilizada para andar en bicicleta y correr. Desde el Costão de Itaipuaçu parte un sendero con vista al Elefante de Piedra. El mar abierto tiene fuertes corrientes de retorno; el Recinto, donde el mar se encuentra con un canal, es la zona más indicada para familias con niños. Foto: Gustavoolimiranda / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Playa de Itaipuaçu"
         }
       },
       "created_at": "2026-09-04T17:31:09.383724+00:00",
@@ -1004,10 +1036,12 @@
       "translations": {
         "source": "54ece752ff0e9892",
         "en": {
-          "description": "🥘 Seafood Restaurant\r\n🕓 Lunch - Tue to Sun: 11:30am to 4pm\r\n👇🏻Delivery, menu and more.\r\n\r\nhttps://www.instagram.com/restaurantedoalexandre"
+          "description": "🥘 Seafood Restaurant\r\n🕓 Lunch - Tue to Sun: 11:30am to 4pm\r\n👇🏻Delivery, menu and more.\r\n\r\nhttps://www.instagram.com/restaurantedoalexandre",
+          "name": "Alexandre Restaurante"
         },
         "es": {
-          "description": "🥘 Restaurante especializado en Mariscos\r\n🕓 Almuerzo - De Miércoles a Domingo: 11:30h a 16h\r\n👇🏻Entrega a domicilio, menú y más.\r\n\r\nhttps://www.instagram.com/restaurantedoalexandre"
+          "description": "🥘 Restaurante especializado en Mariscos\r\n🕓 Almuerzo - De Miércoles a Domingo: 11:30h a 16h\r\n👇🏻Entrega a domicilio, menú y más.\r\n\r\nhttps://www.instagram.com/restaurantedoalexandre",
+          "name": "Alexandre Restaurante"
         }
       },
       "created_at": "2026-09-03T06:31:09.383724+00:00",
@@ -1060,10 +1094,12 @@
       "translations": {
         "source": "c404d25dd03959d1",
         "en": {
-          "description": "Scheduled visits – Fishermen’s Association - Rua Apigio Luís da Costa, 8 – Zacarias - (21) 99757-2501 Mr. Vilson Correa.\r\n\r\nIn 1790 this traditional fishing community was already appearing on maps. Creators of the artisanal 'branch fishing' technique, they still resist the passage of time with their traditions.\r\n\r\nAt the traditional Maricá Fishermen’s Colony, it is possible to find fresh fish and taste the Camboinha cachaça, typical of the region. The place maintains traditional constructions and presents a very primitive appearance in some points."
+          "description": "Scheduled visits – Fishermen’s Association - Rua Apigio Luís da Costa, 8 – Zacarias - (21) 99757-2501 Mr. Vilson Correa.\r\n\r\nIn 1790 this traditional fishing community was already appearing on maps. Creators of the artisanal 'branch fishing' technique, they still resist the passage of time with their traditions.\r\n\r\nAt the traditional Maricá Fishermen’s Colony, it is possible to find fresh fish and taste the Camboinha cachaça, typical of the region. The place maintains traditional constructions and presents a very primitive appearance in some points.",
+          "name": "Zacarias Fishing Community"
         },
         "es": {
-          "description": "Visitas con reserva – Asociación de Pescadores - Rua Apigio Luís da Costa, 8 – Zacarias - (21) 99757-2501 Sr. Vilson Correa.\r\n\r\nEn 1790 esta tradicional comunidad pesquera ya aparecía en los mapas. Creadores de la técnica artesanal de la “pesca de galho”, ellos aún resisten al tiempo con sus tradiciones.\r\n\r\nEn la tradicional Colonia de Pescadores de Maricá es posible encontrar pescado fresco y probar la caña Camboinha, típica de la región. El lugar mantiene construcciones tradicionales y presenta un visual bastante primitivo en algunos puntos."
+          "description": "Visitas con reserva – Asociación de Pescadores - Rua Apigio Luís da Costa, 8 – Zacarias - (21) 99757-2501 Sr. Vilson Correa.\r\n\r\nEn 1790 esta tradicional comunidad pesquera ya aparecía en los mapas. Creadores de la técnica artesanal de la “pesca de galho”, ellos aún resisten al tiempo con sus tradiciones.\r\n\r\nEn la tradicional Colonia de Pescadores de Maricá es posible encontrar pescado fresco y probar la caña Camboinha, típica de la región. El lugar mantiene construcciones tradicionales y presenta un visual bastante primitivo en algunos puntos.",
+          "name": "Comunidad Pesquera de Zacarias"
         }
       },
       "created_at": "2026-08-30T22:31:09.383724+00:00",
@@ -1104,10 +1140,12 @@
       "translations": {
         "source": "9d803f12be59d34c",
         "en": {
-          "description": "Environmental Protection Area created in 1984 to protect the coastal sand habitat and the lagoon system of Maricá, which includes the lagoons of Maricá, Barra, Padre, Guarapina, and Jaconé, as well as Lagoa Brava and Ilha Cardosa. It is the oldest APA under state administration and is now managed by Inea. Photo: Filipo Tardim / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Environmental Protection Area created in 1984 to protect the coastal sand habitat and the lagoon system of Maricá, which includes the lagoons of Maricá, Barra, Padre, Guarapina, and Jaconé, as well as Lagoa Brava and Ilha Cardosa. It is the oldest APA under state administration and is now managed by Inea. Photo: Filipo Tardim / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Maricá Environmental Protection Area"
         },
         "es": {
-          "description": "Área de Protección Ambiental creada en 1984 para proteger la restinga y el sistema lagunar de Maricá, que incluye las lagunas de Maricá, de la Barra, del Padre, de Guarapina y de Jaconé, además de la Lagoa Brava y la Isla Cardosa. Es la APA más antigua bajo administración estatal y hoy es gestionada por el Inea. Foto: Filipo Tardim / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Área de Protección Ambiental creada en 1984 para proteger la restinga y el sistema lagunar de Maricá, que incluye las lagunas de Maricá, de la Barra, del Padre, de Guarapina y de Jaconé, además de la Lagoa Brava y la Isla Cardosa. Es la APA más antigua bajo administración estatal y hoy es gestionada por el Inea. Foto: Filipo Tardim / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Área de Protección Ambiental de Maricá"
         }
       },
       "created_at": "2026-08-25T18:31:09.383724+00:00",
@@ -1132,10 +1170,12 @@
       "translations": {
         "source": "af87b5337e12b6b2",
         "en": {
-          "description": "Covered space inaugurated by the city hall in February 2024 as part of the revitalization of the Center, with 114 stalls. Sells food, drinks, souvenirs, handicrafts, art pieces, clothing, shoes, and accessories. The Family Agriculture Fair has already been held in front of the location. Illustrative image (popular commerce center): Rodrigo_Santos / Wikimedia Commons (CC BY 3.0)."
+          "description": "Covered space inaugurated by the city hall in February 2024 as part of the revitalization of the Center, with 114 stalls. Sells food, drinks, souvenirs, handicrafts, art pieces, clothing, shoes, and accessories. The Family Agriculture Fair has already been held in front of the location. Illustrative image (popular commerce center): Rodrigo_Santos / Wikimedia Commons (CC BY 3.0).",
+          "name": "Cecop Popular Market"
         },
         "es": {
-          "description": "Espacio cubierto inaugurado por la alcaldía en febrero de 2024 como parte de la revitalización del Centro, con 114 cajas. Vende comidas, bebidas, recuerdos, artesanías, piezas de arte, ropa, calzado y accesorios. La Feria de la Agricultura Familiar ya se realizó frente al lugar. Imagen ilustrativa (centro de comercio popular): Rodrigo_Santos / Wikimedia Commons (CC BY 3.0)."
+          "description": "Espacio cubierto inaugurado por la alcaldía en febrero de 2024 como parte de la revitalización del Centro, con 114 cajas. Vende comidas, bebidas, recuerdos, artesanías, piezas de arte, ropa, calzado y accesorios. La Feria de la Agricultura Familiar ya se realizó frente al lugar. Imagen ilustrativa (centro de comercio popular): Rodrigo_Santos / Wikimedia Commons (CC BY 3.0).",
+          "name": "Centro de Comercio Popular (Cecop)"
         }
       },
       "created_at": "2026-08-25T00:31:09.383724+00:00",
@@ -1160,10 +1200,12 @@
       "translations": {
         "source": "0e070578c8499042",
         "en": {
-          "description": "Waterfall in a preserved area of Atlantic Rainforest in Espraiado, declared cultural, tourist, and landscape heritage of the state of Rio de Janeiro by Law 10.998 of 2025. In 2022, the city hall announced the reopening of the waterfall and the Gruta da Sacristia for visits and bathing, with diving and climbing prohibited due to the uneven rocky bottom. Espraiado also hosts the rural circuit Espraiado de Portas Abertas. Illustrative image (pool in a waterfall in the Atlantic Rainforest of Rio de Janeiro state): João P. Burini / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Waterfall in a preserved area of Atlantic Rainforest in Espraiado, declared cultural, tourist, and landscape heritage of the state of Rio de Janeiro by Law 10.998 of 2025. In 2022, the city hall announced the reopening of the waterfall and the Gruta da Sacristia for visits and bathing, with diving and climbing prohibited due to the uneven rocky bottom. Espraiado also hosts the rural circuit Espraiado de Portas Abertas. Illustrative image (pool in a waterfall in the Atlantic Rainforest of Rio de Janeiro state): João P. Burini / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Espraiado Waterfall"
         },
         "es": {
-          "description": "Cascada en área preservada de Mata Atlántica en Espraiado, declarada patrimonio cultural, turístico y paisajístico del estado de Río de Janeiro por la Ley 10.998 de 2025. En 2022, la alcaldía informó la reapertura de la cascada y la Gruta de la Sacristía para visitación y baño, con prohibición de buceo y escalada debido al fondo de rocas irregulares. El Espraiado también acoge el circuito rural Espraiado de Puertas Abiertas. Imagen ilustrativa (pozo en cascada de la Mata Atlántica fluminense): João P. Burini / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Cascada en área preservada de Mata Atlántica en Espraiado, declarada patrimonio cultural, turístico y paisajístico del estado de Río de Janeiro por la Ley 10.998 de 2025. En 2022, la alcaldía informó la reapertura de la cascada y la Gruta de la Sacristía para visitación y baño, con prohibición de buceo y escalada debido al fondo de rocas irregulares. El Espraiado también acoge el circuito rural Espraiado de Puertas Abiertas. Imagen ilustrativa (pozo en cascada de la Mata Atlántica fluminense): João P. Burini / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Cascada del Espraiado"
         }
       },
       "created_at": "2026-08-21T07:31:09.383724+00:00",
@@ -1204,10 +1246,12 @@
       "translations": {
         "source": "eab7f07ad37fd298",
         "en": {
-          "description": "Beachfront guesthouse in Ponta Negra, with swimming pool, pool bar and restaurant with sea views. Illustrative image (sea of Ponta Negra): Rodrigo Alves / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Beachfront guesthouse in Ponta Negra, with swimming pool, pool bar and restaurant with sea views. Illustrative image (sea of Ponta Negra): Rodrigo Alves / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Black Point Beach Club"
         },
         "es": {
-          "description": "Posada a orillas del mar en Ponta Negra, con piscina, bar en la piscina y restaurante con vista al mar. Imagen ilustrativa (mar de Ponta Negra): Rodrigo Alves / Wikimedia Commons (CC BY-SA 4.0)."
+          "description": "Posada a orillas del mar en Ponta Negra, con piscina, bar en la piscina y restaurante con vista al mar. Imagen ilustrativa (mar de Ponta Negra): Rodrigo Alves / Wikimedia Commons (CC BY-SA 4.0).",
+          "name": "Black Point Beach Club"
         }
       },
       "created_at": "2026-08-14T06:31:09.383724+00:00",
@@ -1223,6 +1267,90 @@
     }
   ],
   "events": [
+    {
+      "title": "Bora Ler!: biblioteca móvel em comunidades de Maricá",
+      "slug": "bora-ler-biblioteca-movel-em-comunidades-de-marica",
+      "excerpt": "A biblioteca móvel do projeto Bora Ler! passa por quatro comunidades de Maricá, de 3 a 6 de novembro, com livros e contação de histórias.",
+      "content": "O projeto Bora Ler!, parte da programação da FLIM, leva a biblioteca móvel a quatro comunidades, sempre das 10h às 12h e das 14h às 16h:\n\n03/11: Condomínio Carlos Alberto Soares de Freitas (Inoã)\n04/11: Condomínio Carlos Marighella (Itaipuaçu)\n05/11: Comunidade do Risca Faca (Inoã)\n06/11: Santa Paula (Inoã)\n\nHá livros e contação de histórias, e a autora Lili Dias participa dos quatro dias. A atividade é gratuita.",
+      "image": "WhatsApp-Image-2026-10-28-at-14.32.57.webp",
+      "image_caption": "Foto: Prefeitura de Maricá",
+      "event_date": "2026-11-03T13:00:00+00:00",
+      "event_end_date": "2026-11-06T19:00:00+00:00",
+      "event_location": "Inoã e Itaipuaçu",
+      "source_name": "Prefeitura de Maricá",
+      "source_url": "https://www.marica.rj.gov.br/noticia/projeto-bora-ler-leva-biblioteca-movel-a-quatro-comunidades-de-marica/",
+      "is_featured": false,
+      "translations": {
+        "source": "55b7bc4f1923b8bd",
+        "en": {
+          "title": "Bora Ler!: mobile library in Maricá communities",
+          "excerpt": "The Bora Ler! project's mobile library will visit four communities in Maricá from November 3 to 6, with books and storytelling.",
+          "content": "The Bora Ler! project, part of the FLIM program, brings the mobile library to four communities, always from 10 AM to 12 PM and from 2 PM to 4 PM:\n\nNovember 3: Carlos Alberto Soares de Freitas Condominium (Inoã)\nNovember 4: Carlos Marighella Condominium (Itaipuaçu)\nNovember 5: Risca Faca Community (Inoã)\nNovember 6: Santa Paula (Inoã)\n\nThere are books and storytelling, and author Lili Dias participates in all four days. The activity is free."
+        },
+        "es": {
+          "title": "¡Bora Ler!: biblioteca móvil en comunidades de Maricá",
+          "excerpt": "La biblioteca móvil del proyecto ¡Bora Ler! pasa por cuatro comunidades de Maricá, del 3 al 6 de noviembre, con libros y narración de historias.",
+          "content": "El proyecto ¡Bora Ler!, parte de la programación de la FLIM, lleva la biblioteca móvil a cuatro comunidades, siempre de 10h a 12h y de 14h a 16h:\n\n03/11: Condominio Carlos Alberto Soares de Freitas (Inoã)\n04/11: Condominio Carlos Marighella (Itaipuaçu)\n05/11: Comunidad del Risca Faca (Inoã)\n06/11: Santa Paula (Inoã)\n\nHay libros y narración de historias, y la autora Lili Dias participa de los cuatro días. La actividad es gratuita."
+        }
+      },
+      "publish_date": "2026-11-01T18:42:45.552134+00:00"
+    },
+    {
+      "title": "23º Festival Internacional de Cinema Infantil (FICI) no Cine Henfil",
+      "slug": "23o-festival-internacional-de-cinema-infantil-fici-no-cine-henfil",
+      "excerpt": "Sessões gratuitas do FICI no Cine Henfil, às 10h, 14h e 16h, em 31 de outubro e 7 de novembro.",
+      "content": "O Cine Henfil recebe o 23º Festival Internacional de Cinema Infantil (FICI) nos dias 31/10 e 07/11, com sessões às 10h, 14h e 16h.\n\nO cinema fica na Rua Alferes Gomes, 390, Centro. Os ingressos são gratuitos, retirados pelo Sympla, e não há lugares marcados.",
+      "image": "50537960717_8138039558_o-scaled_7W2MHIb.webp",
+      "image_caption": "Foto: Prefeitura de Maricá",
+      "event_date": "2026-10-31T13:00:00+00:00",
+      "event_end_date": "2026-11-08T02:59:00+00:00",
+      "event_location": "Cine Henfil, Rua Alferes Gomes, 390, Centro",
+      "source_name": "Prefeitura de Maricá",
+      "source_url": "https://www.marica.rj.gov.br/noticia/cine-henfil-recebe-festivais-de-cinema-frances-e-infantil-com-sessoes-gratuitas/",
+      "is_featured": false,
+      "translations": {
+        "source": "f62e41c6ea4e31a6",
+        "en": {
+          "title": "23rd International Children's Film Festival (FICI) at Cine Henfil",
+          "excerpt": "Free screenings of the FICI at Cine Henfil at 10 AM, 2 PM and 4 PM on October 31 and November 7.",
+          "content": "Cine Henfil hosts the 23rd International Children's Film Festival (FICI) on October 31 and November 7, with screenings at 10 AM, 2 PM and 4 PM.\n\nThe cinema is located at Rua Alferes Gomes, 390, Centro. Tickets are free and can be picked up through Sympla, and there are no reserved seats."
+        },
+        "es": {
+          "title": "23º Festival Internacional de Cine Infantil (FICI) en Cine Henfil",
+          "excerpt": "Sesiones gratuitas del FICI en Cine Henfil, a las 10h, 14h y 16h, el 31 de octubre y 7 de noviembre.",
+          "content": "El Cine Henfil acoge el 23º Festival Internacional de Cine Infantil (FICI) los días 31/10 y 07/11, con sesiones a las 10h, 14h y 16h.\n\nEl cine se encuentra en la Rua Alferes Gomes, 390, Centro. Las entradas son gratuitas y se retiran a través de Sympla, y no hay asientos reservados."
+        }
+      },
+      "publish_date": "2026-11-01T18:42:45.536859+00:00"
+    },
+    {
+      "title": "Festival de Cinema Francês do Brasil no Cine Henfil",
+      "slug": "festival-de-cinema-frances-do-brasil-no-cine-henfil",
+      "excerpt": "Sessões gratuitas de cinema francês no Cine Henfil, às 18h, de 30 de outubro a 19 de dezembro.",
+      "content": "O Cine Henfil recebe o Festival de Cinema Francês do Brasil com sessões às 18h nos dias 30/10, 06/11, 13/11, 21/11, 27/11, 04/12, 11/12 e 19/12.\n\nO cinema fica na Rua Alferes Gomes, 390, Centro. Os ingressos são gratuitos, retirados pelo Sympla, e não há lugares marcados.",
+      "image": "50537960717_8138039558_o-scaled.webp",
+      "image_caption": "Foto: Prefeitura de Maricá",
+      "event_date": "2026-10-30T21:00:00+00:00",
+      "event_end_date": "2026-12-20T02:59:00+00:00",
+      "event_location": "Cine Henfil, Rua Alferes Gomes, 390, Centro",
+      "source_name": "Prefeitura de Maricá",
+      "source_url": "https://www.marica.rj.gov.br/noticia/cine-henfil-recebe-festivais-de-cinema-frances-e-infantil-com-sessoes-gratuitas/",
+      "is_featured": false,
+      "translations": {
+        "source": "37dff84f1ce7a517",
+        "en": {
+          "title": "French Film Festival in Brazil at Cine Henfil",
+          "excerpt": "Free French film screenings at Cine Henfil at 6 PM from October 30 to December 19.",
+          "content": "Cine Henfil hosts the French Film Festival in Brazil with screenings at 6 PM on October 30, November 6, November 13, November 21, November 27, December 4, December 11, and December 19.\n\nThe cinema is located at Rua Alferes Gomes, 390, Centro. Tickets are free and can be picked up through Sympla, and there are no reserved seats."
+        },
+        "es": {
+          "title": "Festival de Cine Francés de Brasil en Cine Henfil",
+          "excerpt": "Sesiones gratuitas de cine francés en Cine Henfil, a las 18h, del 30 de octubre al 19 de diciembre.",
+          "content": "El Cine Henfil acoge el Festival de Cine Francés de Brasil con sesiones a las 18h los días 30/10, 06/11, 13/11, 21/11, 27/11, 04/12, 11/12 y 19/12.\n\nEl cine se encuentra en la Rua Alferes Gomes, 390, Centro. Las entradas son gratuitas, se retiran a través de Sympla, y no hay asientos reservados."
+        }
+      },
+      "publish_date": "2026-11-01T18:42:45.171888+00:00"
+    },
     {
       "title": "FLIM 2026: Festa Literária Internacional de Maricá",
       "slug": "flim-2026-festa-literaria-internacional-de-marica",
