@@ -5,7 +5,7 @@ from django.utils import translation
 
 from apps.accounts.models import User
 from apps.core.views import calculate_percentage_change
-from apps.explore.models import Category, Place, PlaceImage
+from apps.explore.models import Category, Place, PlaceImage, PlaceReview
 from apps.news.models import News, NewsCategory
 
 
@@ -835,3 +835,33 @@ class VercelAnalyticsTests(TestCase):
         self.assertNotContains(
             self.client.get(reverse("core:landing")), "/_vercel/insights/"
         )
+
+
+class LandingReviewsTests(TestCase):
+    """'Quem visitou conta' mostra avaliações boas e com texto, uma por lugar"""
+
+    def setUp(self):
+        owner = User.objects.create_user(username="dono", password="x")
+        self.place = Place.objects.create(
+            name="Lagoa",
+            description="d",
+            address="a",
+            created_by=owner,
+            is_approved=True,
+        )
+        for i, (rating, comment) in enumerate(
+            [(5, "Vista linda"), (2, "Fraco"), (5, "")]
+        ):
+            PlaceReview.objects.create(
+                place=self.place,
+                user=User.objects.create_user(username=f"v{i}", password="x"),
+                rating=rating,
+                comment=comment,
+            )
+
+    def test_shows_good_reviews_with_text_once_per_place(self):
+        response = self.client.get(reverse("core:landing"))
+        self.assertEqual(
+            [r.comment for r in response.context["reviews"]], ["Vista linda"]
+        )
+        self.assertContains(response, "Quem visitou conta")

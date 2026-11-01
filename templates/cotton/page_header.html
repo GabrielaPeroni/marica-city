@@ -1,6 +1,8 @@
 {% load i18n %}
 <c-vars title="" eyebrow="" subtitle="" class="" />
-<header class="border-b {{ class }}" {{ attrs }}>
+<header class="relative isolate overflow-hidden border-b {{ class }}" {{ attrs }}>
+  <span class="deco-float -top-10 right-[4%] hidden w-56 rotate-[160deg] text-lagoon-tint md:block lg:w-72" data-parallax="0.1"><c-deco shape="frond" class="w-full" /></span>
+  <span class="deco-float right-[18%] -bottom-6 hidden w-14 text-sun/80 lg:block"><c-deco shape="sun" class="w-full" /></span>
   <div class="container-page py-8 md:py-12">
     {% if crumbs %}
     <nav class="mb-4" aria-label="{% translate 'Trilha de navegação' %}">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-31 17:08-0300\n"
+"POT-Creation-Date: 2026-10-31 22:27-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -45,7 +45,7 @@ msgstr "Home"
 msgid "Explorar lugares"
 msgstr "Explore places"
 
-#: templates/404.html:18 templates/base.html:68 templates/news/news_list.html:4
+#: templates/404.html:18 templates/base.html:85 templates/news/news_list.html:4
 msgid "Agenda de eventos"
 msgstr "Events agenda"
 
@@ -316,7 +316,7 @@ msgstr "Name, email, username..."
 msgid "Filtrar"
 msgstr "Filter"
 
-#: templates/accounts/user_management.html:38 templates/includes/navbar.html:30
+#: templates/accounts/user_management.html:38 templates/includes/navbar.html:32
 msgid "Usuário"
 msgstr "User"
 
@@ -392,7 +392,7 @@ msgstr "Confirm change"
 msgid "Confirmar"
 msgstr "Confirm"
 
-#: templates/base.html:7
+#: templates/base.html:8
 msgid ""
 "Guia de turismo de Maricá: praias, lagoas, trilhas, cultura e a agenda de eventos da "
 "cidade."
@@ -400,16 +400,16 @@ msgstr ""
 "Maricá Tourism Guide: beaches, lagoons, trails, culture, and the city's event "
 "calendar."
 
-#: templates/base.html:18
+#: templates/base.html:33
 msgid "Pular para o conteúdo"
 msgstr "Skip to content"
 
-#: templates/base.html:28 templates/cotton/dialog.html:13
+#: templates/base.html:43 templates/cotton/dialog.html:13
 #: templates/explore/place_detail.html:288
 msgid "Fechar"
 msgstr "Close"
 
-#: templates/base.html:50
+#: templates/base.html:67
 msgid ""
 "Guia de turismo de Maricá: praias, lagoas, trilhas, cultura e a agenda de eventos da "
 "cidade, em português, inglês e espanhol."
@@ -417,75 +417,75 @@ msgstr ""
 "A tourism guide to Maricá: beaches, lagoons, trails, culture and the city's events, "
 "in Portuguese, English and Spanish."
 
-#: templates/base.html:52
+#: templates/base.html:69
 msgid "Código no GitHub"
 msgstr "Code on GitHub"
 
-#: templates/base.html:52 templates/news/news_detail.html:75
+#: templates/base.html:69 templates/news/news_detail.html:75
 #: templates/news/news_detail.html:82
 msgid "abre em nova aba"
 msgstr "opens in new tab"
 
-#: templates/base.html:56
+#: templates/base.html:73
 msgid "Rodapé: explorar"
 msgstr "Footer: explore"
 
-#: templates/base.html:57 templates/explore/category_detail.html:18
+#: templates/base.html:74 templates/explore/category_detail.html:18
 #: templates/explore/explore.html:16 templates/explore/place_detail.html:37
 #: templates/explore/place_form.html:13 templates/explore/review_form.html:14
-#: templates/includes/navbar.html:12 templates/includes/navbar.html:71
+#: templates/includes/navbar.html:14 templates/includes/navbar.html:74
 msgid "Explorar"
 msgstr "Explore"
 
-#: templates/base.html:62
+#: templates/base.html:79
 msgid "Todos os lugares"
 msgstr "All places"
 
-#: templates/base.html:65
+#: templates/base.html:82
 msgid "Rodapé: visite"
 msgstr "Footer: visit"
 
-#: templates/base.html:66
+#: templates/base.html:83
 msgid "Visite"
 msgstr "Visit"
 
-#: templates/base.html:69 templates/core/about.html:40
+#: templates/base.html:86 templates/core/about.html:40
 msgid "Planeje sua visita"
 msgstr "Plan your visit"
 
-#: templates/base.html:70 templates/core/about.html:121
+#: templates/base.html:87 templates/core/about.html:121
 msgid "Telefones de emergência"
 msgstr "Emergency numbers"
 
-#: templates/base.html:71 templates/core/about.html:4 templates/core/about.html:9
+#: templates/base.html:88 templates/core/about.html:4 templates/core/about.html:9
 msgid "Sobre o projeto"
 msgstr "About the project"
 
-#: templates/base.html:74
+#: templates/base.html:91
 msgid "Rodapé: participar"
 msgstr "Footer: participate"
 
-#: templates/base.html:75
+#: templates/base.html:92
 msgid "Participar"
 msgstr "Participate"
 
-#: templates/base.html:78 templates/base.html:82 templates/explore/favorites.html:4
-#: templates/explore/favorites.html:9 templates/includes/navbar.html:36
+#: templates/base.html:95 templates/base.html:99 templates/explore/favorites.html:4
+#: templates/explore/favorites.html:9 templates/includes/navbar.html:38
 msgid "Meus favoritos"
 msgstr "My favorites"
 
-#: apps/explore/views.py:174 templates/base.html:79 templates/core/landing.html:40
-#: templates/core/landing.html:112 templates/explore/admin/backlog.html:7
+#: apps/explore/views.py:174 templates/base.html:96 templates/core/landing.html:41
+#: templates/core/landing.html:147 templates/explore/admin/backlog.html:7
 #: templates/explore/category_detail.html:50 templates/explore/explore.html:19
-#: templates/explore/explore.html:42 templates/includes/navbar.html:38
+#: templates/explore/explore.html:42 templates/includes/navbar.html:40
 msgid "Cadastrar lugar"
 msgstr "Submit a place"
 
-#: templates/base.html:81 templates/core/about.html:142
+#: templates/base.html:98 templates/core/about.html:142
 msgid "Criar conta"
 msgstr "Create account"
 
-#: templates/base.html:91
+#: templates/base.html:108
 msgid "Código sob licença MIT · Fotos: Wikimedia Commons e colaboradores"
 msgstr "Code under the MIT licence · Photos: Wikimedia Commons and contributors"
 
@@ -815,9 +815,9 @@ msgid "Cancelar e voltar"
 msgstr "Cancel and go back"
 
 #: apps/news/models.py:19 templates/core/admin/news_list.html:4
-#: templates/core/admin/news_list.html:5 templates/includes/admin_sidebar.html:31
-#: templates/includes/navbar.html:13 templates/includes/navbar.html:72
-#: templates/news/news_list.html:15
+#: templates/core/admin/news_list.html:5 templates/core/landing.html:22
+#: templates/includes/admin_sidebar.html:31 templates/includes/navbar.html:15
+#: templates/includes/navbar.html:75 templates/news/news_list.html:15
 msgid "Eventos"
 msgstr "Events"
 
@@ -836,7 +836,8 @@ msgid "Todas"
 msgstr "All"
 
 #: templates/core/admin/news_list.html:28 templates/core/admin/news_list.html:31
-#: templates/explore/_filter_bar.html:20 templates/explore/admin/backlog.html:37
+#: templates/core/landing.html:88 templates/explore/_filter_bar.html:20
+#: templates/explore/admin/backlog.html:37
 msgid "Buscar"
 msgstr "Search"
 
@@ -1007,19 +1008,27 @@ msgstr "View, edit and manage system user accounts."
 msgid "Descubra o Turismo Local"
 msgstr "Discover local tourism"
 
-#: templates/core/landing.html:16
+#: templates/core/landing.html:17
 msgid "carrossel"
 msgstr "carousel"
 
-#: templates/core/landing.html:16
+#: templates/core/landing.html:17
 msgid "Destaques"
 msgstr "Highlights"
 
-#: templates/core/landing.html:30
+#: templates/core/landing.html:22
+msgid "Descubra"
+msgstr "Discover"
+
+#: templates/core/landing.html:22
+msgid "Participe"
+msgstr "Join in"
+
+#: templates/core/landing.html:31
 msgid "Descubra as Maravilhas de Maricá"
 msgstr "Discover the Wonders of Maricá"
 
-#: templates/core/landing.html:31
+#: templates/core/landing.html:32
 msgid ""
 "Explore a beleza de praias intocadas, lagoas cristalinas e uma cultura vibrante. "
 "Embarque em uma jornada repleta de aventura e memórias inesquecíveis."
@@ -1027,15 +1036,15 @@ msgstr ""
 "Explore the beauty of untouched beaches, crystal clear lagoons and vibrant culture. "
 "Embark on a journey filled with adventure and unforgettable memories."
 
-#: templates/core/landing.html:32
+#: templates/core/landing.html:33
 msgid "Começar a Explorar"
 msgstr "Start Exploring"
 
-#: templates/core/landing.html:34
+#: templates/core/landing.html:35
 msgid "Viva Experiências Únicas"
 msgstr "Experience Unique Moments"
 
-#: templates/core/landing.html:35
+#: templates/core/landing.html:36
 msgid ""
 "Descubra eventos locais, gastronomia autêntica e lugares escondidos. Maricá oferece "
 "experiências que vão além do comum."
@@ -1043,15 +1052,15 @@ msgstr ""
 "Discover local events, authentic cuisine, and hidden gems. Maricá offers experiences "
 "beyond the ordinary."
 
-#: templates/core/landing.html:36
+#: templates/core/landing.html:37
 msgid "Ver Eventos"
 msgstr "View Events"
 
-#: templates/core/landing.html:38
+#: templates/core/landing.html:39
 msgid "Compartilhe Seus Lugares Favoritos"
 msgstr "Share Your Favorites"
 
-#: templates/core/landing.html:39
+#: templates/core/landing.html:40
 msgid ""
 "Contribua com a comunidade e ajude outros a descobrirem Maricá. Adicione lugares "
 "especiais e conte sua história."
@@ -1059,7 +1068,7 @@ msgstr ""
 "Contribute to the community and help others discover Maricá. Add special places and "
 "share your story."
 
-#: templates/core/landing.html:54
+#: templates/core/landing.html:57
 #, python-format
 msgid ""
 "Entre na sua conta (menu <strong>Entrar</strong>) ou <a "
@@ -1068,32 +1077,50 @@ msgstr ""
 "Sign in (menu <strong>Sign In</strong>) or <a href=\"%(register_url)s\">create a free"
 " account</a> to continue."
 
-#: templates/core/landing.html:63
+#: templates/core/landing.html:66
 msgid "Pausar apresentação"
 msgstr "Pause presentation"
 
-#: templates/core/landing.html:75
+#: templates/core/landing.html:71
+msgid "Role"
+msgstr "Scroll"
+
+#: templates/core/landing.html:82
+msgid "Para onde vamos?"
+msgstr "Where to next?"
+
+#: templates/core/landing.html:86
+msgid "Praia, trilha, restaurante…"
+msgstr "Beach, trail, restaurant…"
+
+#: templates/core/landing.html:91 templates/explore/_filter_bar.html:23
+#: templates/explore/admin/backlog.html:82 templates/explore/place_detail.html:236
+#: templates/explore/place_form.html:43
+msgid "Categorias"
+msgstr "Categories"
+
+#: templates/core/landing.html:106
 msgid "Em alta agora"
 msgstr "Trending now"
 
-#: templates/core/landing.html:75
+#: templates/core/landing.html:106
 msgid "Destinos populares este mês"
 msgstr "Popular destinations this month"
 
-#: templates/core/landing.html:75 templates/core/landing.html:143
+#: templates/core/landing.html:106 templates/core/landing.html:180
 #: templates/cotton/section_heading.html:15
 msgid "Ver todos"
 msgstr "See all"
 
-#: templates/core/landing.html:90
+#: templates/core/landing.html:125
 msgid "Onde ir"
 msgstr "Where to go"
 
-#: templates/core/landing.html:90
+#: templates/core/landing.html:125
 msgid "Escolha sua própria jornada."
 msgstr "Choose your own journey."
 
-#: templates/core/landing.html:91
+#: templates/core/landing.html:126
 msgid ""
 "Explore os lugares mais incríveis de Maricá. De praias paradisíacas a experiências "
 "culturais únicas, há um lugar em Maricá para todos! Descubra o que torna cada um "
@@ -1103,58 +1130,66 @@ msgstr ""
 "cultural experiences, there's a place in Maricá for everyone! Discover what makes "
 "each one special."
 
-#: templates/core/landing.html:94
+#: templates/core/landing.html:129
 msgid "Veja mais"
 msgstr "See more"
 
-#: templates/core/landing.html:109
+#: templates/core/landing.html:144
 msgid "Nenhum lugar disponível ainda. Volte em breve!"
 msgstr "No places available yet. Check back soon!"
 
-#: templates/core/landing.html:122 templates/news/news_detail.html:92
+#: templates/core/landing.html:158 templates/news/news_detail.html:92
 msgid "Ver agenda completa"
 msgstr "See the full agenda"
 
-#: templates/core/landing.html:123
+#: templates/core/landing.html:159
 msgid "Próximos eventos em Maricá"
 msgstr "Upcoming events in Maricá"
 
-#: templates/core/landing.html:123
+#: templates/core/landing.html:159
 msgid "Eventos recentes em Maricá"
 msgstr "Recent events in Maricá"
 
-#: templates/core/landing.html:143
+#: templates/core/landing.html:180
 msgid "Explorar por categoria"
 msgstr "Explore by category"
 
-#: templates/core/landing.html:143
+#: templates/core/landing.html:180
 msgid "Encontre exatamente o que você procura"
 msgstr "Find exactly what you're looking for"
 
-#: templates/core/landing.html:157
+#: templates/core/landing.html:194
 #, python-format
 msgid "%(counter)s lugar"
 msgid_plural "%(counter)s lugares"
 msgstr[0] "%(counter)s place"
 msgstr[1] "%(counter)s places"
 
-#: templates/core/landing.html:170
+#: templates/core/landing.html:208
+msgid "Quem visitou conta"
+msgstr "What visitors say"
+
+#: templates/core/landing.html:208
+msgid "Avaliações recentes de quem passou por Maricá"
+msgstr "Recent reviews from Maricá visitors"
+
+#: templates/core/landing.html:233
 msgid "Explore no mapa"
 msgstr "Explore on map"
 
-#: templates/core/landing.html:170
+#: templates/core/landing.html:233
 msgid "Navegue pelos Lugares de Maricá"
 msgstr "Browse Maricá Places"
 
-#: templates/core/landing.html:170
+#: templates/core/landing.html:233
 msgid "Todos os lugares cadastrados, no mapa interativo"
 msgstr "All registered places, on the interactive map"
 
-#: templates/core/landing.html:174
+#: templates/core/landing.html:237
 msgid "Carregando mapa interativo..."
 msgstr "Loading interactive map..."
 
-#: templates/core/landing.html:177
+#: templates/core/landing.html:240
 msgid "Clique nos marcadores para ver detalhes de cada lugar"
 msgstr "Click on markers to see details of each place"
 
@@ -1166,7 +1201,7 @@ msgstr "Happening now"
 msgid "Encerrado"
 msgstr "Ended"
 
-#: templates/cotton/page_header.html:6 templates/explore/category_detail.html:16
+#: templates/cotton/page_header.html:8 templates/explore/category_detail.html:16
 #: templates/explore/place_detail.html:35 templates/explore/review_form.html:12
 #: templates/news/news_detail.html:23
 msgid "Trilha de navegação"
@@ -1231,11 +1266,6 @@ msgstr "Name (Z–A)"
 #: templates/explore/explore.html:37
 msgid "Limpar busca"
 msgstr "Clear search"
-
-#: templates/explore/_filter_bar.html:23 templates/explore/admin/backlog.html:82
-#: templates/explore/place_detail.html:236 templates/explore/place_form.html:43
-msgid "Categorias"
-msgstr "Categories"
 
 #: templates/explore/admin/backlog.html:4 templates/explore/admin/backlog.html:5
 #: templates/explore/category_detail.html:35 templates/explore/explore.html:27
@@ -1751,7 +1781,7 @@ msgstr "Update review"
 msgid "Menu do painel"
 msgstr "Admin menu"
 
-#: templates/includes/admin_sidebar.html:9 templates/includes/navbar.html:34
+#: templates/includes/admin_sidebar.html:9 templates/includes/navbar.html:36
 msgid "Painel de administração"
 msgstr "Admin dashboard"
 
@@ -1771,7 +1801,7 @@ msgstr "Back to the site"
 msgid "Admin avançado (Django)"
 msgstr "Advanced admin (Django)"
 
-#: templates/includes/admin_sidebar.html:66 templates/includes/navbar.html:44
+#: templates/includes/admin_sidebar.html:66 templates/includes/navbar.html:46
 msgid "Sair"
 msgstr "Sign out"
 
@@ -1795,7 +1825,7 @@ msgstr "Decline"
 msgid "Aceitar"
 msgstr "Accept"
 
-#: templates/includes/language_switcher.html:3 templates/includes/navbar.html:77
+#: templates/includes/language_switcher.html:3 templates/includes/navbar.html:80
 msgid "Idioma"
 msgstr "Language"
 
@@ -1815,27 +1845,27 @@ msgstr "Don't have an account?"
 msgid "Cadastre-se agora"
 msgstr "Sign up now"
 
-#: templates/includes/navbar.html:5 templates/includes/navbar.html:68
+#: templates/includes/navbar.html:6 templates/includes/navbar.html:71
 msgid "Navegação principal"
 msgstr "Main navigation"
 
-#: templates/includes/navbar.html:11 templates/includes/navbar.html:70
+#: templates/includes/navbar.html:13 templates/includes/navbar.html:73
 msgid "Início"
 msgstr "Home"
 
-#: templates/includes/navbar.html:14 templates/includes/navbar.html:73
+#: templates/includes/navbar.html:16 templates/includes/navbar.html:76
 msgid "Sobre"
 msgstr "About"
 
-#: templates/includes/navbar.html:53
+#: templates/includes/navbar.html:55
 msgid "Abrir menu"
 msgstr "Open menu"
 
-#: templates/includes/navbar.html:59
+#: templates/includes/navbar.html:62
 msgid "Menu"
 msgstr "Menu"
 
-#: templates/includes/navbar.html:64
+#: templates/includes/navbar.html:67
 msgid "Fechar menu"
 msgstr "Close menu"
 
@@ -2130,114 +2160,114 @@ msgstr "User %(username)s deleted successfully."
 msgid "Você não tem permissão para acessar esta página."
 msgstr "You do not have permission to access this page."
 
-#: apps/core/views.py:177 apps/explore/views.py:337
+#: apps/core/views.py:191 apps/explore/views.py:337
 msgid "Todos"
 msgstr "All"
 
-#: apps/core/views.py:178
+#: apps/core/views.py:192
 msgid "Sugestões"
 msgstr "Suggestions"
 
-#: apps/core/views.py:179
+#: apps/core/views.py:193
 msgid "Publicados"
 msgstr "Published"
 
-#: apps/core/views.py:180
+#: apps/core/views.py:194
 msgid "Rascunhos"
 msgstr "Drafts"
 
-#: apps/core/views.py:181
+#: apps/core/views.py:195
 msgid "Arquivados"
 msgstr "Archived"
 
-#: apps/core/views.py:262
+#: apps/core/views.py:276
 #, python-format
 msgid "Evento \"%(title)s\" criado com sucesso!"
 msgstr "Event \"%(title)s\" created successfully!"
 
-#: apps/core/views.py:265
+#: apps/core/views.py:279
 msgid "Criar novo evento"
 msgstr "Create new event"
 
-#: apps/core/views.py:265
+#: apps/core/views.py:279
 msgid "Criar"
 msgstr "Create"
 
-#: apps/core/views.py:276
+#: apps/core/views.py:290
 #, python-format
 msgid "Evento \"%(title)s\" atualizado com sucesso!"
 msgstr "Event \"%(title)s\" updated successfully!"
 
-#: apps/core/views.py:282
+#: apps/core/views.py:296
 #, python-format
 msgid "Editar: %(title)s"
 msgstr "Edit: %(title)s"
 
-#: apps/core/views.py:283 apps/explore/views.py:195
+#: apps/core/views.py:297 apps/explore/views.py:195
 msgid "Salvar Alterações"
 msgstr "Save Changes"
 
-#: apps/core/views.py:297
+#: apps/core/views.py:311
 #, python-format
 msgid "Evento \"%(news_title)s\" excluído com sucesso."
 msgstr "Event \"%(news_title)s\" deleted successfully."
 
-#: apps/core/views.py:309
+#: apps/core/views.py:323
 #, python-format
 msgid "%(count)d evento publicado"
 msgid_plural "%(count)d eventos publicados"
 msgstr[0] "%(count)d event published"
 msgstr[1] "%(count)d events published"
 
-#: apps/core/views.py:312
+#: apps/core/views.py:326
 #, python-format
 msgid "%(count)d evento arquivado"
 msgid_plural "%(count)d eventos arquivados"
 msgstr[0] "%(count)d event archived"
 msgstr[1] "%(count)d events archived"
 
-#: apps/core/views.py:315
+#: apps/core/views.py:329
 #, python-format
 msgid "%(count)d evento excluído"
 msgid_plural "%(count)d eventos excluídos"
 msgstr[0] "%(count)d event deleted"
 msgstr[1] "%(count)d events deleted"
 
-#: apps/core/views.py:327 apps/core/views.py:422
+#: apps/core/views.py:341 apps/core/views.py:436
 msgid "Selecione ao menos um evento."
 msgstr "Select at least one event."
 
-#: apps/core/views.py:342 apps/core/views.py:433 apps/explore/views.py:328
+#: apps/core/views.py:356 apps/core/views.py:447 apps/explore/views.py:328
 msgid "Ação inválida."
 msgstr "Invalid action."
 
-#: apps/core/views.py:393
+#: apps/core/views.py:407
 #, python-format
 msgid "\"%(title)s\" foi descartado."
 msgstr "\"%(title)s\" has been discarded."
 
-#: apps/core/views.py:400
+#: apps/core/views.py:414
 #, python-format
 msgid "Revise os campos de \"%(title)s\"."
 msgstr "Review the fields of \"%(title)s\"."
 
-#: apps/core/views.py:411
+#: apps/core/views.py:425
 #, python-format
 msgid "\"%(title)s\" publicado na agenda."
 msgstr "\"%(title)s\" published to the agenda."
 
-#: apps/core/views.py:428
+#: apps/core/views.py:442
 #, python-format
 msgid "%(count)d evento descartado"
 msgid_plural "%(count)d eventos descartados"
 msgstr[0] "%(count)d event discarded"
 msgstr[1] "%(count)d events discarded"
 
-#: apps/core/views.py:444
+#: apps/core/views.py:458
 msgid "Não foi possível consultar a Prefeitura agora."
 msgstr "Couldn't reach the Prefeitura's website right now."
 
-#: apps/core/views.py:448
+#: apps/core/views.py:462
 #, python-format
 msgid "%(created)s evento(s) novo(s) para triagem."
 msgstr "%(created)s new event(s) to review."

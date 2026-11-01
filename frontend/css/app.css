@@ -57,7 +57,7 @@
 /* Paleta: neutros carvão/off-white; o vermelho de Maricá é só acento (--brand) */
 :root {
   --radius: 0.75rem;
-  --background: #f7f5f1;
+  --background: #f6f7f2;
   --foreground: #2b2826;
   --card: #ffffff;
   --card-foreground: #2b2826;
@@ -65,14 +65,14 @@
   --popover-foreground: #2b2826;
   --primary: #2b2826;
   --primary-foreground: #ffffff;
-  --secondary: #efece6;
+  --secondary: #edf0e8;
   --secondary-foreground: #2b2826;
-  --muted: #efece6;
+  --muted: #edf0e8;
   --muted-foreground: #655e58;
-  --accent: #efece6;
+  --accent: #edf0e8;
   --accent-foreground: #2b2826;
   --destructive: #bc2f38;
-  --border: #e3ded6;
+  --border: #dee3d9;
   --input: #d6d0c7;
   --ring: #bc2f38;
   --sidebar: #ffffff;
@@ -87,6 +87,12 @@
   --brand: #bc2f38;
   --brand-strong: #96252c;
   --brand-tint: #f7ebea;
+  /* Cores de "impressão" das ilustrações: lagoa, restinga e sol de Maricá */
+  --lagoon: #1f5a4c;
+  --lagoon-ink: #163f36;
+  --lagoon-tint: #dcebe3;
+  --leaf: #4f8a5b;
+  --sun: #f2b53a;
   --ink-soft: #968e87;
   --star: #d9a441;
   --success: #3f7558;
@@ -146,6 +152,11 @@
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-tint: var(--brand-tint);
+  --color-lagoon: var(--lagoon);
+  --color-lagoon-ink: var(--lagoon-ink);
+  --color-lagoon-tint: var(--lagoon-tint);
+  --color-leaf: var(--leaf);
+  --color-sun: var(--sun);
   --color-ink-soft: var(--ink-soft);
   --color-star: var(--star);
   --color-success: var(--success);
@@ -556,4 +567,47 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@layer components {
+  /* Ilustrações impressas (templates/includes/deco/*.svg): borda irregular e
+     granulado de tinta pelo filtro #ink de base.html */
+  .deco {
+    pointer-events: none;
+    user-select: none;
+    filter: url(#ink);
+  }
+
+  .deco-solid {
+    filter: url(#ink-edge);
+  }
+
+  .deco-float {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
+    translate: 0 calc(var(--parallax, 0) * 1px);
+  }
+
+  /* Borda ondulada entre seções: a onda tem a cor da seção que ela começa */
+  .wave-edge {
+    filter: url(#ink-edge);
+    pointer-events: none;
+    position: absolute;
+    inset-inline: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: clamp(2.25rem, 5vw, 4.5rem);
+  }
+
+  .wave-edge.wave-top {
+    bottom: calc(100% - 1px);
+  }
+
+  .wave-edge.wave-bottom {
+    top: calc(100% - 1px);
+    scale: 1 -1;
+  }
 }

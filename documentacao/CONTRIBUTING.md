@@ -285,6 +285,24 @@ estrelas clicáveis (`.star-picker`).
 Filtro avulso: `{% load form_ui %}{{ form.campo|ui_widget }}` só o widget com
 as classes do Basecoat.
 
+### Ilustrações impressas e movimento
+
+- `<c-deco shape="frond" class="w-64" />`: formas em cor sólida com borda de
+  tinta (filtros `#ink`/`#ink-edge` em `base.html`). Formas: `frond`,
+  `frond-low`, `monstera`, `aroeira` (frutos em `--deco-accent`), `sun`,
+  `gulls`, `skyline`, `wave`. A cor vem de `text-*` (`text-lagoon`,
+  `text-lagoon-tint`, `text-sun`, `text-leaf`). Geradas por
+  `uv run python scripts/generate_deco.py templates/includes/deco`.
+- Para espalhar entre seções: `<span class="deco-float top-10 -left-16 w-64"
+data-parallax="0.1"><c-deco shape="monstera" class="w-full" /></span>`
+  dentro de uma seção `relative isolate overflow-x-clip` (fica atrás do
+  conteúdo; use `z-[2]` para passar por cima da seção vizinha).
+- `<c-wave at="top" class="text-lagoon" />` / `at="bottom"`: borda ondulada
+  da cor da seção que a contém.
+- `data-reveal` (elemento) e `data-reveal-stagger` (filhos em sequência)
+  aparecem ao rolar; `data-spotlight` acende uma luz sob o cursor. Tudo some
+  com movimento reduzido.
+
 ### Pre-commit
 
 ```bash

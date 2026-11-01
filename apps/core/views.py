@@ -112,8 +112,22 @@ def landing_view(request):
         )
     )
 
+    # Quem visitou conta: avaliações boas e com texto, uma por lugar
+    reviews, seen = [], set()
+    for review in (
+        PlaceReview.objects.filter(
+            place__in=Place.objects.public(), rating__gte=4, comment__gt=""
+        )
+        .select_related("user", "place")
+        .order_by("-created_at")[:12]
+    ):
+        if review.place_id not in seen:
+            seen.add(review.place_id)
+            reviews.append(review)
+
     context = {
         "featured_places": featured_places,
+        "reviews": reviews[:3],
         "trending_places": trending_places,
         "upcoming_events": upcoming_events,
         "recent_events": recent_events,

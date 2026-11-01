@@ -16,6 +16,20 @@
   </head>
 
   <body class="flex min-h-dvh flex-col bg-background text-foreground" data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
+    {# Filtros das ilustrações: borda irregular (+ granulado) de impressão #}
+    <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+      <filter id="ink-edge" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="warp" />
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="ink" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="warp" />
+        <feDisplacementMap in="SourceGraphic" in2="warp" scale="5" xChannelSelector="R" yChannelSelector="G" result="rough" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="9" result="grain" />
+        <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -5 0 0 0 4.4" result="speck" />
+        <feComposite in="rough" in2="speck" operator="in" />
+      </filter>
+    </svg>
     <a class="skip-link sr-only z-50 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:fixed focus:start-4 focus:top-4" href="#conteudo">{% translate "Pular para o conteúdo" %}</a>
 
     <div id="toaster" class="toaster">
@@ -42,8 +56,10 @@
     {% block site_chrome %}
     {% include 'includes/cookie_consent.html' %}
 
-    <footer class="mt-auto bg-foreground text-background/70">
-      <div class="container-page grid gap-10 py-14 lg:grid-cols-12">
+    <footer class="relative mt-[clamp(3rem,8vw,7rem)] bg-lagoon-ink text-background/75">
+      <span class="pointer-events-none absolute inset-x-0 bottom-[calc(100%-1px)] block h-[clamp(3rem,8vw,7rem)] text-lagoon-ink">{% include "includes/deco/skyline.svg" with deco_class="deco-solid size-full" %}</span>
+      <span class="pointer-events-none absolute -top-[clamp(5rem,10vw,9rem)] right-[10%] block w-28 text-lagoon-ink sm:w-36">{% include "includes/deco/gulls.svg" with deco_class="w-full" %}</span>
+      <div class="container-page relative grid gap-10 py-14 lg:grid-cols-12">
         <div class="lg:col-span-5">
           <a class="inline-flex items-center gap-2 font-display text-2xl font-semibold tracking-tight text-background" href="{% url 'core:landing' %}">
             <span class="size-2 rounded-full bg-brand" aria-hidden="true"></span>MaricaCity

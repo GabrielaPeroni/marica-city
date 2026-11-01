@@ -25,7 +25,7 @@
           <div class="absolute inset-0 bg-linear-to-r from-black/60 via-black/25 to-transparent"></div>
           <div class="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/55 to-transparent"></div>
         </div>
-        <div class="container-page flex h-full flex-col justify-end pt-28 pb-32 md:justify-center md:pb-24">
+        <div class="container-page flex h-full flex-col justify-end pt-28 pb-40 md:justify-center md:pb-36">
           <div class="hero-copy max-w-3xl" data-hero-parallax>
             {% if forloop.first %}
             <h1 class="hero-line font-display text-display-xl font-semibold text-balance drop-shadow-sm">{% translate "Descubra as Maravilhas de Maricá" %}</h1>
@@ -47,6 +47,8 @@
     </div>
   </div>
 
+  <span class="deco-float top-[18%] right-[8%] z-10 hidden w-40 text-white/85 md:block lg:w-52" data-parallax="-0.15"><c-deco shape="gulls" class="w-full" /></span>
+
   {% if request.GET.next and not user.is_authenticated %}
   <div class="absolute inset-x-0 top-24 z-20">
     <div class="container-page">
@@ -58,7 +60,7 @@
   </div>
   {% endif %}
 
-  <div class="absolute inset-x-0 bottom-6 z-20 md:bottom-10">
+  <div class="absolute inset-x-0 bottom-16 z-20 md:bottom-24">
     <div class="container-page flex items-end gap-4">
       <div class="hero-pagination flex w-auto! flex-1 items-end gap-3 sm:max-w-md"></div>
       <button class="hero-pause-btn group btn rounded-full text-white hover:bg-white/15 hover:text-white" data-variant="ghost" data-size="icon-sm" type="button" aria-pressed="false" aria-label="{% translate 'Pausar apresentação' %}">
@@ -72,9 +74,34 @@
   </div>
 </section>
 
+<section id="searchSection" class="relative flow-root overflow-x-clip">
+  <c-wave at="top" class="text-background" />
+  <span class="deco-float -top-44 -right-10 z-[2] w-56 rotate-[200deg] text-lagoon sm:-top-56 sm:w-72 lg:right-[4%] lg:w-96" data-parallax="0.08"><c-deco shape="frond" class="w-full" /></span>
+  <div class="container-page relative z-[3] -mt-10 sm:-mt-14">
+    <form action="{% url 'explore:explore' %}" method="get" role="search" class="max-w-3xl rounded-2xl bg-card p-3 shadow-lift ring-1 ring-foreground/8 sm:p-4" data-reveal>
+      <label for="landing-search" class="ms-1 font-display text-lg font-semibold">{% translate "Para onde vamos?" %}</label>
+      <div class="mt-2 flex gap-2">
+        <div class="relative flex-1">
+          {% icon "search" class="pointer-events-none absolute top-1/2 left-3 size-5 -translate-y-1/2 text-muted-foreground" %}
+          <input id="landing-search" name="q" type="search" class="input h-12 w-full ps-10 text-base" placeholder="{% translate 'Praia, trilha, restaurante…' %}" autocomplete="off">
+        </div>
+        <button type="submit" class="btn h-12" data-variant="brand" data-size="lg">{% translate "Buscar" %}</button>
+      </div>
+      {% if categories %}
+      <ul class="-mx-3 mt-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0" aria-label="{% translate 'Categorias' %}">
+        {% for category in categories %}
+        <li><a href="{% url 'explore:category_detail' category.slug %}" class="category-chip h-8 shrink-0 text-xs">{{ category|tr:"name" }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </form>
+  </div>
+</section>
+
 {% if trending_places %}
-<section id="trendingSection" class="py-16 md:py-24">
-  <div class="container-page">
+<section id="trendingSection" class="relative isolate overflow-x-clip pt-16 pb-24 md:pt-24 md:pb-32">
+  <span class="deco-float top-1/4 -left-28 hidden w-72 -rotate-12 text-lagoon-tint md:block" data-parallax="0.12"><c-deco shape="monstera" class="w-full" /></span>
+  <div class="container-page relative">
     {% url 'explore:explore' as explore_url %}
     {% translate "Em alta agora" as trending_title %}{% translate "Destinos populares este mês" as trending_sub %}{% translate "Ver todos" as see_all %}
     <c-section-heading id="trendingHeading" :title="trending_title" :subtitle="trending_sub" :href="explore_url" :link_text="see_all" />
@@ -87,15 +114,19 @@
 </section>
 {% endif %}
 
-<section id="featuredSection" class="border-y bg-card py-16 md:py-24">
+<section id="featuredSection" class="relative bg-lagoon py-16 text-white md:py-24">
+  <c-wave at="top" class="text-lagoon" />
+  <c-wave at="bottom" class="text-lagoon" />
+  <span class="deco-float -bottom-24 -left-16 z-[2] w-56 rotate-12 text-lagoon-ink sm:w-80" data-parallax="-0.1"><c-deco shape="frond-low" class="w-full" /></span>
+  <span class="deco-float -top-10 right-[6%] z-[2] w-20 text-sun sm:w-28" data-parallax="0.18"><c-deco shape="sun" class="w-full" /></span>
   {% if featured_places %}
-  <div class="container-page grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-    <div>
+  <div class="container-page relative z-[3] grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+    <div class="[&_.text-brand]:text-sun [&_.text-muted-foreground]:text-white/80">
       {% translate "Onde ir" as featured_eyebrow %}{% translate "Escolha sua própria jornada." as featured_title %}
       {% blocktranslate trimmed asvar featured_desc %}Explore os lugares mais incríveis de Maricá. De praias paradisíacas a experiências culturais únicas,
       há um lugar em Maricá para todos! Descubra o que torna cada um deles único.{% endblocktranslate %}
       <c-section-heading id="featuredSectionHeading" :eyebrow="featured_eyebrow" :title="featured_title" :subtitle="featured_desc" class="mb-0!" />
-      <a id="featuredSectionCta" href="{% url 'explore:explore' %}" class="btn group mt-6" data-variant="outline">{% translate "Veja mais" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
+      <a id="featuredSectionCta" href="{% url 'explore:explore' %}" class="btn group mt-6 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:text-white" data-variant="outline">{% translate "Veja mais" %}{% icon "arrow-right" class="size-4 transition-transform group-hover:translate-x-0.5" %}</a>
     </div>
 
     <div id="featuredSwiper" data-reveal class="swiper featured-swiper -mx-4! px-4! sm:mx-0! sm:px-0! sm:[mask-image:linear-gradient(to_right,black_85%,transparent)]">
@@ -121,7 +152,8 @@
 </section>
 
 {% if upcoming_events or recent_events %}
-<section id="eventsSection" class="py-16 md:py-24">
+<section id="eventsSection" class="relative isolate overflow-x-clip pt-28 pb-16 md:pt-36 md:pb-24">
+  <span class="deco-float top-16 -right-20 hidden w-64 rotate-[25deg] text-leaf [--deco-accent:var(--brand)] md:block" data-parallax="0.1"><c-deco shape="aroeira" class="w-full" /></span>
   <div class="container-page">
     {% url 'news:news_list' as news_url %}{% translate "Ver agenda completa" as agenda_link %}
     {% if upcoming_events %}{% translate "Próximos eventos em Maricá" as events_title %}{% else %}{% translate "Eventos recentes em Maricá" as events_title %}{% endif %}
@@ -142,7 +174,8 @@
 {% endif %}
 
 {% if categories %}
-<section id="categoriesSection" class="border-t bg-card py-16 md:py-24">
+<section id="categoriesSection" class="relative isolate overflow-x-clip border-t bg-card py-16 md:py-24">
+  <span class="deco-float -bottom-16 -left-20 hidden w-64 -rotate-[30deg] text-lagoon-tint md:block" data-parallax="-0.08"><c-deco shape="monstera" class="w-full" /></span>
   <div class="container-page">
     {% url 'explore:explore' as explore_url %}{% translate "Explorar por categoria" as categories_title %}{% translate "Encontre exatamente o que você procura" as categories_sub %}{% translate "Ver todos" as see_all %}
     <c-section-heading :title="categories_title" :subtitle="categories_sub" :href="explore_url" :link_text="see_all" />
@@ -161,6 +194,33 @@
             <p class="mt-1 text-sm {% if category.cover %}text-white/85{% else %}text-muted-foreground{% endif %}">{% blocktranslate trimmed count counter=category.public_place_count %}{{ counter }} lugar{% plural %}{{ counter }} lugares{% endblocktranslate %}</p>
           </div>
         </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+{% if reviews %}
+<section id="reviewsSection" class="relative isolate overflow-x-clip bg-lagoon-tint py-16 md:py-24">
+  <span class="deco-float top-10 right-[8%] hidden w-36 text-lagoon/70 md:block" data-parallax="-0.12"><c-deco shape="gulls" class="w-full" /></span>
+  <div class="container-page">
+    {% translate "Quem visitou conta" as reviews_title %}{% translate "Avaliações recentes de quem passou por Maricá" as reviews_sub %}
+    <c-section-heading :title="reviews_title" :subtitle="reviews_sub" />
+    <ul class="grid gap-6 md:grid-cols-3" data-reveal-stagger>
+      {% for review in reviews %}
+      <li class="{% cycle '-rotate-1' 'rotate-1' '-rotate-[0.6deg]' %}">
+        <figure class="flex h-full flex-col rounded-xl bg-card p-6 shadow-card ring-1 ring-foreground/8 transition duration-300 hover:rotate-0 hover:shadow-lift">
+          <c-rating :value="review.rating" compact />
+          <blockquote class="mt-3 flex-1 font-display text-lg leading-relaxed text-pretty">“{{ review|tr:"comment"|truncatewords:40 }}”</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3 border-t border-dashed pt-4 text-sm">
+            <span class="grid size-9 shrink-0 place-items-center rounded-full bg-lagoon font-semibold text-white" aria-hidden="true">{{ review.user.username|first|upper }}</span>
+            <span class="min-w-0">
+              <span class="block font-semibold">{{ review.user.username }}</span>
+              <a href="{% url 'explore:place_detail' review.place.pk %}" class="block truncate text-muted-foreground hover:text-foreground">{{ review.place|tr:"name" }}</a>
+            </span>
+          </figcaption>
+        </figure>
       </li>
       {% endfor %}
     </ul>

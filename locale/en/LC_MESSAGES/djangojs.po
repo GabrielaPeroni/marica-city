@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-31 17:08-0300\n"
+"POT-Creation-Date: 2026-10-31 22:27-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -110,27 +110,27 @@ msgstr "Failed to authenticate with Google. Please try again."
 msgid "Erro ao conectar com o servidor. Por favor, tente novamente."
 msgstr "Error connecting to server. Please try again."
 
-#: static/js/landing.js:17
+#: static/js/landing.js:27
 msgid "Slide anterior"
 msgstr "Previous slide"
 
-#: static/js/landing.js:18
+#: static/js/landing.js:28
 msgid "Próximo slide"
 msgstr "Next slide"
 
-#: static/js/landing.js:19
+#: static/js/landing.js:29
 msgid "Ir para o slide {{index}}"
 msgstr "Go to slide {{index}}"
 
-#: static/js/landing.js:36
+#: static/js/landing.js:88
 msgid "Retomar apresentação"
 msgstr "Resume presentation"
 
-#: static/js/landing.js:36
+#: static/js/landing.js:88
 msgid "Pausar apresentação"
 msgstr "Pause presentation"
 
-#: static/js/landing_map.js:125
+#: static/js/landing_map.js:55
 msgid "Ver detalhes"
 msgstr "View details"
 
