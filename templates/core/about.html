@@ -6,142 +6,54 @@
 {% block content %}
 {% include 'includes/navbar.html' %}
 
-<c-page-header eyebrow="{% translate 'Sobre o projeto' %}" title="{% translate 'Sobre o MaricaCity' %}" subtitle="{% translate 'Conectando pessoas aos melhores lugares de Maricá.' %}" />
+<c-page-header eyebrow="{% translate 'Sobre o projeto' %}" title="{% translate 'Sobre o MaricaCity' %}" subtitle="{% translate 'Um guia de lugares de Maricá feito pela comunidade e aprovado pela moderação.' %}" />
 
 <div class="container-page py-12 md:py-16">
-  <div class="grid gap-5 md:grid-cols-3">
-    <section class="rounded-xl border bg-card p-6 shadow-card">
-      <span class="grid size-11 place-items-center rounded-lg bg-brand-tint text-brand">{% icon "target" class="size-5" %}</span>
-      <h2 class="mt-4 font-display text-xl font-semibold">{% translate "Nossa missão" %}</h2>
-      <p class="mt-2 text-muted-foreground">
-        {% blocktranslate trimmed %}Ajudar moradores e visitantes a descobrir o melhor de Maricá, das praias aos restaurantes,
-        em um só lugar.{% endblocktranslate %}
-      </p>
-    </section>
-    <section class="rounded-xl border bg-card p-6 shadow-card">
-      <span class="grid size-11 place-items-center rounded-lg bg-brand-tint text-brand">{% icon "users" class="size-5" %}</span>
-      <h2 class="mt-4 font-display text-xl font-semibold">{% translate "Como funciona" %}</h2>
-      <p class="mt-2 text-muted-foreground">
-        {% blocktranslate trimmed %}A comunidade cadastra lugares, a moderação aprova e todos avaliam. O guia se mantém
-        atualizado por quem vive a cidade.{% endblocktranslate %}
-      </p>
-    </section>
-    <section class="rounded-xl border bg-card p-6 shadow-card">
-      <span class="grid size-11 place-items-center rounded-lg bg-brand-tint text-brand">{% icon "heart" class="size-5" %}</span>
-      <h2 class="mt-4 font-display text-xl font-semibold">{% translate "Faça parte" %}</h2>
-      <p class="mt-2 text-muted-foreground">
-        {% blocktranslate trimmed %}Crie uma conta gratuita para salvar favoritos, avaliar e compartilhar os seus lugares
-        preferidos.{% endblocktranslate %}
-      </p>
-    </section>
-  </div>
+  <section id="visite" class="scroll-mt-24" aria-labelledby="visitHeading">
+    <c-section-heading id="visitHeading" title="{% translate 'Planeje sua visita' %}" />
 
-  <section id="visite" class="mt-16 scroll-mt-24 md:mt-24" aria-labelledby="visitHeading">
-    <c-section-heading id="visitHeading" eyebrow="{% translate 'Para visitantes' %}" title="{% translate 'Planeje sua visita' %}" subtitle="{% translate 'O essencial para aproveitar Maricá: como chegar, como circular e o que levar em conta.' %}" />
-
-    <div class="grid gap-5 lg:grid-cols-2 [&_p+p]:mt-3 [&_p_a]:font-semibold [&_p_a]:text-brand [&_p_a]:underline-offset-4 [&_p_a:hover]:underline">
-      <section class="flex flex-col gap-4 rounded-xl border bg-card p-6 shadow-card sm:flex-row sm:gap-5">
-        <span class="grid size-11 shrink-0 place-items-center rounded-lg bg-muted">{% icon "signpost" class="size-5" %}</span>
+    <div class="grid gap-x-10 gap-y-8 md:grid-cols-2 [&_p_a]:font-semibold [&_p_a]:text-brand [&_p_a]:underline-offset-4 [&_p_a:hover]:underline">
+      <section class="flex gap-4">
+        <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">{% icon "signpost" class="size-5" %}</span>
         <div>
           <h3 class="font-display text-xl font-semibold">{% translate "Como chegar" context "visit page heading" %}</h3>
-          <div class="mt-2 text-muted-foreground">
-            <p>{% blocktranslate trimmed %}
-              Maricá fica a cerca de 60 km do centro do Rio de Janeiro. De carro, o caminho
-              mais comum é pela Ponte Rio–Niterói e pela RJ-106 (Rodovia Amaral Peixoto);
-              conte de uma hora a uma hora e meia, dependendo do trânsito.
-            {% endblocktranslate %}</p>
-            <p>{% blocktranslate trimmed %}
-              Há linhas de ônibus intermunicipais saindo do Rio e de Niterói. Confira horários
-              com as empresas antes de sair.
-            {% endblocktranslate %}</p>
-          </div>
+          <p class="mt-1.5 text-muted-foreground">{% translate "Cerca de 60 km do Rio, pela Ponte Rio–Niterói e pela RJ-106: de uma hora a uma hora e meia de carro. Há ônibus intermunicipais saindo do Rio e de Niterói." %}</p>
         </div>
       </section>
-
-      <section class="flex flex-col gap-4 rounded-xl border bg-card p-6 shadow-card sm:flex-row sm:gap-5">
-        <span class="grid size-11 shrink-0 place-items-center rounded-lg bg-muted">{% icon "bus" class="size-5" %}</span>
+      <section class="flex gap-4">
+        <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">{% icon "bus" class="size-5" %}</span>
         <div>
           <h3 class="font-display text-xl font-semibold">{% translate "Como circular" %}</h3>
-          <div class="mt-2 text-muted-foreground">
-            <p>{% blocktranslate trimmed %}
-              Os ônibus municipais vermelhos, os "Vermelhinhos", são gratuitos para todos,
-              moradores e visitantes. Eles ligam o Centro às praias, lagoas e bairros.
-            {% endblocktranslate %}</p>
-            <p>{% blocktranslate trimmed %}
-              As distâncias entre as regiões são grandes, então para visitar vários lugares
-              no mesmo dia vale planejar o roteiro com antecedência.
-            {% endblocktranslate %}</p>
-          </div>
+          <p class="mt-1.5 text-muted-foreground">{% translate 'Os ônibus municipais vermelhos, os "Vermelhinhos", são gratuitos e ligam o Centro às praias e lagoas. As distâncias são grandes: planeje o roteiro.' %}</p>
         </div>
       </section>
-
-      <section class="flex flex-col gap-4 rounded-xl border bg-card p-6 shadow-card sm:flex-row sm:gap-5">
-        <span class="grid size-11 shrink-0 place-items-center rounded-lg bg-muted">{% icon "sun" class="size-5" %}</span>
+      <section class="flex gap-4">
+        <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">{% icon "sun" class="size-5" %}</span>
         <div>
           <h3 class="font-display text-xl font-semibold">{% translate "Quando ir" %}</h3>
-          <div class="mt-2 text-muted-foreground">
-            <p>{% blocktranslate trimmed %}
-              O clima é tropical: verões quentes e com chuvas de fim de tarde, invernos amenos
-              e mais secos. O verão é a época das praias; o inverno é ótimo para trilhas.
-            {% endblocktranslate %}</p>
-            <p>
-              {% blocktranslate trimmed %}
-              A cidade tem agenda cultural o ano todo, com festas tradicionais, shows e
-              festivais gratuitos.
-              {% endblocktranslate %}
-              <a href="{% url 'news:news_list' %}">{% translate "Veja a agenda" %}</a>.
-            </p>
-          </div>
+          <p class="mt-1.5 text-muted-foreground">{% translate "Verão para as praias, inverno para as trilhas." %} <a href="{% url 'news:news_list' %}">{% translate "Veja a agenda" %}</a>.</p>
         </div>
       </section>
-
-      <section class="flex flex-col gap-4 rounded-xl border bg-card p-6 shadow-card sm:flex-row sm:gap-5">
-        <span class="grid size-11 shrink-0 place-items-center rounded-lg bg-muted">{% icon "waves" class="size-5" %}</span>
+      <section class="flex gap-4">
+        <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">{% icon "waves" class="size-5" %}</span>
         <div>
           <h3 class="font-display text-xl font-semibold">{% translate "Praias, lagoas e trilhas" %}</h3>
-          <div class="mt-2 text-muted-foreground">
-            <p>{% blocktranslate trimmed %}
-              As praias de mar aberto, como Itaipuaçu, Ponta Negra e Jaconé, costumam ter ondas
-              fortes e correntes: prefira nadar perto dos postos de guarda-vidas. Para águas
-              calmas, caiaque e stand-up paddle, procure as lagoas.
-            {% endblocktranslate %}</p>
-            <p>
-              {% blocktranslate trimmed %}
-              Em trilhas, saia cedo, leve água e protetor solar e avise alguém do seu trajeto.
-              {% endblocktranslate %}
-              <a href="{% url 'explore:explore' %}">{% translate "Explore os lugares" %}</a>.
-            </p>
-          </div>
+          <p class="mt-1.5 text-muted-foreground">{% translate "Em mar aberto há ondas e correntes fortes: nade perto dos guarda-vidas. Nas trilhas, saia cedo e leve água." %} <a href="{% url 'explore:explore' %}">{% translate "Explore os lugares" %}</a>.</p>
         </div>
       </section>
     </div>
-
-    <section class="mt-12 scroll-mt-24" aria-labelledby="emergencyHeading">
-      <h3 id="emergencyHeading" class="flex scroll-mt-24 items-center gap-2 font-display text-display-sm font-semibold">
-        {% icon "phone" class="size-5 text-brand" %}{% translate "Telefones de emergência" %}
-      </h3>
-      <ul class="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4 [&_strong]:font-display [&_strong]:text-3xl [&_strong]:font-semibold [&_strong]:text-brand">
-        <li><a href="tel:190" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>190</strong> <span class="text-sm text-muted-foreground">{% translate "Polícia Militar" %}</span></a></li>
-        <li><a href="tel:192" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>192</strong> <span class="text-sm text-muted-foreground">{% translate "SAMU (ambulância)" %}</span></a></li>
-        <li><a href="tel:193" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>193</strong> <span class="text-sm text-muted-foreground">{% translate "Corpo de Bombeiros e salvamento" %}</span></a></li>
-        <li><a href="tel:199" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>199</strong> <span class="text-sm text-muted-foreground">{% translate "Defesa Civil" %}</span></a></li>
-      </ul>
-    </section>
-
-    <p class="mt-6 flex items-start gap-2 text-sm text-muted-foreground">
-      {% icon "info" class="mt-0.5 size-4 shrink-0" %}{% translate "Informações gerais para visitantes. Horários, linhas e condições podem mudar; confirme antes de sair." %}
-    </p>
   </section>
 
-  <div class="mt-16 flex flex-col items-start gap-6 rounded-2xl bg-foreground p-8 text-background md:mt-24 md:flex-row md:items-center md:justify-between md:p-10">
-    <p class="max-w-xl font-display text-display-sm font-semibold">{% translate "Pronto para descobrir Maricá?" %}</p>
-    <div class="flex flex-wrap gap-2">
-      <c-button href="{% url 'explore:explore' %}" variant="brand">{% icon "compass" %}{% translate "Explorar lugares" %}</c-button>
-      <c-button href="{% url 'news:news_list' %}" variant="secondary">{% icon "calendar" %}{% translate "Ver agenda de eventos" %}</c-button>
-      {% if not user.is_authenticated %}
-      <c-button href="{% url 'accounts:register' %}" variant="ghost" class="text-background hover:bg-background/10 hover:text-background">{% translate "Criar conta" %}</c-button>
-      {% endif %}
-    </div>
-  </div>
+  <section class="mt-14 scroll-mt-24 md:mt-20" aria-labelledby="emergencyHeading">
+    <h2 id="emergencyHeading" class="flex scroll-mt-24 items-center gap-2 font-display text-display-sm font-semibold">
+      {% icon "phone" class="size-5 text-brand" %}{% translate "Telefones de emergência" %}
+    </h2>
+    <ul class="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4 [&_strong]:font-display [&_strong]:text-3xl [&_strong]:font-semibold [&_strong]:text-brand">
+      <li><a href="tel:190" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>190</strong> <span class="text-sm text-muted-foreground">{% translate "Polícia Militar" %}</span></a></li>
+      <li><a href="tel:192" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>192</strong> <span class="text-sm text-muted-foreground">{% translate "SAMU (ambulância)" %}</span></a></li>
+      <li><a href="tel:193" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>193</strong> <span class="text-sm text-muted-foreground">{% translate "Corpo de Bombeiros e salvamento" %}</span></a></li>
+      <li><a href="tel:199" class="flex h-full flex-col gap-1 rounded-xl border bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-lift"><strong>199</strong> <span class="text-sm text-muted-foreground">{% translate "Defesa Civil" %}</span></a></li>
+    </ul>
+  </section>
 </div>
 {% endblock %}
