@@ -115,7 +115,7 @@ visitor sees, and `place.can_edit(user)` centralizes owner-or-moderator checks.
 
 **Thumbnails and blurred placeholders.** Uploads are never served at full size
 in lists. `{{ img|srcset:"480,960" }}` generates WebP copies at 480, 960 and
-1600 px on first use and store them beside the media. Each image also gets a
+1600 px on first use and stores them beside the media. Each image also gets a
 16 px WebP preview inlined as a data URI, which the browser stretches into a
 blurred background while the real file loads.
 
@@ -137,8 +137,7 @@ floor. A second workflow builds the production image, runs `check --deploy`,
 migrates, waits for the Docker healthcheck, smoke-tests pages, `robots.txt`,
 `sitemap.xml` and hashed static files, then runs Lighthouse CI (accessibility,
 best practices and SEO at 0.95 or higher, performance at 0.85 or higher). Pushes
-to `main` publish the image to GHCR with an SBOM and provenance. After each
-production deploy, a third workflow checks the live site.
+to `main` publish the image to GHCR with an SBOM and provenance.
 
 **Printed-illustration generator.** The botanical shapes, gulls and skyline on
 the pages are SVG files produced by `scripts/generate_deco.py` (smooth curves

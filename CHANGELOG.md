@@ -415,7 +415,6 @@ translate_content` translates only new or changed items (it tracks a hash of
 ### Added
 
 - `.env.example` documenting required and optional environment variables.
-- `docs/IMPROVEMENT_PLAN.md` tracking an in-progress polish/hardening plan.
 - Production settings module (`config/settings/prod.py`) with SSL redirect, secure cookies, HSTS, and `SECURE_PROXY_SSL_HEADER` for running behind a reverse proxy/CDN (e.g. Cloudflare).
 - Redis-backed cache option via `CACHE_URL`/`REDIS_URL`, for multi-process production deployments.
 - ESLint config and an esbuild bundling pipeline for `static/js/`.

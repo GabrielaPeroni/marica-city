@@ -149,6 +149,10 @@ places).
   one. Fix: Project → Settings → Deployment Checks, remove the check (or
   promote the staged deployment by hand). Post-deploy verification belongs in
   `.github/workflows/deploy-check.yml`, not in a Vercel check that blocks the alias.
+- **`deploy-check.yml` does not run today.** The Vercel project has GitHub
+  deployment events turned off (`createDeployments: disabled`), so its trigger
+  never fires. Turning them on is not enough: it would test deployment URLs,
+  which sit behind Vercel Authentication, so point it at the public domain too.
 - **R2 variables must exist before the build.** Uploaded photos and the demo
   content that `scripts/vercel_build.py` loads go to R2 during the build, so
   `AWS_*` must already be set for that environment. Without them, files land on

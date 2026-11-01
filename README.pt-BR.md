@@ -136,8 +136,7 @@ piso de 90% de cobertura. Outro workflow constrói a imagem de produção, roda
 `robots.txt`, `sitemap.xml` e arquivos estáticos com hash, e então roda o
 Lighthouse CI (acessibilidade, boas práticas e SEO com 0,95 ou mais; desempenho
 com 0,85 ou mais). Pushes em `main` publicam a imagem no GHCR com SBOM e
-proveniência. Após cada deploy em produção, um terceiro workflow verifica o site
-no ar.
+proveniência.
 
 **Gerador de ilustrações impressas.** As formas botânicas, gaivotas e o skyline
 das páginas são SVGs produzidos por `scripts/generate_deco.py` (curvas suaves
