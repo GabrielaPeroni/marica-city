@@ -1,6 +1,6 @@
 {% load i18n event_dates content_i18n thumbs icons %}
 <c-vars event lead=False eager=False level="3" sizes="(min-width: 1280px) 400px, (min-width: 640px) 50vw, 100vw" class="" />
-<a href="{% url 'news:news_detail' event.slug %}" class="group relative isolate flex flex-col overflow-hidden rounded-xl bg-card text-card-foreground shadow-card ring-1 ring-foreground/8 transition duration-300 outline-none hover:-translate-y-0.5 hover:shadow-lift focus-visible:ring-3 focus-visible:ring-ring/50 {% if lead %}md:flex-row{% endif %} {{ class }}" data-spotlight {{ attrs }}>
+<a href="{% url 'news:news_detail' event.slug %}" class="group relative isolate flex flex-col overflow-hidden rounded-xl bg-card text-card-foreground shadow-card ring-1 ring-foreground/8 transition-[translate,box-shadow] duration-700 ease-spring hover:-translate-y-1.5 outline-none hover:shadow-lift focus-visible:ring-3 focus-visible:ring-ring/50 {% if lead %}md:flex-row{% endif %} {{ class }}" data-spotlight {{ attrs }}>
   <div class="relative aspect-[16/10] shrink-0 overflow-hidden bg-muted {% if lead %}md:aspect-auto md:min-h-80 md:w-1/2{% endif %}">
     {% if event.featured_image %}
     <img src="{{ event.featured_image|thumb:960 }}" srcset="{{ event.featured_image|srcset:'480,960' }}" sizes="{{ sizes }}" alt="" class="img-ph size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 {% if lead %}md:absolute md:inset-0{% endif %}" loading="{% if eager %}eager{% else %}lazy{% endif %}" decoding="async" style="{{ event.featured_image|placeholder }}">

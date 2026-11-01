@@ -194,8 +194,8 @@ def sun():
 
 def gulls():
     body = "".join(
-        f'<path transform="translate({x} {y}) scale({s})" '
-        'd="M0,10 Q14,-6 30,8 Q46,-6 60,10 Q46,2 30,16 Q14,2 0,10Z"/>'
+        f'<g transform="translate({x} {y}) scale({s})">'
+        '<path d="M0,10 Q14,-6 30,8 Q46,-6 60,10 Q46,2 30,16 Q14,2 0,10Z"/></g>'
         for x, y, s in [(30, 60, 1), (95, 30, 0.7), (140, 75, 0.55)]
     )
     svg("gulls", "0 0 180 110", body)
@@ -216,6 +216,25 @@ def wave():
         "wave",
         "0 0 1440 80",
         f'<path d="M{smooth(pts)} L1440,80 L0,80Z"/>',
+        ' preserveAspectRatio="none"',
+    )
+
+
+def wave_loop():
+    """Tileable water edge (two periods of 1440); slid by -50% it loops seamlessly."""
+    pts = [
+        (
+            x,
+            46
+            + 16 * math.sin(2 * math.pi * x / 720)
+            + 6 * math.sin(2 * math.pi * x / 360 + 1.2),
+        )
+        for x in range(0, 2881, 30)
+    ]
+    svg(
+        "wave-loop",
+        "0 0 2880 100",
+        f'<path d="M{smooth(pts)} L2880,100 L0,100Z"/>',
         ' preserveAspectRatio="none"',
     )
 
@@ -261,5 +280,6 @@ aroeira()
 sun()
 gulls()
 wave()
+wave_loop()
 skyline()
 print("ok", sorted(p.name for p in OUT.iterdir()))

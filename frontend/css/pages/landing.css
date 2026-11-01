@@ -23,11 +23,11 @@
 
 .hero-line {
   opacity: 0;
-  translate: 0 1.5rem;
+  translate: 0 2rem;
   filter: blur(6px);
   transition:
     opacity 0.8s ease,
-    translate 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 1.1s var(--ease-spring),
     filter 0.8s ease;
 }
 
@@ -100,5 +100,37 @@
   }
   to {
     translate: 0 200%;
+  }
+}
+
+/* Borda de água do hero: duas ondas que deslizam sem emenda (a SVG tem dois
+   períodos; andar -50% volta ao mesmo desenho) */
+.hero-water {
+  @apply pointer-events-none absolute inset-x-0 -bottom-px z-[15] overflow-hidden;
+  height: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.hero-water-layer {
+  @apply absolute bottom-0 left-0 h-full w-[200%];
+  animation: hero-water 22s linear infinite;
+}
+
+.hero-water-back {
+  @apply bottom-3 text-white/30 sm:bottom-5;
+  animation-duration: 34s;
+  animation-direction: reverse;
+}
+
+.hero-water-front {
+  @apply text-background;
+}
+
+.hero-water .deco {
+  filter: none;
+}
+
+@keyframes hero-water {
+  to {
+    translate: -50% 0;
   }
 }
