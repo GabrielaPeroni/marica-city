@@ -7,7 +7,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, RequestFactory, TestCase
 from django.urls import reverse
 
-from .models import Category, Favorite, Place, PlaceApproval, PlaceImage, PlaceReview
+from ..models import Category, Favorite, Place, PlaceApproval, PlaceImage, PlaceReview
 
 User = get_user_model()
 

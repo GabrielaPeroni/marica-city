@@ -645,7 +645,9 @@ class AgendaTests(TestCase):
 class EventCrawlerTests(TestCase):
     """Crawler reads a saved API response; no network access"""
 
-    POSTS = Path(__file__).parent / "testdata" / "prefeitura_posts.json"
+    POSTS = (
+        Path(__file__).resolve().parent.parent / "testdata" / "prefeitura_posts.json"
+    )
     NOW = datetime(2026, 10, 21, 12, 0, tzinfo=dt_timezone.utc)
 
     def setUp(self):

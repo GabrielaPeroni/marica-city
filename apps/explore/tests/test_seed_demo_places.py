@@ -11,7 +11,7 @@ from apps.accounts.models import User
 from apps.explore.management.commands.seed_demo_places import DATA_FILE
 from apps.explore.models import Category, Place
 
-from .tests import TINY_GIF
+from .test_explore import TINY_GIF
 
 SLUGS = [
     "restaurantes",

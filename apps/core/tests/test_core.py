@@ -65,7 +65,7 @@ class LandingPageTests(TestCase):
         self.assertContains(response, "landing-map")
         self.assertContains(response, "Navegue pelos Lugares")
         self.assertContains(response, "js/components/lazy_assets.js")
-        self.assertContains(response, "js/landing_map.js")
+        self.assertContains(response, "js/pages/landing_map.js")
         self.assertNotContains(response, "unpkg.com/leaflet")
         self.assertNotContains(response, "maps.googleapis.com")
 

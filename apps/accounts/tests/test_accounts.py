@@ -12,7 +12,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from . import codes
+from .. import codes
 
 User = get_user_model()
 

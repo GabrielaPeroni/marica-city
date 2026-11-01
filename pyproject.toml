@@ -116,6 +116,7 @@ ignore_errors = true
 django_settings_module = "config.settings.dev"
 
 [tool.coverage.run]
+# Test files are measured on purpose: the 90% floor in CI was set with them counted.
 source = ["."]
 omit = [
     "*/migrations/*",
@@ -123,7 +124,6 @@ omit = [
     "*/env/*",
     "manage.py",
     "*/settings/*",
-    "*/tests/*",
     "*/__pycache__/*",
     # Gerador das ilustrações (ferramenta de desenvolvimento, saída versionada)
     "scripts/generate_deco.py",
