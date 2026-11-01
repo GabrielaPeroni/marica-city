@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 16:50-0300\n"
+"POT-Creation-Date: 2026-11-01 17:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -2389,7 +2389,7 @@ msgid_plural "%(n)s minutos"
 msgstr[0] "%(n)s minuto"
 msgstr[1] "%(n)s minutos"
 
-#: apps/explore/ratelimit_handlers.py:29
+#: apps/explore/ratelimit_handlers.py:30
 #, python-format
 msgid "Muitas tentativas em pouco tempo. Aguarde %(wait)s e tente de novo."
 msgstr "Demasiados intentos en poco tiempo. Espera %(wait)s e inténtalo de nuevo."

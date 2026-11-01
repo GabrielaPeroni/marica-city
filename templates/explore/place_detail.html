@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/place_detail.js' %}"></script>
+<script src="{% static 'js/pages/place_detail.js' %}"></script>
 {% if place.latitude and place.longitude %}
 <script src="{% static 'js/components/lazy_assets.js' %}"></script>
 <script src="{% static 'js/components/place_map.js' %}"></script>

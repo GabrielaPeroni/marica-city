@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 16:50-0300\n"
+"POT-Creation-Date: 2026-11-01 17:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -46,21 +46,59 @@ msgstr "No tienes conexión. Algunas acciones solo funcionan con internet."
 msgid "Conexão restabelecida."
 msgstr "Conexión restablecida."
 
+#: static/js/components/favorites_ui.js:13
+msgid "Remover dos favoritos"
+msgstr "Quitar de favoritos"
+
+#: static/js/components/favorites_ui.js:14
+msgid "Adicionar aos favoritos"
+msgstr "Agregar a favoritos"
+
+#: static/js/components/favorites_ui.js:164
+#, python-format
+msgid "Não foi possível atualizar o favorito. %s"
+msgstr "No pudimos actualizar el favorito. %s"
+
 #: static/js/components/form_guard.js:24
 msgid "Enviando…"
 msgstr "Enviando…"
+
+#: static/js/components/google_auth.js:22 static/js/components/login.js:43
+#: static/js/components/toasts.js:37
+msgid "usuário"
+msgstr "usuario"
+
+#: static/js/components/google_auth.js:29
+msgid "Falha ao autenticar com Google. Por favor, tente novamente."
+msgstr "Fallo al autenticar con Google. Por favor, inténtelo nuevamente."
 
 #: static/js/components/image_fallback.js:13
 msgid "Foto indisponível"
 msgstr "Foto no disponible"
 
+#: static/js/components/login.js:27
+msgid "Entrando..."
+msgstr "Entrando..."
+
+#: static/js/components/login.js:40
+msgid "Sucesso!"
+msgstr "¡Éxito!"
+
+#: static/js/components/login.js:46
+msgid "Erro ao fazer login."
+msgstr "Error al iniciar sesión."
+
+#: static/js/components/login.js:54
+msgid "Erro ao conectar com o servidor. Tente novamente."
+msgstr "Error al conectar con el servidor. Inténtelo nuevamente."
+
+#: static/js/components/login.js:66
+msgid "Entrar"
+msgstr "Entrar"
+
 #: static/js/components/nav_progress.js:14
 msgid "Ainda carregando… a conexão pode estar lenta. Aguarde um instante."
 msgstr "Aún cargando… tu conexión puede estar lenta. Espera un momento."
-
-#: static/js/components/toasts.js:37 static/js/google_auth.js:22 static/js/login.js:43
-msgid "usuário"
-msgstr "usuario"
 
 #: static/js/components/unsaved_guard.js:36
 msgid "Sair sem salvar?"
@@ -110,116 +148,79 @@ msgstr "Inactivo"
 msgid "Erro ao alterar status"
 msgstr "Error al cambiar el estado"
 
-#: static/js/favorites-ui.js:13
-msgid "Remover dos favoritos"
-msgstr "Quitar de favoritos"
-
-#: static/js/favorites-ui.js:14
-msgid "Adicionar aos favoritos"
-msgstr "Agregar a favoritos"
-
-#: static/js/favorites-ui.js:164
-#, python-format
-msgid "Não foi possível atualizar o favorito. %s"
-msgstr "No pudimos actualizar el favorito. %s"
-
-#: static/js/google_auth.js:29
-msgid "Falha ao autenticar com Google. Por favor, tente novamente."
-msgstr "Fallo al autenticar con Google. Por favor, inténtelo nuevamente."
-
-#: static/js/landing.js:27
+#: static/js/pages/landing.js:27
 msgid "Slide anterior"
 msgstr "Diapositiva anterior"
 
-#: static/js/landing.js:28
+#: static/js/pages/landing.js:28
 msgid "Próximo slide"
 msgstr "Siguiente diapositiva"
 
-#: static/js/landing.js:29
+#: static/js/pages/landing.js:29
 msgid "Ir para o slide {{index}}"
 msgstr "Ir a la diapositiva {{index}}"
 
-#: static/js/landing.js:78
+#: static/js/pages/landing.js:78
 msgid "Retomar apresentação"
 msgstr "Reanudar presentación"
 
-#: static/js/landing.js:78
+#: static/js/pages/landing.js:78
 msgid "Pausar apresentação"
 msgstr "Pausar presentación"
 
-#: static/js/landing_map.js:54
+#: static/js/pages/landing_map.js:54
 msgid "Ver detalhes"
 msgstr "Ver detalles"
 
-#: static/js/login.js:27
-msgid "Entrando..."
-msgstr "Entrando..."
-
-#: static/js/login.js:40
-msgid "Sucesso!"
-msgstr "¡Éxito!"
-
-#: static/js/login.js:46
-msgid "Erro ao fazer login."
-msgstr "Error al iniciar sesión."
-
-#: static/js/login.js:54
-msgid "Erro ao conectar com o servidor. Tente novamente."
-msgstr "Error al conectar con el servidor. Inténtelo nuevamente."
-
-#: static/js/login.js:66
-msgid "Entrar"
-msgstr "Entrar"
-
-#: static/js/place_detail.js:15
+#: static/js/pages/place_detail.js:15
 msgid "Editar avaliação"
 msgstr "Editar reseña"
 
-#: static/js/place_detail.js:16
+#: static/js/pages/place_detail.js:16
 msgid "Escrever avaliação"
 msgstr "Escribir reseña"
 
-#: static/js/place_detail.js:19
+#: static/js/pages/place_detail.js:19
 msgid "Atualizar avaliação"
 msgstr "Actualizar reseña"
 
-#: static/js/place_detail.js:20
+#: static/js/pages/place_detail.js:20
 msgid "Enviar avaliação"
 msgstr "Enviar reseña"
 
-#: static/js/utils.js:56
+#: static/js/services/utils.js:56
 #, python-format
 msgid "Muitas tentativas em pouco tempo. Aguarde %s s e tente de novo."
 msgstr "Demasiados intentos en poco tiempo. Espera %s s e inténtalo de nuevo."
 
-#: static/js/utils.js:59
+#: static/js/services/utils.js:59
 msgid "Muitas tentativas em pouco tempo. Aguarde um momento e tente de novo."
 msgstr "Demasiados intentos en poco tiempo. Espera un momento e inténtalo de nuevo."
 
-#: static/js/utils.js:70
+#: static/js/services/utils.js:70
 msgid "Sua sessão expirou. Recarregue a página e tente de novo."
 msgstr "Tu sesión expiró. Recarga la página e inténtalo de nuevo."
 
-#: static/js/utils.js:76
+#: static/js/services/utils.js:76
 msgid "O servidor está com problemas agora. Tente novamente em alguns minutos."
 msgstr "El servidor tiene problemas ahora. Inténtalo de nuevo en unos minutos."
 
-#: static/js/utils.js:81
+#: static/js/services/utils.js:81
 msgid "Não foi possível concluir a ação. Tente novamente."
 msgstr "No pudimos completar la acción. Inténtalo de nuevo."
 
-#: static/js/utils.js:117
+#: static/js/services/utils.js:117
 msgid "A conexão está lenta. Ainda estamos tentando, aguarde um pouco."
 msgstr "La conexión está lenta. Seguimos intentando, espera un poco."
 
-#: static/js/utils.js:136 static/js/utils.js:160
+#: static/js/services/utils.js:136 static/js/services/utils.js:160
 msgid "O servidor demorou demais para responder. Tente novamente."
 msgstr "El servidor tardó demasiado en responder. Inténtalo de nuevo."
 
-#: static/js/utils.js:142
+#: static/js/services/utils.js:142
 msgid "Você está sem conexão. Verifique a internet e tente de novo."
 msgstr "No tienes conexión. Revisa tu internet e inténtalo de nuevo."
 
-#: static/js/utils.js:147
+#: static/js/services/utils.js:147
 msgid "Não foi possível falar com o servidor. Verifique sua conexão e tente de novo."
 msgstr "No pudimos comunicarnos con el servidor. Revisa tu conexión e inténtalo de nuevo."

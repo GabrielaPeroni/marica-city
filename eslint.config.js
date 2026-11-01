@@ -68,10 +68,10 @@ module.exports = [
     },
   },
   {
-    // getCookie()/cloneIcon()/request() (utils.js) and showToast() (toasts.js) load first
+    // getCookie()/cloneIcon()/request() (services/utils.js) and showToast() (toasts.js) load first
     // in base.html, so every other file can use them.
     files: ['static/js/**/*.js'],
-    ignores: ['static/js/utils.js', 'static/js/components/toasts.js'],
+    ignores: ['static/js/services/utils.js', 'static/js/components/toasts.js'],
     languageOptions: {
       globals: {
         getCookie: 'readonly',
@@ -83,20 +83,15 @@ module.exports = [
     },
   },
   {
-    // favoritesService is the singleton exported by favorites-service.js,
-    // which base.html loads before favorites-ui.js.
-    files: ['static/js/favorites-ui.js'],
+    // favoritesService is the singleton exported by favorites_service.js,
+    // which base.html loads before favorites_ui.js.
+    files: ['static/js/components/favorites_ui.js'],
     languageOptions: {
       globals: { favoritesService: 'readonly' },
     },
   },
   {
-    ignores: [
-      'static/js/dist/**',
-      'static/vendor/**',
-      'node_modules/**',
-      'staticfiles/**',
-    ],
+    ignores: ['static/vendor/**', 'node_modules/**', 'staticfiles/**'],
   },
   prettier,
 ];

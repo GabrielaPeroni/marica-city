@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 16:50-0300\n"
+"POT-Creation-Date: 2026-11-01 17:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -46,21 +46,59 @@ msgstr "You are offline. Some actions only work with internet."
 msgid "Conexão restabelecida."
 msgstr "Connection restored."
 
+#: static/js/components/favorites_ui.js:13
+msgid "Remover dos favoritos"
+msgstr "Remove from favorites"
+
+#: static/js/components/favorites_ui.js:14
+msgid "Adicionar aos favoritos"
+msgstr "Add to favorites"
+
+#: static/js/components/favorites_ui.js:164
+#, python-format
+msgid "Não foi possível atualizar o favorito. %s"
+msgstr "We could not update the favorite. %s"
+
 #: static/js/components/form_guard.js:24
 msgid "Enviando…"
 msgstr "Sending…"
+
+#: static/js/components/google_auth.js:22 static/js/components/login.js:43
+#: static/js/components/toasts.js:37
+msgid "usuário"
+msgstr "user"
+
+#: static/js/components/google_auth.js:29
+msgid "Falha ao autenticar com Google. Por favor, tente novamente."
+msgstr "Failed to authenticate with Google. Please try again."
 
 #: static/js/components/image_fallback.js:13
 msgid "Foto indisponível"
 msgstr "Photo unavailable"
 
+#: static/js/components/login.js:27
+msgid "Entrando..."
+msgstr "Logging in..."
+
+#: static/js/components/login.js:40
+msgid "Sucesso!"
+msgstr "Success!"
+
+#: static/js/components/login.js:46
+msgid "Erro ao fazer login."
+msgstr "Error logging in."
+
+#: static/js/components/login.js:54
+msgid "Erro ao conectar com o servidor. Tente novamente."
+msgstr "Error connecting to server. Try again."
+
+#: static/js/components/login.js:66
+msgid "Entrar"
+msgstr "Log in"
+
 #: static/js/components/nav_progress.js:14
 msgid "Ainda carregando… a conexão pode estar lenta. Aguarde um instante."
 msgstr "Still loading… your connection may be slow. Hang on a moment."
-
-#: static/js/components/toasts.js:37 static/js/google_auth.js:22 static/js/login.js:43
-msgid "usuário"
-msgstr "user"
 
 #: static/js/components/unsaved_guard.js:36
 msgid "Sair sem salvar?"
@@ -110,116 +148,79 @@ msgstr "Inactive"
 msgid "Erro ao alterar status"
 msgstr "Error changing status"
 
-#: static/js/favorites-ui.js:13
-msgid "Remover dos favoritos"
-msgstr "Remove from favorites"
-
-#: static/js/favorites-ui.js:14
-msgid "Adicionar aos favoritos"
-msgstr "Add to favorites"
-
-#: static/js/favorites-ui.js:164
-#, python-format
-msgid "Não foi possível atualizar o favorito. %s"
-msgstr "We could not update the favorite. %s"
-
-#: static/js/google_auth.js:29
-msgid "Falha ao autenticar com Google. Por favor, tente novamente."
-msgstr "Failed to authenticate with Google. Please try again."
-
-#: static/js/landing.js:27
+#: static/js/pages/landing.js:27
 msgid "Slide anterior"
 msgstr "Previous slide"
 
-#: static/js/landing.js:28
+#: static/js/pages/landing.js:28
 msgid "Próximo slide"
 msgstr "Next slide"
 
-#: static/js/landing.js:29
+#: static/js/pages/landing.js:29
 msgid "Ir para o slide {{index}}"
 msgstr "Go to slide {{index}}"
 
-#: static/js/landing.js:78
+#: static/js/pages/landing.js:78
 msgid "Retomar apresentação"
 msgstr "Resume presentation"
 
-#: static/js/landing.js:78
+#: static/js/pages/landing.js:78
 msgid "Pausar apresentação"
 msgstr "Pause presentation"
 
-#: static/js/landing_map.js:54
+#: static/js/pages/landing_map.js:54
 msgid "Ver detalhes"
 msgstr "View details"
 
-#: static/js/login.js:27
-msgid "Entrando..."
-msgstr "Logging in..."
-
-#: static/js/login.js:40
-msgid "Sucesso!"
-msgstr "Success!"
-
-#: static/js/login.js:46
-msgid "Erro ao fazer login."
-msgstr "Error logging in."
-
-#: static/js/login.js:54
-msgid "Erro ao conectar com o servidor. Tente novamente."
-msgstr "Error connecting to server. Try again."
-
-#: static/js/login.js:66
-msgid "Entrar"
-msgstr "Log in"
-
-#: static/js/place_detail.js:15
+#: static/js/pages/place_detail.js:15
 msgid "Editar avaliação"
 msgstr "Edit review"
 
-#: static/js/place_detail.js:16
+#: static/js/pages/place_detail.js:16
 msgid "Escrever avaliação"
 msgstr "Write review"
 
-#: static/js/place_detail.js:19
+#: static/js/pages/place_detail.js:19
 msgid "Atualizar avaliação"
 msgstr "Update review"
 
-#: static/js/place_detail.js:20
+#: static/js/pages/place_detail.js:20
 msgid "Enviar avaliação"
 msgstr "Submit review"
 
-#: static/js/utils.js:56
+#: static/js/services/utils.js:56
 #, python-format
 msgid "Muitas tentativas em pouco tempo. Aguarde %s s e tente de novo."
 msgstr "Too many attempts in a short time. Wait %s s and try again."
 
-#: static/js/utils.js:59
+#: static/js/services/utils.js:59
 msgid "Muitas tentativas em pouco tempo. Aguarde um momento e tente de novo."
 msgstr "Too many attempts in a short time. Wait a moment and try again."
 
-#: static/js/utils.js:70
+#: static/js/services/utils.js:70
 msgid "Sua sessão expirou. Recarregue a página e tente de novo."
 msgstr "Your session expired. Reload the page and try again."
 
-#: static/js/utils.js:76
+#: static/js/services/utils.js:76
 msgid "O servidor está com problemas agora. Tente novamente em alguns minutos."
 msgstr "The server is having problems right now. Try again in a few minutes."
 
-#: static/js/utils.js:81
+#: static/js/services/utils.js:81
 msgid "Não foi possível concluir a ação. Tente novamente."
 msgstr "We could not complete the action. Try again."
 
-#: static/js/utils.js:117
+#: static/js/services/utils.js:117
 msgid "A conexão está lenta. Ainda estamos tentando, aguarde um pouco."
 msgstr "Your connection is slow. We are still trying, please wait."
 
-#: static/js/utils.js:136 static/js/utils.js:160
+#: static/js/services/utils.js:136 static/js/services/utils.js:160
 msgid "O servidor demorou demais para responder. Tente novamente."
 msgstr "The server took too long to respond. Try again."
 
-#: static/js/utils.js:142
+#: static/js/services/utils.js:142
 msgid "Você está sem conexão. Verifique a internet e tente de novo."
 msgstr "You are offline. Check your internet and try again."
 
-#: static/js/utils.js:147
+#: static/js/services/utils.js:147
 msgid "Não foi possível falar com o servidor. Verifique sua conexão e tente de novo."
 msgstr "We could not reach the server. Check your connection and try again."
