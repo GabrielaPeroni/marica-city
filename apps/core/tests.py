@@ -64,7 +64,9 @@ class LandingPageTests(TestCase):
         response = self.client.get(self.url)
         self.assertContains(response, "landing-map")
         self.assertContains(response, "Navegue pelos Lugares")
-        self.assertContains(response, "leaflet")
+        self.assertContains(response, "js/components/lazy_assets.js")
+        self.assertContains(response, "js/landing_map.js")
+        self.assertNotContains(response, "unpkg.com/leaflet")
         self.assertNotContains(response, "maps.googleapis.com")
 
 
