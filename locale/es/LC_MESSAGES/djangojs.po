@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 17:12-0300\n"
+"POT-Creation-Date: 2026-11-01 20:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -63,12 +63,7 @@ msgstr "No pudimos actualizar el favorito. %s"
 msgid "Enviando…"
 msgstr "Enviando…"
 
-#: static/js/components/google_auth.js:22 static/js/components/login.js:43
-#: static/js/components/toasts.js:37
-msgid "usuário"
-msgstr "usuario"
-
-#: static/js/components/google_auth.js:29
+#: static/js/components/google_auth.js:14
 msgid "Falha ao autenticar com Google. Por favor, tente novamente."
 msgstr "Fallo al autenticar con Google. Por favor, inténtelo nuevamente."
 
@@ -83,6 +78,10 @@ msgstr "Entrando..."
 #: static/js/components/login.js:40
 msgid "Sucesso!"
 msgstr "¡Éxito!"
+
+#: static/js/components/login.js:43 static/js/components/toasts.js:37
+msgid "usuário"
+msgstr "usuario"
 
 #: static/js/components/login.js:46
 msgid "Erro ao fazer login."

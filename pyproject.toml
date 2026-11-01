@@ -16,6 +16,8 @@ dependencies = [
     "whitenoise>=6.12.0,<7.0",
     "django-storages[s3]>=1.14.6,<2.0",
     "django-cotton==2.8.0",
+    "google-auth>=2.40,<3",
+    "requests>=2.32,<3",
 ]
 
 [tool.uv]
@@ -116,7 +118,6 @@ ignore_errors = true
 django_settings_module = "config.settings.dev"
 
 [tool.coverage.run]
-# Test files are measured on purpose: the 90% floor in CI was set with them counted.
 source = ["."]
 omit = [
     "*/migrations/*",
@@ -124,6 +125,7 @@ omit = [
     "*/env/*",
     "manage.py",
     "*/settings/*",
+    "*/tests/*",
     "*/__pycache__/*",
     # Gerador das ilustrações (ferramenta de desenvolvimento, saída versionada)
     "scripts/generate_deco.py",

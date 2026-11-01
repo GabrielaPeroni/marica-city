@@ -130,9 +130,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Points at Redis via CACHE_URL/REDIS_URL in prod; LocMemCache otherwise
-# (not safe across multiple processes/workers).
-_CACHE_URL = config("CACHE_URL", default=config("REDIS_URL", default=""))
+# Points at Redis via CACHE_URL/REDIS_URL/KV_URL (Upstash on Vercel) in prod;
+# LocMemCache otherwise (not safe across multiple processes/workers).
+_CACHE_URL = config(
+    "CACHE_URL", default=config("REDIS_URL", default=config("KV_URL", default=""))
+)
 
 if _CACHE_URL:
     CACHES = {
@@ -141,6 +143,10 @@ if _CACHE_URL:
             "LOCATION": _CACHE_URL,
             "OPTIONS": {
                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                # Redis fora do ar deixa o site mais lento, não fora do ar
+                "IGNORE_EXCEPTIONS": True,
+                "SOCKET_CONNECT_TIMEOUT": 2,
+                "SOCKET_TIMEOUT": 2,
             },
         }
     }
@@ -151,6 +157,11 @@ else:
             "LOCATION": "ratelimit-cache",
         }
     }
+
+# O popup do botão do Google precisa falar com a janela que o abriu
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
+# Google Sign-In e os tiles do OpenStreetMap conferem a origem da página
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"

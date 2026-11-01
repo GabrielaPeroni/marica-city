@@ -1,9 +1,12 @@
 name: Deploy check
 
-# Vercel reports each deployment back to GitHub. When the production deploy
-# succeeds, smoke-test the live site and run Lighthouse against it. (Preview
-# URLs sit behind Vercel's deployment protection by default, so they're skipped.)
-on: deployment_status
+# Smoke-tests the public site and runs Lighthouse against it every day, and on
+# demand. (Deployment URLs sit behind Vercel's deployment protection, so it uses
+# the public domain rather than reacting to each deployment.)
+on:
+  schedule:
+    - cron: "30 10 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,12 +14,9 @@ permissions:
 jobs:
   live:
     name: Smoke-test production
-    if: >-
-      github.event.deployment_status.state == 'success' &&
-      github.event.deployment.environment == 'Production'
     runs-on: ubuntu-latest
     env:
-      SITE: ${{ github.event.deployment_status.environment_url }}
+      SITE: https://marica-city.vercel.app
     steps:
       - uses: actions/checkout@v7
 

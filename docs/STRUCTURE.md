@@ -119,6 +119,6 @@ componentes e convenções em [CONTRIBUTING.md](./CONTRIBUTING.md#frontend-css-�
 
 ## Testes
 
-`uv run python manage.py test apps` (a CI roda sob `coverage` com piso de 90%).
+`uv run python manage.py test apps` (a CI roda sob `coverage` com piso de 80%).
 Cada app tem `tests/` com `test_<app>.py` e arquivos por tema; os dados do
 crawler ficam em `apps/news/testdata/`.

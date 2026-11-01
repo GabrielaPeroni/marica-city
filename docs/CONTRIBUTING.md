@@ -41,12 +41,12 @@ uv run python manage.py test apps.explore.tests.test_explore.PlaceModelTests  # 
 uv run python manage.py test apps.explore.tests.test_visits                   # um arquivo
 ```
 
-Cobertura, com o piso de 90% que a CI aplica (ela roda com
+Cobertura do código da aplicação (sem os testes), com o piso de 80% que a CI aplica (ela roda com
 `RATELIMIT_ENABLE=False` e Postgres):
 
 ```bash
 uv run coverage run manage.py test apps
-uv run coverage report --fail-under=90
+uv run coverage report --fail-under=80
 ```
 
 Cada app tem um pacote `apps/<app>/tests/`: `test_<app>.py` com os testes
@@ -383,7 +383,7 @@ Todo PR roda `.github/workflows/pr-checks.yml`:
   `autoflake --check`, `flake8`, `pip-audit`, `prettier --check`, e
   `npm run build:css` sem diferença do que foi commitado.
 - **Tests**: `manage.py check`, `makemigrations --check --dry-run`, a suíte
-  Django completa contra Postgres, e `coverage report --fail-under=90`.
+  Django completa contra Postgres, e `coverage report --fail-under=80`.
 
 `.github/workflows/codeql.yml` roda CodeQL (Python + JS/TS) em push/PR para
 `main` e semanalmente. O Dependabot (`.github/dependabot.yml`) abre PRs de

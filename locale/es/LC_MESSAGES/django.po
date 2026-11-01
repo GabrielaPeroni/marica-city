@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 17:12-0300\n"
+"POT-Creation-Date: 2026-11-01 20:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -297,12 +297,12 @@ msgstr "Todos los tipos"
 msgid "Administrador"
 msgstr "Administrador"
 
-#: apps/accounts/views.py:328 templates/accounts/user_management.html:14
+#: apps/accounts/views.py:377 templates/accounts/user_management.html:14
 #: templates/accounts/user_management.html:65
 msgid "Moderador"
 msgstr "Moderador"
 
-#: apps/accounts/views.py:328 templates/accounts/user_management.html:15
+#: apps/accounts/views.py:377 templates/accounts/user_management.html:15
 #: templates/accounts/user_management.html:66
 msgid "Regular"
 msgstr "Regular"
@@ -1769,7 +1769,7 @@ msgstr "Idioma"
 msgid "Entre na sua conta"
 msgstr "Inicia sesión en tu cuenta"
 
-#: apps/accounts/views.py:156 templates/includes/login_dropdown.html:17
+#: apps/accounts/views.py:157 templates/includes/login_dropdown.html:17
 msgid "Esqueci minha senha"
 msgstr "Olvidé mi contraseña"
 
@@ -1993,127 +1993,151 @@ msgstr ""
 msgid "Website ou URL de rede social"
 msgstr "Sitio web o URL de red social"
 
-#: apps/accounts/views.py:34
+#: apps/accounts/views.py:35
 msgid "Seu código de cadastro no MaricaCity"
 msgstr "Tu código de registro en MaricaCity"
 
-#: apps/accounts/views.py:35
+#: apps/accounts/views.py:36
 msgid "Código para redefinir sua senha no MaricaCity"
 msgstr "Código para restablecer tu contraseña en MaricaCity"
 
-#: apps/accounts/views.py:52
+#: apps/accounts/views.py:53
 msgid "Não foi possível enviar o e-mail agora. Tente novamente em instantes."
 msgstr "No se pudo enviar el correo electrónico ahora. Inténtelo de nuevo en unos instantes."
 
-#: apps/accounts/views.py:112
+#: apps/accounts/views.py:113
 msgid "Esse nome de usuário ou e-mail acabou de ser usado. Tente outro."
 msgstr "Este nombre de usuario o correo electrónico acaba de ser utilizado. Intente con otro."
 
-#: apps/accounts/views.py:119
+#: apps/accounts/views.py:120
 msgid "Cadastro realizado com sucesso! Bem-vindo ao MaricaCity."
 msgstr "¡Registro exitoso! Bienvenido a MaricaCity."
 
-#: apps/accounts/views.py:122 apps/accounts/views.py:181
+#: apps/accounts/views.py:123 apps/accounts/views.py:182
 msgid "Código inválido ou expirado."
 msgstr "Código inválido o expirado."
 
-#: apps/accounts/views.py:129
+#: apps/accounts/views.py:130
 msgid "Confirme seu e-mail"
 msgstr "Confirmar correo electrónico"
 
-#: apps/accounts/views.py:130
+#: apps/accounts/views.py:131
 msgid "Confirmar cadastro"
 msgstr "Confirmar registro"
 
-#: apps/accounts/views.py:157
+#: apps/accounts/views.py:158
 msgid "Informe o e-mail da sua conta para receber um código."
 msgstr "Ingrese el correo electrónico de su cuenta para recibir un código."
 
-#: apps/accounts/views.py:158
+#: apps/accounts/views.py:159
 msgid "Enviar código"
 msgstr "Enviar código"
 
-#: apps/accounts/views.py:178
+#: apps/accounts/views.py:179
 msgid "Senha alterada! Entre com a nova senha no menu Entrar."
 msgstr "Contraseña cambiada ¡Ingresa con la nueva contraseña en el menú Iniciar sesión!"
 
-#: apps/accounts/views.py:188
+#: apps/accounts/views.py:189
 msgid "Redefinir senha"
 msgstr "Restablecer contraseña"
 
-#: apps/accounts/views.py:189
+#: apps/accounts/views.py:190
 msgid "Salvar nova senha"
 msgstr "Guardar nueva contraseña"
 
-#: apps/accounts/views.py:208
+#: apps/accounts/views.py:209
 msgid "Enviamos um novo código."
 msgstr "Enviamos un nuevo código."
 
-#: apps/accounts/views.py:225
+#: apps/accounts/views.py:226
 msgid "Por favor, preencha todos os campos."
 msgstr "Por favor, complete todos los campos."
 
-#: apps/accounts/views.py:234
+#: apps/accounts/views.py:235 apps/accounts/views.py:294
 #, python-format
 msgid "Bem-vindo de volta, %(username)s!"
 msgstr "¡Bienvenido de nuevo, %(username)s!"
 
-#: apps/accounts/views.py:244
+#: apps/accounts/views.py:245 apps/accounts/views.py:270
 msgid "Sua conta foi desativada. Entre em contato com o administrador."
 msgstr "Su cuenta ha sido desactivada. Póngase en contacto con el administrador."
 
-#: apps/accounts/views.py:247
+#: apps/accounts/views.py:248
 msgid "Nome de usuário ou senha incorretos."
 msgstr "Nombre de usuario o contraseña incorrectos."
 
-#: apps/accounts/views.py:249 apps/accounts/views.py:308
+#: apps/accounts/views.py:250 apps/accounts/views.py:357
 msgid "Método não permitido"
 msgstr "Método no permitido"
 
+#: apps/accounts/views.py:255
+msgid "O login com Google não está disponível agora."
+msgstr "El inicio de sesión con Google no está disponible ahora."
+
 #: apps/accounts/views.py:256
+msgid "Não foi possível validar sua conta Google."
+msgstr "No pudimos validar tu cuenta de Google."
+
+#: apps/accounts/views.py:258
+msgid "Sua conta Google precisa ter um e-mail verificado."
+msgstr "Tu cuenta de Google necesita un correo verificado."
+
+#: apps/accounts/views.py:262
+msgid "Há mais de uma conta com este e-mail. Entre com seu usuário e senha."
+msgstr "Hay más de una cuenta con este correo. Inicia sesión con tu usuario y contraseña."
+
+#: apps/accounts/views.py:266
+msgid "Contas da equipe entram com usuário e senha."
+msgstr "Las cuentas del equipo inician sesión con usuario y contraseña."
+
+#: apps/accounts/views.py:285
+msgid "Requisição inválida."
+msgstr "Solicitud no válida."
+
+#: apps/accounts/views.py:305
 msgid "Você saiu com sucesso."
 msgstr "Has salido con éxito."
 
-#: apps/accounts/views.py:306
+#: apps/accounts/views.py:355
 msgid "Sem permissão"
 msgstr "Sin permiso"
 
-#: apps/accounts/views.py:311
+#: apps/accounts/views.py:360
 msgid "O administrador não pode ser alterado."
 msgstr "El administrador no se puede modificar."
 
-#: apps/accounts/views.py:322
+#: apps/accounts/views.py:371
 msgid "Você não pode alterar seu próprio status"
 msgstr "No puedes cambiar tu propio estado"
 
-#: apps/accounts/views.py:332
+#: apps/accounts/views.py:381
 #, python-format
 msgid "Status de %(username)s alterado para %(role_display)s."
 msgstr "Estado de %(username)s cambiado a %(role_display)s."
 
-#: apps/accounts/views.py:345
+#: apps/accounts/views.py:394
 msgid "Você não pode desativar sua própria conta"
 msgstr "No puedes desactivar tu propia cuenta"
 
-#: apps/accounts/views.py:352
+#: apps/accounts/views.py:401
 #, python-format
 msgid "Usuário %(username)s ativado com sucesso."
 msgstr "El usuario %(username)s ha sido activado con éxito."
 
-#: apps/accounts/views.py:354
+#: apps/accounts/views.py:403
 #, python-format
 msgid "Usuário %(username)s desativado com sucesso."
 msgstr "El usuario %(username)s ha sido desactivado con éxito."
 
-#: apps/accounts/views.py:370
+#: apps/accounts/views.py:419
 msgid "O administrador não pode ser excluído."
 msgstr "El administrador no se puede eliminar."
 
-#: apps/accounts/views.py:373
+#: apps/accounts/views.py:422
 msgid "Você não pode excluir sua própria conta."
 msgstr "No puedes eliminar tu propia cuenta."
 
-#: apps/accounts/views.py:380
+#: apps/accounts/views.py:429
 #, python-format
 msgid "Usuário %(username)s excluído com sucesso."
 msgstr "Usuario %(username)s eliminado con éxito."

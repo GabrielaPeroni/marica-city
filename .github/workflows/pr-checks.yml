@@ -132,10 +132,10 @@ jobs:
         run: |
           uv run python manage.py makemigrations --check --dry-run
 
-      - name: Run tests with coverage (floor 90%)
+      - name: Run tests with coverage (floor 80%)
         run: |
           uv run coverage run manage.py test apps --verbosity=2
-          uv run coverage report --fail-under=90
+          uv run coverage report --fail-under=80
 
       - name: Coverage summary
         if: always()

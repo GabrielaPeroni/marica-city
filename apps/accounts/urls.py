@@ -19,6 +19,7 @@ urlpatterns = [
         name="resend_code",
     ),
     path("login/", views.login_view, name="login"),
+    path("google/", views.google_login_view, name="google_login"),
     path("logout/", views.logout_view, name="logout"),
     path("usuarios/", views.user_management_view, name="user_management"),
     path(

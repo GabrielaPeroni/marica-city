@@ -1,33 +1,17 @@
-function decodeJWT(token) {
-  let base64Url = token.split('.')[1];
-  let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  let jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split('')
-      .map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      })
-      .join('')
-  );
-  return JSON.parse(jsonPayload);
-}
-
 function handleCredentialResponse(response) {
-  const payload = decodeJWT(response.credential);
-
-  request('/auth/google/', { method: 'POST', json: { token: response.credential } })
-    .then(() => {
+  request('/accounts/google/', { method: 'POST', json: { token: response.credential } })
+    .then(data => {
       // Armazenar flag para mostrar toast de sucesso após redirect
       sessionStorage.setItem('loginSuccess', 'true');
-      sessionStorage.setItem('loginUsername', payload.name || gettext('usuário'));
+      sessionStorage.setItem('loginUsername', data.username);
       window.location.href = '/';
     })
     .catch(error => {
       console.error('Autenticação do Google falhou:', error.kind || error);
       showToast(
-        error.kind === 'http' || error.kind === 'forbidden'
-          ? gettext('Falha ao autenticar com Google. Por favor, tente novamente.')
-          : error.userMessage,
+        (error.data && error.data.error) ||
+          error.userMessage ||
+          gettext('Falha ao autenticar com Google. Por favor, tente novamente.'),
         'error'
       );
     });

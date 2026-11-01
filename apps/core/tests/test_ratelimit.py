@@ -1,6 +1,10 @@
+from unittest import mock
+
 from django.core.cache import cache
 from django.test import TestCase, override_settings
 from django.urls import reverse
+
+from django_ratelimit import core
 
 from apps.accounts.models import User
 from apps.explore.models import Place
@@ -12,6 +16,12 @@ AJAX = {"HTTP_ACCEPT": "application/json"}
 class RateLimitTests(TestCase):
     def setUp(self):
         cache.clear()
+        # Janela fixa: uma sequência que cruza a virada do minuto zeraria a contagem
+        patcher = mock.patch.object(
+            core, "_get_window", autospec=True, return_value=4102444800
+        )
+        patcher.start()
+        self.addCleanup(patcher.stop)
         self.user = User.objects.create_user("ana", password="x")
         self.place = Place.objects.create(
             name="P",

@@ -1,3 +1,4 @@
+import json
 import logging
 import smtplib
 
@@ -15,7 +16,7 @@ from apps.core.decorators import moderator_required
 from apps.core.ratelimit import limit
 from apps.core.utils import is_local_url
 
-from . import codes
+from . import codes, google
 from .forms import (
     EmailCodeForm,
     PasswordResetConfirmForm,
@@ -247,6 +248,54 @@ def login_view(request):
         return _json_error(_("Nome de usuário ou senha incorretos."), 401)
 
     return _json_error(_("Método não permitido"), 405)
+
+
+def _google_errors():
+    return {
+        "not_configured": (_("O login com Google não está disponível agora."), 503),
+        "invalid_token": (_("Não foi possível validar sua conta Google."), 401),
+        "email_not_verified": (
+            _("Sua conta Google precisa ter um e-mail verificado."),
+            403,
+        ),
+        "ambiguous_email": (
+            _("Há mais de uma conta com este e-mail. Entre com seu usuário e senha."),
+            409,
+        ),
+        "staff_requires_password": (
+            _("Contas da equipe entram com usuário e senha."),
+            403,
+        ),
+        "inactive": (
+            _("Sua conta foi desativada. Entre em contato com o administrador."),
+            403,
+        ),
+    }
+
+
+@require_POST
+@limit("20/m")
+def google_login_view(request):
+    """Recebe o ID token do botão do Google, valida e abre a sessão"""
+    try:
+        token = json.loads(request.body or b"{}").get("token")
+    except (ValueError, AttributeError):
+        token = None
+    if not token or not isinstance(token, str):
+        return _json_error(_("Requisição inválida."), 400)
+    try:
+        user = google.user_from_claims(google.verify_token(token))
+    except google.GoogleLoginError as exc:
+        return _json_error(*_google_errors()[exc.code])
+    login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+    return JsonResponse(
+        {
+            "success": True,
+            "message": _("Bem-vindo de volta, %(username)s!")
+            % {"username": user.username},
+            "username": user.username,
+        }
+    )
 
 
 @login_required

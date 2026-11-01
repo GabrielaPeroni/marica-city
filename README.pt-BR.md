@@ -90,60 +90,6 @@ templates ficam em `templates/`, a fonte do Tailwind em `frontend/css/` e o CSS
 compilado é versionado em `static/`. O mapa de diretórios está em
 [docs/STRUCTURE.md](./docs/STRUCTURE.md).
 
-## Decisões de engenharia
-
-**Tradução de conteúdo com hash da origem.** Lugares, categorias, avaliações e
-notícias guardam `translations` em JSON: `{"en": {...}, "es": {...}, "source": "<hash>"}`.
-O hash cobre os campos em português, então `translate_content` (um modelo
-Ollama local) só retraduz o que mudou, e os templates leem o resultado com
-`{{ obj|tr:"campo" }}`, caindo para o português. O site nunca chama o modelo
-durante uma requisição. Veja `apps/core/content_translation.py`.
-
-**Crawler de eventos com triagem humana.** `apps/news/event_crawler.py` busca
-publicações na API WordPress da Prefeitura, interpreta datas e locais em
-português, ignora anúncios no passado e elimina duplicatas por semelhança de
-título. Os resultados viram linhas `EventCandidate`; aprovar uma cria um `News`
-publicado. A busca é idempotente, então pode rodar num cron diário (Vercel) ou
-num agendador de 6 horas (Docker).
-
-**Fluxo de moderação.** `Place.is_approved` começa falso. `PlaceApproval`
-registra cada aprovação, rejeição ou pedido de mudanças e atualiza o lugar ao
-salvar; `Place.objects.public()` é o único queryset por trás de tudo que o
-visitante vê, e `place.can_edit(user)` concentra a checagem dono-ou-moderador.
-
-**Miniaturas e prévias borradas.** Uploads nunca são servidos no tamanho
-original em listas. `{{ img|srcset:"480,960" }}` gera cópias WebP de 480, 960 e
-1600 px no primeiro uso e as guarda ao lado da mídia. Cada imagem também ganha
-uma prévia WebP de 16 px embutida como data URI, que o navegador estica num
-fundo borrado enquanto o arquivo real carrega.
-
-**UI otimista e tratamento de falhas.** Todo `fetch` passa por um helper
-`request()` com tempo limite e erros tipados (offline, timeout, limite, servidor).
-Os favoritos mudam na hora, juntam cliques rápidos num único pedido e voltam
-atrás com um aviso se falhar. Formulários desabilitam os botões após o primeiro
-envio, uma faixa avisa quando a conexão está offline ou lenta, e imagens e mapas
-quebrados viram um estado com "tentar de novo".
-
-**Limite de requisições.** `@limit("30/m", key="user")` protege as views que
-gravam ou buscam. O excesso recebe 429 com `Retry-After`: JSON para `fetch`,
-página amigável para o navegador. Na Vercel o IP do cliente vem do cabeçalho do
-proxy.
-
-**CI.** Pull requests rodam linters, `pip-audit`, a checagem de que o CSS e os
-ícones compilados estão atualizados e a suíte de testes em PostgreSQL 15 com
-piso de 90% de cobertura. Outro workflow constrói a imagem de produção, roda
-`check --deploy`, migra, espera o healthcheck do Docker, testa páginas,
-`robots.txt`, `sitemap.xml` e arquivos estáticos com hash, e então roda o
-Lighthouse CI (acessibilidade, boas práticas e SEO com 0,95 ou mais; desempenho
-com 0,85 ou mais). Pushes em `main` publicam a imagem no GHCR com SBOM e
-proveniência.
-
-**Gerador de ilustrações impressas.** As formas botânicas, gaivotas e o skyline
-das páginas são SVGs produzidos por `scripts/generate_deco.py` (curvas suaves
-por pontos de controle, variação com semente). Os componentes `<c-deco>` e
-`<c-wave>` os posicionam; o movimento pausa fora da tela e some com movimento
-reduzido.
-
 ## Rodando localmente
 
 Requer Python 3.11+, [uv](https://docs.astral.sh/uv/) e Node 22 (só para
@@ -172,41 +118,16 @@ uv run python manage.py test apps
 uv run coverage run manage.py test apps && uv run coverage report
 ```
 
-A suíte tem 409 testes (`apps/<app>/tests/`). A CI mede a cobertura incluindo
-os arquivos de teste e exige 90%. Contando só o código da aplicação, a cobertura
-de linhas é 82%.
+A suíte fica em `apps/<app>/tests/`. A CI mede a cobertura do código da aplicação,
+sem os testes, e exige 80%.
 
-## Deploy
+## Documentação
 
-A produção roda na Vercel (região `gru1`, perto do banco da Neon), com
-Cloudflare R2 para as fotos. Configuração, variáveis de ambiente, o cron e as
-armadilhas conhecidas estão em [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md).
+[docs/STRUCTURE.md](./docs/STRUCTURE.md)
+[docs/CRUD.md](./docs/CRUD.md)
+[docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md)
+[docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)
+[Changelog](./CHANGELOG.md)
 
-## Limitações conhecidas
-
-- **O login com Google existe só no front-end.** `static/js/components/google_auth.js`
-  envia um token para `/auth/google/`, mas nenhuma view atende essa rota, então
-  o botão não consegue autenticar ninguém. E-mail e senha é o único login que
-  funciona.
-- **Os limites de requisição são por instância sem cache compartilhado.** O
-  cache padrão fica na memória; em plataforma serverless cada instância conta
-  separado, e um código por e-mail pode ser recusado por uma instância diferente
-  da que o emitiu. Defina `CACHE_URL` ou `REDIS_URL` para compartilhar o estado.
-- **A tradução precisa de um LLM local.** `translate_content` usa o Ollama; as
-  traduções automáticas são sinalizadas como tais e podem ser corrigidas no
-  Django Admin.
-- **O crawler de eventos depende de um único portal.** Se a Prefeitura mudar os
-  IDs de categoria ou o formato das publicações, o `crawl_events` precisa ser
-  ajustado.
-- **As capturas de tela ainda não foram versionadas.**
-
-## Mais documentação
-
-[Estrutura](./docs/STRUCTURE.md) · [CRUD e permissões](./docs/CRUD.md) ·
-[Contribuindo](./docs/CONTRIBUTING.md) · [Deploy (inglês)](./docs/DEPLOYMENT.md) ·
-[Changelog (inglês)](./CHANGELOG.md)
-
-## Licença
-
-Código sob [Licença MIT](./LICENSE). As fotos vêm da Wikimedia Commons e de
-colaboradores, com os créditos no rodapé do site.
+Código sob a [licença MIT](./LICENSE). As fotos vêm do Wikimedia Commons e de
+colaboradores, com crédito no rodapé do site.

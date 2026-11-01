@@ -119,14 +119,14 @@ uv run python manage.py test apps
 uv run coverage run manage.py test apps && uv run coverage report
 ```
 
-The suite has 409 tests (`apps/<app>/tests/`). CI measures coverage with test
-files included and requires 90%.
+The suite lives in `apps/<app>/tests/`. CI measures coverage of application
+code, without the tests, and requires 80%.
 
 ## Documentation
 
 [docs/STRUCTURE.md](./docs/STRUCTURE.md)
 [docs/CRUD.md](./docs/CRUD.md)
-[/docs/CONTRIBUTING.md)](./docs/CONTRIBUTING.md)
+[docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md)
 [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)
 [Changelog](./CHANGELOG.md)
 

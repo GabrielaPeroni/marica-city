@@ -22,6 +22,11 @@ class User(AbstractUser):
         blank=True, null=True, help_text=_l("Website ou URL de rede social")
     )
 
+    # Identificador estável da conta Google (o e-mail dela pode mudar)
+    google_sub = models.CharField(
+        max_length=255, unique=True, blank=True, null=True, editable=False
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

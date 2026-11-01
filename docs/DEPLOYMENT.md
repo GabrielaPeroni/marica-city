@@ -33,7 +33,7 @@ Copy `.env.example` to `.env` and fill in real values. At minimum for prod:
   Vercel/Neon provide it) or `DB_ENGINE`/`DB_NAME`/`DB_USER`/`DB_PASSWORD`/
   `DB_HOST`/`DB_PORT` — a real Postgres instance (SQLite is dev-only).
   `DATABASE_URL` wins when both are set.
-- `CACHE_URL` or `REDIS_URL` — a Redis instance; without one, `LocMemCache` is
+- `CACHE_URL`, `REDIS_URL` or `KV_URL` (set by Upstash on Vercel) — a Redis instance; without one, `LocMemCache` is
   used, which is not safe across multiple gunicorn workers.
 - `SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`,
   `SECURE_HSTS_*` — default to secure values already, only override if you
@@ -63,12 +63,12 @@ supervisor, uptime monitor).
 
 ## CI/CD pipeline
 
-| Workflow           | When                                          | What                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pr-checks.yml`    | PRs and `main`                                | Linters (black, isort, autoflake, flake8, Prettier, pip-audit); tests on Postgres under coverage (floor 90%)                                                                                                                                                                                                                                                                                                                 |
-| `container.yml`    | PRs, `main`, `v*` tags                        | Builds the image, `check --deploy` with default prod settings, runs it on Postgres, migrates, waits for the Docker healthcheck, smoke-tests pages / `robots.txt` / `sitemap.xml` / hashed static files, Lighthouse CI score floors. On `main`: publishes `ghcr.io/<owner>/<repo>` (`latest`, `sha-…`) with SBOM and build provenance. On a `v*` tag: semver tags plus a GitHub Release from that version's CHANGELOG section |
-| `deploy-check.yml` | Vercel reports a successful production deploy | Smoke-tests the live URL and runs Lighthouse against it                                                                                                                                                                                                                                                                                                                                                                      |
-| `codeql.yml`       | PRs, `main`, weekly                           | Static security analysis                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Workflow           | When                   | What                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------ | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pr-checks.yml`    | PRs and `main`         | Linters (black, isort, autoflake, flake8, Prettier, pip-audit); tests on Postgres under coverage (floor 90%)                                                                                                                                                                                                                                                                                                                 |
+| `container.yml`    | PRs, `main`, `v*` tags | Builds the image, `check --deploy` with default prod settings, runs it on Postgres, migrates, waits for the Docker healthcheck, smoke-tests pages / `robots.txt` / `sitemap.xml` / hashed static files, Lighthouse CI score floors. On `main`: publishes `ghcr.io/<owner>/<repo>` (`latest`, `sha-…`) with SBOM and build provenance. On a `v*` tag: semver tags plus a GitHub Release from that version's CHANGELOG section |
+| `deploy-check.yml` | Daily and on demand    | Smoke-tests the live URL and runs Lighthouse against it                                                                                                                                                                                                                                                                                                                                                                      |
+| `codeql.yml`       | PRs, `main`, weekly    | Static security analysis                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 Dependabot keeps Python, npm, GitHub Actions and the Docker base image up to date.
 
@@ -149,11 +149,8 @@ places).
   one. This happened until 2026-11-01, when the check was deleted. Fix: remove
   the check, through Project → Settings → Deployment Checks or the API (or
   promote the staged deployment by hand). Post-deploy verification belongs in
-  `.github/workflows/deploy-check.yml`, not in a Vercel check that blocks the alias.
-- **`deploy-check.yml` does not run today.** The Vercel project has GitHub
-  deployment events turned off (`createDeployments: disabled`), so its trigger
-  never fires. Turning them on is not enough: it would test deployment URLs,
-  which sit behind Vercel Authentication, so point it at the public domain too.
+  `.github/workflows/deploy-check.yml`, which runs daily against the public domain,
+  not in a Vercel check that blocks the alias.
 - **R2 variables must exist before the build.** Uploaded photos and the demo
   content that `scripts/vercel_build.py` loads go to R2 during the build, so
   `AWS_*` must already be set for that environment. Without them, files land on
