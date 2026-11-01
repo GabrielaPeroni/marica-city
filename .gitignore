@@ -73,3 +73,5 @@ CLAUDE.md
 
 # Browser automation output
 .playwright-mcp/
+.vercel
+.env*

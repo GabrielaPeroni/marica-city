@@ -47,3 +47,13 @@ class DemoSnapshotTests(TestCase):
         self.load()
         self.load()
         self.assertEqual(Place.objects.count(), len(self.data["places"]))
+
+    def test_restores_photos_missing_from_storage(self):
+        self.load()
+        image = PlaceImage.objects.first()
+        with override_settings(MEDIA_ROOT=self.media.name):
+            image.image.storage.delete(image.image.name)
+            self.assertFalse(image.image.storage.exists(image.image.name))
+        self.load()
+        with override_settings(MEDIA_ROOT=self.media.name):
+            self.assertTrue(image.image.storage.exists(image.image.name))

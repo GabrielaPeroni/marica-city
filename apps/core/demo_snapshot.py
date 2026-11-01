@@ -209,3 +209,23 @@ def load():
         News.objects.filter(pk=event.pk).update(publish_date=publish_date)
 
     return len(data["places"])
+
+
+def restore_media():
+    """Upload snapshot photos missing from storage (e.g. loaded before R2 was set up).
+
+    Matches each stored image to ``demo_data/media/<same stem>.webp`` and saves it under
+    its existing name; returns how many files were uploaded.
+    """
+    available = {path.stem: path for path in MEDIA_DIR.glob("*.webp")}
+    fields = [image.image for image in PlaceImage.objects.all()]
+    fields += [e.featured_image for e in News.objects.exclude(featured_image="")]
+    uploaded = 0
+    for field in fields:
+        source = available.get(Path(field.name).stem)
+        if source is None or field.storage.exists(field.name):
+            continue
+        with open(source, "rb") as fh:
+            field.storage.save(field.name, File(fh))
+        uploaded += 1
+    return uploaded

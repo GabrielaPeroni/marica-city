@@ -57,7 +57,10 @@ AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME", default="")
 AWS_S3_ENDPOINT_URL = config("AWS_S3_ENDPOINT_URL", default="")
 AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME", default="auto")
-AWS_S3_CUSTOM_DOMAIN = config("AWS_S3_CUSTOM_DOMAIN", default="")
+# Só o host (pub-….r2.dev); aceita também a URL completa colada do painel
+AWS_S3_CUSTOM_DOMAIN = (
+    config("AWS_S3_CUSTOM_DOMAIN", default="").removeprefix("https://").rstrip("/")
+)
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False
 # Upload names never repeat (Django adds a suffix), so browsers and the CDN can keep them.
