@@ -45,7 +45,7 @@
 <div class="container-page grid gap-10 py-10 md:py-14 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16">
   <article class="max-w-prose">
     {% if news_item.image_caption %}
-    <p class="mb-6 text-sm text-muted-foreground">{{ news_item.image_caption }}</p>
+    <p class="mb-6 text-sm text-muted-foreground">{% if news_item.image_caption|slice:":6" == "Foto: " %}{% translate "Foto" %}: {{ news_item.image_caption|slice:"6:" }}{% else %}{{ news_item.image_caption }}{% endif %}</p>
     {% endif %}
     <div class="text-lg leading-relaxed text-foreground/90 [&_p]:mb-5">{{ news_item|tr:"content"|linebreaks }}</div>
     {% if news_item|machine_translated %}

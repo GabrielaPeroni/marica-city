@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-31 22:27-0300\n"
+"POT-Creation-Date: 2026-11-01 15:53-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -474,8 +474,8 @@ msgstr "Participate"
 msgid "Meus favoritos"
 msgstr "My favorites"
 
-#: apps/explore/views.py:174 templates/base.html:96 templates/core/landing.html:41
-#: templates/core/landing.html:147 templates/explore/admin/backlog.html:7
+#: apps/explore/views.py:180 templates/base.html:96 templates/core/landing.html:41
+#: templates/core/landing.html:150 templates/explore/admin/backlog.html:7
 #: templates/explore/category_detail.html:50 templates/explore/explore.html:19
 #: templates/explore/explore.html:42 templates/includes/navbar.html:40
 msgid "Cadastrar lugar"
@@ -836,7 +836,7 @@ msgid "Todas"
 msgstr "All"
 
 #: templates/core/admin/news_list.html:28 templates/core/admin/news_list.html:31
-#: templates/core/landing.html:88 templates/explore/_filter_bar.html:20
+#: templates/core/landing.html:91 templates/explore/_filter_bar.html:20
 #: templates/explore/admin/backlog.html:37
 msgid "Buscar"
 msgstr "Search"
@@ -924,7 +924,7 @@ msgstr "New Places"
 msgid "Novos Usuários"
 msgstr "New Users"
 
-#: apps/explore/views.py:339 templates/core/admin_dashboard.html:35
+#: apps/explore/views.py:345 templates/core/admin_dashboard.html:35
 #: templates/cotton/place_card.html:16 templates/explore/place_detail.html:44
 #: templates/includes/admin_sidebar.html:26
 msgid "Aguardando aprovação"
@@ -1068,7 +1068,7 @@ msgstr ""
 "Contribute to the community and help others discover Maricá. Add special places and "
 "share your story."
 
-#: templates/core/landing.html:57
+#: templates/core/landing.html:61
 #, python-format
 msgid ""
 "Entre na sua conta (menu <strong>Entrar</strong>) ou <a "
@@ -1077,50 +1077,50 @@ msgstr ""
 "Sign in (menu <strong>Sign In</strong>) or <a href=\"%(register_url)s\">create a free"
 " account</a> to continue."
 
-#: templates/core/landing.html:66
+#: templates/core/landing.html:70
 msgid "Pausar apresentação"
 msgstr "Pause presentation"
 
-#: templates/core/landing.html:71
+#: templates/core/landing.html:75
 msgid "Role"
 msgstr "Scroll"
 
-#: templates/core/landing.html:82
+#: templates/core/landing.html:85
 msgid "Para onde vamos?"
 msgstr "Where to next?"
 
-#: templates/core/landing.html:86
+#: templates/core/landing.html:89
 msgid "Praia, trilha, restaurante…"
 msgstr "Beach, trail, restaurant…"
 
-#: templates/core/landing.html:91 templates/explore/_filter_bar.html:23
+#: templates/core/landing.html:94 templates/explore/_filter_bar.html:23
 #: templates/explore/admin/backlog.html:82 templates/explore/place_detail.html:236
 #: templates/explore/place_form.html:43
 msgid "Categorias"
 msgstr "Categories"
 
-#: templates/core/landing.html:106
+#: templates/core/landing.html:109
 msgid "Em alta agora"
 msgstr "Trending now"
 
-#: templates/core/landing.html:106
+#: templates/core/landing.html:109
 msgid "Destinos populares este mês"
 msgstr "Popular destinations this month"
 
-#: templates/core/landing.html:106 templates/core/landing.html:180
+#: templates/core/landing.html:109 templates/core/landing.html:183
 #: templates/cotton/section_heading.html:15
 msgid "Ver todos"
 msgstr "See all"
 
-#: templates/core/landing.html:125
+#: templates/core/landing.html:128
 msgid "Onde ir"
 msgstr "Where to go"
 
-#: templates/core/landing.html:125
+#: templates/core/landing.html:128
 msgid "Escolha sua própria jornada."
 msgstr "Choose your own journey."
 
-#: templates/core/landing.html:126
+#: templates/core/landing.html:129
 msgid ""
 "Explore os lugares mais incríveis de Maricá. De praias paradisíacas a experiências "
 "culturais únicas, há um lugar em Maricá para todos! Descubra o que torna cada um "
@@ -1130,66 +1130,66 @@ msgstr ""
 "cultural experiences, there's a place in Maricá for everyone! Discover what makes "
 "each one special."
 
-#: templates/core/landing.html:129
+#: templates/core/landing.html:132
 msgid "Veja mais"
 msgstr "See more"
 
-#: templates/core/landing.html:144
+#: templates/core/landing.html:147
 msgid "Nenhum lugar disponível ainda. Volte em breve!"
 msgstr "No places available yet. Check back soon!"
 
-#: templates/core/landing.html:158 templates/news/news_detail.html:92
+#: templates/core/landing.html:161 templates/news/news_detail.html:92
 msgid "Ver agenda completa"
 msgstr "See the full agenda"
 
-#: templates/core/landing.html:159
+#: templates/core/landing.html:162
 msgid "Próximos eventos em Maricá"
 msgstr "Upcoming events in Maricá"
 
-#: templates/core/landing.html:159
+#: templates/core/landing.html:162
 msgid "Eventos recentes em Maricá"
 msgstr "Recent events in Maricá"
 
-#: templates/core/landing.html:180
+#: templates/core/landing.html:183
 msgid "Explorar por categoria"
 msgstr "Explore by category"
 
-#: templates/core/landing.html:180
+#: templates/core/landing.html:183
 msgid "Encontre exatamente o que você procura"
 msgstr "Find exactly what you're looking for"
 
-#: templates/core/landing.html:194
+#: templates/core/landing.html:197
 #, python-format
 msgid "%(counter)s lugar"
 msgid_plural "%(counter)s lugares"
 msgstr[0] "%(counter)s place"
 msgstr[1] "%(counter)s places"
 
-#: templates/core/landing.html:208
+#: templates/core/landing.html:211
 msgid "Quem visitou conta"
 msgstr "What visitors say"
 
-#: templates/core/landing.html:208
+#: templates/core/landing.html:211
 msgid "Avaliações recentes de quem passou por Maricá"
 msgstr "Recent reviews from Maricá visitors"
 
-#: templates/core/landing.html:233
+#: templates/core/landing.html:236
 msgid "Explore no mapa"
 msgstr "Explore on map"
 
-#: templates/core/landing.html:233
+#: templates/core/landing.html:236
 msgid "Navegue pelos Lugares de Maricá"
 msgstr "Browse Maricá Places"
 
-#: templates/core/landing.html:233
+#: templates/core/landing.html:236
 msgid "Todos os lugares cadastrados, no mapa interativo"
 msgstr "All registered places, on the interactive map"
 
-#: templates/core/landing.html:237
+#: templates/core/landing.html:240
 msgid "Carregando mapa interativo..."
 msgstr "Loading interactive map..."
 
-#: templates/core/landing.html:240
+#: templates/core/landing.html:243
 msgid "Clique nos marcadores para ver detalhes de cada lugar"
 msgstr "Click on markers to see details of each place"
 
@@ -1331,7 +1331,7 @@ msgstr "Created by"
 msgid "Em destaque na página inicial"
 msgstr "Featured on the home page"
 
-#: apps/explore/views.py:351 templates/explore/admin/backlog.html:106
+#: apps/explore/views.py:357 templates/explore/admin/backlog.html:106
 msgid "Em destaque"
 msgstr "Featured"
 
@@ -1893,7 +1893,7 @@ msgstr "Duplicate"
 msgid "Não é um lugar turístico"
 msgstr "Not a tourist attraction"
 
-#: templates/includes/place_removal_reasons.html:7
+#: apps/explore/api.py:54 templates/includes/place_removal_reasons.html:7
 msgid "Outros"
 msgstr "Other"
 
@@ -1920,11 +1920,15 @@ msgstr ""
 
 #: templates/news/news_detail.html:25
 msgid "Agenda"
-msgstr "Agenda"
+msgstr "Events"
 
 #: templates/news/news_detail.html:30
 msgid "Evento"
 msgstr "Event"
+
+#: templates/news/news_detail.html:48
+msgid "Foto"
+msgstr "Photo"
 
 #: templates/news/news_detail.html:59
 msgid "Quando e onde"
@@ -2160,7 +2164,7 @@ msgstr "User %(username)s deleted successfully."
 msgid "Você não tem permissão para acessar esta página."
 msgstr "You do not have permission to access this page."
 
-#: apps/core/views.py:191 apps/explore/views.py:337
+#: apps/core/views.py:191 apps/explore/views.py:343
 msgid "Todos"
 msgstr "All"
 
@@ -2203,7 +2207,7 @@ msgstr "Event \"%(title)s\" updated successfully!"
 msgid "Editar: %(title)s"
 msgstr "Edit: %(title)s"
 
-#: apps/core/views.py:297 apps/explore/views.py:195
+#: apps/core/views.py:297 apps/explore/views.py:201
 msgid "Salvar Alterações"
 msgstr "Save Changes"
 
@@ -2237,7 +2241,7 @@ msgstr[1] "%(count)d events deleted"
 msgid "Selecione ao menos um evento."
 msgstr "Select at least one event."
 
-#: apps/core/views.py:356 apps/core/views.py:447 apps/explore/views.py:328
+#: apps/core/views.py:356 apps/core/views.py:447 apps/explore/views.py:334
 msgid "Ação inválida."
 msgstr "Invalid action."
 
@@ -2413,11 +2417,11 @@ msgstr "User who favorited the place"
 msgid "Lugar que foi favoritado"
 msgstr "Place that was favorited"
 
-#: apps/explore/views.py:161
+#: apps/explore/views.py:167
 msgid "Você não tem permissão para criar lugares."
 msgstr "You do not have permission to create places."
 
-#: apps/explore/views.py:169
+#: apps/explore/views.py:175
 #, python-format
 msgid ""
 "Lugar \"%(name)s\" criado com sucesso! Ele será revisado por um administrador antes "
@@ -2426,124 +2430,124 @@ msgstr ""
 "Place \"%(name)s\" created successfully! It will be reviewed by an administrator "
 "before appearing on the site."
 
-#: apps/explore/views.py:174
+#: apps/explore/views.py:180
 msgid "Enviar para Aprovação"
 msgstr "Submit for Approval"
 
-#: apps/explore/views.py:183
+#: apps/explore/views.py:189
 msgid "Você não tem permissão para editar este lugar."
 msgstr "You do not have permission to edit this place."
 
-#: apps/explore/views.py:190
+#: apps/explore/views.py:196
 #, python-format
 msgid "Lugar \"%(name)s\" atualizado com sucesso!"
 msgstr "Place \"%(name)s\" updated successfully!"
 
-#: apps/explore/views.py:194
+#: apps/explore/views.py:200
 #, python-format
 msgid "Editar %(name)s"
 msgstr "Edit %(name)s"
 
-#: apps/explore/views.py:204
+#: apps/explore/views.py:210
 msgid "Você não tem permissão para excluir este lugar."
 msgstr "You do not have permission to delete this place."
 
-#: apps/explore/views.py:212
+#: apps/explore/views.py:218
 #, python-format
 msgid "Lugar \"%(place_name)s\" foi excluído com sucesso."
 msgstr "Place \"%(place_name)s\" was deleted successfully."
 
-#: apps/explore/views.py:224
+#: apps/explore/views.py:230
 msgid "Por favor, selecione um motivo para a rejeição."
 msgstr "Please select a reason for rejection."
 
-#: apps/explore/views.py:228
+#: apps/explore/views.py:234
 msgid "Por favor, especifique o motivo da rejeição."
 msgstr "Please specify the reason for rejection."
 
-#: apps/explore/views.py:250
+#: apps/explore/views.py:256
 #, python-format
 msgid "%(name)s está em destaque na página inicial."
 msgstr "%(name)s is now featured on the home page."
 
-#: apps/explore/views.py:252
+#: apps/explore/views.py:258
 #, python-format
 msgid "%(name)s saiu dos destaques."
 msgstr "%(name)s is no longer featured."
 
-#: apps/explore/views.py:269
+#: apps/explore/views.py:275
 #, python-format
 msgid "Lugar \"%(name)s\" foi aprovado com sucesso!"
 msgstr "Place \"%(name)s\" was approved successfully!"
 
-#: apps/explore/views.py:289
+#: apps/explore/views.py:295
 #, python-format
 msgid "Lugar \"%(name)s\" foi removido."
 msgstr "Place \"%(name)s\" was removed."
 
-#: apps/explore/views.py:301
+#: apps/explore/views.py:307
 msgid "Selecione ao menos um lugar."
 msgstr "Select at least one place."
 
-#: apps/explore/views.py:311
+#: apps/explore/views.py:317
 #, python-format
 msgid "%(count)d lugar aprovado"
 msgid_plural "%(count)d lugares aprovados"
 msgstr[0] "%(count)d place approved"
 msgstr[1] "%(count)d places approved"
 
-#: apps/explore/views.py:325
+#: apps/explore/views.py:331
 #, python-format
 msgid "%(count)d lugar removido"
 msgid_plural "%(count)d lugares removidos"
 msgstr[0] "%(count)d place removed"
 msgstr[1] "%(count)d places removed"
 
-#: apps/explore/views.py:345
+#: apps/explore/views.py:351
 msgid "Aprovados"
 msgstr "Approved"
 
-#: apps/explore/views.py:356
+#: apps/explore/views.py:362
 msgid "Removidos"
 msgstr "Removed"
 
-#: apps/explore/views.py:415
+#: apps/explore/views.py:421
 msgid "Você já avaliou este lugar. Edite sua avaliação existente."
 msgstr "You have already reviewed this place. Edit your existing review."
 
-#: apps/explore/views.py:424
+#: apps/explore/views.py:430
 msgid "Avaliação enviada com sucesso!"
 msgstr "Review submitted successfully!"
 
-#: apps/explore/views.py:441
+#: apps/explore/views.py:447
 msgid "Você não tem permissão para editar esta avaliação."
 msgstr "You do not have permission to edit this review."
 
-#: apps/explore/views.py:449
+#: apps/explore/views.py:455
 msgid "Avaliação atualizada com sucesso!"
 msgstr "Review updated successfully!"
 
-#: apps/explore/views.py:458
+#: apps/explore/views.py:464
 msgid "Você não tem permissão para excluir esta avaliação."
 msgstr "You do not have permission to delete this review."
 
-#: apps/explore/views.py:465
+#: apps/explore/views.py:471
 msgid "Avaliação excluída com sucesso!"
 msgstr "Review deleted successfully!"
 
-#: apps/explore/views.py:482
+#: apps/explore/views.py:488
 msgid "Favorito atualizado"
 msgstr "Favorite updated"
 
-#: apps/explore/views.py:493
+#: apps/explore/views.py:499
 msgid "Lugar removido dos favoritos"
 msgstr "Place removed from favorites"
 
-#: apps/explore/views.py:495
+#: apps/explore/views.py:501
 msgid "Lugar adicionado aos favoritos"
 msgstr "Place added to favorites"
 
-#: apps/explore/views.py:549
+#: apps/explore/views.py:555
 #, python-format
 msgid "%(value)s favoritos sincronizados"
 msgstr "%(value)s favorites synchronized"

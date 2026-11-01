@@ -6,8 +6,8 @@ from apps.explore.models import Place
 
 class Command(BaseCommand):
     help = (
-        "Cria o conteúdo de demonstração num banco sem lugares e envia ao armazenamento "
-        "as fotos do snapshot que estiverem faltando."
+        "Cria o conteúdo de demonstração num banco sem lugares, acrescenta eventos e "
+        "traduções novas do snapshot e envia ao armazenamento as fotos que faltam."
     )
 
     def handle(self, *args, **options):
@@ -17,6 +17,13 @@ class Command(BaseCommand):
             created = demo_snapshot.load()
             self.stdout.write(
                 self.style.SUCCESS(f"{created} lugares de demonstração criados.")
+            )
+        events, places = demo_snapshot.sync()
+        if events or places:
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"{events} evento(s) criado(s), {places} tradução(ões) de lugar."
+                )
             )
         uploaded = demo_snapshot.restore_media()
         if uploaded:
