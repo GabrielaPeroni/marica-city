@@ -25,7 +25,7 @@
 
 <section class="relative isolate flex items-end overflow-hidden bg-foreground text-white {% if hero %}min-h-[62svh] md:min-h-[72svh]{% else %}min-h-[22rem]{% endif %}" aria-labelledby="place-title">
   {% if hero %}
-  <img src="{{ hero.image|thumb:1600 }}" srcset="{{ hero.image|srcset:'960,1600' }}" sizes="100vw" alt="{{ hero.caption|default:place.name }}" class="img-ph absolute inset-0 -z-20 size-full object-cover" fetchpriority="high" decoding="async" style="{{ hero.image|placeholder }};view-transition-name:place-{{ place.pk }}">
+  <img src="{{ hero.image|thumb:1600 }}" srcset="{{ hero.image|srcset:'960,1600' }}" sizes="100vw" alt="{% firstof hero.caption place|tr:'name' %}" class="img-ph absolute inset-0 -z-20 size-full object-cover" fetchpriority="high" decoding="async" style="{{ hero.image|placeholder }};view-transition-name:place-{{ place.pk }}">
   <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/35 to-black/10" aria-hidden="true"></div>
   {% else %}
   <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_10%,var(--brand)_0,transparent_55%)] opacity-60" aria-hidden="true"></div>
@@ -118,7 +118,7 @@
             {% elif total == 4 and forloop.last %}col-span-2 md:col-span-1
             {% endif %}
           {% endif %}">
-          <img src="{{ image.image|thumb:960 }}" srcset="{{ image.image|srcset:'480,960' }}" sizes="{% if forloop.first %}(min-width: 1024px) 40vw, 100vw{% else %}(min-width: 1024px) 20vw, 50vw{% endif %}" alt="{{ image.caption|default:place.name }}" loading="lazy" decoding="async" class="img-ph size-full object-cover transition-transform duration-500 group-hover:scale-105" style="{{ image.image|placeholder }}">
+          <img src="{{ image.image|thumb:960 }}" srcset="{{ image.image|srcset:'480,960' }}" sizes="{% if forloop.first %}(min-width: 1024px) 40vw, 100vw{% else %}(min-width: 1024px) 20vw, 50vw{% endif %}" alt="{% firstof image.caption place|tr:'name' %}" loading="lazy" decoding="async" class="img-ph size-full object-cover transition-transform duration-500 group-hover:scale-105" style="{{ image.image|placeholder }}">
           {% if forloop.last and total > 5 %}
           <span class="absolute inset-0 grid place-items-center bg-black/55 text-lg font-semibold text-white">{% blocktranslate with count=total %}Ver todas ({{ count }}){% endblocktranslate %}</span>
           {% endif %}
@@ -279,7 +279,7 @@
 <dialog id="gallery-lightbox" class="lightbox" aria-label="{% translate 'Fotos' %}: {{ place|tr:"name" }}">
   {% for image in gallery %}
   <figure data-lightbox-item {% if not forloop.first %}hidden{% endif %}>
-    <img src="{{ image.image|thumb:1600 }}" srcset="{{ image.image|srcset:'960,1600' }}" sizes="100vw" alt="{{ image.caption|default:place.name }}" loading="lazy" decoding="async">
+    <img src="{{ image.image|thumb:1600 }}" srcset="{{ image.image|srcset:'960,1600' }}" sizes="100vw" alt="{% firstof image.caption place|tr:'name' %}" loading="lazy" decoding="async">
     <figcaption class="text-center text-sm text-white/80">
       {% if image.caption %}{{ image.caption }} · {% endif %}<span class="tabular-nums">{{ forloop.counter }} / {{ gallery|length }}</span>
     </figcaption>
