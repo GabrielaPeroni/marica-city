@@ -94,7 +94,7 @@ jobs:
             echo "$path -> $code"
             [ "$code" = 200 ] || exit 1
           done
-          css=$(curl -s http://localhost:8000/ | grep -o '/static/css/main\.[0-9a-f]*\.css' | head -1)
+          css=$(curl -s http://localhost:8000/ | grep -o '/static/css/app\.[0-9a-f]*\.css' | head -1)
           [ -n "$css" ] || { echo "::error::Hashed stylesheet not found in the page"; exit 1; }
           curl -sI "http://localhost:8000$css" | grep -i 'cache-control: .*immutable'
 
