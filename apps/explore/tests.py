@@ -2389,6 +2389,23 @@ class ExplorePageSearchTests(TestCase):
         self.assertEqual(response.context["all_places"].count(), 1)
         self.assertEqual(response.context["all_places"].first(), self.other_place)
 
+    def test_search_matches_translated_name(self):
+        """Visitors searching in English or Spanish find the translated name"""
+        self.matching_place.translations = {
+            "en": {"name": "Araçatiba Lagoon"},
+            "es": {"name": "Laguna de Araçatiba"},
+        }
+        self.matching_place.save()
+        url = reverse("explore:explore")
+        for query in ("lagoon", "laguna de ara"):
+            response = self.client.get(url, {"q": query})
+            self.assertEqual(
+                list(response.context["all_places"]), [self.matching_place]
+            )
+        self.assertEqual(
+            self.client.get(url, {"q": "zzz"}).context["all_places"].count(), 0
+        )
+
 
 class CategorySearchTests(TestCase):
     """Search inside a category must filter, not list everything"""

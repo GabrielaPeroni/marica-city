@@ -15,6 +15,7 @@ from django.views.decorators.http import require_POST
 
 from django_ratelimit.decorators import ratelimit
 
+from apps.core.content_translation import TARGETS
 from apps.core.decorators import moderator_required
 from apps.core.utils import safe_next
 
@@ -35,6 +36,15 @@ def _active_categories():
     return Category.objects.filter(is_active=True).order_by("display_order")
 
 
+def _text_match(query):
+    """Nome e descrição, no original e nas traduções."""
+    match = Q(name__icontains=query) | Q(description__icontains=query)
+    for lang in TARGETS:
+        match |= Q(**{f"translations__{lang}__name__icontains": query})
+        match |= Q(**{f"translations__{lang}__description__icontains": query})
+    return match
+
+
 def explore_view(request):
     """Todos os lugares públicos (e os pendentes do próprio usuário), com busca"""
     places = Place.objects.public()
@@ -44,9 +54,7 @@ def explore_view(request):
     search_query = request.GET.get("q", "").strip()
     if search_query:
         places = places.filter(
-            Q(name__icontains=search_query)
-            | Q(description__icontains=search_query)
-            | Q(categories__name__icontains=search_query)
+            _text_match(search_query) | Q(categories__name__icontains=search_query)
         ).distinct()
 
     sort = _sort(request)
@@ -66,9 +74,7 @@ def category_detail_view(request, slug):
 
     search_query = request.GET.get("q", "").strip()
     if search_query:
-        places = places.filter(
-            Q(name__icontains=search_query) | Q(description__icontains=search_query)
-        )
+        places = places.filter(_text_match(search_query))
 
     sort = _sort(request)
     cover = (
