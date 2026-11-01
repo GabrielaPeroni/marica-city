@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n content_i18n icons %}
-{% block title %}{% translate "Excluir avaliação" %} - {{ review.place.name }}{% endblock %}
+{% block title %}{% translate "Excluir avaliação" %} - {{ review.place|tr:"name" }}{% endblock %}
 
 {% block content %}
 {% include 'includes/navbar.html' %}

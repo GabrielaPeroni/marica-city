@@ -96,7 +96,7 @@ class PlaceQuerySet(models.QuerySet):
 
 
 class Place(models.Model):
-    TRANSLATABLE_FIELDS = ("description",)
+    TRANSLATABLE_FIELDS = ("name", "description")
 
     objects = PlaceQuerySet.as_manager()
 
