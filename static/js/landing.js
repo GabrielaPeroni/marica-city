@@ -69,16 +69,6 @@ function initHero() {
     );
   }
 
-  const scrollCue = section.querySelector('.hero-scroll');
-  if (scrollCue) {
-    scrollCue.addEventListener('click', event => {
-      const next = section.nextElementSibling;
-      if (!next) return;
-      event.preventDefault();
-      next.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
-    });
-  }
-
   const pauseBtn = section.querySelector('.hero-pause-btn');
   if (!pauseBtn) return;
   const setPaused = paused => {

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n static content_i18n thumbs icons %}
 
-{% block title %}{{ place.name }} - MaricaCity{% endblock %}
+{% block title %}{{ place|tr:"name" }} - MaricaCity{% endblock %}
 {% block meta_description %}{{ place|tr:"description"|truncatechars:155 }}{% endblock %}
 
 {% block extra_css %}
@@ -36,14 +36,14 @@
       <ol class="flex flex-wrap items-center gap-1.5 text-sm text-white/75 [&_a:hover]:text-white [&>li:not(:last-child)]:after:ms-1.5 [&>li:not(:last-child)]:after:content-['/']">
         <li><a href="{% url 'explore:explore' %}">{% translate "Explorar" %}</a></li>
         {% if first_category %}<li><a href="{% url 'explore:category_detail' first_category.slug %}">{{ first_category|tr:"name" }}</a></li>{% endif %}
-        <li aria-current="page" class="line-clamp-1 text-white">{{ place.name }}</li>
+        <li aria-current="page" class="line-clamp-1 text-white">{{ place|tr:"name" }}</li>
       </ol>
     </nav>
 
     {% if place.is_pending %}
     <c-badge variant="warning" class="mb-3">{% icon "clock" %}{% translate "Aguardando aprovação" %}</c-badge>
     {% endif %}
-    <h1 id="place-title" class="max-w-4xl font-display text-display-lg font-semibold text-balance">{{ place.name }}</h1>
+    <h1 id="place-title" class="max-w-4xl font-display text-display-lg font-semibold text-balance">{{ place|tr:"name" }}</h1>
 
     <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-white/90">
       {% if average_rating %}
@@ -88,7 +88,7 @@
             {% csrf_token %}
             <c-button type="submit" size="sm">{% icon "check" %}{% translate "Aprovar" %}</c-button>
           </form>
-          <c-button variant="outline" size="sm" data-remove-place="{{ place.pk }}" data-place-name="{{ place.name }}">{% icon "ban" %}{% translate "Remover" %}</c-button>
+          <c-button variant="outline" size="sm" data-remove-place="{{ place.pk }}" data-place-name="{{ place|tr:"name" }}">{% icon "ban" %}{% translate "Remover" %}</c-button>
         </div>
         {% endif %}
       </section>
@@ -134,7 +134,7 @@
       <h2 id="location-heading" class="font-display text-display-sm font-semibold">{% translate "Localização" %}</h2>
       <div class="mt-5 overflow-hidden rounded-xl bg-card shadow-card ring-1 ring-foreground/8">
         {% if place.latitude and place.longitude %}
-        <div id="place-map" class="z-0 h-72 w-full bg-muted md:h-96" data-latitude="{{ place.latitude }}" data-longitude="{{ place.longitude }}" data-place-name="{{ place.name }}">
+        <div id="place-map" class="z-0 h-72 w-full bg-muted md:h-96" data-latitude="{{ place.latitude }}" data-longitude="{{ place.longitude }}" data-place-name="{{ place|tr:"name" }}">
           <c-skeleton class="size-full rounded-none" />
         </div>
         {% endif %}
@@ -266,7 +266,7 @@
       <div class="grid gap-2">
         <c-button href="{% url 'explore:place_edit' place.pk %}" variant="outline" class="w-full">{% icon "pencil" %}{% translate "Editar este lugar" %}</c-button>
         {% if user.can_moderate and not place.is_pending %}
-        <c-button variant="outline" class="w-full" data-remove-place="{{ place.pk }}" data-place-name="{{ place.name }}">{% icon "ban" %}{% translate "Remover do site" %}</c-button>
+        <c-button variant="outline" class="w-full" data-remove-place="{{ place.pk }}" data-place-name="{{ place|tr:"name" }}">{% icon "ban" %}{% translate "Remover do site" %}</c-button>
         {% endif %}
         <c-button variant="ghost" class="w-full text-destructive hover:text-destructive" data-dialog-open="delete-place-dialog">{% icon "trash-2" %}{% translate "Excluir lugar" %}</c-button>
       </div>
@@ -276,7 +276,7 @@
 </div>
 
 {% if gallery %}
-<dialog id="gallery-lightbox" class="lightbox" aria-label="{% translate 'Fotos' %}: {{ place.name }}">
+<dialog id="gallery-lightbox" class="lightbox" aria-label="{% translate 'Fotos' %}: {{ place|tr:"name" }}">
   {% for image in gallery %}
   <figure data-lightbox-item {% if not forloop.first %}hidden{% endif %}>
     <img src="{{ image.image|thumb:1600 }}" srcset="{{ image.image|srcset:'960,1600' }}" sizes="100vw" alt="{{ image.caption|default:place.name }}" loading="lazy" decoding="async">
@@ -294,7 +294,7 @@
 {% endif %}
 
 {% if user.is_authenticated and not place.is_pending %}
-<c-dialog id="review-dialog" title="{% translate 'Escrever avaliação' %}" description="{{ place.name }}">
+<c-dialog id="review-dialog" title="{% translate 'Escrever avaliação' %}" description="{{ place|tr:"name" }}">
   <form id="reviewForm" method="post" action="{% url 'explore:review_create' place.pk %}" data-create-url="{% url 'explore:review_create' place.pk %}" class="grid gap-5">
     {% csrf_token %}
     <fieldset class="field gap-2">

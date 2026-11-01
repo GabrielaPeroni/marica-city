@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static navigation icons %}
+{% load i18n static content_i18n navigation icons %}
 
 {% block title %}{{ title }} - MaricaCity{% endblock %}
 
@@ -11,7 +11,7 @@
 <c-page-header title="{{ title }}" subtitle="{% if place %}{% translate 'Atualize as informações do seu lugar.' %}{% else %}{% translate 'Compartilhe um lugar especial com a comunidade. Ele fica visível após aprovação.' %}{% endif %}">
   <c-slot name="crumbs">
     <li><a href="{% url 'explore:explore' %}">{% translate "Explorar" %}</a></li>
-    {% if place %}<li><a href="{% url 'explore:place_detail' place.pk %}">{{ place.name }}</a></li>{% endif %}
+    {% if place %}<li><a href="{% url 'explore:place_detail' place.pk %}">{{ place|tr:"name" }}</a></li>{% endif %}
     <li aria-current="page">{% if place %}{% translate "Editar" %}{% else %}{% translate "Novo lugar" %}{% endif %}</li>
   </c-slot>
   <c-slot name="actions">

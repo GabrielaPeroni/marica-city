@@ -83,26 +83,6 @@
   @apply rounded-sm outline-2 outline-offset-4 outline-white;
 }
 
-/* Convite para rolar: linha que escorre para baixo */
-.hero-scroll-line {
-  @apply relative block h-10 w-px overflow-hidden bg-white/25;
-}
-
-.hero-scroll-line::after {
-  content: '';
-  @apply absolute inset-x-0 top-0 h-1/2 bg-white;
-  animation: hero-scroll 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-}
-
-@keyframes hero-scroll {
-  from {
-    translate: 0 -100%;
-  }
-  to {
-    translate: 0 200%;
-  }
-}
-
 /* Borda de água do hero: duas ondas que deslizam sem emenda (a SVG tem dois
    períodos; andar -50% volta ao mesmo desenho) */
 .hero-water {

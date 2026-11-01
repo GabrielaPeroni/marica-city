@@ -298,19 +298,15 @@
   }
 
   /* Navbar: barra clara flutuante (vidro) em todas as páginas; sobre o hero
-     (data-variant="transparent") fica fixa por cima da foto. Ao rolar compacta
-     (data-scrolled) e some enquanto se desce a página (data-hidden). */
+     (data-variant="transparent") fica fixa por cima da foto. Ao rolar
+     (data-scrolled) só muda a sombra; some enquanto se desce a página (data-hidden). */
   .site-nav {
     view-transition-name: site-nav;
-    @apply pointer-events-none sticky top-0 z-40 pt-3 text-foreground transition-[translate,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:pt-4;
+    @apply pointer-events-none sticky top-0 z-40 pt-3 text-foreground transition-[translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:pt-4;
   }
 
   .site-nav[data-variant='transparent'] {
     @apply fixed inset-x-0;
-  }
-
-  .site-nav[data-scrolled] {
-    @apply pt-2;
   }
 
   .site-nav[data-hidden] {
@@ -318,20 +314,16 @@
   }
 
   .site-nav-bar {
-    @apply pointer-events-auto flex h-14 items-center gap-1 rounded-2xl bg-background/80 ps-4 pe-2 shadow-card ring-1 ring-foreground/8 backdrop-blur-xl backdrop-saturate-150 transition-[height,box-shadow,background-color] duration-500 sm:ps-5;
-  }
-
-  .site-nav[data-variant='transparent']:not([data-scrolled]) .site-nav-bar {
-    @apply bg-background/70 shadow-lift ring-white/40;
+    @apply pointer-events-auto flex h-14 items-center gap-1 rounded-2xl bg-background/85 ps-4 pe-2 shadow-card ring-1 ring-foreground/8 backdrop-blur-xl backdrop-saturate-150 transition-[box-shadow,background-color] duration-500 sm:ps-5;
   }
 
   .site-nav[data-scrolled] .site-nav-bar {
-    @apply h-12 bg-background/90 shadow-lift;
+    @apply bg-background/95 shadow-lift;
   }
 
   /* Barras grudadas logo abaixo do navbar (filtros); sobem quando ele some */
   .sticky-under-nav {
-    @apply sticky top-16 transition-[top] duration-500;
+    @apply sticky top-[4.25rem] transition-[top] duration-500 sm:top-[4.5rem];
   }
 
   html:has(.site-nav[data-hidden]) .sticky-under-nav {
@@ -355,12 +347,12 @@
   }
 
   .site-nav-link {
-    @apply relative z-10 inline-flex h-9 items-center rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground aria-[current=page]:text-foreground;
+    @apply relative z-10 inline-flex h-9 items-center rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors duration-300 hover:text-foreground aria-[current=page]:bg-foreground/6 aria-[current=page]:text-foreground;
   }
 
-  /* Pílula que desliza até o link sob o cursor e volta para a página atual */
+  /* Pílula que segue o cursor entre os links e some ao sair; a página atual tem a sua, fixa */
   .site-nav-indicator {
-    @apply pointer-events-none absolute top-0 left-0 h-9 rounded-full bg-foreground/6 opacity-0 transition-[translate,width,opacity] duration-600 ease-spring;
+    @apply pointer-events-none absolute top-0 left-0 h-9 rounded-full bg-foreground/6 opacity-0 transition-[translate,width,opacity] duration-300 ease-out-soft;
     width: var(--indicator-w, 0);
     translate: var(--indicator-x, 0) 0;
   }
@@ -600,6 +592,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Reserva a barra de rolagem: páginas curtas não deslocam o navbar */
+  scrollbar-gutter: stable;
 }
 
 @layer components {
@@ -611,8 +605,9 @@ html {
     filter: url(#ink);
   }
 
+  /* Formas largas: o filtro de tinta deixa falhas na borda da região filtrada */
   .deco-solid {
-    filter: url(#ink-edge);
+    filter: none;
   }
 
   .deco-float {

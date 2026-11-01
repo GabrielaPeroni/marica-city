@@ -1,5 +1,5 @@
-// Navbar: compacta ao rolar (data-scrolled), some ao descer e volta ao subir
-// (data-hidden), e uma pílula desliza até o link sob o cursor.
+// Navbar: sombra mais forte ao rolar (data-scrolled), some ao descer e volta ao subir
+// (data-hidden), e uma pílula segue o cursor entre os links.
 (function () {
   const nav = document.querySelector('[data-site-nav]');
   if (!nav) return;
@@ -32,22 +32,26 @@
   const indicator = list && list.querySelector('.site-nav-indicator');
   if (!indicator) return;
   const current = list.querySelector('[aria-current="page"]');
+  const hide = () => indicator.removeAttribute('data-ready');
   const moveTo = link => {
-    if (!link) {
-      indicator.removeAttribute('data-ready');
-      return;
+    // Reaparece direto no link, sem deslizar da última posição
+    if (!indicator.hasAttribute('data-ready')) {
+      indicator.style.transition = 'none';
+      indicator.style.setProperty('--indicator-x', `${link.offsetLeft}px`);
+      indicator.style.setProperty('--indicator-w', `${link.offsetWidth}px`);
+      indicator.getBoundingClientRect();
+      indicator.style.transition = '';
     }
     indicator.style.setProperty('--indicator-x', `${link.offsetLeft}px`);
     indicator.style.setProperty('--indicator-w', `${link.offsetWidth}px`);
-    indicator.setAttribute('data-ready', '');
+    // A página atual já tem a pílula fixa
+    if (link === current) hide();
+    else indicator.setAttribute('data-ready', '');
   };
-  moveTo(current);
   list.querySelectorAll('.site-nav-link').forEach(link => {
     link.addEventListener('pointerenter', () => moveTo(link));
     link.addEventListener('focus', () => moveTo(link));
   });
-  list.addEventListener('pointerleave', () => moveTo(current));
-  list.addEventListener('focusout', () => moveTo(current));
-  window.addEventListener('resize', () => moveTo(current));
-  document.fonts && document.fonts.ready.then(() => moveTo(current));
+  list.addEventListener('pointerleave', hide);
+  list.addEventListener('focusout', hide);
 })();

@@ -2,8 +2,10 @@
 
 from django.http import JsonResponse
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 
+from apps.core.content_translation import translated
 from apps.core.thumbnails import thumbnail_url
 
 from .models import Place
@@ -22,7 +24,7 @@ def _summary(place):
     image = place.primary_image
     return {
         "id": place.id,
-        "name": place.name,
+        "name": translated(place, "name"),
         "image_url": thumbnail_url(image.image, 960) if image else None,
         "url": reverse("explore:place_detail", args=[place.id]),
         "rating": place.average_rating,
@@ -40,7 +42,7 @@ def map_data_api(request):
     places = []
     for place in _places().filter(latitude__isnull=False, longitude__isnull=False):
         category = next(iter(place.categories.all()), None)
-        description = place.description
+        description = translated(place, "description")
         places.append(
             {
                 **_summary(place),
@@ -49,7 +51,7 @@ def map_data_api(request):
                 ),
                 "latitude": float(place.latitude),
                 "longitude": float(place.longitude),
-                "category": category.name if category else "Outros",
+                "category": translated(category, "name") if category else _("Outros"),
                 "category_icon": category.icon if category else "📍",
             }
         )
@@ -67,9 +69,9 @@ def places_by_ids_api(request):
     places = [
         {
             **_summary(place),
-            "description": place.description,
+            "description": translated(place, "description"),
             "categories": [
-                {"name": c.name, "icon": c.icon, "slug": c.slug}
+                {"name": translated(c, "name"), "icon": c.icon, "slug": c.slug}
                 for c in place.categories.all()
             ],
         }

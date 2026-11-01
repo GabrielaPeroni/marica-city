@@ -7,7 +7,7 @@
       {% if image %}
       <img src="{{ image|thumb:960 }}" srcset="{{ image|srcset:'480,960' }}" sizes="{{ sizes }}" alt="" class="img-ph size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" loading="{% if eager %}eager{% else %}lazy{% endif %}" decoding="async" style="{{ image|placeholder }}{% if morph %};view-transition-name:place-{{ place.pk }}{% endif %}">
       {% else %}
-      <div class="grid size-full place-items-center bg-secondary font-display text-5xl text-muted-foreground" aria-hidden="true">{{ place.name|first }}</div>
+      <div class="grid size-full place-items-center bg-secondary font-display text-5xl text-muted-foreground" aria-hidden="true">{{ place|tr:"name"|first }}</div>
       {% endif %}
       {% if category %}
       <span class="badge absolute start-3 top-3" data-variant="overlay">{{ category|tr:"name" }}</span>
@@ -18,9 +18,9 @@
     </div>
     <div class="flex flex-1 flex-col gap-1.5 p-4">
       {% if level == "2" %}
-      <h2 class="font-display text-lg font-semibold leading-snug">{{ place.name }}</h2>
+      <h2 class="font-display text-lg font-semibold leading-snug">{{ place|tr:"name" }}</h2>
       {% else %}
-      <h3 class="font-display text-lg font-semibold leading-snug">{{ place.name }}</h3>
+      <h3 class="font-display text-lg font-semibold leading-snug">{{ place|tr:"name" }}</h3>
       {% endif %}
       <c-rating :value="place.average_rating" :count="place.review_count" compact />
       {% if place.address %}

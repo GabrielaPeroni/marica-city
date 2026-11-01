@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n static content_i18n navigation thumbs icons %}
 
-{% block title %}{% if review %}{% translate "Editar avaliação" %}{% else %}{% translate "Escrever avaliação" %}{% endif %} - {{ place.name }}{% endblock %}
+{% block title %}{% if review %}{% translate "Editar avaliação" %}{% else %}{% translate "Escrever avaliação" %}{% endif %} - {{ place|tr:"name" }}{% endblock %}
 
 {% block content %}
 {% include 'includes/navbar.html' %}
@@ -12,7 +12,7 @@
   <nav class="mb-6" aria-label="{% translate 'Trilha de navegação' %}">
     <ol class="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground [&_a:hover]:text-foreground [&>li:not(:last-child)]:after:ms-1.5 [&>li:not(:last-child)]:after:content-['/']">
       <li><a href="{% url 'explore:explore' %}">{% translate "Explorar" %}</a></li>
-      <li><a href="{% url 'explore:place_detail' place.pk %}">{{ place.name }}</a></li>
+      <li><a href="{% url 'explore:place_detail' place.pk %}">{{ place|tr:"name" }}</a></li>
       <li aria-current="page">{% if review %}{% translate "Editar avaliação" %}{% else %}{% translate "Nova avaliação" %}{% endif %}</li>
     </ol>
   </nav>
@@ -24,11 +24,11 @@
     {% if image %}
     <img src="{{ image|thumb:480 }}" alt="" class="img-ph size-16 shrink-0 rounded-md object-cover" style="{{ image|placeholder }}">
     {% else %}
-    <span class="grid size-16 shrink-0 place-items-center rounded-md bg-secondary font-display text-2xl text-muted-foreground" aria-hidden="true">{{ place.name|first }}</span>
+    <span class="grid size-16 shrink-0 place-items-center rounded-md bg-secondary font-display text-2xl text-muted-foreground" aria-hidden="true">{{ place|tr:"name"|first }}</span>
     {% endif %}
     {% endwith %}
     <span class="min-w-0">
-      <span class="block font-display text-lg font-semibold">{{ place.name }}</span>
+      <span class="block font-display text-lg font-semibold">{{ place|tr:"name" }}</span>
       <span class="mt-1 flex flex-wrap gap-1.5">{% for category in place.categories.all %}<span class="badge" data-variant="secondary">{{ category|tr:"name" }}</span>{% endfor %}</span>
     </span>
   </a>
