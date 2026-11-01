@@ -12,15 +12,6 @@ Esta é a versão 2 de um projeto acadêmico. A versão 1 está arquivada como
 [Marica-City-v1](https://github.com/GabrielaPeroni/Marica-City-v1); a v2 é uma
 reescrita voltada a estrutura, testes, deploy e qualidade do front-end.
 
-<!--
-Capturas de tela: coloque os arquivos abaixo em docs/screenshots/ e descomente as tags.
-Nomes esperados:
-  docs/screenshots/landing.png          página inicial
-  docs/screenshots/explore.png          /explore/ com filtros
-  docs/screenshots/place-detail.png     página de um lugar (galeria, mapa, avaliações)
-  docs/screenshots/admin-dashboard.png  /painel-admin/
-  docs/screenshots/mobile.png           landing ou lugar em largura de celular
-
 <p align="center">
   <img src="docs/screenshots/landing.png" alt="Página inicial" width="720">
 </p>
@@ -32,9 +23,6 @@ Nomes esperados:
   <img src="docs/screenshots/admin-dashboard.png" alt="Painel administrativo" width="360">
   <img src="docs/screenshots/mobile.png" alt="Layout no celular" width="180">
 </p>
--->
-
-_Capturas de tela serão adicionadas._
 
 ## Destaques
 

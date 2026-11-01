@@ -12,15 +12,6 @@ This is version 2 of an academic project. Version 1 is archived as
 [Marica-City-v1](https://github.com/GabrielaPeroni/Marica-City-v1); v2 is a
 rewrite focused on structure, tests, deployment and front-end quality.
 
-<!--
-Screenshots: put the files below in docs/screenshots/ and uncomment the tags.
-Expected filenames:
-  docs/screenshots/landing.png          landing page
-  docs/screenshots/explore.png          /explore/ with filters
-  docs/screenshots/place-detail.png     a place page (gallery, map, reviews)
-  docs/screenshots/admin-dashboard.png  /painel-admin/
-  docs/screenshots/mobile.png           landing or place page at phone width
-
 <p align="center">
   <img src="docs/screenshots/landing.png" alt="Landing page" width="720">
 </p>
@@ -32,9 +23,6 @@ Expected filenames:
   <img src="docs/screenshots/admin-dashboard.png" alt="Admin dashboard" width="360">
   <img src="docs/screenshots/mobile.png" alt="Mobile layout" width="180">
 </p>
--->
-
-_Screenshots to be added._
 
 ## Highlights
 
