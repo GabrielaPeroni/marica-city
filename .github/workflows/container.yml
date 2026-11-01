@@ -176,6 +176,6 @@ jobs:
           ' CHANGELOG.md > notes.md
           [ -s notes.md ] || { echo "::error::No CHANGELOG section for $version"; exit 1; }
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           body_path: notes.md
