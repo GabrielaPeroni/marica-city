@@ -169,7 +169,7 @@
       "categories": ["praias"],
       "is_featured": false,
       "translations": {
-        "source": "79fa8dfe1f33a749",
+        "source": "edea985ceed084ac",
         "en": {
           "description": "Maricá Beach with a sandy bottom, good for surfers of all levels and easily accessible via Amaral Peixoto Highway, with signs indicating the entrance. It is near Ponta Negra Lighthouse and Lagoa de Guarapina, and the area has several guest houses. Photo: Wilfredor / Wikimedia Commons (CC0).",
           "name": "Ponta Negra Beach"
@@ -260,7 +260,7 @@
       "categories": ["natureza-parques"],
       "is_featured": false,
       "translations": {
-        "source": "c6f76679dbb9412e",
+        "source": "57776048ca0d3f72",
         "en": {
           "description": "The Pedra do Elefante viewpoint, surrounded by the preserved forest of Serra da Tiririca Park, is located at the border between the municipalities of Maricá and Niterói. It is one of the most beautiful landscapes in the city with a beautiful view of the entire oceanic coastline of Maricá. There is a telescope at the location so you don't miss any detail.\r\n\r\nPedra do Elefante has an altitude of 412 meters, the highest point in the city. From this privileged location, the view reaches as far as the beaches of Saquarema, already in the Lagos Region of Rio de Janeiro. On days with good visibility, it is possible to see the Ilha de Cabo Frio, and the Ilhas Maricás.\r\n\r\nThe region is also known as Falso Pão de Açúcar, Pedra de Itaipuaçu and Alto Mourão.",
           "name": "Pedra do Elefante Lookout"
@@ -336,7 +336,7 @@
       "categories": ["natureza-parques", "praias"],
       "is_featured": false,
       "translations": {
-        "source": "00541d1d5bdc8a41",
+        "source": "d043c3c8102e3627",
         "en": {
           "description": "Beautiful lake perfect for kayaking, stand-up paddleboarding and relaxation. Surrounded by nature.\n\nPhoto: Daniel Souza Lima / Wikimedia Commons (CC BY-SA 4.0)",
           "name": "Araçatiba Lagoon"
@@ -412,7 +412,7 @@
       "categories": ["artes-cultura"],
       "is_featured": false,
       "translations": {
-        "source": "9e52f8178e42ad14",
+        "source": "81c129991d0e07d2",
         "en": {
           "description": "A colonial building from the 19th century listed by Inepac, which was formerly a public jail, city hall, and the seat of the Municipal Chamber. Restored between 2015 and the beginning of 2020, it now houses the Cultural House and is the headquarters of the Maricá Historical Museum, dedicated to preserving and promoting the history of the municipality. It hosts exhibitions and is one of the stops on the cultural city tour of the historic center. Photo: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Maricá House of Culture and History Museum"
@@ -473,7 +473,7 @@
       "categories": ["hoteis-pousadas"],
       "is_featured": false,
       "translations": {
-        "source": "c53670da9539be48",
+        "source": "6bc140c3972485b2",
         "en": {
           "description": "Guesthouse in the Itaipuaçu neighborhood, near the beach. Illustrative image (sunset in Itaipuaçu): MiPorto / Wikimedia Commons (CC BY-SA 3.0).",
           "name": "Pousada das Estrelas"
@@ -503,7 +503,7 @@
       "categories": ["restaurantes"],
       "is_featured": false,
       "translations": {
-        "source": "3aca1d8f9ebda39f",
+        "source": "86347c65cfe28e32",
         "en": {
           "description": "Brazilian cuisine and barbecue ranch in Espraiado, in the rural area of Maricá. Participates in the Espraiado Open Doors circuit, which brings together restaurants, farms, and cultural attractions in the region. Illustrative image (fire-roasted ribs): Jonas Joaquim Tavares… / Wikimedia Commons (CC BY-SA 3.0).",
           "name": "Restaurante Costela Fogo de Chão"
@@ -549,7 +549,7 @@
       "categories": ["compras"],
       "is_featured": false,
       "translations": {
-        "source": "4766f371445df3b5",
+        "source": "d9ae0599e2120913",
         "en": {
           "description": "Shopping in Maricá's Downtown, opened in 2021, with shops and services and parking that also hosts city fairs and events. Illustrative image (Maricá's Downtown): Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Boulevard Maricá"
@@ -579,7 +579,7 @@
       "categories": ["artes-cultura", "compras"],
       "is_featured": false,
       "translations": {
-        "source": "39358deffbdf0d6f",
+        "source": "64a7ba64aeb55b9f",
         "en": {
           "description": "Craft fair organized by the Tourism Secretariat, which brings together local artisans in city squares. It is part of ArteMar, a hub that coordinates local fairs in Maricá. The locations and dates vary, so it's worth checking the city hall's schedule. Illustrative image (craft fair): Mateus S. Figueiredo / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Feirarte"
@@ -625,7 +625,7 @@
       "categories": ["artes-cultura"],
       "is_featured": false,
       "translations": {
-        "source": "5db0eb7709f68ffc",
+        "source": "5a071dea2da8b48d",
         "en": {
           "description": "The main historical symbol of Maricá's downtown, the church of Nossa Senhora do Amparo, is linked to the origin of the city, whose parish was created in 1755. It is one of the few constructions in the municipality that is over a hundred years old. Its patron saint is celebrated on August 15, and the church's staircase hosts ceremonies of African-derived religions. Photo: Donatas Dabravolskas / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Nossa Senhora do Amparo Mother Church"
@@ -671,7 +671,7 @@
       "categories": ["praias"],
       "is_featured": false,
       "translations": {
-        "source": "0357e55be0151c6e",
+        "source": "6523ab351463858d",
         "en": {
           "description": "One of the main beaches in the municipality, between the open sea and the protected lagoon system within the Maricá Environmental Protection Area (APA). The Barra neighborhood has inns and restaurants by the lagoon. Photo: MICROLARM / Wikimedia Commons (CC BY-SA 3.0).",
           "name": "Barra de Maricá Beach"
@@ -717,7 +717,7 @@
       "categories": ["restaurantes"],
       "is_featured": false,
       "translations": {
-        "source": "209ced40641f6d00",
+        "source": "0cf287a99f5c616a",
         "en": {
           "description": "Brazilian barbecue and cuisine restaurant in Maricá's downtown. There is also a unit in the Cordeirinho neighborhood. Illustrative image (barbecue): Afrank99 / Wikimedia Commons (CC BY-SA 2.5).",
           "name": "Restaurante João & João"
@@ -747,7 +747,7 @@
       "categories": ["hoteis-pousadas"],
       "is_featured": false,
       "translations": {
-        "source": "13baaff334d3bc32",
+        "source": "55f30fb03fa551d0",
         "en": {
           "description": "Guesthouse in Araçatiba, near the lake and the center of Maricá. Illustrative image (sunset at Lagoa de Araçatiba): Filipo tardim / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Pousada Tamarindos"
@@ -793,7 +793,7 @@
       "categories": ["restaurantes"],
       "is_featured": false,
       "translations": {
-        "source": "4f0db7a41df66dfb",
+        "source": "c550529d75fce56c",
         "en": {
           "description": "Thursday to Sunday (Thursday from 5pm)\r\nFriday to Sunday from 11:30am to midnight\r\n🎤Live music Fri,Sat and Sun",
           "name": "Rancho Tempero Maranhense"
@@ -851,7 +851,7 @@
       "categories": ["natureza-parques"],
       "is_featured": false,
       "translations": {
-        "source": "9e4aefb979440aae",
+        "source": "06d316da71ecde75",
         "en": {
           "description": "Atlantic Forest Conservation Unit divided between Niterói and Maricá, covering 3,493 hectares, including a marine section. The highest point is Morro do Elefante, at 412 meters. It features trails such as the Alto Mourão trail and the Andorinhas trail, and visitation hours and rules must be confirmed with the Inea. Photo: Felipe Chermont / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Serra da Tiririca State Park"
@@ -912,7 +912,7 @@
       "categories": ["artes-cultura"],
       "is_featured": false,
       "translations": {
-        "source": "ce0ed84abd5d3022",
+        "source": "c1136ddf49d88277",
         "en": {
           "description": "Municipal cinema in Maricá's downtown with 200 seats, including spaces reserved for wheelchair users, people with reduced mobility, and people with obesity. Entry is free, with ticket reservations made online. The program mixes recent Brazilian films, children's animations, and showcases, and there are sessions adapted for people with autism spectrum disorder. Illustrative image (cinema room): Dalto.Ruiz / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Cine Henfil"
@@ -973,7 +973,7 @@
       "categories": ["praias"],
       "is_featured": false,
       "translations": {
-        "source": "feb37a875883e378",
+        "source": "40401339ac7d7297",
         "en": {
           "description": "One of the main beaches in Maricá, stretching about 15 km with a parallel bike path used for cycling and running. From the Itaipuaçu Cliffs, a trail offers a view of the Elephant Rock. The open sea has strong return currents; the Recanto, where the sea meets a channel, is the area most recommended for families with children. Photo: Gustavoolimiranda / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Itaipuaçu Beach"
@@ -1034,7 +1034,7 @@
       "categories": ["restaurantes"],
       "is_featured": false,
       "translations": {
-        "source": "54ece752ff0e9892",
+        "source": "5905a0d81bee7a38",
         "en": {
           "description": "🥘 Seafood Restaurant\r\n🕓 Lunch - Tue to Sun: 11:30am to 4pm\r\n👇🏻Delivery, menu and more.\r\n\r\nhttps://www.instagram.com/restaurantedoalexandre",
           "name": "Alexandre Restaurante"
@@ -1092,7 +1092,7 @@
       "categories": ["natureza-parques"],
       "is_featured": false,
       "translations": {
-        "source": "c404d25dd03959d1",
+        "source": "1420937a3b58ade8",
         "en": {
           "description": "Scheduled visits – Fishermen’s Association - Rua Apigio Luís da Costa, 8 – Zacarias - (21) 99757-2501 Mr. Vilson Correa.\r\n\r\nIn 1790 this traditional fishing community was already appearing on maps. Creators of the artisanal 'branch fishing' technique, they still resist the passage of time with their traditions.\r\n\r\nAt the traditional Maricá Fishermen’s Colony, it is possible to find fresh fish and taste the Camboinha cachaça, typical of the region. The place maintains traditional constructions and presents a very primitive appearance in some points.",
           "name": "Zacarias Fishing Community"
@@ -1138,7 +1138,7 @@
       "categories": ["natureza-parques"],
       "is_featured": false,
       "translations": {
-        "source": "9d803f12be59d34c",
+        "source": "5c553e919f39c296",
         "en": {
           "description": "Environmental Protection Area created in 1984 to protect the coastal sand habitat and the lagoon system of Maricá, which includes the lagoons of Maricá, Barra, Padre, Guarapina, and Jaconé, as well as Lagoa Brava and Ilha Cardosa. It is the oldest APA under state administration and is now managed by Inea. Photo: Filipo Tardim / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Maricá Environmental Protection Area"
@@ -1168,7 +1168,7 @@
       "categories": ["compras"],
       "is_featured": false,
       "translations": {
-        "source": "af87b5337e12b6b2",
+        "source": "140827ad6cb4c0e8",
         "en": {
           "description": "Covered space inaugurated by the city hall in February 2024 as part of the revitalization of the Center, with 114 stalls. Sells food, drinks, souvenirs, handicrafts, art pieces, clothing, shoes, and accessories. The Family Agriculture Fair has already been held in front of the location. Illustrative image (popular commerce center): Rodrigo_Santos / Wikimedia Commons (CC BY 3.0).",
           "name": "Cecop Popular Market"
@@ -1198,7 +1198,7 @@
       "categories": ["natureza-parques"],
       "is_featured": false,
       "translations": {
-        "source": "0e070578c8499042",
+        "source": "6ecae0178b2928f9",
         "en": {
           "description": "Waterfall in a preserved area of Atlantic Rainforest in Espraiado, declared cultural, tourist, and landscape heritage of the state of Rio de Janeiro by Law 10.998 of 2025. In 2022, the city hall announced the reopening of the waterfall and the Gruta da Sacristia for visits and bathing, with diving and climbing prohibited due to the uneven rocky bottom. Espraiado also hosts the rural circuit Espraiado de Portas Abertas. Illustrative image (pool in a waterfall in the Atlantic Rainforest of Rio de Janeiro state): João P. Burini / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Espraiado Waterfall"
@@ -1244,7 +1244,7 @@
       "categories": ["hoteis-pousadas"],
       "is_featured": false,
       "translations": {
-        "source": "eab7f07ad37fd298",
+        "source": "f95e41924ff53740",
         "en": {
           "description": "Beachfront guesthouse in Ponta Negra, with swimming pool, pool bar and restaurant with sea views. Illustrative image (sea of Ponta Negra): Rodrigo Alves / Wikimedia Commons (CC BY-SA 4.0).",
           "name": "Black Point Beach Club"
