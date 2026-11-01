@@ -82,143 +82,152 @@ function updateNavbarFavoritesCount() {
   }
 }
 
-/**
- * Gerenciar clique no botão de favorito
- * @param {Event} e - Evento de clique
- */
-async function handleFavoriteClick(e) {
-  e.preventDefault();
-  e.stopPropagation();
+const SYNC_DELAY_MS = 300;
+const SYNC_MAX_ROUNDS = 4;
+// placeId -> { server: último estado confirmado, timer, running }
+const syncState = new Map();
 
-  const button = e.currentTarget;
-  const placeId = button.dataset.placeId;
+function isLoggedIn() {
+  return document.body.dataset.userAuthenticated === 'true';
+}
 
-  if (!placeId) {
-    console.error('ID do local não encontrado');
-    return;
-  }
-
-  // Sem `disabled`: ele esmaecia o botão e tirava o hover/foco a cada clique
-  if (button.dataset.busy) return;
-  button.dataset.busy = 'true';
-
-  try {
-    // Alternar no localStorage
-    const isNowFavorited = favoritesService.toggleFavorite(placeId);
-
-    // Atualizar UI
-    updateFavoriteButton(button, isNowFavorited);
-    updateFavoritesCount(placeId, isNowFavorited ? 1 : -1);
-    updateNavbarFavoritesCount();
-
-    // Mostrar animação de feedback
-    button.removeAttribute('data-pop');
-    void button.offsetWidth;
-    button.setAttribute('data-pop', '');
-
-    // Se logado, também sincronizar com backend (opcional - dispara e esquece)
-    const isLoggedIn = document.body.dataset.userAuthenticated === 'true';
-    if (isLoggedIn) {
-      const csrfToken = getCookie('csrftoken');
-
-      // Opcional: chamar endpoint do backend para salvar favorito
-      try {
-        await fetch(`/explore/place/${placeId}/favorite/toggle/`, {
-          method: 'POST',
-          headers: {
-            'X-CSRFToken': csrfToken,
-            'Content-Type': 'application/json',
-          },
-        });
-      } catch (error) {
-        // Sincronização com backend falhou mas o armazenamento local ainda funciona
-        console.warn('Sincronização com backend falhou:', error);
-      }
+/** Aplica o estado a todos os corações do mesmo lugar, contagens e navbar */
+function applyFavorite(placeId, wanted) {
+  const was = favoritesService.isFavorited(placeId);
+  if (wanted && !was) favoritesService.addFavorite(placeId);
+  if (!wanted && was) favoritesService.removeFavorite(placeId);
+  document.querySelectorAll('.favorite-btn').forEach(button => {
+    if (button.dataset.placeId === String(placeId)) {
+      updateFavoriteButton(button, wanted);
     }
-  } catch (error) {
-    console.error('Erro ao alternar favorito:', error);
-    alert(gettext('Erro ao atualizar favorito. Tente novamente.'));
-  } finally {
-    delete button.dataset.busy;
-  }
+  });
+  if (was !== wanted) updateFavoritesCount(placeId, wanted ? 1 : -1);
+  updateNavbarFavoritesCount();
+}
+
+function popButton(button) {
+  button.removeAttribute('data-pop');
+  void button.offsetWidth;
+  button.setAttribute('data-pop', '');
 }
 
 /**
- * Gerenciar remoção de favorito da página de favoritos
- * @param {Event} e - Evento de clique
+ * Envia o estado final desejado ao servidor. Cliques rápidos viram um pedido só:
+ * o estado local é a verdade, o servidor é reconciliado com `is_favorited`.
+ * @returns {Promise<boolean>} true se o servidor ficou igual ao local
  */
-async function handleRemoveFavorite(e) {
+function scheduleSync(placeId, { immediate = false } = {}) {
+  if (!isLoggedIn()) return Promise.resolve(true);
+  let state = syncState.get(placeId);
+  if (!state) {
+    // Primeiro clique: o servidor ainda está como o cliente estava antes dele
+    state = {
+      server: !favoritesService.isFavorited(placeId),
+      timer: null,
+      waiters: [],
+    };
+    syncState.set(placeId, state);
+  }
+  return new Promise(resolve => {
+    state.waiters.push(resolve);
+    if (state.running) return;
+    clearTimeout(state.timer);
+    state.timer = setTimeout(() => runSync(placeId), immediate ? 0 : SYNC_DELAY_MS);
+  });
+}
+
+async function runSync(placeId) {
+  const state = syncState.get(placeId);
+  state.running = true;
+  state.timer = null;
+  let failure = null;
+  for (let round = 0; round < SYNC_MAX_ROUNDS; round++) {
+    if (favoritesService.isFavorited(placeId) === state.server) break;
+    try {
+      const { data } = await request(`/explore/place/${placeId}/favorite/toggle/`, {
+        method: 'POST',
+        timeout: 8000,
+        keepalive: true,
+      });
+      if (typeof data.is_favorited === 'boolean') state.server = data.is_favorited;
+      else state.server = !state.server;
+    } catch (error) {
+      failure = error;
+      break;
+    }
+  }
+  state.running = false;
+  const ok = !failure && favoritesService.isFavorited(placeId) === state.server;
+  if (!ok) {
+    applyFavorite(placeId, state.server);
+    const reason = failure ? failure.userMessage : '';
+    const text = gettext('Não foi possível atualizar o favorito. %s');
+    showToast(interpolate(text, [reason]).trim(), 'error');
+  }
+  const waiters = state.waiters.splice(0);
+  waiters.forEach(resolve => resolve(ok));
+}
+
+/** Cliques em corações: troca na hora, servidor em segundo plano */
+function handleFavoriteClick(e) {
+  const button = e.target.closest('.favorite-btn');
+  if (!button) return;
   e.preventDefault();
   e.stopPropagation();
 
-  const button = e.currentTarget;
   const placeId = button.dataset.placeId;
-
   if (!placeId) return;
 
-  // Remover do localStorage
-  favoritesService.removeFavorite(placeId);
-
-  // Remover cartão com animação
-  const card = button.closest('[data-favorite-item]');
-  if (card) {
-    card.classList.add('transition', 'duration-300', 'opacity-0', 'scale-95');
-
-    setTimeout(() => {
-      card.remove();
-
-      // Verificar se não há mais favoritos
-      const remainingCards = document.querySelectorAll('.favorite-btn').length;
-      if (remainingCards === 0) {
-        location.reload(); // Recarregar para mostrar estado vazio
-      }
-    }, 300);
+  if (button.hasAttribute('data-remove-mode')) {
+    removeFromFavoritesPage(button, placeId);
+    return;
   }
-
-  // Atualizar contagem da navbar
-  updateNavbarFavoritesCount();
-
-  // Sincronizar com backend se logado
-  const isLoggedIn = document.body.dataset.userAuthenticated === 'true';
-  if (isLoggedIn) {
-    const csrfToken = getCookie('csrftoken');
-    try {
-      await fetch(`/explore/place/${placeId}/favorite/toggle/`, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken,
-          'Content-Type': 'application/json',
-        },
-      });
-    } catch (error) {
-      console.warn('Sincronização com backend falhou:', error);
-    }
-  }
+  applyFavorite(placeId, !favoritesService.isFavorited(placeId));
+  popButton(button);
+  scheduleSync(placeId);
 }
 
-// Inicializar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', function () {
-  // Inicializar UI
-  initializeFavoritesUI();
-
-  // Adicionar manipuladores de clique a todos os botões de favorito
-  const favoriteButtons = document.querySelectorAll(
-    '.favorite-btn:not([data-remove-mode])'
+async function removeFromFavoritesPage(button, placeId) {
+  const card = button.closest('[data-favorite-item]');
+  if (card && card.hidden) return;
+  applyFavorite(placeId, false);
+  if (card) {
+    card.classList.add('transition', 'duration-300', 'opacity-0', 'scale-95');
+    setTimeout(() => {
+      if (!favoritesService.isFavorited(placeId)) card.hidden = true;
+    }, 300);
+  }
+  const ok = await scheduleSync(placeId, { immediate: true });
+  if (!ok && card) {
+    card.hidden = false;
+    card.classList.remove('transition', 'duration-300', 'opacity-0', 'scale-95');
+  }
+  const remaining = [...document.querySelectorAll('[data-favorite-item]')].filter(
+    item => !item.hidden
   );
-  favoriteButtons.forEach(button => {
-    button.addEventListener('click', handleFavoriteClick);
-  });
+  if (remaining.length === 0) location.reload();
+}
 
-  // Adicionar manipuladores de clique para botões de remover na página de favoritos
-  const removeButtons = document.querySelectorAll('.favorite-btn[data-remove-mode]');
-  removeButtons.forEach(button => {
-    button.addEventListener('click', handleRemoveFavorite);
-  });
-
-  // Ouvir mudanças de armazenamento de outras abas
-  window.addEventListener('storage', function (e) {
-    if (e.key === 'marica_favorites') {
-      initializeFavoritesUI();
+// Fecha o que ficou pendente antes de a aba sumir
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'hidden') return;
+  syncState.forEach((state, placeId) => {
+    if (state.timer && !state.running) {
+      clearTimeout(state.timer);
+      runSync(placeId);
     }
+  });
+});
+
+// Um só ouvinte: vale para cartões de qualquer lugar, inclusive os inseridos depois
+document.addEventListener('click', handleFavoriteClick);
+
+document.addEventListener('DOMContentLoaded', function () {
+  initializeFavoritesUI();
+  window.addEventListener('storage', function (e) {
+    if (e.key === 'marica_favorites') initializeFavoritesUI();
+  });
+  window.addEventListener('pageshow', e => {
+    if (e.persisted) initializeFavoritesUI();
   });
 });

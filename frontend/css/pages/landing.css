@@ -17,7 +17,8 @@
   transition: scale 7s cubic-bezier(0.25, 0.6, 0.3, 1);
 }
 
-.swiper-slide-active .hero-img {
+.swiper-slide-active .hero-img,
+.hero-swiper:not(.swiper-initialized) .swiper-slide:first-child .hero-img {
   scale: 1;
 }
 
@@ -31,7 +32,8 @@
     filter 0.8s ease;
 }
 
-.swiper-slide-active .hero-line {
+.swiper-slide-active .hero-line,
+.hero-swiper:not(.swiper-initialized) .swiper-slide:first-child .hero-line {
   opacity: 1;
   translate: 0 0;
   filter: blur(0);
@@ -113,4 +115,31 @@
   to {
     translate: -50% 0;
   }
+}
+
+/* Swiper vem da CDN, fora do caminho crítico: até ele iniciar (ou se não vier), o hero mostra
+   o primeiro slide e o trilho "Onde ir" rola com o dedo/mouse */
+.hero-swiper {
+  @apply relative overflow-hidden;
+}
+
+.hero-swiper .swiper-wrapper {
+  @apply flex h-full w-full;
+}
+
+.hero-swiper .swiper-slide {
+  @apply h-full w-full shrink-0;
+}
+
+.hero-swiper:not(.swiper-initialized) .swiper-slide:nth-child(n + 2),
+.hero-section:has(.hero-swiper:not(.swiper-initialized)) .hero-pause-btn {
+  @apply hidden;
+}
+
+.featured-swiper:not(.swiper-initialized) .swiper-wrapper {
+  @apply flex gap-5 overflow-x-auto;
+}
+
+.featured-swiper:not(.swiper-initialized) .swiper-slide {
+  @apply shrink-0;
 }

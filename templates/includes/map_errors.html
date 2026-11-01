@@ -1,0 +1,19 @@
+{% load i18n icons %}
+{# Estados de erro dos mapas (lazy_assets.js clona estes templates) #}
+<template id="map-error-template">
+  <c-empty-state icon="map-pin" title="{% translate 'Não foi possível carregar o mapa' %}" description="{% translate 'Verifique sua conexão e tente de novo. O resto da página continua funcionando.' %}" class="h-full rounded-none border-0">
+    <button type="button" class="btn" data-variant="outline" data-map-retry>{% icon "refresh-cw" %}{% translate "Tentar de novo" %}</button>
+  </c-empty-state>
+</template>
+<template id="map-data-error-template">
+  <div class="absolute inset-x-3 top-3 z-[1000]" data-map-data-error>
+    <div class="alert" data-variant="destructive" role="alert">
+      {% icon "triangle-alert" %}
+      <h2>{% translate "Não foi possível carregar os lugares do mapa" %}</h2>
+      <section>
+        <p>{% translate "O mapa funciona, mas os marcadores não vieram." %}</p>
+        <button type="button" class="btn mt-2" data-variant="outline" data-size="sm" data-map-data-retry>{% icon "refresh-cw" %}{% translate "Tentar de novo" %}</button>
+      </section>
+    </div>
+  </div>
+</template>

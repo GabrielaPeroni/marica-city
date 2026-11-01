@@ -6,15 +6,12 @@
 
 {% block extra_css %}
 <meta name="view-beacon" content="{% url 'explore:place_visit' place.pk %}">
-{% if place.latitude and place.longitude %}
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-{% endif %}
 {% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'js/place_detail.js' %}"></script>
 {% if place.latitude and place.longitude %}
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{% static 'js/components/lazy_assets.js' %}"></script>
 <script src="{% static 'js/components/place_map.js' %}"></script>
 {% endif %}
 {% endblock %}
@@ -137,6 +134,7 @@
         <div id="place-map" class="z-0 h-72 w-full bg-muted md:h-96" data-latitude="{{ place.latitude }}" data-longitude="{{ place.longitude }}" data-place-name="{{ place|tr:"name" }}">
           <c-skeleton class="size-full rounded-none" />
         </div>
+        {% include 'includes/map_errors.html' %}
         {% endif %}
         <div class="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
           <p class="flex items-start gap-2">{% icon "map-pin" class="mt-1 size-4 shrink-0 text-brand" %}<span>{{ place.address }}</span></p>

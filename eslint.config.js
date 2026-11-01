@@ -31,6 +31,10 @@ const browserGlobals = {
   confirm: 'readonly',
   module: 'readonly',
   HTMLDialogElement: 'readonly',
+  AbortController: 'readonly',
+  HTMLFormElement: 'readonly',
+  HTMLImageElement: 'readonly',
+  Date: 'readonly',
 };
 
 // Third-party libraries loaded from <script> tags in templates/base.html
@@ -64,12 +68,18 @@ module.exports = [
     },
   },
   {
-    // getCookie()/cloneIcon() (utils.js) and showToast() (toasts.js) load first
+    // getCookie()/cloneIcon()/request() (utils.js) and showToast() (toasts.js) load first
     // in base.html, so every other file can use them.
     files: ['static/js/**/*.js'],
     ignores: ['static/js/utils.js', 'static/js/components/toasts.js'],
     languageOptions: {
-      globals: { getCookie: 'readonly', cloneIcon: 'readonly', showToast: 'readonly' },
+      globals: {
+        getCookie: 'readonly',
+        cloneIcon: 'readonly',
+        showToast: 'readonly',
+        request: 'readonly',
+        RequestError: 'readonly',
+      },
     },
   },
   {

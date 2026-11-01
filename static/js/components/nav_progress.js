@@ -5,15 +5,30 @@
   bar.setAttribute('aria-hidden', 'true');
   document.body.appendChild(bar);
   let timer = null;
+  let slowTimer = null;
+  const SLOW_NAV_MS = 5000;
+
+  function stillLoading() {
+    if (window.showConnectionNotice) {
+      window.showConnectionNotice(
+        gettext('Ainda carregando… a conexão pode estar lenta. Aguarde um instante.'),
+        'slow'
+      );
+    }
+  }
 
   function start() {
     clearTimeout(timer);
+    clearTimeout(slowTimer);
     timer = setTimeout(() => bar.classList.add('is-loading'), 120);
+    slowTimer = setTimeout(stillLoading, SLOW_NAV_MS);
   }
 
   function reset() {
     clearTimeout(timer);
-    bar.classList.remove('is-loading');
+    clearTimeout(slowTimer);
+    bar.classList.remove('is-loading', 'is-done');
+    if (window.hideConnectionNotice) window.hideConnectionNotice('slow');
   }
 
   document.addEventListener('click', e => {
@@ -40,10 +55,13 @@
   // Nesta página: se as imagens ainda estão chegando, a barra continua e termina quando tudo carrega
   if (document.readyState !== 'complete') {
     const slow = setTimeout(() => bar.classList.add('is-loading'), 150);
+    const slowNotice = setTimeout(stillLoading, SLOW_NAV_MS);
     window.addEventListener(
       'load',
       () => {
         clearTimeout(slow);
+        clearTimeout(slowNotice);
+        if (window.hideConnectionNotice) window.hideConnectionNotice('slow');
         if (!bar.classList.contains('is-loading')) return;
         bar.classList.add('is-done');
         setTimeout(() => bar.classList.remove('is-loading', 'is-done'), 450);

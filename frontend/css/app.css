@@ -419,6 +419,29 @@
     @apply bg-muted bg-cover bg-center bg-no-repeat;
   }
 
+  /* Foto que falhou: fundo neutro com ícone no lugar do ícone quebrado (image_fallback.js) */
+  .img-fallback {
+    @apply grid min-h-24 min-w-24 place-items-center bg-secondary text-muted-foreground;
+    background-image: none;
+  }
+
+  .img-fallback svg {
+    @apply size-8 opacity-60;
+  }
+
+  /* Aviso de conexão (connection.js): embaixo, acima da barra de cookies */
+  .connection-banner {
+    @apply fixed start-4 end-4 bottom-4 z-[60] flex items-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm text-primary-foreground shadow-lift sm:end-auto sm:max-w-md;
+  }
+
+  .connection-banner svg {
+    @apply size-4 shrink-0;
+  }
+
+  body:has(#cookieConsent:not([hidden])) .connection-banner {
+    @apply bottom-40 sm:bottom-24;
+  }
+
   /* RadioSelect / CheckboxSelectMultiple renderizados pelo <c-form-field> */
   .choice-list {
     @apply grid gap-2.5 text-sm text-foreground;
@@ -670,6 +693,16 @@ html {
   .deco-float:nth-of-type(2n) > .deco {
     animation-duration: 11s;
     animation-delay: -4s;
+  }
+
+  /* Fora da tela a animação para (motion.js marca .is-offscreen): menos trabalho por quadro */
+  .deco-float.is-offscreen > .deco,
+  .deco-float.is-offscreen .deco-gulls,
+  .deco-float.is-offscreen .deco-gulls path,
+  .deco-gulls.is-offscreen,
+  .deco-gulls.is-offscreen path,
+  .hero-water.is-offscreen .hero-water-layer {
+    animation-play-state: paused;
   }
 
   /* Gaivotas: o bando flutua e cada uma bate as asas */

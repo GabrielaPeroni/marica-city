@@ -15,29 +15,21 @@ function decodeJWT(token) {
 function handleCredentialResponse(response) {
   const payload = decodeJWT(response.credential);
 
-  // Enviar token para o backend para autenticação
-  fetch('/auth/google/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': getCookie('csrftoken'),
-    },
-    body: JSON.stringify({ token: response.credential }),
-  })
-    .then(res => {
-      if (res.ok) {
-        // Armazenar flag para mostrar toast de sucesso após redirect
-        sessionStorage.setItem('loginSuccess', 'true');
-        sessionStorage.setItem('loginUsername', payload.name || gettext('usuário'));
-        window.location.href = '/';
-      } else {
-        console.error('Autenticação do Google falhou');
-        alert(gettext('Falha ao autenticar com Google. Por favor, tente novamente.'));
-      }
+  request('/auth/google/', { method: 'POST', json: { token: response.credential } })
+    .then(() => {
+      // Armazenar flag para mostrar toast de sucesso após redirect
+      sessionStorage.setItem('loginSuccess', 'true');
+      sessionStorage.setItem('loginUsername', payload.name || gettext('usuário'));
+      window.location.href = '/';
     })
     .catch(error => {
-      console.error('Erro durante a autenticação do Google:', error);
-      alert(gettext('Erro ao conectar com o servidor. Por favor, tente novamente.'));
+      console.error('Autenticação do Google falhou:', error.kind || error);
+      showToast(
+        error.kind === 'http' || error.kind === 'forbidden'
+          ? gettext('Falha ao autenticar com Google. Por favor, tente novamente.')
+          : error.userMessage,
+        'error'
+      );
     });
 }
 

@@ -41,6 +41,13 @@
     <c-skeleton variant="card" /><c-skeleton variant="card" /><c-skeleton variant="card" />
   </div>
 </template>
+<template id="favoritesError">
+  <div data-favorites-error>
+    <c-empty-state icon="triangle-alert" title="{% translate 'Não foi possível carregar seus favoritos' %}" description="{% translate 'Seus favoritos continuam salvos neste navegador. Verifique a conexão e tente de novo.' %}">
+      <button type="button" class="btn" data-variant="outline" data-favorites-retry>{% icon "refresh-cw" %}{% translate "Tentar de novo" %}</button>
+    </c-empty-state>
+  </div>
+</template>
 <script>
   // Sem login os favoritos estão no localStorage: pede os cards renderizados com ?ids=
   (function () {
@@ -52,26 +59,34 @@
     empty.hidden = true;
     content.appendChild(document.getElementById('favoritesSkeleton').content.cloneNode(true));
 
-    document.addEventListener('DOMContentLoaded', async function () {
+    async function load() {
+      content.querySelector('[data-favorites-error]')?.remove();
+      if (!content.querySelector('[aria-busy]')) {
+        content.appendChild(document.getElementById('favoritesSkeleton').content.cloneNode(true));
+      }
       try {
-        const response = await fetch(`?ids=${ids.join(',')}`);
-        const page = new DOMParser().parseFromString(await response.text(), 'text/html');
+        const { data } = await request(`?ids=${ids.join(',')}`, { as: 'text' });
+        const page = new DOMParser().parseFromString(data, 'text/html');
         const grid = page.querySelector('#favoritesContent [data-favorite-item]')?.parentElement;
-        content.querySelector('[aria-busy]').remove();
+        content.querySelector('[aria-busy]')?.remove();
         if (!grid) {
           empty.hidden = false;
           return;
         }
         content.appendChild(document.adoptNode(grid));
         document.getElementById('favoritesCount').replaceWith(document.adoptNode(page.getElementById('favoritesCount')));
-        grid.querySelectorAll('.favorite-btn[data-remove-mode]').forEach(function (button) {
-          button.addEventListener('click', handleRemoveFavorite);
-        });
+        if (window.revealIn) window.revealIn(content);
       } catch (error) {
-        console.error('Error loading favorites:', error);
         content.querySelector('[aria-busy]')?.remove();
-        empty.hidden = false;
+        content.appendChild(document.getElementById('favoritesError').content.cloneNode(true));
+        content.querySelector('[data-favorites-retry]').addEventListener('click', load);
+        showToast(error.userMessage, 'error');
       }
+    }
+
+    document.addEventListener('DOMContentLoaded', load);
+    window.addEventListener('online', function () {
+      if (content.querySelector('[data-favorites-error]')) load();
     });
   })();
 </script>

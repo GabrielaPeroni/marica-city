@@ -9,10 +9,18 @@ document.addEventListener('DOMContentLoaded', function () {
   loginForms.forEach(form => {
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
+      if (form.dataset.loginBusy) return;
 
       const submitButton = form.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.textContent;
+      const originalNodes = [...submitButton.childNodes];
 
+      const restore = () => {
+        delete form.dataset.loginBusy;
+        submitButton.disabled = false;
+        submitButton.replaceChildren(...originalNodes);
+      };
+
+      form.dataset.loginBusy = 'true';
       submitButton.disabled = true;
       submitButton.replaceChildren(
         cloneIcon('loader-circle') || '',
@@ -21,12 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
       form.querySelector('[data-login-error]')?.remove();
 
       try {
-        const response = await fetch(form.action, {
+        const { data } = await request(form.action, {
           method: 'POST',
           body: new FormData(form),
-          headers: { 'X-CSRFToken': getCookie('csrftoken') },
         });
-        const data = await response.json();
 
         if (data.success) {
           submitButton.replaceChildren(
@@ -38,18 +44,26 @@ document.addEventListener('DOMContentLoaded', function () {
           setTimeout(() => location.reload(), 500);
         } else {
           showErrorInForm(form, data.error || gettext('Erro ao fazer login.'));
-          submitButton.disabled = false;
-          submitButton.textContent = originalButtonText;
+          restore();
         }
       } catch (error) {
-        console.error('Erro de login:', error);
-        showErrorInForm(
-          form,
-          gettext('Erro ao conectar com o servidor. Tente novamente.')
-        );
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
+        // Senha errada volta como JSON com erro; o resto é falha de rede/servidor
+        const message =
+          (error.data && error.data.error) ||
+          error.userMessage ||
+          gettext('Erro ao conectar com o servidor. Tente novamente.');
+        showErrorInForm(form, message);
+        restore();
       }
+    });
+
+    // Voltou pelo cache de páginas no meio do envio
+    window.addEventListener('pageshow', e => {
+      if (!e.persisted || !form.dataset.loginBusy) return;
+      delete form.dataset.loginBusy;
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = false;
+      button.textContent = gettext('Entrar');
     });
   });
 });

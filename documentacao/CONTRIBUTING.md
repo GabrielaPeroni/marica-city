@@ -156,6 +156,28 @@ diálogos. Tipografia: Inter 16px no corpo; títulos em Fraunces com
   `dropdown-menu`, `popover`, `toast`, `alert`, `table`). Marcação antiga do
   Bootstrap que sobrar numa página pega o estilo/JS do Basecoat; troque-a.
 
+### Rede lenta, falhas e envios duplicados
+
+- Todo `fetch` do JS passa por `request(url, {method, json, body, as, timeout})`
+  (`utils.js`): tem tempo limite e rejeita com `RequestError`
+  (`kind`: `offline`, `timeout`, `network`, `ratelimit`, `forbidden`, `server`,
+  `http`; `userMessage` já vem traduzida; `data` traz o JSON do erro). Passou de
+  4 s, mostra uma vez por minuto o aviso "conexão lenta". Nunca repete sozinho.
+- Favoritos são otimistas: o coração troca na hora (`applyFavorite`) e o
+  servidor é reconciliado em segundo plano (`scheduleSync`), com cliques
+  juntados em um pedido só; se falhar, volta ao estado confirmado e avisa.
+- `connection.js`: faixa offline/lenta (`showConnectionNotice`) e região
+  `aria-live`. `nav_progress.js` avisa se a navegação passa de 5 s.
+- `form_guard.js`: todo `<form method=post>` desabilita os botões com spinner
+  ("Enviando…", ou `data-pending-label`) e barra o segundo envio; opte fora com
+  `data-no-guard`. Restaura no `pageshow` do cache de páginas.
+- `image_fallback.js`: foto que falha vira `.img-fallback` com ícone.
+- `lazy_assets.js`: `loadLeaflet()`/`loadSwiper()` baixam a CDN só quando
+  precisa; `lazyMap(container, mount)` monta o mapa com esqueleto e estado de
+  erro com "Tentar de novo" (templates em `includes/map_errors.html`).
+- Limites: `@limit("30/m", key="user")` (`apps/core/ratelimit.py`); o excesso
+  vira 429 com `Retry-After` (JSON para fetch, `429.html` para o navegador).
+
 ### Componentes (`templates/cotton/`)
 
 Props em string (`variant="outline"`) ou expressão com `:` (`:place="place"`,

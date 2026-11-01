@@ -4,7 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  const csrfToken = getCookie('csrftoken');
   const confirmDialog = document.getElementById('user-confirm');
 
   function askConfirm(message) {
@@ -20,10 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  function post(url) {
-    return fetch(url, { method: 'POST', headers: { 'X-CSRFToken': csrfToken } }).then(
-      response => response.json()
-    );
+  async function post(url) {
+    try {
+      return (await request(url, { method: 'POST' })).data;
+    } catch (error) {
+      // Erros do servidor vêm em JSON ({error}); falhas de rede, na mensagem clássica
+      throw new Error((error.data && error.data.error) || error.userMessage, {
+        cause: error,
+      });
+    }
   }
 
   document.querySelectorAll('.user-role-select').forEach(select => {

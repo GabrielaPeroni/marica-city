@@ -106,8 +106,16 @@ function initFeatured() {
 }
 
 function initLanding() {
-  initHero();
-  initFeatured();
+  const start = () =>
+    window
+      .loadSwiper()
+      .then(() => {
+        initHero();
+        initFeatured();
+      })
+      // Sem a CDN a página segue legível (primeiro slide, trilho rolável); tenta de novo ao voltar a internet
+      .catch(() => window.addEventListener('online', start, { once: true }));
+  start();
 }
 
 if (document.readyState === 'loading') {

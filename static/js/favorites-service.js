@@ -130,33 +130,17 @@ class FavoritesService {
 
   /**
    * Sincronizar favoritos com backend (para usuários logados)
-   * @param {string} csrfToken - Token CSRF para requisições POST
    * @returns {Promise<void>}
    */
-  async syncWithBackend(csrfToken) {
+  async syncWithBackend() {
     try {
-      // Obter favoritos locais
-      const localFavorites = this.getFavorites();
-
-      // Enviar para o backend para mesclar
-      const response = await fetch('/explore/favorites/sync/', {
+      const { data } = await request('/explore/favorites/sync/', {
         method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ favorites: localFavorites }),
+        json: { favorites: this.getFavorites() },
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        // Atualizar armazenamento local com favoritos mesclados do backend
-        if (data.favorites) {
-          this.saveFavorites(data.favorites);
-        }
-      }
+      if (data && data.favorites) this.saveFavorites(data.favorites);
     } catch (error) {
-      console.error('Erro ao sincronizar favoritos com backend:', error);
+      console.warn('Sincronização de favoritos falhou:', error.kind || error);
     }
   }
 
@@ -166,25 +150,14 @@ class FavoritesService {
    */
   async loadFromBackend() {
     try {
-      const response = await fetch('/explore/favorites/list/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.favorites) {
-          // Mesclar com favoritos locais
-          const localFavorites = this.getFavorites();
-          const merged = [...new Set([...localFavorites, ...data.favorites])];
-          this.saveFavorites(merged);
-          return merged;
-        }
+      const { data } = await request('/explore/favorites/list/', { timeout: 8000 });
+      if (data && data.favorites) {
+        const merged = [...new Set([...this.getFavorites(), ...data.favorites])];
+        this.saveFavorites(merged);
+        return merged;
       }
     } catch (error) {
-      console.error('Erro ao carregar favoritos do backend:', error);
+      console.warn('Carregar favoritos falhou:', error.kind || error);
     }
     return this.getFavorites();
   }

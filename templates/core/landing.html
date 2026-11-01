@@ -4,11 +4,9 @@
 {% block title %}MaricaCity - {% translate "Descubra o Turismo Local" %}{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="preload" as="image" type="image/webp" fetchpriority="high"
       href="{% static 'images/hero/hero_1-1920.webp' %}"
       imagesrcset="{% static 'images/hero/hero_1-1280.webp' %} 1280w, {% static 'images/hero/hero_1-1920.webp' %} 1920w" imagesizes="100vw">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css">
 {% endblock %}
 
 {% block content %}
@@ -239,13 +237,13 @@
     <p class="mt-4 flex items-center gap-1.5 text-sm text-muted-foreground">
       {% icon "info" class="size-4 shrink-0" %}{% translate "Clique nos marcadores para ver detalhes de cada lugar" %}
     </p>
+    {% include 'includes/map_errors.html' %}
   </div>
 </section>
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js"></script>
+<script src="{% static 'js/components/lazy_assets.js' %}"></script>
 <script src="{% static 'js/landing.js' %}"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="{% static 'js/landing_map.js' %}"></script>
 {% endblock %}

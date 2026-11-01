@@ -48,6 +48,11 @@
       {% endfor %}
     </div>
 
+    <div id="connection-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="connection-banner" class="connection-banner" aria-hidden="true" hidden>
+      <span data-connection-icon></span><span data-connection-text></span>
+    </div>
+
     <main class="flex-1">
       {% block content %}{% endblock %}
     </main>
@@ -144,7 +149,10 @@
     <script src="{% static 'js/favorites-ui.js' %}"></script>
 
     <script src="{% static 'js/components/cookie_consent.js' %}"></script>
+    <script src="{% static 'js/components/connection.js' %}"></script>
     <script src="{% static 'js/components/nav_progress.js' %}"></script>
+    <script src="{% static 'js/components/form_guard.js' %}"></script>
+    <script src="{% static 'js/components/image_fallback.js' %}"></script>
     <script src="{% static 'js/components/unsaved_guard.js' %}"></script>
 
     {% include 'includes/speculation_rules.html' %}

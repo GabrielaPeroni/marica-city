@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 16:18-0300\n"
+"POT-Creation-Date: 2026-11-01 16:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -38,7 +38,27 @@ msgstr "Cancel"
 msgid "Fechar"
 msgstr "Close"
 
-#: static/js/components/toasts.js:37 static/js/google_auth.js:31 static/js/login.js:37
+#: static/js/components/connection.js:45
+msgid "Você está sem conexão. Algumas ações só funcionam com internet."
+msgstr "You are offline. Some actions only work with internet."
+
+#: static/js/components/connection.js:52
+msgid "Conexão restabelecida."
+msgstr "Connection restored."
+
+#: static/js/components/form_guard.js:24
+msgid "Enviando…"
+msgstr "Sending…"
+
+#: static/js/components/image_fallback.js:13
+msgid "Foto indisponível"
+msgstr "Photo unavailable"
+
+#: static/js/components/nav_progress.js:14
+msgid "Ainda carregando… a conexão pode estar lenta. Aguarde um instante."
+msgstr "Still loading… your connection may be slow. Hang on a moment."
+
+#: static/js/components/toasts.js:37 static/js/google_auth.js:22 static/js/login.js:43
 msgid "usuário"
 msgstr "user"
 
@@ -58,7 +78,7 @@ msgstr "Keep editing"
 msgid "Descartar e sair"
 msgstr "Discard and leave"
 
-#: static/js/components/user_management.js:33
+#: static/js/components/user_management.js:37
 msgid ""
 "Tem certeza que deseja alterar o tipo deste usuário? Isso pode modificar as "
 "permissões do usuário no sistema."
@@ -66,27 +86,27 @@ msgstr ""
 "Are you sure you want to change this user's type? This may modify the user's "
 "permissions in the system."
 
-#: static/js/components/user_management.js:56
+#: static/js/components/user_management.js:60
 msgid "Erro ao atualizar tipo de usuário"
 msgstr "Error updating user type"
 
-#: static/js/components/user_management.js:70
+#: static/js/components/user_management.js:74
 msgid "Tem certeza que deseja ativar este usuário?"
 msgstr "Are you sure you want to activate this user?"
 
-#: static/js/components/user_management.js:71
+#: static/js/components/user_management.js:75
 msgid "Tem certeza que deseja desativar este usuário?"
 msgstr "Are you sure you want to deactivate this user?"
 
-#: static/js/components/user_management.js:84
+#: static/js/components/user_management.js:88
 msgid "Ativo"
 msgstr "Active"
 
-#: static/js/components/user_management.js:84
+#: static/js/components/user_management.js:88
 msgid "Inativo"
 msgstr "Inactive"
 
-#: static/js/components/user_management.js:90
+#: static/js/components/user_management.js:94
 msgid "Erro ao alterar status"
 msgstr "Error changing status"
 
@@ -98,17 +118,14 @@ msgstr "Remove from favorites"
 msgid "Adicionar aos favoritos"
 msgstr "Add to favorites"
 
-#: static/js/favorites-ui.js:140
-msgid "Erro ao atualizar favorito. Tente novamente."
-msgstr "Error updating favorite. Try again."
+#: static/js/favorites-ui.js:164
+#, python-format
+msgid "Não foi possível atualizar o favorito. %s"
+msgstr "We could not update the favorite. %s"
 
-#: static/js/google_auth.js:35
+#: static/js/google_auth.js:29
 msgid "Falha ao autenticar com Google. Por favor, tente novamente."
 msgstr "Failed to authenticate with Google. Please try again."
-
-#: static/js/google_auth.js:40
-msgid "Erro ao conectar com o servidor. Por favor, tente novamente."
-msgstr "Error connecting to server. Please try again."
 
 #: static/js/landing.js:27
 msgid "Slide anterior"
@@ -130,25 +147,29 @@ msgstr "Resume presentation"
 msgid "Pausar apresentação"
 msgstr "Pause presentation"
 
-#: static/js/landing_map.js:55
+#: static/js/landing_map.js:54
 msgid "Ver detalhes"
 msgstr "View details"
 
-#: static/js/login.js:19
+#: static/js/login.js:27
 msgid "Entrando..."
 msgstr "Logging in..."
 
-#: static/js/login.js:34
+#: static/js/login.js:40
 msgid "Sucesso!"
 msgstr "Success!"
 
-#: static/js/login.js:40
+#: static/js/login.js:46
 msgid "Erro ao fazer login."
 msgstr "Error logging in."
 
-#: static/js/login.js:48
+#: static/js/login.js:54
 msgid "Erro ao conectar com o servidor. Tente novamente."
 msgstr "Error connecting to server. Try again."
+
+#: static/js/login.js:66
+msgid "Entrar"
+msgstr "Log in"
 
 #: static/js/place_detail.js:15
 msgid "Editar avaliação"
@@ -165,3 +186,40 @@ msgstr "Update review"
 #: static/js/place_detail.js:20
 msgid "Enviar avaliação"
 msgstr "Submit review"
+
+#: static/js/utils.js:56
+#, python-format
+msgid "Muitas tentativas em pouco tempo. Aguarde %s s e tente de novo."
+msgstr "Too many attempts in a short time. Wait %s s and try again."
+
+#: static/js/utils.js:59
+msgid "Muitas tentativas em pouco tempo. Aguarde um momento e tente de novo."
+msgstr "Too many attempts in a short time. Wait a moment and try again."
+
+#: static/js/utils.js:70
+msgid "Sua sessão expirou. Recarregue a página e tente de novo."
+msgstr "Your session expired. Reload the page and try again."
+
+#: static/js/utils.js:76
+msgid "O servidor está com problemas agora. Tente novamente em alguns minutos."
+msgstr "The server is having problems right now. Try again in a few minutes."
+
+#: static/js/utils.js:81
+msgid "Não foi possível concluir a ação. Tente novamente."
+msgstr "We could not complete the action. Try again."
+
+#: static/js/utils.js:117
+msgid "A conexão está lenta. Ainda estamos tentando, aguarde um pouco."
+msgstr "Your connection is slow. We are still trying, please wait."
+
+#: static/js/utils.js:136 static/js/utils.js:160
+msgid "O servidor demorou demais para responder. Tente novamente."
+msgstr "The server took too long to respond. Try again."
+
+#: static/js/utils.js:142
+msgid "Você está sem conexão. Verifique a internet e tente de novo."
+msgstr "You are offline. Check your internet and try again."
+
+#: static/js/utils.js:147
+msgid "Não foi possível falar com o servidor. Verifique sua conexão e tente de novo."
+msgstr "We could not reach the server. Check your connection and try again."

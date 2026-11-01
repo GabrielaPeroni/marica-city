@@ -1,8 +1,7 @@
 // Mapa do detalhe do lugar (Leaflet + OpenStreetMap), montado quando entra na tela
 (function () {
   const container = document.getElementById('place-map');
-  const L = window.L;
-  if (!container || !L) return;
+  if (!container) return;
 
   const position = [
     parseFloat(container.dataset.latitude),
@@ -13,8 +12,7 @@
     return;
   }
 
-  function mount() {
-    container.replaceChildren();
+  function mount(L) {
     const map = L.map(container, { scrollWheelZoom: false }).setView(position, 15);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -41,14 +39,5 @@
       });
   }
 
-  const observer = new window.IntersectionObserver(
-    entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
-        observer.disconnect();
-        mount();
-      }
-    },
-    { rootMargin: '200px' }
-  );
-  observer.observe(container);
+  window.lazyMap(container, mount);
 })();

@@ -1,8 +1,7 @@
 // Mapa da página inicial (Leaflet + OpenStreetMap) com todos os lugares, montado quando entra na tela
 (function () {
   const container = document.getElementById('landing-map');
-  const L = window.L;
-  if (!container || !L) return;
+  if (!container) return;
 
   const MARICA = [-22.9194, -42.8186];
 
@@ -58,9 +57,7 @@
     return card;
   }
 
-  async function mount() {
-    container.replaceChildren();
-    container.removeAttribute('aria-busy');
+  function mount(L) {
     const map = L.map(container, { scrollWheelZoom: false }).setView(MARICA, 12);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -73,42 +70,55 @@
       .getComputedStyle(document.documentElement)
       .getPropertyValue('--brand')
       .trim();
+    const markers = L.layerGroup().addTo(map);
 
-    try {
-      const response = await fetch('/explore/api/map-data/');
-      const data = await response.json();
-      const places = (data.places || []).filter(
-        p => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)
-      );
-      const points = places.map(place => {
-        const point = [place.latitude, place.longitude];
-        L.circleMarker(point, {
-          radius: 9,
-          color: 'white',
-          weight: 3,
-          fillColor: brand,
-          fillOpacity: 1,
-        })
-          .addTo(map)
-          .bindTooltip(place.name, { direction: 'top', offset: [0, -8] })
-          .bindPopup(popupFor(place), { maxWidth: 260 });
-        return point;
+    function showDataError() {
+      const template = document.getElementById('map-data-error-template');
+      const notice = template.content.firstElementChild.cloneNode(true);
+      notice.querySelector('[data-map-data-retry]').addEventListener('click', () => {
+        notice.remove();
+        loadMarkers();
       });
-      if (points.length > 1) map.fitBounds(points, { padding: [32, 32] });
-      else if (points.length === 1) map.setView(points[0], 15);
-    } catch (error) {
-      console.error('Erro ao buscar dados dos locais:', error);
+      container.append(notice);
+      // Evita que cliques no aviso movam o mapa
+      L.DomEvent.disableClickPropagation(notice);
     }
+
+    async function loadMarkers() {
+      container.querySelector('[data-map-data-error]')?.remove();
+      try {
+        const { data } = await request('/explore/api/map-data/');
+        const places = (data.places || []).filter(
+          p => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)
+        );
+        markers.clearLayers();
+        const points = places.map(place => {
+          const point = [place.latitude, place.longitude];
+          L.circleMarker(point, {
+            radius: 9,
+            color: 'white',
+            weight: 3,
+            fillColor: brand,
+            fillOpacity: 1,
+          })
+            .addTo(markers)
+            .bindTooltip(place.name, { direction: 'top', offset: [0, -8] })
+            .bindPopup(popupFor(place), { maxWidth: 260 });
+          return point;
+        });
+        if (points.length > 1) map.fitBounds(points, { padding: [32, 32] });
+        else if (points.length === 1) map.setView(points[0], 15);
+      } catch (error) {
+        console.warn('Dados do mapa indisponíveis:', error.kind || error);
+        showDataError();
+      }
+    }
+
+    window.addEventListener('online', () => {
+      if (container.querySelector('[data-map-data-error]')) loadMarkers();
+    });
+    loadMarkers();
   }
 
-  const observer = new window.IntersectionObserver(
-    entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
-        observer.disconnect();
-        mount();
-      }
-    },
-    { rootMargin: '200px' }
-  );
-  observer.observe(container);
+  window.lazyMap(container, mount);
 })();
