@@ -71,7 +71,7 @@ repos:
     hooks:
       - id: check-init-files
         name: Check __init__.py files exist
-        entry: python .github/check_innit.py
+        entry: python scripts/check_init_files.py
         language: system
         pass_filenames: false
         always_run: true

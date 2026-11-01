@@ -32,7 +32,7 @@ jobs:
 
       - name: Check __init__.py files
         run: |
-          uv run python .github/check_innit.py
+          uv run python scripts/check_init_files.py
 
       - name: Run Black
         run: |
@@ -44,11 +44,11 @@ jobs:
 
       - name: Run autoflake
         run: |
-          uv run autoflake --check --remove-all-unused-imports --remove-unused-variables --remove-duplicate-keys --ignore-init-module-imports --recursive apps/ config/ manage.py .github/check_innit.py
+          uv run autoflake --check --remove-all-unused-imports --remove-unused-variables --remove-duplicate-keys --ignore-init-module-imports --recursive apps/ config/ manage.py scripts/check_init_files.py
 
       - name: Run flake8
         run: |
-          uv run flake8 --select=TMS010,TMS011,TMS012,TMS013,TMS020,TMS021,TMS022 apps/ config/ manage.py .github/check_innit.py
+          uv run flake8 --select=TMS010,TMS011,TMS012,TMS013,TMS020,TMS021,TMS022 apps/ config/ manage.py scripts/check_init_files.py
 
       - name: Run pip-audit
         run: |

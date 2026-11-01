@@ -49,7 +49,7 @@ project is archived as `Marica-City-v1`.
 - `robots.txt`, `sitemap.xml` (pages, places, events) and a meta description
   on every page (a place's or event's own text where there is one).
 - Dependabot also watches the Docker base image.
-- Ready for Vercel (see `documentacao/DEPLOYMENT.md`):
+- Ready for Vercel (see `docs/DEPLOYMENT.md`):
   - `[tool.vercel]` entry point and a build step (`scripts/vercel_build.py`)
     that migrates, loads the demo content and creates the admin from
     environment variables.
@@ -334,11 +334,11 @@ translate_content` translates only new or changed items (it tracks a hash of
 - `commitizen` for Conventional Commits-based versioning/changelog automation.
 - Multi-stage `Dockerfile` (gunicorn + whitenoise), `docker-compose.yml` for local
   parity (app + postgres + redis), an opt-in `mock-cloudflare` proxy for testing
-  the prod HTTPS path locally, and `documentacao/DEPLOYMENT.md`.
+  the prod HTTPS path locally, and `docs/DEPLOYMENT.md`.
 - `GET /healthz/` health check endpoint.
 - Cloudflare R2 (S3-compatible) media storage via `django-storages`, opt-in via
   `AWS_STORAGE_BUCKET_NAME` — falls back to local disk when unset.
-- `documentacao/CONTRIBUTING.md` and `.github/PULL_REQUEST_TEMPLATE.md`.
+- `docs/CONTRIBUTING.md` and `.github/PULL_REQUEST_TEMPLATE.md`.
 
 ### Changed
 
@@ -377,7 +377,7 @@ translate_content` translates only new or changed items (it tracks a hash of
 ### Added
 
 - `.env.example` documenting required and optional environment variables.
-- `documentacao/IMPROVEMENT_PLAN.md` tracking an in-progress polish/hardening plan.
+- `docs/IMPROVEMENT_PLAN.md` tracking an in-progress polish/hardening plan.
 - Production settings module (`config/settings/prod.py`) with SSL redirect, secure cookies, HSTS, and `SECURE_PROXY_SSL_HEADER` for running behind a reverse proxy/CDN (e.g. Cloudflare).
 - Redis-backed cache option via `CACHE_URL`/`REDIS_URL`, for multi-process production deployments.
 - ESLint config and an esbuild bundling pipeline for `static/js/`.

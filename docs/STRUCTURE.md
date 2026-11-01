@@ -197,7 +197,7 @@ marica-city/
 │   └── mock-cloudflare/
 │       └── Caddyfile              # Proxy Caddy local (perfil docker-compose opcional) para testar o path HTTPS/HSTS sem Cloudflare real
 │
-├── documentacao/                   # Documentação do projeto
+├── docs/                   # Documentação do projeto
 │   ├── CRUD.md                    # Documentação detalhada CRUD
 │   ├── STRUCTURE.md               # Este arquivo - Estrutura completa
 │   ├── CONTRIBUTING.md            # Guia de contribuição (setup, testes, lint, workflow de PR)
@@ -1368,7 +1368,7 @@ Configurado em `.pre-commit-config.yaml`:
 - **`pr-checks.yml`** — em cada PR e push para `main`: job `lintert` (check `__init__.py`, black, isort, autoflake, flake8, pip-audit, prettier) e job `tests` (Postgres de serviço, `check --deploy`, `makemigrations --check --dry-run`, testes Django, coverage com piso de 70%).
 - **`codeql.yml`** — CodeQL para Python e JavaScript/TypeScript, em push/PR para `main` e semanalmente (segunda-feira 06:00 UTC).
 - **Dependabot** (`.github/dependabot.yml`) — atualizações automáticas de dependências pip, npm e GitHub Actions.
-- **Nenhum workflow de CD** — não há deploy automático a partir de um merge; ver `documentacao/DEPLOYMENT.md` para o processo manual/documentado.
+- **Nenhum workflow de CD** — não há deploy automático a partir de um merge; ver `docs/DEPLOYMENT.md` para o processo manual/documentado.
 
 ---
 

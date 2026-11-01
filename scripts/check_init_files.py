@@ -31,6 +31,7 @@ def find_python_directories(
             ".tox",
             ".coverage",
             "htmlcov",
+            ".claude",
             "site-packages",
         }
 

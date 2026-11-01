@@ -14,14 +14,14 @@ MaricaCity é uma plataforma web para descoberta e avaliação de pontos turíst
 
 ## Stack e arquitetura
 
-- **Backend**: [Django 5.2](https://www.djangoproject.com/), organizado em apps por domínio (`core`, `accounts`, `explore`, `news`) — veja [STRUCTURE.md](./documentacao/STRUCTURE.md) para a arquitetura completa e [CRUD.md](./documentacao/CRUD.md) para os detalhes de implementação do CRUD.
+- **Backend**: [Django 5.2](https://www.djangoproject.com/), organizado em apps por domínio (`core`, `accounts`, `explore`, `news`) — veja [STRUCTURE.md](./docs/STRUCTURE.md) para a arquitetura completa e [CRUD.md](./docs/CRUD.md) para os detalhes de implementação do CRUD.
 - **Banco de dados**: SQLite por padrão em desenvolvimento; PostgreSQL suportado via variáveis de ambiente para produção.
 - **Frontend**: templates Django com Tailwind CSS 4 + Basecoat e componentes django-cotton, ícones Lucide, mapas Leaflet/OpenStreetMap e JavaScript vanilla por página/componente (ESLint para lint; `npm run build:css` compila o CSS).
 - **Dependências**: gerenciadas com [uv](https://docs.astral.sh/uv/).
 - **Qualidade e CI**: black, isort, autoflake, flake8 e Prettier via pre-commit; testes Django e checagens de segurança/migração rodam em CI a cada PR.
 - **Rate limiting**: `django-ratelimit` para proteção contra abuso em endpoints sensíveis.
 
-O plano de melhorias em andamento (hardening de segurança, deploy, cobertura de testes, etc.) está documentado em [IMPROVEMENT_PLAN.md](./documentacao/IMPROVEMENT_PLAN.md).
+O plano de melhorias em andamento (hardening de segurança, deploy, cobertura de testes, etc.) está documentado em [IMPROVEMENT_PLAN.md](./docs/IMPROVEMENT_PLAN.md).
 
 ## 🚀 Como rodar o projeto
 
@@ -62,4 +62,4 @@ uv run python manage.py runserver
 
 ## 📜 Licença
 
-- **Código Django**: [MIT](./documentacao/LICENSE.txt).
+- **Código Django**: [MIT](./LICENSE).

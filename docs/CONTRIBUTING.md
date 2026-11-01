@@ -334,7 +334,7 @@ uv run pre-commit install
 Depois disso, cada commit roda automaticamente: trailing-whitespace,
 end-of-file-fixer, check-yaml/json/toml/xml, check-merge-conflict,
 debug-statements, black, isort, autoflake, flake8, prettier e uma checagem
-customizada de arquivos `__init__.py` (`.github/check_innit.py`). Rode
+customizada de arquivos `__init__.py` (`scripts/check_init_files.py`). Rode
 `uv run pre-commit run --all-files` para validar o repo inteiro de uma vez.
 
 ## Migrações

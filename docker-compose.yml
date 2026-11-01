@@ -72,7 +72,7 @@ services:
 
   # Mock Cloudflare edge: TLS termination + X-Forwarded-Proto, for testing the prod
   # SECURE_PROXY_SSL_HEADER/SECURE_SSL_REDIRECT path locally. Opt-in via --profile mock-cloudflare;
-  # a real deployment replaces this with actual Cloudflare (proxy or Tunnel) — see documentacao/DEPLOYMENT.md.
+  # a real deployment replaces this with actual Cloudflare (proxy or Tunnel) — see docs/DEPLOYMENT.md.
   mock-cloudflare:
     image: caddy:2-alpine
     profiles: ["mock-cloudflare"]
