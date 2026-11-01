@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 15:53-0300\n"
+"POT-Creation-Date: 2026-11-01 16:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -39,9 +39,9 @@ msgstr "Intente uno de estos caminos:"
 msgid "Página inicial"
 msgstr "Página de inicio"
 
-#: templates/404.html:17 templates/core/about.html:139 templates/explore/explore.html:4
-#: templates/explore/explore.html:12 templates/explore/favorites.html:27
-#: templates/explore/favorites.html:31 templates/news/news_list.html:17
+#: templates/404.html:17 templates/explore/explore.html:4 templates/explore/explore.html:12
+#: templates/explore/favorites.html:27 templates/explore/favorites.html:31
+#: templates/news/news_list.html:17
 msgid "Explorar lugares"
 msgstr "Explorar lugares"
 
@@ -451,11 +451,11 @@ msgstr "Pie de página: visitar"
 msgid "Visite"
 msgstr "Visitar"
 
-#: templates/base.html:86 templates/core/about.html:40
+#: templates/base.html:86 templates/core/about.html:13
 msgid "Planeje sua visita"
 msgstr "Planifica tu visita"
 
-#: templates/base.html:87 templates/core/about.html:121
+#: templates/base.html:87 templates/core/about.html:49
 msgid "Telefones de emergência"
 msgstr "Teléfonos de emergencia"
 
@@ -477,13 +477,13 @@ msgid "Meus favoritos"
 msgstr "Mis favoritos"
 
 #: apps/explore/views.py:180 templates/base.html:96 templates/core/landing.html:41
-#: templates/core/landing.html:150 templates/explore/admin/backlog.html:7
+#: templates/core/landing.html:147 templates/explore/admin/backlog.html:7
 #: templates/explore/category_detail.html:50 templates/explore/explore.html:19
 #: templates/explore/explore.html:42 templates/includes/navbar.html:40
 msgid "Cadastrar lugar"
 msgstr "Registrar lugar"
 
-#: templates/base.html:98 templates/core/about.html:142
+#: templates/base.html:98
 msgid "Criar conta"
 msgstr "Crear cuenta"
 
@@ -496,178 +496,77 @@ msgid "Sobre o MaricaCity"
 msgstr "Acerca de MaricaCity"
 
 #: templates/core/about.html:9
-msgid "Conectando pessoas aos melhores lugares de Maricá."
-msgstr "Conectando personas a los mejores lugares de Maricá."
+msgid "Um guia de lugares de Maricá feito pela comunidade e aprovado pela moderação."
+msgstr "Una guía de lugares de Maricá hecha por la comunidad y revisada por la moderación."
 
-#: templates/core/about.html:15
-msgid "Nossa missão"
-msgstr "Nuestra misión"
-
-#: templates/core/about.html:17
-msgid ""
-"Ajudar moradores e visitantes a descobrir o melhor de Maricá, das praias aos "
-"restaurantes, em um só lugar."
-msgstr ""
-"Ayudar a los residentes y visitantes a descubrir lo mejor de Maricá, desde las playas"
-" hasta los restaurantes, en un solo lugar."
-
-#: templates/core/about.html:23
-msgid "Como funciona"
-msgstr "Cómo funciona"
-
-#: templates/core/about.html:25
-msgid ""
-"A comunidade cadastra lugares, a moderação aprova e todos avaliam. O guia se mantém "
-"atualizado por quem vive a cidade."
-msgstr ""
-"La comunidad registra lugares, la moderación aprueba y todos califican. El guía se "
-"mantiene actualizado por quienes viven la ciudad."
-
-#: templates/core/about.html:31
-msgid "Faça parte"
-msgstr "Únete"
-
-#: templates/core/about.html:33
-msgid ""
-"Crie uma conta gratuita para salvar favoritos, avaliar e compartilhar os seus lugares"
-" preferidos."
-msgstr ""
-"Crea una cuenta gratuita para guardar favoritos, calificar y compartir tus lugares "
-"favoritos."
-
-#: templates/core/about.html:40
-msgid "Para visitantes"
-msgstr "Para visitantes"
-
-#: templates/core/about.html:40
-msgid "O essencial para aproveitar Maricá: como chegar, como circular e o que levar em conta."
-msgstr ""
-"Lo esencial para disfrutar de Maricá: cómo llegar, cómo moverse y lo que tener en "
-"cuenta."
-
-#: templates/core/about.html:46
+#: templates/core/about.html:19
 msgctxt "visit page heading"
 msgid "Como chegar"
 msgstr "Cómo llegar"
 
-#: templates/core/about.html:48
+#: templates/core/about.html:20
 msgid ""
-"Maricá fica a cerca de 60 km do centro do Rio de Janeiro. De carro, o caminho mais "
-"comum é pela Ponte Rio–Niterói e pela RJ-106 (Rodovia Amaral Peixoto); conte de uma "
-"hora a uma hora e meia, dependendo do trânsito."
+"Cerca de 60 km do Rio, pela Ponte Rio–Niterói e pela RJ-106: de uma hora a uma hora e"
+" meia de carro. Há ônibus intermunicipais saindo do Rio e de Niterói."
 msgstr ""
-"Maricá está a unos 60 km del centro de Río de Janeiro. En coche, el camino más común "
-"es por la Ponte Rio–Niterói y por la RJ-106 (Rodovia Amaral Peixoto); el viaje dura "
-"entre una y una hora y media, dependiendo del tráfico."
+"A unos 60 km de Río, por el puente Río–Niterói y la RJ-106: de una hora a una hora y "
+"media en auto. Hay autobuses intermunicipales desde Río y Niterói."
 
-#: templates/core/about.html:53
-msgid ""
-"Há linhas de ônibus intermunicipais saindo do Rio e de Niterói. Confira horários com "
-"as empresas antes de sair."
-msgstr ""
-"Existen líneas de autobús intermunicipales que salen de Río y de Niterói. Consulte "
-"los horarios con las empresas antes de salir."
-
-#: templates/core/about.html:64
+#: templates/core/about.html:26
 msgid "Como circular"
 msgstr "Cómo moverse"
 
-#: templates/core/about.html:66
+#: templates/core/about.html:27
 msgid ""
-"Os ônibus municipais vermelhos, os \"Vermelhinhos\", são gratuitos para todos, "
-"moradores e visitantes. Eles ligam o Centro às praias, lagoas e bairros."
+"Os ônibus municipais vermelhos, os \"Vermelhinhos\", são gratuitos e ligam o Centro "
+"às praias e lagoas. As distâncias são grandes: planeje o roteiro."
 msgstr ""
-"Los autobuses municipales rojos, los \"Vermelhinhos\", son gratuitos para todos, "
-"residentes y visitantes. Conectan el Centro con las playas, lagunas y barrios."
+"Los autobuses municipales rojos, los \"Vermelhinhos\", son gratuitos y conectan el "
+"centro con las playas y lagunas. Las distancias son largas: planifica tu ruta."
 
-#: templates/core/about.html:70
-msgid ""
-"As distâncias entre as regiões são grandes, então para visitar vários lugares no "
-"mesmo dia vale planejar o roteiro com antecedência."
-msgstr ""
-"Las distancias entre las regiones son grandes, por lo que para visitar varios lugares"
-" en el mismo día es recomendable planificar el itinerario con antelación."
-
-#: templates/core/about.html:81
+#: templates/core/about.html:33
 msgid "Quando ir"
 msgstr "Cuándo ir"
 
-#: templates/core/about.html:83
-msgid ""
-"O clima é tropical: verões quentes e com chuvas de fim de tarde, invernos amenos e "
-"mais secos. O verão é a época das praias; o inverno é ótimo para trilhas."
-msgstr ""
-"El clima es tropical: veranos calurosos con lluvias al final de la tarde, inviernos "
-"suaves y más secos. El verano es la época de las playas; el invierno es ideal para "
-"senderismo."
+#: templates/core/about.html:34
+msgid "Verão para as praias, inverno para as trilhas."
+msgstr "Verano para las playas, invierno para los senderos."
 
-#: templates/core/about.html:88
-msgid ""
-"A cidade tem agenda cultural o ano todo, com festas tradicionais, shows e festivais "
-"gratuitos."
-msgstr ""
-"La ciudad tiene una agenda cultural todo el año, con fiestas tradicionales, "
-"conciertos y festivales gratuitos."
-
-#: templates/core/about.html:92
+#: templates/core/about.html:34
 msgid "Veja a agenda"
 msgstr "Ver la agenda"
 
-#: templates/core/about.html:101
+#: templates/core/about.html:40
 msgid "Praias, lagoas e trilhas"
 msgstr "Playas, lagunas y senderos"
 
-#: templates/core/about.html:103
+#: templates/core/about.html:41
 msgid ""
-"As praias de mar aberto, como Itaipuaçu, Ponta Negra e Jaconé, costumam ter ondas "
-"fortes e correntes: prefira nadar perto dos postos de guarda-vidas. Para águas "
-"calmas, caiaque e stand-up paddle, procure as lagoas."
+"Em mar aberto há ondas e correntes fortes: nade perto dos guarda-vidas. Nas trilhas, "
+"saia cedo e leve água."
 msgstr ""
-"Las playas de mar abierto, como Itaipuaçu, Ponta Negra y Jaconé, suelen tener olas "
-"fuertes y corrientes: prefiera nadar cerca de los puestos de guardavidas. Para aguas "
-"tranquilas, kayak y stand-up paddle, busque las lagunas."
+"En mar abierto hay olas y corrientes fuertes: nada cerca de los salvavidas. En los "
+"senderos, sal temprano y lleva agua."
 
-#: templates/core/about.html:109
-msgid "Em trilhas, saia cedo, leve água e protetor solar e avise alguém do seu trajeto."
-msgstr ""
-"En senderos, salga temprano, lleve agua y protector solar y avise a alguien de su "
-"ruta."
-
-#: templates/core/about.html:112
+#: templates/core/about.html:41
 msgid "Explore os lugares"
 msgstr "Explora los lugares"
 
-#: templates/core/about.html:124
+#: templates/core/about.html:52
 msgid "Polícia Militar"
 msgstr "Policía Militar"
 
-#: templates/core/about.html:125
+#: templates/core/about.html:53
 msgid "SAMU (ambulância)"
 msgstr "SAMU (ambulancia)"
 
-#: templates/core/about.html:126
+#: templates/core/about.html:54
 msgid "Corpo de Bombeiros e salvamento"
 msgstr "Cuerpo de Bomberos y salvamento"
 
-#: templates/core/about.html:127
+#: templates/core/about.html:55
 msgid "Defesa Civil"
 msgstr "Defensa Civil"
-
-#: templates/core/about.html:132
-msgid ""
-"Informações gerais para visitantes. Horários, linhas e condições podem mudar; "
-"confirme antes de sair."
-msgstr ""
-"Información general para visitantes. Horarios, líneas y condiciones pueden cambiar; "
-"confirme antes de salir."
-
-#: templates/core/about.html:137
-msgid "Pronto para descobrir Maricá?"
-msgstr "¿Listo para descubrir Maricá?"
-
-#: templates/core/about.html:140
-msgid "Ver agenda de eventos"
-msgstr "Ver agenda de eventos"
 
 #: templates/core/admin/_event_suggestions.html:3
 msgid ""
@@ -843,7 +742,7 @@ msgid "Todas"
 msgstr "Todas"
 
 #: templates/core/admin/news_list.html:28 templates/core/admin/news_list.html:31
-#: templates/core/landing.html:91 templates/explore/_filter_bar.html:20
+#: templates/core/landing.html:88 templates/explore/_filter_bar.html:20
 #: templates/explore/admin/backlog.html:37
 msgid "Buscar"
 msgstr "Buscar"
@@ -1088,46 +987,42 @@ msgstr ""
 msgid "Pausar apresentação"
 msgstr "Pausar presentación"
 
-#: templates/core/landing.html:75
-msgid "Role"
-msgstr "Desliza"
-
-#: templates/core/landing.html:85
+#: templates/core/landing.html:82
 msgid "Para onde vamos?"
 msgstr "¿A dónde vamos?"
 
-#: templates/core/landing.html:89
+#: templates/core/landing.html:86
 msgid "Praia, trilha, restaurante…"
 msgstr "Playa, sendero, restaurante…"
 
-#: templates/core/landing.html:94 templates/explore/_filter_bar.html:23
+#: templates/core/landing.html:91 templates/explore/_filter_bar.html:23
 #: templates/explore/admin/backlog.html:82 templates/explore/place_detail.html:236
 #: templates/explore/place_form.html:43
 msgid "Categorias"
 msgstr "Categorías"
 
-#: templates/core/landing.html:109
+#: templates/core/landing.html:106
 msgid "Em alta agora"
 msgstr "En alta ahora"
 
-#: templates/core/landing.html:109
+#: templates/core/landing.html:106
 msgid "Destinos populares este mês"
 msgstr "Destinos populares este mes"
 
-#: templates/core/landing.html:109 templates/core/landing.html:183
+#: templates/core/landing.html:106 templates/core/landing.html:180
 #: templates/cotton/section_heading.html:15
 msgid "Ver todos"
 msgstr "Ver todos"
 
-#: templates/core/landing.html:128
+#: templates/core/landing.html:125
 msgid "Onde ir"
 msgstr "Dónde ir"
 
-#: templates/core/landing.html:128
+#: templates/core/landing.html:125
 msgid "Escolha sua própria jornada."
 msgstr "Elige tu propia jornada."
 
-#: templates/core/landing.html:129
+#: templates/core/landing.html:126
 msgid ""
 "Explore os lugares mais incríveis de Maricá. De praias paradisíacas a experiências "
 "culturais únicas, há um lugar em Maricá para todos! Descubra o que torna cada um "
@@ -1137,66 +1032,66 @@ msgstr ""
 "experiencias culturales únicas, hay un lugar en Maricá para todos. Descubre lo que "
 "hace que cada uno de ellos sea único."
 
-#: templates/core/landing.html:132
+#: templates/core/landing.html:129
 msgid "Veja mais"
 msgstr "Ver más"
 
-#: templates/core/landing.html:147
+#: templates/core/landing.html:144
 msgid "Nenhum lugar disponível ainda. Volte em breve!"
 msgstr "No hay lugares disponibles aún. ¡Vuelve pronto!"
 
-#: templates/core/landing.html:161 templates/news/news_detail.html:92
+#: templates/core/landing.html:158 templates/news/news_detail.html:92
 msgid "Ver agenda completa"
 msgstr "Ver agenda completa"
 
-#: templates/core/landing.html:162
+#: templates/core/landing.html:159
 msgid "Próximos eventos em Maricá"
 msgstr "Próximos eventos en Maricá"
 
-#: templates/core/landing.html:162
+#: templates/core/landing.html:159
 msgid "Eventos recentes em Maricá"
 msgstr "Eventos recientes en Maricá"
 
-#: templates/core/landing.html:183
+#: templates/core/landing.html:180
 msgid "Explorar por categoria"
 msgstr "Explorar por categoría"
 
-#: templates/core/landing.html:183
+#: templates/core/landing.html:180
 msgid "Encontre exatamente o que você procura"
 msgstr "Encuentra exactamente lo que estás buscando"
 
-#: templates/core/landing.html:197
+#: templates/core/landing.html:194
 #, python-format
 msgid "%(counter)s lugar"
 msgid_plural "%(counter)s lugares"
 msgstr[0] "%(counter)s lugar"
 msgstr[1] "%(counter)s lugares"
 
-#: templates/core/landing.html:211
+#: templates/core/landing.html:208
 msgid "Quem visitou conta"
 msgstr "Lo que cuentan los visitantes"
 
-#: templates/core/landing.html:211
+#: templates/core/landing.html:208
 msgid "Avaliações recentes de quem passou por Maricá"
 msgstr "Reseñas recientes de quienes pasaron por Maricá"
 
-#: templates/core/landing.html:236
+#: templates/core/landing.html:233
 msgid "Explore no mapa"
 msgstr "Explorar en el mapa"
 
-#: templates/core/landing.html:236
+#: templates/core/landing.html:233
 msgid "Navegue pelos Lugares de Maricá"
 msgstr "Navega por los Lugares de Maricá"
 
-#: templates/core/landing.html:236
+#: templates/core/landing.html:233
 msgid "Todos os lugares cadastrados, no mapa interativo"
 msgstr "Todos los lugares registrados, en el mapa interactivo"
 
-#: templates/core/landing.html:240
+#: templates/core/landing.html:237
 msgid "Carregando mapa interativo..."
 msgstr "Cargando mapa interactivo..."
 
-#: templates/core/landing.html:243
+#: templates/core/landing.html:240
 msgid "Clique nos marcadores para ver detalhes de cada lugar"
 msgstr "Haz clic en los marcadores para ver los detalles de cada lugar"
 

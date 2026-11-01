@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 15:53-0300\n"
+"POT-Creation-Date: 2026-11-01 16:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -98,7 +98,7 @@ msgstr "Quitar de favoritos"
 msgid "Adicionar aos favoritos"
 msgstr "Agregar a favoritos"
 
-#: static/js/favorites-ui.js:139
+#: static/js/favorites-ui.js:140
 msgid "Erro ao atualizar favorito. Tente novamente."
 msgstr "Error al actualizar favorito. Intente nuevamente."
 
@@ -122,11 +122,11 @@ msgstr "Siguiente diapositiva"
 msgid "Ir para o slide {{index}}"
 msgstr "Ir a la diapositiva {{index}}"
 
-#: static/js/landing.js:88
+#: static/js/landing.js:78
 msgid "Retomar apresentação"
 msgstr "Reanudar presentación"
 
-#: static/js/landing.js:88
+#: static/js/landing.js:78
 msgid "Pausar apresentação"
 msgstr "Pausar presentación"
 
