@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n icons %}
+
+{% block title %}{% translate "Muitas tentativas" %} - MaricaCity{% endblock %}
+
+{% block content %}
+{% include 'includes/navbar.html' %}
+
+<section class="container-page grid min-h-[60vh] place-items-center py-16 text-center">
+  <div class="max-w-xl">
+    <p class="text-sm font-semibold text-brand">{% translate "Erro 429" %}</p>
+    <h1 class="mt-2 font-display text-display-lg font-semibold">{% translate "Calma, são muitas tentativas" %}</h1>
+    <p class="mt-4 text-lg text-muted-foreground">{% blocktranslate trimmed %}Recebemos pedidos demais em pouco tempo e pausamos esta ação para proteger o site. Aguarde {{ wait }} e tente de novo.{% endblocktranslate %}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-2">
+      <c-button href="{% url 'core:landing' %}">{% icon "house" %}{% translate "Página inicial" %}</c-button>
+      <c-button href="{% url 'explore:explore' %}" variant="outline">{% icon "compass" %}{% translate "Explorar lugares" %}</c-button>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -11,9 +11,8 @@ from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy as _l
 from django.views.decorators.http import require_POST
 
-from django_ratelimit.decorators import ratelimit
-
 from apps.core.decorators import moderator_required
+from apps.core.ratelimit import limit
 from apps.core.utils import is_local_url
 
 from . import codes
@@ -74,7 +73,7 @@ def _render_code_page(request, form, email, purpose, **context):
     return render(request, "accounts/email_code.html", context)
 
 
-@ratelimit(key="ip", rate="10/h", method="POST", block=True)
+@limit("10/h")
 def register_view(request):
     if request.user.is_authenticated:
         return redirect("core:landing")
@@ -92,6 +91,7 @@ def register_view(request):
     return render(request, "accounts/register.html", {"form": form})
 
 
+@limit("30/h")
 def register_verify_view(request):
     pending = request.session.get(SIGNUP_SESSION)
     if not pending:
@@ -137,7 +137,7 @@ def _reset_user(email):
     return users[0] if len(users) == 1 else None
 
 
-@ratelimit(key="ip", rate="5/h", method="POST", block=True)
+@limit("5/h")
 def password_reset_view(request):
     form = PasswordResetRequestForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
@@ -160,6 +160,7 @@ def password_reset_view(request):
     )
 
 
+@limit("20/h")
 def password_reset_confirm_view(request):
     email = request.session.get(RESET_SESSION)
     if not email:
@@ -190,7 +191,7 @@ def password_reset_confirm_view(request):
 
 
 @require_POST
-@ratelimit(key="ip", rate="5/h", method="POST", block=True)
+@limit("5/h")
 def resend_code_view(request, purpose):
     if purpose not in CODE_SUBJECTS:
         raise Http404
@@ -212,6 +213,8 @@ def _json_error(message, status):
     return JsonResponse({"success": False, "error": message}, status=status)
 
 
+@limit("20/m")
+@limit("100/h")
 def login_view(request):
     """Login do menu "Entrar" (AJAX): responde em JSON"""
     if request.method == "POST":
@@ -312,6 +315,7 @@ def _managed_user(request, user_id, self_error):
 
 
 @login_required
+@limit("60/m", key="user")
 def user_update_type_view(request, user_id):
     """Alterna entre moderador e usuário comum"""
     user, error = _managed_user(
@@ -334,6 +338,7 @@ def user_update_type_view(request, user_id):
 
 
 @login_required
+@limit("60/m", key="user")
 def user_toggle_status_view(request, user_id):
     """Ativa ou desativa a conta"""
     user, error = _managed_user(
@@ -358,6 +363,7 @@ def user_toggle_status_view(request, user_id):
 
 
 @moderator_required
+@limit("30/m", key="user")
 def user_delete_view(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if user.is_superuser:

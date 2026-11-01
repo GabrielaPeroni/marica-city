@@ -13,10 +13,9 @@ from django.utils.translation import ngettext
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from django_ratelimit.decorators import ratelimit
-
 from apps.core.content_translation import TARGETS
 from apps.core.decorators import moderator_required
+from apps.core.ratelimit import limit
 from apps.core.utils import safe_next
 
 from .forms import PlaceForm, PlaceImageFormSet, PlaceReviewForm
@@ -32,6 +31,10 @@ def _sort(request, default="-created_at"):
     return sort if sort in SORTS else default
 
 
+def _is_search(request):
+    return bool(request.GET.get("q", "").strip())
+
+
 def _active_categories():
     return Category.objects.filter(is_active=True).order_by("display_order")
 
@@ -45,6 +48,7 @@ def _text_match(query):
     return match
 
 
+@limit("30/m", method="GET", when=_is_search)
 def explore_view(request):
     """Todos os lugares públicos (e os pendentes do próprio usuário), com busca"""
     places = Place.objects.public()
@@ -68,6 +72,7 @@ def explore_view(request):
     return render(request, "explore/explore.html", context)
 
 
+@limit("30/m", method="GET", when=_is_search)
 def category_detail_view(request, slug):
     category = get_object_or_404(Category, slug=slug, is_active=True)
     places = Place.objects.public().filter(categories=category)
@@ -99,6 +104,7 @@ def category_detail_view(request, slug):
 
 @csrf_exempt
 @require_POST
+@limit("300/h")
 def place_visit_view(request, pk):
     """Conta a visita de uma página aberta a partir de um pré-carregamento."""
     place = get_object_or_404(Place.objects.public(), pk=pk)
@@ -161,7 +167,7 @@ def _place_form(request, place=None):
 
 
 @login_required
-@ratelimit(key="user", rate="5/h", method="POST", block=True)
+@limit("5/h", key="user")
 def place_create_view(request):
     if not request.user.can_create_places:
         messages.error(request, _("Você não tem permissão para criar lugares."))
@@ -182,7 +188,7 @@ def place_create_view(request):
 
 
 @login_required
-@ratelimit(key="user", rate="10/h", method="POST", block=True)
+@limit("10/h", key="user")
 def place_update_view(request, pk):
     place = get_object_or_404(Place, pk=pk)
     if not place.can_edit(request.user):
@@ -204,6 +210,7 @@ def place_update_view(request, pk):
 
 
 @login_required
+@limit("20/h", key="user")
 def place_delete_view(request, pk):
     place = get_object_or_404(Place, pk=pk)
     if not place.can_edit(request.user):
@@ -414,6 +421,7 @@ def backlog_view(request):
 
 
 @login_required
+@limit("20/h", key="user")
 def review_create_view(request, place_pk):
     place = get_object_or_404(Place.objects.public(), pk=place_pk)
     if PlaceReview.objects.filter(place=place, user=request.user).exists():
@@ -442,6 +450,7 @@ def _own_review_or_redirect(request, pk, denied_message):
 
 
 @login_required
+@limit("30/h", key="user")
 def review_edit_view(request, pk):
     review, denied = _own_review_or_redirect(
         request, pk, _("Você não tem permissão para editar esta avaliação.")
@@ -459,6 +468,7 @@ def review_edit_view(request, pk):
 
 
 @login_required
+@limit("30/h", key="user")
 def review_delete_view(request, pk):
     review, denied = _own_review_or_redirect(
         request, pk, _("Você não tem permissão para excluir esta avaliação.")
@@ -481,6 +491,7 @@ def _favorite_ids(user):
 
 
 @require_POST
+@limit("120/m", key="user_or_ip")
 def toggle_favorite_view(request, pk):
     place = get_object_or_404(Place.objects.public(), pk=pk)
     if not request.user.is_authenticated:
@@ -504,6 +515,7 @@ def toggle_favorite_view(request, pk):
     )
 
 
+@limit("60/m", method="GET")
 def favorites_list_view(request):
     """Logado: favoritos do banco. Anônimo: o JS pede ?ids= com os do localStorage."""
     if request.user.is_authenticated:
@@ -533,6 +545,7 @@ def favorites_list_view(request):
 
 @login_required
 @require_POST
+@limit("30/m", key="user")
 def sync_favorites_view(request):
     """Mescla os favoritos do localStorage com os do banco"""
     try:
@@ -558,6 +571,7 @@ def sync_favorites_view(request):
 
 
 @login_required
+@limit("60/m", key="user", method="GET")
 def favorites_api_list_view(request):
     """IDs dos favoritos do usuário, para o JS sincronizar o localStorage"""
     favorites = _favorite_ids(request.user)

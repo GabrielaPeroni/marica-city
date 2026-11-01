@@ -6,6 +6,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 
 from apps.core.content_translation import translated
+from apps.core.ratelimit import limit
 from apps.core.thumbnails import thumbnail_url
 
 from .models import Place
@@ -37,6 +38,7 @@ def _response(places):
 
 
 @require_GET
+@limit("30/m", method="GET")
 def map_data_api(request):
     """Lugares públicos com coordenadas, para o mapa interativo"""
     places = []
@@ -59,6 +61,7 @@ def map_data_api(request):
 
 
 @require_GET
+@limit("60/m", method="GET")
 def places_by_ids_api(request):
     """Detalhes dos lugares em ?ids=1,2,3 (página de favoritos sem login)"""
     try:
