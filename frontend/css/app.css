@@ -409,7 +409,8 @@
   }
 
   /* Coração de favorito: contorno até salvar, depois preenchido (aria-pressed) */
-  .favorite-btn {
+  .favorite-btn,
+  .favorite-btn.btn[data-variant]:is(:hover, :focus-visible, :active) {
     @apply text-brand;
   }
 

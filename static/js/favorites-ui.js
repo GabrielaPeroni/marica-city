@@ -98,8 +98,9 @@ async function handleFavoriteClick(e) {
     return;
   }
 
-  // Desabilitar botão durante o processamento
-  button.disabled = true;
+  // Sem `disabled`: ele esmaecia o botão e tirava o hover/foco a cada clique
+  if (button.dataset.busy) return;
+  button.dataset.busy = 'true';
 
   try {
     // Alternar no localStorage
@@ -138,7 +139,7 @@ async function handleFavoriteClick(e) {
     console.error('Erro ao alternar favorito:', error);
     alert(gettext('Erro ao atualizar favorito. Tente novamente.'));
   } finally {
-    button.disabled = false;
+    delete button.dataset.busy;
   }
 }
 
