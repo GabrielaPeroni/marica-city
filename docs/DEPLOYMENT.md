@@ -77,6 +77,11 @@ commit, then `git tag vx.y.z && git push --tags`.
 
 ## Vercel (production)
 
+Current setup: Vercel project `marica-city`, function region `gru1` (São Paulo,
+set in `vercel.json`) next to the Neon database in `sa-east-1`, served at
+[marica-city.vercel.app](https://marica-city.vercel.app). Deploys come from
+pushes to `main`; the cron below does not deploy anything.
+
 Vercel detects `manage.py` and serves `config.wsgi:application` as one function
 (`[tool.vercel]` in `pyproject.toml`). It runs `collectstatic` itself and serves
 `/static/` from its CDN. The build step `scripts/vercel_build.py` migrates, loads
@@ -135,12 +140,39 @@ To refresh the demo content after curating it locally, run
 an empty database (`load_demo_data` never touches a database that already has
 places).
 
+### Things that went wrong before
+
+- **Production builds stuck at "staged".** A project-level "Deployment Check"
+  that blocks the `deployment-alias` step holds every production build at
+  _Staged_ and it never gets the domain. Symptoms: the build log is green,
+  the new deployment exists, but `marica-city.vercel.app` keeps serving the old
+  one. Fix: Project → Settings → Deployment Checks, remove the check (or
+  promote the staged deployment by hand). Post-deploy verification belongs in
+  `.github/workflows/deploy-check.yml`, not in a Vercel check that blocks the alias.
+- **R2 variables must exist before the build.** Uploaded photos and the demo
+  content that `scripts/vercel_build.py` loads go to R2 during the build, so
+  `AWS_*` must already be set for that environment. Without them, files land on
+  the read-only local filesystem.
+- **Environment variable changes need a rebuild.** Editing a variable does not
+  touch existing deployments; redeploy for it to apply, and for the build step
+  to see it.
+- **Shared cache on serverless.** Email codes (signup and password reset) and
+  rate limits are stored in the Django cache. With the default `LocMemCache`
+  each function instance has its own copy, so a code requested on one instance
+  can be rejected by another and limits count per instance. Set `CACHE_URL` or
+  `REDIS_URL` to a shared Redis for both to work reliably.
+- **Local `.env` pointing at production.** If you pulled variables from Vercel,
+  your `.env` may carry the production Neon `DATABASE_URL` (and
+  `DATABASE_URL_UNPOOLED`). Blank both before running tests or the dev server,
+  or you will write to the live database.
+
 Limits to keep in mind:
 
 - After idle time, the first request starts a new instance (cold start).
-- There is no long-running process. The crawler runs through the cron above,
-  and `translate_content` (Ollama) stays a local task: the snapshot already
-  carries the translations.
+- There is no long-running process. The cron above only runs `crawl_events`
+  (new events land in the triage queue); it does not deploy and does not
+  translate. `translate_content` (Ollama) stays a local task: the demo
+  snapshot already carries the translations.
 
 ## Wiring Cloudflare in front
 
@@ -234,9 +266,9 @@ de cada evento anunciado. Eventos futuros entram na **Triagem de eventos**
 (`/painel-admin/eventos/triagem/`), onde a equipe confere os dados e publica na
 agenda ou descarta. Nada é publicado sem revisão. A busca é idempotente.
 
-> **Estado atual: desligado.** O projeto está em modo demonstração com conteúdo
-> estático: a agenda foi importada uma vez (out/2026) e o
-> agendador não roda. Todo o código continua no repositório. Para religar:
+> **Estado atual:** no Vercel só o cron diário de `/cron/crawl-events/` roda
+> (apenas `crawl_events`); o agendador `run_scheduler` do Docker fica desligado.
+> Para usar o agendador:
 >
 > 1. `docker compose --profile scheduler up -d` (ou rode `run_scheduler` como
 >    serviço / cron com `--once`);
@@ -249,7 +281,7 @@ agenda ou descarta. Nada é publicado sem revisão. A busca é idempotente.
 > ou o botão “Buscar agora” na triagem.
 
 `uv run python manage.py run_scheduler` mantém um processo que roda
-`crawl_events` a cada 6 horas (`--interval`, em horas; `--once`
+`crawl_events` e `translate_content` a cada 6 horas (`--interval`, em horas; `--once`
 roda uma vez e sai). No `docker-compose.yml` ele é o serviço `scheduler`; fora
 do Docker, rode-o como um serviço do sistema ou troque por um cron que chame
 `run_scheduler --once`.

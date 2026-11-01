@@ -5,7 +5,7 @@ repositório. Para a arquitetura completa veja [STRUCTURE.md](./STRUCTURE.md) e 
 
 ## Setup do ambiente
 
-Pré-requisitos: Python 3.10+ e [uv](https://docs.astral.sh/uv/getting-started/installation/).
+Pré-requisitos: Python 3.11+ e [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 ```bash
 git clone <repo>
@@ -35,21 +35,26 @@ Docker para o dia a dia. Detalhes em [DEPLOYMENT.md](./DEPLOYMENT.md).
 ## Rodando os testes
 
 ```bash
-uv run python manage.py test apps            # suíte completa (127 testes)
+uv run python manage.py test apps            # suíte completa
 uv run python manage.py test apps.explore    # um app específico
-uv run python manage.py test apps.explore.tests.PlaceModelTests  # uma classe
+uv run python manage.py test apps.explore.tests.test_explore.PlaceModelTests  # uma classe
+uv run python manage.py test apps.explore.tests.test_visits                   # um arquivo
 ```
 
-Cobertura, com o piso de 70% que a CI aplica:
+Cobertura, com o piso de 90% que a CI aplica (ela roda com
+`RATELIMIT_ENABLE=False` e Postgres):
 
 ```bash
 uv run coverage run manage.py test apps
-uv run coverage report --fail-under=70
+uv run coverage report --fail-under=90
 ```
 
-Os testes ainda vivem em um único `apps/<app>/tests.py` por app (não em
-pacotes `tests/`) — ao adicionar testes para uma feature nova, siga o padrão
-já usado no arquivo do app correspondente.
+Cada app tem um pacote `apps/<app>/tests/`: `test_<app>.py` com os testes
+gerais do app e um `test_<tema>.py` para cada recurso maior (visitas,
+limite de requisições, snapshot de demo...). Teste novo vai no arquivo do tema
+ou em um arquivo novo `test_*.py` no mesmo pacote. O `.env` local pode apontar
+para o Neon de produção: deixe `DATABASE_URL` e `DATABASE_URL_UNPOOLED` em
+branco ao rodar os testes.
 
 ## Lint e formatação
 
@@ -68,10 +73,15 @@ uv run pip-audit       # auditoria de vulnerabilidades nas dependências
 JavaScript (`static/js/`):
 
 ```bash
-npm install
+npm ci
 npm run lint:js        # ESLint
-npm run build:js       # bundle esbuild (só necessário ao testar o build de produção)
 ```
+
+Organização: `components/` (comportamentos compartilhados que o `base.html`
+carrega), `services/` (`utils.js` e `favorites_service.js`, que vêm antes dos
+demais) e `pages/` (um script por página). Não há bundler: cada arquivo é um
+`<script>` num template, e os globais compartilhados estão declarados em
+`eslint.config.js`.
 
 Markdown/JSON/CSS/HTML: `prettier` (config em `.github/.prettierrc`), aplicado
 via pre-commit.
@@ -135,7 +145,7 @@ diálogos. Tipografia: Inter 16px no corpo; títulos em Fraunces com
 - Underscore vira hífen nos atributos (`data_icon` -> `data-icon`).
 - Ícone inexistente quebra a página em DEBUG e nos testes.
 - Ícones inseridos pelo JS: adicione-os em `templates/includes/js_icons.html` e
-  use `cloneIcon("check")` (de `utils.js`).
+  use `cloneIcon("check")` (de `services/utils.js`).
 - Estado preenchido (coração salvo) é CSS: `[aria-pressed=true] svg { fill: currentColor }`.
 
 ### Navbar e chrome
@@ -159,7 +169,7 @@ diálogos. Tipografia: Inter 16px no corpo; títulos em Fraunces com
 ### Rede lenta, falhas e envios duplicados
 
 - Todo `fetch` do JS passa por `request(url, {method, json, body, as, timeout})`
-  (`utils.js`): tem tempo limite e rejeita com `RequestError`
+  (`services/utils.js`): tem tempo limite e rejeita com `RequestError`
   (`kind`: `offline`, `timeout`, `network`, `ratelimit`, `forbidden`, `server`,
   `http`; `userMessage` já vem traduzida; `data` traz o JSON do erro). Passou de
   4 s, mostra uma vez por minuto o aviso "conexão lenta". Nunca repete sozinho.
@@ -240,7 +250,7 @@ entra abaixo (busca, filtros).
 `:morph="False"` se o mesmo lugar aparecer duas vezes na página), `remove`
 (modo "remover dos favoritos"), `level` (`"2"`/`"3"`), `sizes`, `class`.
 O card inteiro é um link; o coração fica sobre a foto (`.favorite-btn`,
-`data-place-id`, `aria-pressed`) e é ligado pelo `favorites-ui.js`. Usa
+`data-place-id`, `aria-pressed`) e é ligado pelo `components/favorites_ui.js`. Usa
 `place.primary_image`, `place.categories.all.0`, `average_rating`,
 `review_count`, `address`, `is_pending`: monte o queryset com
 `.with_ratings().prefetch_related("images", "categories")`.
@@ -372,8 +382,8 @@ Todo PR roda `.github/workflows/pr-checks.yml`:
 - **Linters**: checagem de `__init__.py`, `black --check`, `isort --check-only`,
   `autoflake --check`, `flake8`, `pip-audit`, `prettier --check`, e
   `npm run build:css` sem diferença do que foi commitado.
-- **Tests**: `check --deploy`, `makemigrations --check --dry-run`, a suíte
-  Django completa contra Postgres, e `coverage report --fail-under=70`.
+- **Tests**: `manage.py check`, `makemigrations --check --dry-run`, a suíte
+  Django completa contra Postgres, e `coverage report --fail-under=90`.
 
 `.github/workflows/codeql.yml` roda CodeQL (Python + JS/TS) em push/PR para
 `main` e semanalmente. O Dependabot (`.github/dependabot.yml`) abre PRs de
@@ -386,6 +396,5 @@ e os testes localmente antes de abrir o PR para evitar voltas.
 ## Documentação
 
 Ao alterar models, views, permissões ou fluxos principais, atualize também
-[CRUD.md](./CRUD.md) e [STRUCTURE.md](./STRUCTURE.md) no mesmo PR — é a
-convenção estabelecida no `CLAUDE.md` do projeto e o checklist do PR cobra
-isso.
+[CRUD.md](./CRUD.md) e [STRUCTURE.md](./STRUCTURE.md) no mesmo PR — o
+checklist do PR cobra isso.
