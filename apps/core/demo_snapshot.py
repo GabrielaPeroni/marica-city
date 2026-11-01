@@ -15,6 +15,7 @@ from django.core.files import File
 from django.db import transaction
 
 from apps.accounts.models import User
+from apps.core.content_translation import source_hash
 from apps.core.thumbnails import thumb_name, thumbnail_url
 from apps.explore.models import Category, Place, PlaceImage, PlaceReview
 from apps.news.models import News, NewsCategory
@@ -144,6 +145,18 @@ def _attach(field, name):
         field.save(name, File(fh), save=False)
 
 
+def _create_event(e, owner):
+    e = dict(e)
+    image = e.pop("image")
+    publish_date = e.pop("publish_date")
+    category, _created = NewsCategory.objects.get_or_create(name=NewsCategory.EVENT)
+    event = News(**e, category=category, author=owner, status=News.PUBLISHED)
+    if image:
+        _attach(event.featured_image, image)
+    event.save()
+    News.objects.filter(pk=event.pk).update(publish_date=publish_date)
+
+
 @transaction.atomic
 def load():
     """Create the snapshot content; returns how many places were created."""
@@ -198,17 +211,41 @@ def load():
             )
         Place.objects.filter(pk=place.pk).update(created_at=p["created_at"])
 
-    event_category = NewsCategory.objects.get(name=NewsCategory.EVENT)
     for e in data["events"]:
-        image = e.pop("image")
-        publish_date = e.pop("publish_date")
-        event = News(**e, category=event_category, author=owner, status=News.PUBLISHED)
-        if image:
-            _attach(event.featured_image, image)
-        event.save()
-        News.objects.filter(pk=event.pk).update(publish_date=publish_date)
+        _create_event(e, owner)
 
     return len(data["places"])
+
+
+@transaction.atomic
+def sync():
+    """Bring an existing database up to date with the snapshot, idempotently.
+
+    Creates snapshot events that are missing and copies snapshot translations onto
+    places whose Portuguese text is unchanged (same source hash), so text edited in
+    production is never overwritten. Returns ``(events_created, places_updated)``.
+    """
+    data = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
+    owner = _demo_user(OWNER, first_name="Equipe", last_name="MaricaCity")
+
+    existing = set(News.objects.values_list("slug", flat=True))
+    missing = [e for e in data["events"] if e["slug"] not in existing]
+    for e in missing:
+        _create_event(e, owner)
+
+    updated = 0
+    for p in data["places"]:
+        place = Place.objects.filter(name=p["name"]).first()
+        translations = p["translations"]
+        if (
+            place is not None
+            and translations
+            and translations.get("source") == source_hash(place)
+            and place.translations != translations
+        ):
+            Place.objects.filter(pk=place.pk).update(translations=translations)
+            updated += 1
+    return len(missing), updated
 
 
 def restore_media():

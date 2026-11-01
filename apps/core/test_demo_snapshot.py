@@ -5,12 +5,13 @@ from django.core.management import call_command
 from django.test import TestCase, override_settings
 
 from apps.accounts.models import User
+from apps.core import demo_snapshot
 from apps.core.demo_snapshot import OWNER, SNAPSHOT
 from apps.explore.models import Place, PlaceImage, PlaceReview
 from apps.news.models import News
 
 
-class DemoSnapshotTests(TestCase):
+class SnapshotCase(TestCase):
     def setUp(self):
         self.media = tempfile.TemporaryDirectory()
         self.addCleanup(self.media.cleanup)
@@ -20,6 +21,8 @@ class DemoSnapshotTests(TestCase):
         with override_settings(MEDIA_ROOT=self.media.name):
             call_command("load_demo_data", verbosity=0)
 
+
+class DemoSnapshotTests(SnapshotCase):
     def test_loads_everything_with_translations(self):
         self.load()
         self.assertEqual(Place.objects.public().count(), len(self.data["places"]))
@@ -57,3 +60,53 @@ class DemoSnapshotTests(TestCase):
         self.load()
         with override_settings(MEDIA_ROOT=self.media.name):
             self.assertTrue(image.image.storage.exists(image.image.name))
+
+
+class DemoSnapshotSyncTests(SnapshotCase):
+    def setUp(self):
+        super().setUp()
+        self.load()
+        self.place = Place.objects.get(name=self.data["places"][0]["name"])
+
+    def state(self):
+        return (
+            sorted(News.objects.values_list("slug", flat=True)),
+            sorted(Place.objects.values_list("name", "description", "translations")),
+        )
+
+    def test_recreates_missing_events(self):
+        slug = self.data["events"][0]["slug"]
+        News.objects.get(slug=slug).delete()
+        self.load()
+        self.assertEqual(
+            News.objects.published().events().count(), len(self.data["events"])
+        )
+        self.assertTrue(News.objects.filter(slug=slug).exists())
+
+    def test_applies_translations_when_text_is_unchanged(self):
+        stale = {"source": self.place.translations["source"], "en": {"name": "old"}}
+        Place.objects.filter(pk=self.place.pk).update(translations=stale)
+        self.load()
+        self.place.refresh_from_db()
+        self.assertEqual(
+            self.place.translations, self.data["places"][0]["translations"]
+        )
+
+    def test_edited_description_keeps_its_translations(self):
+        self.place.description = "Texto editado em produção"
+        self.place.save()
+        Place.objects.filter(pk=self.place.pk).update(
+            translations={"source": "old", "en": {"name": "Edited"}}
+        )
+        self.load()
+        self.place.refresh_from_db()
+        self.assertEqual(self.place.translations["en"], {"name": "Edited"})
+        self.assertEqual(self.place.description, "Texto editado em produção")
+
+    def test_running_twice_changes_nothing(self):
+        self.load()
+        before = self.state()
+        self.load()
+        self.assertEqual(self.state(), before)
+        with override_settings(MEDIA_ROOT=self.media.name):
+            self.assertEqual(demo_snapshot.sync(), (0, 0))
