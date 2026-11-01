@@ -146,7 +146,8 @@ places).
   that blocks the `deployment-alias` step holds every production build at
   _Staged_ and it never gets the domain. Symptoms: the build log is green,
   the new deployment exists, but `marica-city.vercel.app` keeps serving the old
-  one. Fix: Project → Settings → Deployment Checks, remove the check (or
+  one. This happened until 2026-11-01, when the check was deleted. Fix: remove
+  the check, through Project → Settings → Deployment Checks or the API (or
   promote the staged deployment by hand). Post-deploy verification belongs in
   `.github/workflows/deploy-check.yml`, not in a Vercel check that blocks the alias.
 - **`deploy-check.yml` does not run today.** The Vercel project has GitHub
