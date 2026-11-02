@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 20:35-0300\n"
+"POT-Creation-Date: 2026-11-01 23:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -39,9 +39,10 @@ msgstr "Intente uno de estos caminos:"
 msgid "Página inicial"
 msgstr "Página de inicio"
 
-#: templates/404.html:17 templates/429.html:16 templates/explore/explore.html:4
-#: templates/explore/explore.html:12 templates/explore/favorites.html:27
-#: templates/explore/favorites.html:31 templates/news/news_list.html:17
+#: templates/404.html:17 templates/429.html:16 templates/core/landing.html:127
+#: templates/explore/explore.html:4 templates/explore/explore.html:12
+#: templates/explore/favorites.html:27 templates/explore/favorites.html:31
+#: templates/news/news_list.html:17
 msgid "Explorar lugares"
 msgstr "Explorar lugares"
 
@@ -1052,10 +1053,6 @@ msgstr ""
 "Explora los lugares más increíbles de Maricá. Desde playas paradisíacas hasta "
 "experiencias culturales únicas, hay un lugar en Maricá para todos. Descubre lo que "
 "hace que cada uno de ellos sea único."
-
-#: templates/core/landing.html:127
-msgid "Veja mais"
-msgstr "Ver más"
 
 #: templates/core/landing.html:142
 msgid "Nenhum lugar disponível ainda. Volte em breve!"
