@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 23:14-0300\n"
+"POT-Creation-Date: 2026-11-02 15:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -269,7 +269,7 @@ msgstr "Are you sure you want to continue?"
 #: templates/accounts/user_management.html:109 templates/accounts/user_management.html:120
 #: templates/core/admin/news_delete_confirm.html:43 templates/explore/place_detail.html:314
 #: templates/explore/place_detail.html:323 templates/explore/place_detail.html:337
-#: templates/explore/place_form.html:103 templates/explore/place_form.html:131
+#: templates/explore/place_form.html:107 templates/explore/place_form.html:135
 #: templates/explore/review_delete_confirm.html:28 templates/explore/review_form.html:51
 #: templates/includes/remove_place_modal.html:22
 msgid "Cancelar"
@@ -402,7 +402,7 @@ msgstr ""
 "places, reviews, and favorites. This action cannot be undone."
 
 #: templates/accounts/user_management.html:112 templates/core/admin/news_list.html:51
-#: templates/core/admin/news_list.html:105 templates/explore/place_form.html:106
+#: templates/core/admin/news_list.html:105 templates/explore/place_form.html:110
 msgid "Excluir"
 msgstr "Delete"
 
@@ -496,7 +496,7 @@ msgstr "Participate"
 msgid "Meus favoritos"
 msgstr "My favorites"
 
-#: apps/explore/views.py:186 templates/base.html:101 templates/core/landing.html:39
+#: apps/explore/views.py:188 templates/base.html:101 templates/core/landing.html:39
 #: templates/core/landing.html:145 templates/explore/admin/backlog.html:7
 #: templates/explore/category_detail.html:50 templates/explore/explore.html:19
 #: templates/explore/explore.html:42 templates/includes/navbar.html:40
@@ -850,7 +850,7 @@ msgstr "New Places"
 msgid "Novos Usuários"
 msgstr "New Users"
 
-#: apps/explore/views.py:352 templates/core/admin_dashboard.html:35
+#: apps/explore/views.py:354 templates/core/admin_dashboard.html:35
 #: templates/cotton/place_card.html:16 templates/explore/place_detail.html:41
 #: templates/includes/admin_sidebar.html:26
 msgid "Aguardando aprovação"
@@ -1249,7 +1249,7 @@ msgstr "Created by"
 msgid "Em destaque na página inicial"
 msgstr "Featured on the home page"
 
-#: apps/explore/views.py:364 templates/explore/admin/backlog.html:106
+#: apps/explore/views.py:366 templates/explore/admin/backlog.html:106
 msgid "Em destaque"
 msgstr "Featured"
 
@@ -1565,16 +1565,16 @@ msgstr "Submit review"
 msgid "Excluir avaliação?"
 msgstr "Delete review?"
 
-#: templates/explore/place_detail.html:333 templates/explore/place_form.html:127
+#: templates/explore/place_detail.html:333 templates/explore/place_form.html:131
 msgid "Excluir este lugar?"
 msgstr "Delete this place?"
 
-#: templates/explore/place_detail.html:334 templates/explore/place_form.html:128
+#: templates/explore/place_detail.html:334 templates/explore/place_form.html:132
 #, python-format
 msgid "Você está prestes a excluir permanentemente <strong>%(name)s</strong>."
 msgstr "You are about to permanently delete <strong>%(name)s</strong>."
 
-#: templates/explore/place_detail.html:335 templates/explore/place_form.html:129
+#: templates/explore/place_detail.html:335 templates/explore/place_form.html:133
 msgid ""
 "Esta ação não pode ser desfeita. Todos os dados, imagens e avaliações associados a "
 "este lugar serão removidos permanentemente."
@@ -1582,7 +1582,7 @@ msgstr ""
 "This action cannot be undone. All data, images, and reviews associated with this "
 "place will be permanently removed."
 
-#: templates/explore/place_detail.html:340 templates/explore/place_form.html:134
+#: templates/explore/place_detail.html:340 templates/explore/place_form.html:138
 msgid "Excluir permanentemente"
 msgstr "Delete permanently"
 
@@ -1642,39 +1642,43 @@ msgstr "Place photos"
 msgid "Adicione até 3 fotos. A primeira é a foto principal; use a estrela para trocar."
 msgstr "Add up to 3 photos. The first one is the main photo; use the star to switch."
 
-#: templates/explore/place_form.html:73
+#: templates/explore/place_form.html:71
+msgid "Escolha as fotos de novo: elas só são guardadas quando o formulário é aceito."
+msgstr "Please choose your photos again: they are only kept once the form is accepted."
+
+#: templates/explore/place_form.html:77
 msgid "Adicionar foto"
 msgstr "Add photo"
 
-#: templates/explore/place_form.html:80
+#: templates/explore/place_form.html:84
 msgid "Principal"
 msgstr "Main"
 
-#: templates/explore/place_form.html:82
+#: templates/explore/place_form.html:86
 msgid "Usar como foto principal"
 msgstr "Use as main photo"
 
-#: templates/explore/place_form.html:83
+#: templates/explore/place_form.html:87
 msgid "Remover foto"
 msgstr "Remove photo"
 
-#: templates/explore/place_form.html:115
+#: templates/explore/place_form.html:119
 msgid "Dicas para um bom cadastro"
 msgstr "Tips for a good listing"
 
-#: templates/explore/place_form.html:117
+#: templates/explore/place_form.html:121
 msgid "Escreva uma descrição detalhada e atrativa"
 msgstr "Write a detailed and attractive description"
 
-#: templates/explore/place_form.html:118
+#: templates/explore/place_form.html:122
 msgid "Adicione fotos de alta qualidade e bem iluminadas"
 msgstr "Add high-quality and well-lit photos"
 
-#: templates/explore/place_form.html:119
+#: templates/explore/place_form.html:123
 msgid "A primeira foto será a imagem de destaque"
 msgstr "The first photo will be the featured image"
 
-#: templates/explore/place_form.html:120
+#: templates/explore/place_form.html:124
 msgid "Selecione as categorias que melhor representam o lugar"
 msgstr "Select the categories that best represent the place"
 
@@ -1840,7 +1844,7 @@ msgstr "Duplicate"
 msgid "Não é um lugar turístico"
 msgstr "Not a tourist attraction"
 
-#: apps/explore/api.py:56 templates/includes/place_removal_reasons.html:7
+#: apps/explore/api.py:77 templates/includes/place_removal_reasons.html:7
 msgid "Outros"
 msgstr "Other"
 
@@ -2135,114 +2139,114 @@ msgstr "User %(username)s deleted successfully."
 msgid "Você não tem permissão para acessar esta página."
 msgstr "You do not have permission to access this page."
 
-#: apps/core/views.py:191 apps/explore/views.py:350
+#: apps/core/views.py:215 apps/explore/views.py:352
 msgid "Todos"
 msgstr "All"
 
-#: apps/core/views.py:192
+#: apps/core/views.py:216
 msgid "Sugestões"
 msgstr "Suggestions"
 
-#: apps/core/views.py:193
+#: apps/core/views.py:217
 msgid "Publicados"
 msgstr "Published"
 
-#: apps/core/views.py:194
+#: apps/core/views.py:218
 msgid "Rascunhos"
 msgstr "Drafts"
 
-#: apps/core/views.py:195
+#: apps/core/views.py:219
 msgid "Arquivados"
 msgstr "Archived"
 
-#: apps/core/views.py:276
+#: apps/core/views.py:300
 #, python-format
 msgid "Evento \"%(title)s\" criado com sucesso!"
 msgstr "Event \"%(title)s\" created successfully!"
 
-#: apps/core/views.py:279
+#: apps/core/views.py:303
 msgid "Criar novo evento"
 msgstr "Create new event"
 
-#: apps/core/views.py:279
+#: apps/core/views.py:303
 msgid "Criar"
 msgstr "Create"
 
-#: apps/core/views.py:290
+#: apps/core/views.py:314
 #, python-format
 msgid "Evento \"%(title)s\" atualizado com sucesso!"
 msgstr "Event \"%(title)s\" updated successfully!"
 
-#: apps/core/views.py:296
+#: apps/core/views.py:320
 #, python-format
 msgid "Editar: %(title)s"
 msgstr "Edit: %(title)s"
 
-#: apps/core/views.py:297 apps/explore/views.py:207
+#: apps/core/views.py:321 apps/explore/views.py:209
 msgid "Salvar Alterações"
 msgstr "Save Changes"
 
-#: apps/core/views.py:311
+#: apps/core/views.py:335
 #, python-format
 msgid "Evento \"%(news_title)s\" excluído com sucesso."
 msgstr "Event \"%(news_title)s\" deleted successfully."
 
-#: apps/core/views.py:323
+#: apps/core/views.py:347
 #, python-format
 msgid "%(count)d evento publicado"
 msgid_plural "%(count)d eventos publicados"
 msgstr[0] "%(count)d event published"
 msgstr[1] "%(count)d events published"
 
-#: apps/core/views.py:326
+#: apps/core/views.py:350
 #, python-format
 msgid "%(count)d evento arquivado"
 msgid_plural "%(count)d eventos arquivados"
 msgstr[0] "%(count)d event archived"
 msgstr[1] "%(count)d events archived"
 
-#: apps/core/views.py:329
+#: apps/core/views.py:353
 #, python-format
 msgid "%(count)d evento excluído"
 msgid_plural "%(count)d eventos excluídos"
 msgstr[0] "%(count)d event deleted"
 msgstr[1] "%(count)d events deleted"
 
-#: apps/core/views.py:341 apps/core/views.py:436
+#: apps/core/views.py:365 apps/core/views.py:460
 msgid "Selecione ao menos um evento."
 msgstr "Select at least one event."
 
-#: apps/core/views.py:356 apps/core/views.py:447 apps/explore/views.py:341
+#: apps/core/views.py:380 apps/core/views.py:471 apps/explore/views.py:343
 msgid "Ação inválida."
 msgstr "Invalid action."
 
-#: apps/core/views.py:407
+#: apps/core/views.py:431
 #, python-format
 msgid "\"%(title)s\" foi descartado."
 msgstr "\"%(title)s\" has been discarded."
 
-#: apps/core/views.py:414
+#: apps/core/views.py:438
 #, python-format
 msgid "Revise os campos de \"%(title)s\"."
 msgstr "Review the fields of \"%(title)s\"."
 
-#: apps/core/views.py:425
+#: apps/core/views.py:449
 #, python-format
 msgid "\"%(title)s\" publicado na agenda."
 msgstr "\"%(title)s\" published to the agenda."
 
-#: apps/core/views.py:442
+#: apps/core/views.py:466
 #, python-format
 msgid "%(count)d evento descartado"
 msgid_plural "%(count)d eventos descartados"
 msgstr[0] "%(count)d event discarded"
 msgstr[1] "%(count)d events discarded"
 
-#: apps/core/views.py:458
+#: apps/core/views.py:482
 msgid "Não foi possível consultar a Prefeitura agora."
 msgstr "Couldn't reach the Prefeitura's website right now."
 
-#: apps/core/views.py:462
+#: apps/core/views.py:486
 #, python-format
 msgid "%(created)s evento(s) novo(s) para triagem."
 msgstr "%(created)s new event(s) to review."
@@ -2407,11 +2411,11 @@ msgstr[1] "%(n)s minutes"
 msgid "Muitas tentativas em pouco tempo. Aguarde %(wait)s e tente de novo."
 msgstr "Too many attempts in a short time. Wait %(wait)s and try again."
 
-#: apps/explore/views.py:173
+#: apps/explore/views.py:175
 msgid "Você não tem permissão para criar lugares."
 msgstr "You do not have permission to create places."
 
-#: apps/explore/views.py:181
+#: apps/explore/views.py:183
 #, python-format
 msgid ""
 "Lugar \"%(name)s\" criado com sucesso! Ele será revisado por um administrador antes "
@@ -2420,124 +2424,124 @@ msgstr ""
 "Place \"%(name)s\" created successfully! It will be reviewed by an administrator "
 "before appearing on the site."
 
-#: apps/explore/views.py:186
+#: apps/explore/views.py:188
 msgid "Enviar para Aprovação"
 msgstr "Submit for Approval"
 
-#: apps/explore/views.py:195
+#: apps/explore/views.py:197
 msgid "Você não tem permissão para editar este lugar."
 msgstr "You do not have permission to edit this place."
 
-#: apps/explore/views.py:202
+#: apps/explore/views.py:204
 #, python-format
 msgid "Lugar \"%(name)s\" atualizado com sucesso!"
 msgstr "Place \"%(name)s\" updated successfully!"
 
-#: apps/explore/views.py:206
+#: apps/explore/views.py:208
 #, python-format
 msgid "Editar %(name)s"
 msgstr "Edit %(name)s"
 
-#: apps/explore/views.py:217
+#: apps/explore/views.py:219
 msgid "Você não tem permissão para excluir este lugar."
 msgstr "You do not have permission to delete this place."
 
-#: apps/explore/views.py:225
+#: apps/explore/views.py:227
 #, python-format
 msgid "Lugar \"%(place_name)s\" foi excluído com sucesso."
 msgstr "Place \"%(place_name)s\" was deleted successfully."
 
-#: apps/explore/views.py:237
+#: apps/explore/views.py:239
 msgid "Por favor, selecione um motivo para a rejeição."
 msgstr "Please select a reason for rejection."
 
-#: apps/explore/views.py:241
+#: apps/explore/views.py:243
 msgid "Por favor, especifique o motivo da rejeição."
 msgstr "Please specify the reason for rejection."
 
-#: apps/explore/views.py:263
+#: apps/explore/views.py:265
 #, python-format
 msgid "%(name)s está em destaque na página inicial."
 msgstr "%(name)s is now featured on the home page."
 
-#: apps/explore/views.py:265
+#: apps/explore/views.py:267
 #, python-format
 msgid "%(name)s saiu dos destaques."
 msgstr "%(name)s is no longer featured."
 
-#: apps/explore/views.py:282
+#: apps/explore/views.py:284
 #, python-format
 msgid "Lugar \"%(name)s\" foi aprovado com sucesso!"
 msgstr "Place \"%(name)s\" was approved successfully!"
 
-#: apps/explore/views.py:302
+#: apps/explore/views.py:304
 #, python-format
 msgid "Lugar \"%(name)s\" foi removido."
 msgstr "Place \"%(name)s\" was removed."
 
-#: apps/explore/views.py:314
+#: apps/explore/views.py:316
 msgid "Selecione ao menos um lugar."
 msgstr "Select at least one place."
 
-#: apps/explore/views.py:324
+#: apps/explore/views.py:326
 #, python-format
 msgid "%(count)d lugar aprovado"
 msgid_plural "%(count)d lugares aprovados"
 msgstr[0] "%(count)d place approved"
 msgstr[1] "%(count)d places approved"
 
-#: apps/explore/views.py:338
+#: apps/explore/views.py:340
 #, python-format
 msgid "%(count)d lugar removido"
 msgid_plural "%(count)d lugares removidos"
 msgstr[0] "%(count)d place removed"
 msgstr[1] "%(count)d places removed"
 
-#: apps/explore/views.py:358
+#: apps/explore/views.py:360
 msgid "Aprovados"
 msgstr "Approved"
 
-#: apps/explore/views.py:369
+#: apps/explore/views.py:371
 msgid "Removidos"
 msgstr "Removed"
 
-#: apps/explore/views.py:429
+#: apps/explore/views.py:431
 msgid "Você já avaliou este lugar. Edite sua avaliação existente."
 msgstr "You have already reviewed this place. Edit your existing review."
 
-#: apps/explore/views.py:438
+#: apps/explore/views.py:440
 msgid "Avaliação enviada com sucesso!"
 msgstr "Review submitted successfully!"
 
-#: apps/explore/views.py:456
+#: apps/explore/views.py:458
 msgid "Você não tem permissão para editar esta avaliação."
 msgstr "You do not have permission to edit this review."
 
-#: apps/explore/views.py:464
+#: apps/explore/views.py:466
 msgid "Avaliação atualizada com sucesso!"
 msgstr "Review updated successfully!"
 
-#: apps/explore/views.py:474
+#: apps/explore/views.py:476
 msgid "Você não tem permissão para excluir esta avaliação."
 msgstr "You do not have permission to delete this review."
 
-#: apps/explore/views.py:481
+#: apps/explore/views.py:483
 msgid "Avaliação excluída com sucesso!"
 msgstr "Review deleted successfully!"
 
-#: apps/explore/views.py:499
+#: apps/explore/views.py:501
 msgid "Favorito atualizado"
 msgstr "Favorite updated"
 
-#: apps/explore/views.py:510
+#: apps/explore/views.py:513
 msgid "Lugar removido dos favoritos"
 msgstr "Place removed from favorites"
 
-#: apps/explore/views.py:512
+#: apps/explore/views.py:515
 msgid "Lugar adicionado aos favoritos"
 msgstr "Place added to favorites"
 
-#: apps/explore/views.py:568
+#: apps/explore/views.py:574
 #, python-format
 msgid "%(value)s favoritos sincronizados"
 msgstr "%(value)s favorites synchronized"

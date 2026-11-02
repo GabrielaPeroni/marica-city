@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MaricaCity VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-01 23:14-0300\n"
+"POT-Creation-Date: 2026-11-02 15:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: static/js/components/address_autocomplete.js:37
+#: static/js/components/address_autocomplete.js:41
 msgid "Comece a digitar o endereço..."
 msgstr "Comience a escribir la dirección..."
 
@@ -54,7 +54,7 @@ msgstr "Quitar de favoritos"
 msgid "Adicionar aos favoritos"
 msgstr "Agregar a favoritos"
 
-#: static/js/components/favorites_ui.js:164
+#: static/js/components/favorites_ui.js:167
 #, python-format
 msgid "Não foi possível atualizar o favorito. %s"
 msgstr "No pudimos actualizar el favorito. %s"
@@ -159,11 +159,11 @@ msgstr "Siguiente diapositiva"
 msgid "Ir para o slide {{index}}"
 msgstr "Ir a la diapositiva {{index}}"
 
-#: static/js/pages/landing.js:78
+#: static/js/pages/landing.js:97
 msgid "Retomar apresentação"
 msgstr "Reanudar presentación"
 
-#: static/js/pages/landing.js:78
+#: static/js/pages/landing.js:97
 msgid "Pausar apresentação"
 msgstr "Pausar presentación"
 
@@ -187,39 +187,39 @@ msgstr "Actualizar reseña"
 msgid "Enviar avaliação"
 msgstr "Enviar reseña"
 
-#: static/js/services/utils.js:56
+#: static/js/services/utils.js:70
 #, python-format
 msgid "Muitas tentativas em pouco tempo. Aguarde %s s e tente de novo."
 msgstr "Demasiados intentos en poco tiempo. Espera %s s e inténtalo de nuevo."
 
-#: static/js/services/utils.js:59
+#: static/js/services/utils.js:73
 msgid "Muitas tentativas em pouco tempo. Aguarde um momento e tente de novo."
 msgstr "Demasiados intentos en poco tiempo. Espera un momento e inténtalo de nuevo."
 
-#: static/js/services/utils.js:70
+#: static/js/services/utils.js:84
 msgid "Sua sessão expirou. Recarregue a página e tente de novo."
 msgstr "Tu sesión expiró. Recarga la página e inténtalo de nuevo."
 
-#: static/js/services/utils.js:76
+#: static/js/services/utils.js:90
 msgid "O servidor está com problemas agora. Tente novamente em alguns minutos."
 msgstr "El servidor tiene problemas ahora. Inténtalo de nuevo en unos minutos."
 
-#: static/js/services/utils.js:81
+#: static/js/services/utils.js:95
 msgid "Não foi possível concluir a ação. Tente novamente."
 msgstr "No pudimos completar la acción. Inténtalo de nuevo."
 
-#: static/js/services/utils.js:117
+#: static/js/services/utils.js:131
 msgid "A conexão está lenta. Ainda estamos tentando, aguarde um pouco."
 msgstr "La conexión está lenta. Seguimos intentando, espera un poco."
 
-#: static/js/services/utils.js:136 static/js/services/utils.js:160
+#: static/js/services/utils.js:150 static/js/services/utils.js:174
 msgid "O servidor demorou demais para responder. Tente novamente."
 msgstr "El servidor tardó demasiado en responder. Inténtalo de nuevo."
 
-#: static/js/services/utils.js:142
+#: static/js/services/utils.js:156
 msgid "Você está sem conexão. Verifique a internet e tente de novo."
 msgstr "No tienes conexión. Revisa tu internet e inténtalo de nuevo."
 
-#: static/js/services/utils.js:147
+#: static/js/services/utils.js:161
 msgid "Não foi possível falar com o servidor. Verifique sua conexão e tente de novo."
 msgstr "No pudimos comunicarnos con el servidor. Revisa tu conexión e inténtalo de nuevo."

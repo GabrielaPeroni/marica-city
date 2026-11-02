@@ -82,6 +82,7 @@ jobs:
       DEBUG: "True"
       SECRET_KEY: test-secret-key-for-ci
       GOOGLE_OAUTH_CLIENT_ID: test-client-id-for-ci-only
+      GOOGLE_MAPS_API_KEY: fake-never-sent
       RATELIMIT_ENABLE: "False"
       BASE_URL: http://localhost:8000
       CHECK_USER: browser-check

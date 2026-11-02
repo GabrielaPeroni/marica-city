@@ -70,7 +70,12 @@ function watch(page) {
       problems.push(`console: ${message.text().slice(0, 160)}`);
     }
   };
-  const onError = error => problems.push(`exception: ${error.message.slice(0, 160)}`);
+  // The browser giving up on a page-change animation: the page itself is unaffected
+  const onError = error => {
+    if (!/Transition was aborted/.test(error.message)) {
+      problems.push(`exception: ${error.message.slice(0, 160)}`);
+    }
+  };
   const onNavigate = frame => {
     if (frame === page.mainFrame()) state.navigations += 1;
   };
@@ -132,7 +137,9 @@ async function checkPlaceSubmit(page) {
   await page.goto(BASE_URL + create, { waitUntil: 'load' });
   await page.locator('#id_name').fill('Lugar do teste de navegador');
   await page.locator('#id_description').fill('Criado e removido pela verificação.');
-  await page.locator('#id_address').fill('Rua do Teste, 1');
+  const search = page.locator('#id_address_search');
+  const hasSearch = (await search.count()) > 0;
+  await (hasSearch ? search : page.locator('#id_address')).fill('Rua do Teste, 1');
   await addPhoto(page);
 
   // No category yet: the server refuses and shows the error on the same page
@@ -148,6 +155,12 @@ async function checkPlaceSubmit(page) {
   }
   if (await page.locator('[data-image-card]').count()) {
     problems.push('preview shown for a photo the server did not keep');
+  }
+  if (!(await page.locator('[data-photos-lost]').count())) {
+    problems.push('nothing asks to choose the photos again');
+  }
+  if (hasSearch && (await search.inputValue()) !== 'Rua do Teste, 1') {
+    problems.push('address lost after a refused submit');
   }
 
   // A double click must still send one request
@@ -183,6 +196,76 @@ async function checkPlaceSubmit(page) {
   report('submit, fix, save and delete a place', problems);
 }
 
+// Stands in for Google so the check never spends the key or depends on Google being up
+const FAKE_MAPS = `
+  window.google = { maps: { places: { Autocomplete: class {
+    addListener(_, handler) {
+      window.pickPlace = place => { this.place = place; handler(); };
+    }
+    getPlace() { return this.place; }
+  } } } };
+  window.initAutocomplete();
+`;
+
+async function checkAddressField(page) {
+  const create = '/explore/place/create/';
+  await page.goto(BASE_URL + create, { waitUntil: 'load' });
+  const search = page.locator('#id_address_search');
+  if (!(await search.count())) {
+    console.log('skip address autocomplete (no GOOGLE_MAPS_API_KEY on this server)');
+    return;
+  }
+  const seen = watch(page);
+  const { problems, firstParty } = seen;
+  const acceptLeaving = dialog => dialog.accept();
+  page.on('dialog', acceptLeaving);
+  const textarea = page.locator('#id_address');
+  const focused = () => page.evaluate(() => document.activeElement.id);
+
+  // Empty address: the browser must point at the visible field, not block in silence
+  await page.locator('#id_name').fill('Teste de endereço');
+  await page.locator('#id_description').fill('Descrição');
+  await page.locator('#place-form [type=submit]').click();
+  await page.waitForTimeout(300);
+  if ((await focused()) !== 'id_address_search') {
+    problems.push('submitting with no address gives no feedback');
+  }
+
+  await search.fill('Rua A');
+  if ((await textarea.inputValue()) !== 'Rua A') problems.push('typing is not saved');
+  await search.press('Enter');
+  await page.waitForTimeout(300);
+  if (firstParty.get(`POST ${create}`)) problems.push('Enter in the address submitted');
+
+  await page.evaluate(() =>
+    window.pickPlace({
+      formatted_address: 'Rua B, Maricá',
+      geometry: { location: { lat: () => -22.9, lng: () => -42.8 } },
+    })
+  );
+  const picked = await page.evaluate(() => [
+    document.getElementById('id_address').value,
+    document.getElementById('id_latitude').value,
+    document.getElementById('id_longitude').value,
+  ]);
+  if (picked.join() !== 'Rua B, Maricá,-22.900000,-42.800000') {
+    problems.push(`picking an address filled ${picked.join(' | ')}`);
+  }
+
+  // Google refuses the key (billing, restrictions): the plain field must come back
+  await page.evaluate(() => window.gm_authFailure?.());
+  if (await search.count()) problems.push('broken autocomplete stays on screen');
+  if (!(await textarea.isVisible())) problems.push('address field stays hidden');
+  if ((await textarea.inputValue()) !== 'Rua B, Maricá') {
+    problems.push('address text lost when autocomplete fails');
+  }
+
+  await page.goto(`${BASE_URL}/sobre/`, { waitUntil: 'load' });
+  page.off('dialog', acceptLeaving);
+  seen.stop();
+  report('address autocomplete', problems);
+}
+
 async function discover(page, listPath, selector) {
   await page.goto(BASE_URL + listPath, { waitUntil: 'load', timeout: 60000 });
   return page
@@ -194,6 +277,11 @@ async function discover(page, listPath, selector) {
 
 const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+if (IS_LOCAL) {
+  await context.route(/maps\.googleapis\.com/, route =>
+    route.fulfill({ contentType: 'text/javascript', body: FAKE_MAPS })
+  );
+}
 const page = await context.newPage();
 const cdp = await context.newCDPSession(page);
 await cdp.send('Performance.enable');
@@ -255,7 +343,10 @@ if (CHECK_USER && CHECK_PASSWORD) {
     calls.length ? [`fetched ${calls.length} more times`] : []
   );
 
-  if (IS_LOCAL) await checkPlaceSubmit(page);
+  if (IS_LOCAL) {
+    await checkAddressField(page);
+    await checkPlaceSubmit(page);
+  }
 }
 
 await browser.close();

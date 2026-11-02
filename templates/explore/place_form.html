@@ -67,6 +67,10 @@
       <p class="mb-3 text-sm text-destructive" role="alert">{{ error }}</p>
       {% endfor %}{% endfor %}
 
+      {% if photos_lost %}
+      <p class="mb-3 text-sm text-destructive" role="alert" data-photos-lost>{% translate "Escolha as fotos de novo: elas só são guardadas quando o formulário é aceito." %}</p>
+      {% endif %}
+
       <div id="image-preview-grid" class="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <button type="button" id="add-image-btn" class="grid aspect-[4/3] place-content-center justify-items-center gap-2 rounded-xl border-2 border-dashed border-input text-sm font-medium text-muted-foreground transition-colors hover:border-foreground/40 hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50">
           {% icon "image-plus" class="size-6" %}

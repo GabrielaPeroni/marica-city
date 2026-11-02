@@ -555,6 +555,12 @@ class PlaceSubmitTests(Data):
         )
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, "data-existing-image-url")
+        self.assertContains(response, "data-photos-lost")
+
+    def test_refused_submission_without_photos_asks_for_nothing(self):
+        response = self.client.post(self.url, self.body(categories=[]))
+        self.assertNotContains(response, "data-photos-lost")
+        self.assertNotContains(self.client.get(self.url), "data-photos-lost")
 
     def test_edit_form_previews_the_saved_photo_after_a_refused_replacement(self):
         prefix = PlaceImageFormSet().prefix

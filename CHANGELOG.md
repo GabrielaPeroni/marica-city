@@ -50,7 +50,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   The view-count beacon also had no rate limit.
 - A NUL character in a search or form answered 500 on Postgres; it now answers 400.
 - A refused place submission showed a preview of a photo that was never saved, so it
-  looked kept but was lost. The form now shows only photos that are really stored.
+  looked kept but was lost. The form now shows only photos that are really stored and
+  asks to choose them again.
+- With address autocomplete on, an empty address blocked the place form with no
+  message. The visible field is now the required one.
+- When Google refuses the Maps key, the address box was disabled, so no address could
+  be typed. The plain text field now comes back.
 - The JavaScript translations are cached, instead of calling the server on every page.
 
 ### Changed

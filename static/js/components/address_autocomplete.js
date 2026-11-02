@@ -20,8 +20,11 @@ function initAutocomplete() {
     return;
   }
 
-  // Ocultar o textarea original temporariamente
+  // Ocultar o textarea original temporariamente. A obrigatoriedade passa para o campo
+  // visível: um campo oculto obrigatório bloqueia o envio sem nenhum aviso.
   addressTextarea.hidden = true;
+  const required = addressTextarea.required;
+  addressTextarea.required = false;
 
   // Criar um input de texto para autocompletar
   autocompleteInput = document.createElement('input');
@@ -29,6 +32,7 @@ function initAutocomplete() {
   autocompleteInput.className = 'input w-full';
   autocompleteInput.id = 'id_address_search';
   autocompleteInput.autocomplete = 'off';
+  autocompleteInput.required = required;
   autocompleteInput.setAttribute(
     'aria-describedby',
     addressTextarea.getAttribute('aria-describedby') || ''
@@ -106,6 +110,17 @@ function updateAddressComponents(components) {
     }
   });
 }
+
+// O Google desativa o campo quando recusa a chave (cobrança, restrição de domínio):
+// volta o campo de texto comum, para o endereço continuar sendo digitado à mão.
+window.gm_authFailure = function () {
+  if (!autocompleteInput) return;
+  autocompleteInput.labels.forEach(label => (label.htmlFor = addressTextarea.id));
+  addressTextarea.required = autocompleteInput.required;
+  addressTextarea.hidden = false;
+  autocompleteInput.remove();
+  autocompleteInput = null;
+};
 
 // Inicializar quando o script do Google Maps for carregado
 window.initAutocomplete = initAutocomplete;

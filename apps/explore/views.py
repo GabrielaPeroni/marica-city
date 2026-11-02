@@ -164,6 +164,7 @@ def _place_form(request, place=None):
         "formset": formset,
         "place": place,
         "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
+        "photos_lost": bool(request.FILES),
     }
 
 
