@@ -4,6 +4,10 @@
  * Sincronização opcional com backend para usuários logados
  */
 
+// Trocas feitas aqui já vão ao servidor; só outro aparelho muda a lista por fora
+const SYNCED_AT_KEY = 'marica_favorites_synced_at';
+const SYNC_TTL_MS = 5 * 60 * 1000;
+
 class FavoritesService {
   constructor() {
     this.storageKey = 'marica_favorites';
@@ -144,14 +148,41 @@ class FavoritesService {
     }
   }
 
+  syncedRecently() {
+    try {
+      const at = Number(window.sessionStorage.getItem(SYNCED_AT_KEY));
+      return Boolean(at) && Date.now() - at < SYNC_TTL_MS;
+    } catch {
+      return false;
+    }
+  }
+
+  markSynced() {
+    try {
+      window.sessionStorage.setItem(SYNCED_AT_KEY, String(Date.now()));
+    } catch {
+      // Sem sessionStorage, só busca de novo na próxima página
+    }
+  }
+
+  forgetSync() {
+    try {
+      window.sessionStorage.removeItem(SYNCED_AT_KEY);
+    } catch {
+      // Nada a limpar
+    }
+  }
+
   /**
    * Carregar favoritos do backend (para usuários logados no carregamento da página)
    * @returns {Promise<number[]>}
    */
   async loadFromBackend() {
+    if (this.syncedRecently()) return this.getFavorites();
     try {
       const { data } = await request('/explore/favorites/list/', { timeout: 8000 });
       if (data && data.favorites) {
+        this.markSynced();
         const merged = [...new Set([...this.getFavorites(), ...data.favorites])];
         this.saveFavorites(merged);
         return merged;

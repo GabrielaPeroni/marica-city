@@ -30,7 +30,7 @@
       {% endif %}
     </div>
   </a>
-  <button type="button" class="favorite-btn btn absolute end-3 top-3 z-10 rounded-full bg-background/90 shadow-sm backdrop-blur hover:bg-background" data-variant="ghost" data-size="icon-sm" data-place-id="{{ place.pk }}" {% if remove %}data-remove-mode="true" aria-pressed="true" title="{% translate 'Remover dos favoritos' %}" aria-label="{% translate 'Remover dos favoritos' %}"{% else %}aria-pressed="false" title="{% translate 'Adicionar aos favoritos' %}" aria-label="{% translate 'Adicionar aos favoritos' %}"{% endif %}>
+  <button type="button" class="favorite-btn btn absolute end-3 top-3 z-10 rounded-full bg-background/90 shadow-sm hover:bg-background" data-variant="ghost" data-size="icon-sm" data-place-id="{{ place.pk }}" {% if remove %}data-remove-mode="true" aria-pressed="true" title="{% translate 'Remover dos favoritos' %}" aria-label="{% translate 'Remover dos favoritos' %}"{% else %}aria-pressed="false" title="{% translate 'Adicionar aos favoritos' %}" aria-label="{% translate 'Adicionar aos favoritos' %}"{% endif %}>
     {% icon "heart" class="size-4" %}
   </button>
 </article>

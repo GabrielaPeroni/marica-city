@@ -4,6 +4,20 @@
  */
 
 /**
+ * Resolve quando a página está de fato aberta; em pré-renderização, espera a ativação
+ * @returns {Promise<void>}
+ */
+function whenActive() {
+  return new Promise(resolve => {
+    if (document.prerendering) {
+      document.addEventListener('prerenderingchange', () => resolve(), { once: true });
+    } else {
+      resolve();
+    }
+  });
+}
+
+/**
  * Obter token CSRF do cookie
  * @param {string} name - Nome do cookie
  * @returns {string|null} Valor do cookie
@@ -182,5 +196,6 @@ if (typeof window !== 'undefined') {
   window.getCookie = getCookie;
   window.cloneIcon = cloneIcon;
   window.request = request;
+  window.whenActive = whenActive;
   window.RequestError = RequestError;
 }

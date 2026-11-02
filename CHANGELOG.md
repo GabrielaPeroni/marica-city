@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (signature, expiry, issuer, audience), requires a verified email, and finds,
   links or creates the account. Staff accounts are never linked by email. The
   button had no server side before, so it could not sign anyone in.
+- API and page tests (`test_api_and_pages.py`): every JSON endpoint's contract,
+  each page per kind of visitor, and query counts. `scripts/browser_check.mjs` runs
+  in CI and against the live site, and fails on repeated calls, failed requests,
+  console errors, reload loops and idle main-thread work.
+- Content translation runs on the server through DeepL in a daily cron, so it no
+  longer needs a local model. Guardrails: public content only, no route visitors
+  can trigger, a daily character limit, a ceiling on the monthly quota, a size limit
+  per item, and no retries after a failure.
 - Shared Redis cache in production (Upstash). Email codes and rate limits now
   work across instances, and the first load on a new instance drops from 7-17s
   to under 1s.
@@ -34,8 +42,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README in English and Portuguese (`README.pt-BR.md`) and a deployment note
   covering the Vercel pitfalls found so far.
 
+### Fixed
+
+- Favorites and place APIs answered 500 to malformed input: a non-list in
+  `favorites/sync/`, oversized ids in `?ids=`, or two simultaneous favorite clicks.
+  The view-count beacon also had no rate limit.
+
 ### Changed
 
+- The landing page no longer restyles the whole hero on every frame, which kept the
+  main thread busy even with the page idle and made scrolling heavy.
+- Lighter scrolling and hovering: cards reveal without an animated blur, card badges
+  and hearts have no backdrop blur, and parallax and the card spotlight update at
+  most once per frame.
+- Hover prerendering no longer calls the API for pages nobody opened, and the
+  favorites list is reused between pages for 5 minutes instead of fetched on each.
 - Repository reorganization (no behaviour change):
   - `documentacao/` is now `docs/`.
   - Page scripts moved to `static/js/pages/`, shared ones to

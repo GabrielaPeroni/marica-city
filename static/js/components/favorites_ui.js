@@ -54,18 +54,21 @@ function initializeFavoritesUI() {
 
   // Se o usuário estiver logado, sincronizar com backend
   const isLoggedIn = document.body.dataset.userAuthenticated === 'true';
+  if (!isLoggedIn) favoritesService.forgetSync();
   if (isLoggedIn) {
-    favoritesService.loadFromBackend().then(() => {
-      // Atualizar UI após carregar do backend
-      buttons.forEach(button => {
-        const placeId = button.dataset.placeId;
-        if (placeId) {
-          const isFavorited = favoritesService.isFavorited(placeId);
-          updateFavoriteButton(button, isFavorited);
-        }
+    whenActive()
+      .then(() => favoritesService.loadFromBackend())
+      .then(() => {
+        // Atualizar UI após carregar do backend
+        buttons.forEach(button => {
+          const placeId = button.dataset.placeId;
+          if (placeId) {
+            const isFavorited = favoritesService.isFavorited(placeId);
+            updateFavoriteButton(button, isFavorited);
+          }
+        });
+        updateNavbarFavoritesCount();
       });
-      updateNavbarFavoritesCount();
-    });
   }
 }
 

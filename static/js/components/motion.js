@@ -47,9 +47,9 @@
           (rect.top + rect.height / 2 - mid) * parseFloat(el.dataset.parallax),
         ];
       });
-      batch.forEach(([el, offset]) =>
-        el.style.setProperty('--parallax', offset.toFixed(1))
-      );
+      batch.forEach(([el, offset]) => {
+        el.style.translate = `0 ${offset.toFixed(1)}px`;
+      });
       ticking = false;
     };
     const watcher = new window.IntersectionObserver(
@@ -88,14 +88,22 @@
   }
 
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    // Um mouse pode disparar 1000 eventos por segundo: só o último de cada quadro conta
+    let latest = null;
+    const paintSpotlight = () => {
+      const { card, x, y } = latest;
+      latest = null;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${x - rect.left}px`);
+      card.style.setProperty('--my', `${y - rect.top}px`);
+    };
     document.addEventListener(
       'pointermove',
       event => {
         const card = event.target.closest && event.target.closest('[data-spotlight]');
         if (!card) return;
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
-        card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+        if (!latest) window.requestAnimationFrame(paintSpotlight);
+        latest = { card, x: event.clientX, y: event.clientY };
       },
       { passive: true }
     );

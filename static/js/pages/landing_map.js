@@ -87,6 +87,7 @@
     async function loadMarkers() {
       container.querySelector('[data-map-data-error]')?.remove();
       try {
+        await whenActive();
         const { data } = await request('/explore/api/map-data/');
         const places = (data.places || []).filter(
           p => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)

@@ -282,7 +282,7 @@
   }
 
   .badge[data-variant='overlay'] {
-    @apply bg-background/90 text-foreground shadow-sm backdrop-blur;
+    @apply bg-background/90 text-foreground shadow-sm;
   }
 
   .badge[data-variant='success'] {
@@ -581,8 +581,7 @@
   transition:
     opacity 0.6s ease,
     translate 1s var(--ease-spring),
-    scale 1s var(--ease-spring),
-    filter 0.6s ease;
+    scale 1s var(--ease-spring);
   transition-delay: calc(var(--reveal-i, 0) * 70ms);
 }
 
@@ -590,7 +589,6 @@
   opacity: 0;
   translate: 0 2.5rem;
   scale: 0.97;
-  filter: blur(4px);
 }
 
 /* Luz que segue o cursor nos cards (posição em --mx/--my, via motion.js) */
@@ -639,7 +637,6 @@ html {
     z-index: -1;
     pointer-events: none;
     will-change: transform;
-    translate: 0 calc(var(--parallax, 0) * 1px);
   }
 
   /* Borda ondulada entre seções: a onda tem a cor da seção que ela começa */

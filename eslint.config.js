@@ -78,6 +78,7 @@ module.exports = [
         cloneIcon: 'readonly',
         showToast: 'readonly',
         request: 'readonly',
+        whenActive: 'readonly',
         RequestError: 'readonly',
       },
     },
