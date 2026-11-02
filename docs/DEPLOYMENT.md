@@ -161,8 +161,10 @@ places).
 - **Shared cache on serverless.** Email codes (signup and password reset) and
   rate limits are stored in the Django cache. With the default `LocMemCache`
   each function instance has its own copy, so a code requested on one instance
-  can be rejected by another and limits count per instance. Set `CACHE_URL` or
-  `REDIS_URL` to a shared Redis for both to work reliably.
+  can be rejected by another and limits count per instance. Production uses
+  Upstash Redis (`marica-city-cache`, free plan, `gru1`), which sets `REDIS_URL`.
+  Image thumbnails and previews are cached there too: without it, the first page
+  on each new instance takes 7-17s instead of under 1s.
 - **Local `.env` pointing at production.** If you pulled variables from Vercel,
   your `.env` may carry the production Neon `DATABASE_URL` (and
   `DATABASE_URL_UNPOOLED`). Blank both before running tests or the dev server,
