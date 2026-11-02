@@ -74,14 +74,11 @@ class DemoSnapshotSyncTests(SnapshotCase):
             sorted(Place.objects.values_list("name", "description", "translations")),
         )
 
-    def test_recreates_missing_events(self):
+    def test_deleted_event_stays_deleted(self):
         slug = self.data["events"][0]["slug"]
         News.objects.get(slug=slug).delete()
         self.load()
-        self.assertEqual(
-            News.objects.published().events().count(), len(self.data["events"])
-        )
-        self.assertTrue(News.objects.filter(slug=slug).exists())
+        self.assertFalse(News.objects.filter(slug=slug).exists())
 
     def test_applies_translations_when_text_is_unchanged(self):
         stale = {"source": self.place.translations["source"], "en": {"name": "old"}}
@@ -109,4 +106,4 @@ class DemoSnapshotSyncTests(SnapshotCase):
         self.load()
         self.assertEqual(self.state(), before)
         with override_settings(MEDIA_ROOT=self.media.name):
-            self.assertEqual(demo_snapshot.sync(), (0, 0))
+            self.assertEqual(demo_snapshot.sync(), 0)

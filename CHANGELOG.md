@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rate limits on every write path, answered with 429 and `Retry-After` (JSON
   for `fetch`, a friendly page for browsers).
 - Translated place names, search over translated text, and demo loading that
-  syncs new snapshot events and unedited translations.
+  syncs unedited translations.
 - `LICENSE` at the repository root, so GitHub detects the MIT license.
 - README in English and Portuguese (`README.pt-BR.md`) and a deployment note
   covering the Vercel pitfalls found so far.

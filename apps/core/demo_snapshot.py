@@ -219,19 +219,13 @@ def load():
 
 @transaction.atomic
 def sync():
-    """Bring an existing database up to date with the snapshot, idempotently.
+    """Copy snapshot translations onto places whose Portuguese text is unchanged.
 
-    Creates snapshot events that are missing and copies snapshot translations onto
-    places whose Portuguese text is unchanged (same source hash), so text edited in
-    production is never overwritten. Returns ``(events_created, places_updated)``.
+    Same source hash only, so text edited in production is never overwritten. Events
+    are left alone: this runs on every build and would bring deleted ones back.
+    Returns how many places were updated.
     """
     data = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
-    owner = _demo_user(OWNER, first_name="Equipe", last_name="MaricaCity")
-
-    existing = set(News.objects.values_list("slug", flat=True))
-    missing = [e for e in data["events"] if e["slug"] not in existing]
-    for e in missing:
-        _create_event(e, owner)
 
     updated = 0
     for p in data["places"]:
@@ -245,7 +239,7 @@ def sync():
         ):
             Place.objects.filter(pk=place.pk).update(translations=translations)
             updated += 1
-    return len(missing), updated
+    return updated
 
 
 def restore_media():
