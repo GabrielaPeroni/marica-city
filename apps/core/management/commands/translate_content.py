@@ -1,39 +1,29 @@
-from contextlib import closing
-from itertools import islice
-from urllib.error import URLError
-
 from django.core.management.base import BaseCommand
 
-from apps.core.content_translation import needs_translation, translate_object
-from apps.explore.models import Category, Place, PlaceReview
-from apps.news.models import News
+from apps.core.content_translation import translate_pending
 
-MODELS = [Category, Place, PlaceReview, News]
+MESSAGES = {
+    "not_configured": "DEEPL_API_KEY não definida; nada foi traduzido.",
+    "unavailable": "DeepL indisponível; tente mais tarde.",
+    "budget": "Limite de caracteres atingido; o resto fica para o próximo lote.",
+    "time": "Tempo do lote esgotado; o resto fica para o próximo lote.",
+    "limit": "Limite de itens atingido; o resto fica para o próximo lote.",
+}
 
 
 class Command(BaseCommand):
-    help = "Traduz para inglês e espanhol o conteúdo novo ou alterado (via Ollama)."
+    help = "Traduz para inglês e espanhol o conteúdo novo ou alterado (via DeepL)."
 
     def add_arguments(self, parser):
         parser.add_argument("--limit", type=int, default=200)
 
     def handle(self, *args, **options):
-        pending = (
-            obj
-            for model in MODELS
-            for obj in model.objects.iterator()
-            if needs_translation(obj)
+        summary = translate_pending(limit=options["limit"])
+        if summary["stopped"]:
+            self.stderr.write(MESSAGES[summary["stopped"]])
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"{summary['translated']} item(ns) traduzido(s), "
+                f"{summary['chars']} caracteres, {summary['skipped']} ignorado(s)."
+            )
         )
-        # closing(): if we stop early, the Postgres server-side cursor behind
-        # .iterator() is closed now, not later inside someone else's transaction
-        with closing(pending):
-            done = 0
-            for obj in islice(pending, options["limit"]):
-                try:
-                    translate_object(obj)
-                except (URLError, TimeoutError, ConnectionError) as exc:
-                    self.stderr.write(f"Ollama indisponível ({exc}); tente mais tarde.")
-                    return
-                done += 1
-                self.stdout.write(f"  {type(obj).__name__} {obj.pk}")
-        self.stdout.write(self.style.SUCCESS(f"{done} item(ns) traduzido(s)."))

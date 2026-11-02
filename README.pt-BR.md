@@ -36,7 +36,8 @@ reescrita voltada a estrutura, testes, deploy e qualidade do front-end.
   extrai datas e locais e coloca os candidatos numa fila de triagem. A equipe
   publica ou descarta; nada vai ao ar sem revisão.
 - **Três idiomas.** A interface usa os catálogos gettext do Django; o conteúdo
-  cadastrado é traduzido por um LLM local e guardado junto do original.
+  público é traduzido pelo DeepL num lote diário, com limite de gasto, e guardado
+  junto do original.
 - **Cadastro com e-mail verificado.** Um código de 6 dígitos confirma o
   endereço antes de a conta ser criada; a recuperação de senha funciona igual.
 - **Painel administrativo.** Fila de aprovação e backlog, gestão de notícias e

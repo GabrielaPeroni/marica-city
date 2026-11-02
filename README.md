@@ -36,8 +36,8 @@ rewrite focused on structure, tests, deployment and front-end quality.
   posts, extracts dates and venues, and puts candidates in a triage queue. Staff
   publish or discard them; nothing goes live unreviewed.
 - **Three languages.** The interface is translated with Django's gettext
-  catalogs; user and editorial content is translated by a local LLM and stored
-  next to the original.
+  catalogs; public content is translated by DeepL in a daily batch with spending
+  limits, and stored next to the original.
 - **Email-verified signup.** A 6-digit code confirms the address before the
   account row is created; password reset works the same way.
 - **Admin panel.** Approval queue and backlog, news and event management,

@@ -94,7 +94,7 @@ pendentes. A equipe confere em `/painel-admin/eventos/triagem/`; aprovar cria
 um `News` publicado. No Vercel quem chama é o cron; no Docker, o serviço
 `scheduler` (`run_scheduler`).
 
-**Tradução de conteúdo.** `translate_content` (Ollama, local) preenche
+**Tradução de conteúdo.** `translate_content` (DeepL, em lote, por cron) preenche
 `translations`; `core/content_translation.py` compara o hash dos campos em
 português para só retraduzir o que mudou. Os templates leem com
 `{% load content_i18n %}{{ obj|tr:"field" }}`. A interface usa `locale/`

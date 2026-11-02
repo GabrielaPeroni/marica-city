@@ -212,9 +212,15 @@ EMAIL_CODE_AUTOFILL_DOMAINS = []
 # Vercel Cron envia este segredo no cabeçalho Authorization (/cron/...)
 CRON_SECRET = config("CRON_SECRET", default="")
 
-# Tradução automática de conteúdo (manage.py translate_content)
-OLLAMA_URL = config("OLLAMA_URL", default="http://localhost:11434")
-OLLAMA_MODEL = config("OLLAMA_MODEL", default="qwen2.5:14b")
+# Tradução automática de conteúdo (cron diário ou manage.py translate_content).
+# Sem chave, nada é traduzido. Os limites contam caracteres enviados ao DeepL.
+DEEPL_API_KEY = config("DEEPL_API_KEY", default="")
+TRANSLATE_DAILY_CHAR_LIMIT = config(
+    "TRANSLATE_DAILY_CHAR_LIMIT", default=20_000, cast=int
+)
+# Fração da cota mensal do DeepL que o site pode usar
+TRANSLATE_USAGE_CEILING = config("TRANSLATE_USAGE_CEILING", default=0.8, cast=float)
+TRANSLATE_MAX_ITEM_CHARS = config("TRANSLATE_MAX_ITEM_CHARS", default=6_000, cast=int)
 
 # Limitação de Taxa (para prevenir abuso de API)
 RATELIMIT_ENABLE = config("RATELIMIT_ENABLE", default=True, cast=bool)

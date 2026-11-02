@@ -16,8 +16,9 @@ from django.views.decorators.http import require_GET, require_POST
 from django.views.static import serve
 
 from apps.accounts.models import User
+from apps.core.content_translation import translate_pending
 from apps.core.decorators import moderator_required
-from apps.core.utils import safe_next
+from apps.core.utils import is_cron_request, safe_next
 from apps.explore.models import Category, Place, PlaceImage, PlaceReview
 from apps.explore.visits import most_visited
 from apps.news import event_crawler
@@ -25,6 +26,17 @@ from apps.news.forms import EventCandidateForm, NewsForm
 from apps.news.models import EventCandidate, News, NewsCategory
 
 logger = logging.getLogger(__name__)
+
+
+@require_GET
+def cron_translate_content_view(request):
+    """Vercel Cron: traduz o conteúdo novo. Só com `Authorization: Bearer <CRON_SECRET>`."""
+    if not is_cron_request(request):
+        return JsonResponse({"error": "unauthorized"}, status=401)
+    summary = translate_pending()
+    return JsonResponse(
+        summary, status=503 if summary["stopped"] == "unavailable" else 200
+    )
 
 
 @require_GET

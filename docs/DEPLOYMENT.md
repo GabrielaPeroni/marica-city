@@ -67,7 +67,7 @@ supervisor, uptime monitor).
 | ------------------ | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pr-checks.yml`    | PRs and `main`         | Linters (black, isort, autoflake, flake8, Prettier, pip-audit); tests on Postgres under coverage (floor 90%)                                                                                                                                                                                                                                                                                                                 |
 | `container.yml`    | PRs, `main`, `v*` tags | Builds the image, `check --deploy` with default prod settings, runs it on Postgres, migrates, waits for the Docker healthcheck, smoke-tests pages / `robots.txt` / `sitemap.xml` / hashed static files, Lighthouse CI score floors. On `main`: publishes `ghcr.io/<owner>/<repo>` (`latest`, `sha-…`) with SBOM and build provenance. On a `v*` tag: semver tags plus a GitHub Release from that version's CHANGELOG section |
-| `deploy-check.yml` | Daily and on demand    | Smoke-tests the live URL and runs Lighthouse against it                                                                                                                                                                                                                                                                                                                                                                      |
+| `deploy-check.yml` | Daily and on demand    | Smoke-tests the live URL, runs `scripts/browser_check.mjs` and Lighthouse against it                                                                                                                                                                                                                                                                                                                                         |
 | `codeql.yml`       | PRs, `main`, weekly    | Static security analysis                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 Dependabot keeps Python, npm, GitHub Actions and the Docker base image up to date.
@@ -87,9 +87,9 @@ Vercel detects `manage.py` and serves `config.wsgi:application` as one function
 `/static/` from its CDN. The build step `scripts/vercel_build.py` migrates, loads
 the demo content on an empty database (`load_demo_data`, from
 `apps/core/demo_data/`) and creates the admin when its variables are set.
-`vercel.json` sets the function timeout and a daily cron that calls
-`/cron/crawl-events/` (protected by `CRON_SECRET`, which Vercel sends as a
-Bearer token).
+`vercel.json` sets the function timeout and two daily crons,
+`/cron/crawl-events/` and `/cron/translate-content/` (both protected by
+`CRON_SECRET`, which Vercel sends as a Bearer token).
 
 One-time setup:
 
@@ -174,9 +174,8 @@ Limits to keep in mind:
 
 - After idle time, the first request starts a new instance (cold start).
 - There is no long-running process. The cron above only runs `crawl_events`
-  (new events land in the triage queue); it does not deploy and does not
-  translate. `translate_content` (Ollama) stays a local task: the demo
-  snapshot already carries the translations.
+  (new events land in the triage queue); it does not deploy. Translation has
+  its own daily cron, `/cron/translate-content/` (see below).
 
 ## Wiring Cloudflare in front
 
@@ -292,15 +291,28 @@ do Docker, rode-o como um serviço do sistema ou troque por um cron que chame
 
 ## Tradução automática do conteúdo (`translate_content`)
 
-O conteúdo cadastrado (descrições de lugares, categorias, eventos e
-avaliações) é traduzido para inglês e espanhol por um LLM local via
-[Ollama](https://ollama.com). As traduções ficam no campo `translations` de cada
-registro e são servidas sem chamar o modelo, então o site não depende do Ollama
-em produção.
+O conteúdo público (lugares, categorias, eventos publicados e avaliações) é
+traduzido para inglês e espanhol pelo [DeepL](https://www.deepl.com/pro-api). As
+traduções ficam no campo `translations` de cada registro e são servidas sem chamar
+o DeepL, então nenhuma visita depende dele.
 
-- `ollama pull qwen2.5:14b` (ou outro modelo; ajuste `OLLAMA_MODEL`).
-- `uv run python manage.py translate_content` traduz o que é novo ou mudou desde
-  a última execução. Também roda dentro do `run_scheduler`.
-- `OLLAMA_URL` aponta para o servidor (padrão `http://localhost:11434`). Se ele
-  não responder, o comando avisa e sai sem erro.
+- A Vercel chama `/cron/translate-content/` uma vez por dia, com `CRON_SECRET`.
+  `uv run python manage.py translate_content` faz o mesmo à mão. Só vai o que é
+  novo ou mudou desde a última tradução.
+- `DEEPL_API_KEY` fica só no servidor. Sem ela, nada é traduzido e o site mostra o
+  português.
+
+Limites, para ninguém gastar a cota:
+
+- Nada que um visitante faça chama o DeepL; não há rota pública de tradução.
+- Só vai conteúdo público: lugar aprovado, evento publicado, avaliação de lugar
+  público. Avaliações entram por último, para spam não atrasar o resto.
+- `TRANSLATE_DAILY_CHAR_LIMIT` (20.000): teto de caracteres por dia, somando os dois
+  idiomas, mesmo que o cron seja chamado de novo. Ele fica no Redis.
+- `TRANSLATE_USAGE_CEILING` (0,8): para em 80% da cota mensal informada pelo DeepL.
+- `TRANSLATE_MAX_ITEM_CHARS` (6.000): item maior que isso é ignorado e registrado
+  no log.
+- Se o DeepL falhar (cota, chave, rede), o lote para na hora, sem novas tentativas.
+  O cron responde 503, visível nos logs da Vercel.
+
 - Correções manuais: Django admin → o registro → "Traduções automáticas".

@@ -536,7 +536,7 @@ class LanguageSwitcherTests(TestCase):
 
 
 class ContentTranslationTests(TestCase):
-    """Conteúdo traduzido por LLM aparece no idioma escolhido, com fallback"""
+    """Conteúdo traduzido aparece no idioma escolhido, com fallback"""
 
     def setUp(self):
         from apps.core.content_translation import translate_object
@@ -546,12 +546,11 @@ class ContentTranslationTests(TestCase):
             name="Praias", slug="praias", description="As melhores praias"
         )
 
-    def _fake(self, prompt):
-        lang = "es" if "Spanish" in prompt else "en"
+    def _fake(self, texts, target):
         return {
-            "en": {"name": "Beaches", "description": "The best beaches"},
-            "es": {"name": "Playas", "description": "Las mejores playas"},
-        }[lang]
+            "EN-US": ["Beaches", "The best beaches"],
+            "ES": ["Playas", "Las mejores playas"],
+        }[target]
 
     def test_translations_are_stored_per_language(self):
         data = self.translate_object(self.category, ask=self._fake)
@@ -577,22 +576,6 @@ class ContentTranslationTests(TestCase):
         self.assertFalse(needs_translation(self.category))
         self.category.description = "Outra descrição"
         self.assertTrue(needs_translation(self.category))
-
-    def test_command_stops_quietly_without_ollama(self):
-        from io import StringIO
-        from unittest import mock
-        from urllib.error import URLError
-
-        from django.core.management import call_command
-
-        err = StringIO()
-        with mock.patch(
-            "apps.core.content_translation._ollama",
-            autospec=True,
-            side_effect=URLError("down"),
-        ):
-            call_command("translate_content", stdout=StringIO(), stderr=err)
-        self.assertIn("Ollama", err.getvalue())
 
 
 class AdminNewsFilterTests(TestCase):

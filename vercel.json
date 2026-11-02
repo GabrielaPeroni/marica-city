@@ -4,5 +4,8 @@
   "functions": {
     "config/wsgi.py": { "maxDuration": 30 }
   },
-  "crons": [{ "path": "/cron/crawl-events/", "schedule": "0 9 * * *" }]
+  "crons": [
+    { "path": "/cron/crawl-events/", "schedule": "0 9 * * *" },
+    { "path": "/cron/translate-content/", "schedule": "30 9 * * *" }
+  ]
 }

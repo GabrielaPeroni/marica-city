@@ -6,7 +6,12 @@ from django.views.generic import RedirectView
 from django.views.i18n import JavaScriptCatalog
 
 from apps.core.sitemaps import SITEMAPS
-from apps.core.views import health_view, media_view, robots_txt_view
+from apps.core.views import (
+    cron_translate_content_view,
+    health_view,
+    media_view,
+    robots_txt_view,
+)
 from apps.news.views import cron_crawl_events_view
 
 urlpatterns = [
@@ -14,6 +19,11 @@ urlpatterns = [
     path("robots.txt", robots_txt_view, name="robots_txt"),
     path("sitemap.xml", sitemap, {"sitemaps": SITEMAPS}, name="sitemap"),
     path("cron/crawl-events/", cron_crawl_events_view, name="cron_crawl_events"),
+    path(
+        "cron/translate-content/",
+        cron_translate_content_view,
+        name="cron_translate_content",
+    ),
     path("i18n/", include("django.conf.urls.i18n")),
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("admin/", admin.site.urls),
