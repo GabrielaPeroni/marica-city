@@ -1,10 +1,14 @@
 """Every page answers correctly for each kind of visitor, and the JSON APIs keep their
 contract: status, shape, methods, malformed input and how many queries they cost."""
 
+import io
 import json
+import tempfile
 from unittest import mock
 
+from django.conf import settings
 from django.core.cache import cache
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import connection
 from django.test import TestCase, override_settings
 from django.test.utils import CaptureQueriesContext
@@ -12,8 +16,10 @@ from django.urls import reverse
 from django.utils import timezone
 
 import django_ratelimit.core
+from PIL import Image
 
 from apps.accounts.models import User
+from apps.explore.forms import PlaceImageFormSet
 from apps.explore.models import Category, Favorite, Place, PlaceReview
 from apps.news.models import News, NewsCategory
 
@@ -322,6 +328,270 @@ class FavoritesApiTests(Data):
         self.client.force_login(self.author)
         response = self.post_json(self.sync_url, {"favorites": list(range(5000))})
         self.assertEqual(response.status_code, 400)
+
+
+@override_settings(RATELIMIT_ENABLE=False)
+class NulCharacterTests(Data):
+    """Postgres refuses NUL, so it must never reach a query (SQLite would hide this)."""
+
+    def test_query_strings_are_refused(self):
+        for url in (
+            reverse("explore:explore"),
+            reverse("explore:category_detail", args=[self.category.slug]),
+            reverse("news:news_list"),
+        ):
+            for query in ("q=%00", "q=a%00b", "%00=x"):
+                with self.subTest(url=url, query=query):
+                    response = self.client.get(f"{url}?{query}")
+                    self.assertEqual(response.status_code, 400)
+
+    def test_forms_are_refused(self):
+        response = self.client.post(
+            reverse("accounts:login"), {"username": "a\x00b", "password": "x"}
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_moderator_filters_are_refused(self):
+        self.client.force_login(self.staff)
+        for url in (
+            reverse("explore:backlog"),
+            reverse("core:admin_news_list"),
+            reverse("accounts:user_management"),
+        ):
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(f"{url}?q=%00").status_code, 400)
+
+    def test_ordinary_requests_pass(self):
+        url = reverse("explore:explore")
+        self.assertEqual(self.client.get(f"{url}?q=praia").status_code, 200)
+
+
+@override_settings(RATELIMIT_ENABLE=False)
+class LoginApiTests(Data):
+    url = "/accounts/login/"
+
+    def test_success_shape(self):
+        data = self.client.post(
+            self.url, {"username": "autor", "password": "pw-12345678"}
+        ).json()
+        self.assertEqual(set(data), {"success", "message", "username"})
+        self.assertTrue(data["success"])
+
+    def test_failures_keep_one_shape(self):
+        for body, status in (
+            ({}, 400),
+            ({"username": "autor"}, 400),
+            ({"username": "autor", "password": "errada"}, 401),
+            ({"username": "ninguem", "password": "errada"}, 401),
+        ):
+            with self.subTest(body=body):
+                response = self.client.post(self.url, body)
+                self.assertEqual(response.status_code, status)
+                self.assertEqual(set(response.json()), {"success", "error"})
+
+    def test_unknown_and_wrong_password_look_the_same(self):
+        unknown = self.client.post(self.url, {"username": "x", "password": "y"})
+        wrong = self.client.post(self.url, {"username": "autor", "password": "y"})
+        self.assertEqual(unknown.json(), wrong.json())
+
+
+@override_settings(RATELIMIT_ENABLE=False)
+class GoogleApiTests(Data):
+    url = "/accounts/google/"
+
+    def test_malformed_bodies_are_refused(self):
+        for body in (b"", b"not json", b"[1]", b'"x"', b"\xff", b'{"token": 5}'):
+            with self.subTest(body=body):
+                response = self.client.post(
+                    self.url, body, content_type="application/json"
+                )
+                self.assertEqual(response.status_code, 400)
+                self.assertFalse(response.json()["success"])
+
+    def test_get_is_refused(self):
+        self.assertEqual(self.client.get(self.url).status_code, 405)
+
+
+@override_settings(RATELIMIT_ENABLE=False)
+class UserManagementApiTests(Data):
+    actions = ("accounts:user_update_type", "accounts:user_toggle_status")
+
+    def test_administrator_cannot_be_changed(self):
+        admin = User.objects.create_superuser("raiz", "r@example.com", "pw-12345678")
+        self.client.force_login(self.staff)
+        for action in self.actions:
+            with self.subTest(action=action):
+                response = self.client.post(reverse(action, args=[admin.pk]))
+                self.assertEqual(response.status_code, 403)
+        admin.refresh_from_db()
+        self.assertTrue(admin.is_active)
+
+    def test_visitor_is_sent_to_login_and_nothing_changes(self):
+        for action in self.actions:
+            with self.subTest(action=action):
+                response = self.client.post(reverse(action, args=[self.author.pk]))
+                self.assertEqual(response.status_code, 302)
+        self.author.refresh_from_db()
+        self.assertTrue(self.author.is_active)
+        self.assertFalse(self.author.is_staff)
+
+    def test_unknown_user_is_404(self):
+        self.client.force_login(self.staff)
+        for action in self.actions:
+            with self.subTest(action=action):
+                self.assertEqual(
+                    self.client.post(reverse(action, args=[999999])).status_code, 404
+                )
+
+
+class JsCatalogTests(TestCase):
+    def url(self, lang):
+        return reverse("javascript-catalog", args=[lang])
+
+    def test_language_comes_from_the_url_not_the_cookie(self):
+        self.client.cookies[settings.LANGUAGE_COOKIE_NAME] = "pt-br"
+        english = self.client.get(self.url("en")).content
+        spanish = self.client.get(self.url("es")).content
+        self.assertNotEqual(english, spanish)
+        self.client.cookies[settings.LANGUAGE_COOKIE_NAME] = "es"
+        self.assertEqual(self.client.get(self.url("en")).content, english)
+
+    def test_can_be_cached_without_setting_cookies(self):
+        response = self.client.get(self.url("en"))
+        self.assertIn("public", response["Cache-Control"])
+        self.assertIn("max-age=3600", response["Cache-Control"])
+        self.assertFalse(response.cookies)
+
+    def test_unknown_language_is_404(self):
+        self.assertEqual(self.client.get(self.url("xx")).status_code, 404)
+
+    def test_pages_link_the_catalog_of_their_language(self):
+        response = self.client.get(reverse("core:about"), HTTP_ACCEPT_LANGUAGE="es")
+        self.assertContains(response, f'src="{self.url("es")}"')
+
+
+class HealthApiTests(Data):
+    def test_shape(self):
+        response = self.client.get(reverse("healthz"))
+        self.assertEqual(response.json(), {"status": "ok"})
+
+
+@override_settings(RATELIMIT_ENABLE=False)
+class PlaceSubmitTests(Data):
+    url = "/explore/place/create/"
+
+    def setUp(self):
+        super().setUp()
+        media = tempfile.TemporaryDirectory()
+        self.addCleanup(media.cleanup)
+        storage = override_settings(
+            MEDIA_ROOT=media.name,
+            STORAGES={
+                "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+                "staticfiles": {
+                    "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
+                },
+            },
+        )
+        storage.enable()
+        self.addCleanup(storage.disable)
+        self.client.force_login(self.author)
+
+    def body(self, **overrides):
+        prefix = PlaceImageFormSet().prefix
+        return {
+            "name": "Lugar novo",
+            "description": "Descrição",
+            "address": "Rua B",
+            "categories": [self.category.pk],
+            f"{prefix}-TOTAL_FORMS": 3,
+            f"{prefix}-INITIAL_FORMS": 0,
+            f"{prefix}-MIN_NUM_FORMS": 0,
+            f"{prefix}-MAX_NUM_FORMS": 10,
+            **{f"{prefix}-{i}-display_order": 0 for i in range(3)},
+            **overrides,
+        }
+
+    def image(self, name="foto.png"):
+        buffer = io.BytesIO()
+        Image.new("RGB", (4, 4)).save(buffer, "PNG")
+        return SimpleUploadedFile(name, buffer.getvalue(), content_type="image/png")
+
+    def test_created_as_pending_with_a_primary_photo(self):
+        prefix = PlaceImageFormSet().prefix
+        response = self.client.post(
+            self.url, self.body(**{f"{prefix}-0-image": self.image()})
+        )
+        place = Place.objects.get(name="Lugar novo")
+        self.assertRedirects(
+            response,
+            reverse("explore:place_detail", args=[place.pk]),
+            fetch_redirect_response=False,
+        )
+        self.assertFalse(place.is_approved)
+        self.assertEqual(place.created_by, self.author)
+        self.assertTrue(place.images.get().is_primary)
+
+    def test_refused_submissions_create_nothing(self):
+        prefix = PlaceImageFormSet().prefix
+        fake = SimpleUploadedFile("foto.png", b"not an image", "image/png")
+        for overrides in (
+            {"categories": []},
+            {"name": ""},
+            {"categories": [999999]},
+            {f"{prefix}-0-image": fake},
+            {"latitude": "abc"},
+        ):
+            with self.subTest(overrides=list(overrides)):
+                response = self.client.post(self.url, self.body(**overrides))
+                self.assertEqual(response.status_code, 200)
+                self.assertFalse(Place.objects.filter(name="Lugar novo").exists())
+
+    def test_refused_submission_does_not_preview_an_unsaved_photo(self):
+        prefix = PlaceImageFormSet().prefix
+        response = self.client.post(
+            self.url,
+            self.body(categories=[], **{f"{prefix}-0-image": self.image()}),
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "data-existing-image-url")
+
+    def test_edit_form_previews_the_saved_photo_after_a_refused_replacement(self):
+        prefix = PlaceImageFormSet().prefix
+        self.client.post(self.url, self.body(**{f"{prefix}-0-image": self.image()}))
+        place = Place.objects.get(name="Lugar novo")
+        saved = place.images.get()
+        response = self.client.post(
+            reverse("explore:place_edit", args=[place.pk]),
+            self.body(
+                name="",
+                **{
+                    f"{prefix}-INITIAL_FORMS": 1,
+                    f"{prefix}-0-id": saved.pk,
+                    f"{prefix}-0-image": self.image("nova.png"),
+                },
+            ),
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response, f'data-existing-image-url="{saved.image.url}"', count=1
+        )
+        self.assertNotContains(response, "nova.png")
+
+    def test_cannot_approve_itself_or_claim_another_author(self):
+        self.client.post(
+            self.url,
+            self.body(is_approved="on", is_featured="on", created_by=self.staff.pk),
+        )
+        place = Place.objects.get(name="Lugar novo")
+        self.assertFalse(place.is_approved)
+        self.assertFalse(place.is_featured)
+        self.assertEqual(place.created_by, self.author)
+
+    def test_visitor_is_sent_to_login(self):
+        self.client.logout()
+        self.assertEqual(self.client.post(self.url, self.body()).status_code, 302)
+        self.assertFalse(Place.objects.filter(name="Lugar novo").exists())
 
 
 @override_settings(RATELIMIT_ENABLE=True)

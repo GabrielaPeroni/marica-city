@@ -5,14 +5,16 @@ from django.conf import settings
 from django.contrib import messages
 from django.db import connection
 from django.db.models import OuterRef, Subquery
-from django.http import HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy as _l
 from django.utils.translation import ngettext
+from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET, require_POST
+from django.views.i18n import JavaScriptCatalog
 from django.views.static import serve
 
 from apps.accounts.models import User
@@ -37,6 +39,16 @@ def cron_translate_content_view(request):
     return JsonResponse(
         summary, status=503 if summary["stopped"] == "unavailable" else 200
     )
+
+
+@require_GET
+@cache_control(public=True, max_age=3600, s_maxage=86400)
+def js_catalog_view(request, lang):
+    """JS strings, loaded on every page. The language is in the URL so it can be cached."""
+    if lang not in dict(settings.LANGUAGES):
+        raise Http404
+    with translation.override(lang):
+        return JavaScriptCatalog.as_view()(request)
 
 
 @require_GET

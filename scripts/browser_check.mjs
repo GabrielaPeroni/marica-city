@@ -16,6 +16,12 @@ const IGNORED_FAILURES = /accounts\.google\.com|gstatic\.com|mapsjs\/gen_204/;
 // A wrong-password 401 is expected; the rest are Google's sign-in frame outside prod
 const IGNORED_CONSOLE = /origin is not allowed|status of 401/;
 
+const IS_LOCAL = /^https?:\/\/(localhost|127\.0\.0\.1)(:|$)/.test(BASE_URL);
+const TINY_PNG = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+  'base64'
+);
+
 const failures = [];
 
 async function metrics(cdp) {
@@ -23,10 +29,18 @@ async function metrics(cdp) {
   return Object.fromEntries(list.map(m => [m.name, m.value]));
 }
 
-async function checkPage(page, cdp, path) {
+function report(name, problems) {
+  console.log(`${problems.length ? 'FAIL' : 'ok  '} ${name}`);
+  for (const problem of problems) {
+    console.log(`     ${problem}`);
+    failures.push(`${name}: ${problem}`);
+  }
+}
+
+function watch(page) {
   const firstParty = new Map();
   const problems = [];
-  let navigations = 0;
+  const state = { firstParty, problems, navigations: 0 };
 
   const onRequest = request => {
     const url = request.url();
@@ -58,7 +72,7 @@ async function checkPage(page, cdp, path) {
   };
   const onError = error => problems.push(`exception: ${error.message.slice(0, 160)}`);
   const onNavigate = frame => {
-    if (frame === page.mainFrame()) navigations += 1;
+    if (frame === page.mainFrame()) state.navigations += 1;
   };
 
   page.on('request', onRequest);
@@ -68,20 +82,28 @@ async function checkPage(page, cdp, path) {
   page.on('pageerror', onError);
   page.on('framenavigated', onNavigate);
 
+  state.stop = () => {
+    page.off('request', onRequest);
+    page.off('response', onResponse);
+    page.off('requestfailed', onFailed);
+    page.off('console', onConsole);
+    page.off('pageerror', onError);
+    page.off('framenavigated', onNavigate);
+  };
+  return state;
+}
+
+async function checkPage(page, cdp, path) {
+  const seen = watch(page);
   await page.goto(BASE_URL + path, { waitUntil: 'load', timeout: 60000 });
   await page.waitForTimeout(1500);
   const before = await metrics(cdp);
   await page.waitForTimeout(3000);
   const after = await metrics(cdp);
   const idle = Math.round(((after.TaskDuration - before.TaskDuration) / 3) * 1000);
+  seen.stop();
 
-  page.off('request', onRequest);
-  page.off('response', onResponse);
-  page.off('requestfailed', onFailed);
-  page.off('console', onConsole);
-  page.off('pageerror', onError);
-  page.off('framenavigated', onNavigate);
-
+  const { firstParty, problems, navigations } = seen;
   if (navigations !== 1) problems.push(`loaded ${navigations} times`);
   for (const [call, count] of firstParty) {
     if (count > 1) problems.push(`called ${count} times: ${call}`);
@@ -89,12 +111,76 @@ async function checkPage(page, cdp, path) {
   if (idle > IDLE_BUDGET_MS_PER_S) {
     problems.push(`idle main thread ${idle} ms/s (budget ${IDLE_BUDGET_MS_PER_S})`);
   }
+  report(`${path}  idle ${idle} ms/s`, problems);
+}
 
-  console.log(`${problems.length ? 'FAIL' : 'ok  '} ${path}  idle ${idle} ms/s`);
-  for (const problem of problems) {
-    console.log(`     ${problem}`);
-    failures.push(`${path}: ${problem}`);
+async function addPhoto(page) {
+  const [chooser] = await Promise.all([
+    page.waitForEvent('filechooser'),
+    page.locator('#add-image-btn').click(),
+  ]);
+  await chooser.setFiles({ name: 'foto.png', mimeType: 'image/png', buffer: TINY_PNG });
+  await page.locator('[data-image-card]').waitFor();
+}
+
+// Submits a place the way a person does, then deletes it. Creates data, so local only.
+async function checkPlaceSubmit(page) {
+  const create = '/explore/place/create/';
+  const seen = watch(page);
+  const { problems, firstParty } = seen;
+
+  await page.goto(BASE_URL + create, { waitUntil: 'load' });
+  await page.locator('#id_name').fill('Lugar do teste de navegador');
+  await page.locator('#id_description').fill('Criado e removido pela verificação.');
+  await page.locator('#id_address').fill('Rua do Teste, 1');
+  await addPhoto(page);
+
+  // No category yet: the server refuses and shows the error on the same page
+  await Promise.all([
+    page.waitForNavigation(),
+    page.locator('#place-form [type=submit]').click(),
+  ]);
+  if (!(await page.locator('fieldset [role=alert]').count())) {
+    problems.push('no error shown for a missing category');
   }
+  if ((await page.locator('#id_name').inputValue()) === '') {
+    problems.push('typed text lost after a refused submit');
+  }
+  if (await page.locator('[data-image-card]').count()) {
+    problems.push('preview shown for a photo the server did not keep');
+  }
+
+  // A double click must still send one request
+  await page.locator('input[name="categories"]').first().check();
+  await addPhoto(page);
+  await Promise.all([
+    page.waitForURL(/\/explore\/place\/\d+\/$/),
+    page.locator('#place-form [type=submit]').dblclick(),
+  ]);
+  const posts = firstParty.get(`POST ${create}`) || 0;
+  if (posts !== 2) problems.push(`expected 2 submits, sent ${posts}`);
+
+  const detail = new URL(page.url()).pathname;
+  await page.goto(`${BASE_URL}${detail}edit/`, { waitUntil: 'load' });
+  const photos = await page.locator('[data-image-card]').count();
+  if (photos !== 1)
+    problems.push(`expected the saved photo in the form, found ${photos}`);
+
+  await page.locator('[data-dialog-open="deleteModal"]').click();
+  await Promise.all([
+    page.waitForNavigation(),
+    page.locator('#deleteModal form [type=submit]').click(),
+  ]);
+  seen.stop();
+
+  // Pages repeat GETs between them, so only repeated writes count here
+  firstParty.delete(`POST ${create}`);
+  for (const [call, count] of firstParty) {
+    if (count > 1 && !call.startsWith('GET ')) {
+      problems.push(`sent ${count} times: ${call}`);
+    }
+  }
+  report('submit, fix, save and delete a place', problems);
 }
 
 async function discover(page, listPath, selector) {
@@ -164,8 +250,12 @@ if (CHECK_USER && CHECK_PASSWORD) {
   await page.goto(`${BASE_URL}/sobre/`, { waitUntil: 'load' });
   await page.waitForTimeout(500);
   page.off('request', count);
-  console.log(`${calls.length ? 'FAIL' : 'ok  '} favorites list reused between pages`);
-  if (calls.length) failures.push(`favorites list fetched ${calls.length} more times`);
+  report(
+    'favorites list reused between pages',
+    calls.length ? [`fetched ${calls.length} more times`] : []
+  );
+
+  if (IS_LOCAL) await checkPlaceSubmit(page);
 }
 
 await browser.close();

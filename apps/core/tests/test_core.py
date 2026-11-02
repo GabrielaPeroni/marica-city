@@ -529,8 +529,7 @@ class LanguageSwitcherTests(TestCase):
         self.assertContains(response, "Explorar lugares")
 
     def test_javascript_catalog_is_served(self):
-        self.client.post(reverse("set_language"), {"language": "en", "next": "/"})
-        response = self.client.get(reverse("javascript-catalog"))
+        response = self.client.get(reverse("javascript-catalog", args=["en"]))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Remove from favorites")
 

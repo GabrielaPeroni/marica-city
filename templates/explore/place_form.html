@@ -87,7 +87,7 @@
 
       <div id="formset-container" hidden>
         {% for form_instance in formset %}
-        <div class="formset-form" data-form-index="{{ forloop.counter0 }}" {% if form_instance.instance.image %}data-existing-image-url="{{ form_instance.instance.image.url }}"{% if form_instance.instance.is_primary %} data-primary{% endif %}{% endif %}>
+        <div class="formset-form" data-form-index="{{ forloop.counter0 }}" {% if form_instance.initial.image %}data-existing-image-url="{{ form_instance.initial.image.url }}"{% if form_instance.instance.is_primary %} data-primary{% endif %}{% endif %}>
           {{ form_instance.id }}
           {{ form_instance.image }}
           {{ form_instance.caption }}

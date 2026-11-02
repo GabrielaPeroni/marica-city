@@ -13,10 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (signature, expiry, issuer, audience), requires a verified email, and finds,
   links or creates the account. Staff accounts are never linked by email. The
   button had no server side before, so it could not sign anyone in.
-- API and page tests (`test_api_and_pages.py`): every JSON endpoint's contract,
-  each page per kind of visitor, and query counts. `scripts/browser_check.mjs` runs
-  in CI and against the live site, and fails on repeated calls, failed requests,
-  console errors, reload loops and idle main-thread work.
+- API and page tests (`test_api_and_pages.py`): JSON endpoint contracts, submitting
+  a place, each page per kind of visitor, and query counts. `scripts/browser_check.mjs`
+  runs in CI and against the live site, and fails on repeated calls, failed requests,
+  console errors, reload loops and idle main-thread work. On a local server it also
+  submits, corrects, saves and deletes a place like a visitor would.
 - Content translation runs on the server through DeepL in a daily cron, so it no
   longer needs a local model. Guardrails: public content only, no route visitors
   can trigger, a daily character limit, a ceiling on the monthly quota, a size limit
@@ -47,6 +48,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Favorites and place APIs answered 500 to malformed input: a non-list in
   `favorites/sync/`, oversized ids in `?ids=`, or two simultaneous favorite clicks.
   The view-count beacon also had no rate limit.
+- A NUL character in a search or form answered 500 on Postgres; it now answers 400.
+- A refused place submission showed a preview of a photo that was never saved, so it
+  looked kept but was lost. The form now shows only photos that are really stored.
+- The JavaScript translations are cached, instead of calling the server on every page.
 
 ### Changed
 

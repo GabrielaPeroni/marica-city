@@ -41,15 +41,15 @@ coverage, `[tool.vercel]`), `uv.lock`, `package.json`, `eslint.config.js`,
 
 ## URLs
 
-| Prefixo                                                          | App                                                           |
-| ---------------------------------------------------------------- | ------------------------------------------------------------- |
-| `/`                                                              | `core`: landing, `/sobre/`, `/painel-admin/...`               |
-| `/accounts/`                                                     | `accounts`: cadastro, login, usuários                         |
-| `/explore/`                                                      | `explore`: lugares, categorias, avaliações, favoritos, `api/` |
-| `/eventos/`                                                      | `news`: lista e detalhe (`/news/...` redireciona)             |
-| `/admin/`                                                        | Django Admin                                                  |
-| `/healthz/`, `/robots.txt`, `/sitemap.xml`, `/jsi18n/`, `/i18n/` | infraestrutura                                                |
-| `/cron/crawl-events/`                                            | chamada pelo Vercel Cron (exige `CRON_SECRET`)                |
+| Prefixo                                                                 | App                                                           |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `/`                                                                     | `core`: landing, `/sobre/`, `/painel-admin/...`               |
+| `/accounts/`                                                            | `accounts`: cadastro, login, usuários                         |
+| `/explore/`                                                             | `explore`: lugares, categorias, avaliações, favoritos, `api/` |
+| `/eventos/`                                                             | `news`: lista e detalhe (`/news/...` redireciona)             |
+| `/admin/`                                                               | Django Admin                                                  |
+| `/healthz/`, `/robots.txt`, `/sitemap.xml`, `/jsi18n/<lang>/`, `/i18n/` | infraestrutura                                                |
+| `/cron/crawl-events/`                                                   | chamada pelo Vercel Cron (exige `CRON_SECRET`)                |
 
 ## Modelos
 

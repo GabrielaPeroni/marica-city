@@ -3,12 +3,12 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path, re_path
 from django.views.generic import RedirectView
-from django.views.i18n import JavaScriptCatalog
 
 from apps.core.sitemaps import SITEMAPS
 from apps.core.views import (
     cron_translate_content_view,
     health_view,
+    js_catalog_view,
     media_view,
     robots_txt_view,
 )
@@ -25,7 +25,7 @@ urlpatterns = [
         name="cron_translate_content",
     ),
     path("i18n/", include("django.conf.urls.i18n")),
-    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
+    path("jsi18n/<str:lang>/", js_catalog_view, name="javascript-catalog"),
     path("admin/", admin.site.urls),
     path("accounts/", include("apps.accounts.urls")),
     path("explore/", include("apps.explore.urls")),
