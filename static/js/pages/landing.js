@@ -39,11 +39,15 @@ function initHero() {
         '<span class="hero-dot-bar"><span></span></span></button>',
     },
     on: {
+      // Direto na barra ativa: uma variável na seção recalcula o estilo do hero inteiro a cada quadro
       autoplayTimeLeft(swiper, timeLeft, progress) {
-        section.style.setProperty('--hero-progress', String(1 - progress));
+        const bar = section.querySelector('.hero-dot.is-active .hero-dot-bar > span');
+        if (bar) bar.style.scale = `${1 - progress} 1`;
       },
       slideChange() {
-        section.style.setProperty('--hero-progress', '0');
+        section
+          .querySelectorAll('.hero-dot-bar > span')
+          .forEach(bar => bar.style.removeProperty('scale'));
       },
     },
     threshold: 10,
@@ -51,10 +55,15 @@ function initHero() {
 
   // Parallax: o texto sobe e some conforme a página rola para fora do hero
   if (!reduceMotion) {
+    const copies = section.querySelectorAll('.hero-copy');
     let ticking = false;
+    let last = '';
     const onScroll = () => {
-      const progress = Math.min(window.scrollY / section.offsetHeight, 1);
-      section.style.setProperty('--hero-scroll', progress.toFixed(3));
+      const progress = Math.min(window.scrollY / section.offsetHeight, 1).toFixed(3);
+      if (progress !== last) {
+        last = progress;
+        copies.forEach(copy => copy.style.setProperty('--hero-scroll', progress));
+      }
       ticking = false;
     };
     window.addEventListener(
@@ -70,6 +79,16 @@ function initHero() {
   }
 
   const pauseBtn = section.querySelector('.hero-pause-btn');
+
+  // Fora da tela o carrossel não precisa trocar de foto
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    new window.IntersectionObserver(([entry]) => {
+      if (pauseBtn?.getAttribute('aria-pressed') === 'true') return;
+      if (entry.isIntersecting) hero.autoplay.resume();
+      else hero.autoplay.pause();
+    }).observe(section);
+  }
+
   if (!pauseBtn) return;
   const setPaused = paused => {
     pauseBtn.setAttribute('aria-pressed', String(paused));

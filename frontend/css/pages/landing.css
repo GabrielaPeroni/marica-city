@@ -77,10 +77,6 @@
   @apply block h-full origin-left scale-x-0 bg-white;
 }
 
-.hero-dot.is-active .hero-dot-bar > span {
-  scale: var(--hero-progress, 0) 1;
-}
-
 .hero-dot:focus-visible {
   @apply rounded-sm outline-2 outline-offset-4 outline-white;
 }
