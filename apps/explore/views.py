@@ -18,6 +18,7 @@ from apps.core.decorators import moderator_required
 from apps.core.ratelimit import limit
 from apps.core.utils import safe_next
 
+from .api import MAX_IDS, parse_ids, valid_ids
 from .forms import PlaceForm, PlaceImageFormSet, PlaceReviewForm
 from .models import Category, Favorite, Place, PlaceApproval, PlaceImage, PlaceReview
 from .visits import record_visit
@@ -500,7 +501,8 @@ def toggle_favorite_view(request, pk):
 
     deleted, _detail = Favorite.objects.filter(user=request.user, place=place).delete()
     if not deleted:
-        Favorite.objects.create(user=request.user, place=place)
+        # get_or_create: dois cliques simultâneos não quebram a restrição de unicidade
+        Favorite.objects.get_or_create(user=request.user, place=place)
     return JsonResponse(
         {
             "success": True,
@@ -527,7 +529,7 @@ def favorites_list_view(request):
         places = Place.objects.filter(pk__in=ids)
     else:
         try:
-            ids = [int(i) for i in request.GET.get("ids", "").split(",") if i.strip()]
+            ids = parse_ids(request.GET.get("ids", ""))
         except ValueError:
             ids = []
         places = Place.objects.public().filter(pk__in=ids)
@@ -552,13 +554,16 @@ def sync_favorites_view(request):
         local_ids = json.loads(request.body).get("favorites", [])
     except (json.JSONDecodeError, AttributeError):
         return JsonResponse({"success": False, "error": "Invalid JSON"}, status=400)
+    if not isinstance(local_ids, list) or len(local_ids) > MAX_IDS:
+        return JsonResponse({"success": False, "error": "Invalid list"}, status=400)
 
     existing = set(_favorite_ids(request.user))
     new_places = Place.objects.public().filter(
-        pk__in=[i for i in local_ids if isinstance(i, int) and i not in existing]
+        pk__in=[i for i in valid_ids(local_ids) if i not in existing]
     )
     added = Favorite.objects.bulk_create(
-        [Favorite(user=request.user, place=place) for place in new_places]
+        [Favorite(user=request.user, place=place) for place in new_places],
+        ignore_conflicts=True,
     )
     return JsonResponse(
         {

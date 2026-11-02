@@ -49,6 +49,16 @@ uv run coverage run manage.py test apps
 uv run coverage report --fail-under=80
 ```
 
+`apps/core/tests/test_api_and_pages.py` cobre o contrato das APIs JSON, o status de
+cada página por tipo de visitante e o número de consultas. O que só aparece no
+navegador (chamadas repetidas, falhas de rede, erros no console, recarregamentos,
+trabalho com a página parada) fica em `scripts/browser_check.mjs`:
+
+```bash
+npx playwright install chromium   # uma vez
+BASE_URL=http://localhost:8000 CHECK_USER=x CHECK_PASSWORD=y npm run check:browser
+```
+
 Cada app tem um pacote `apps/<app>/tests/`: `test_<app>.py` com os testes
 gerais do app e um `test_<tema>.py` para cada recurso maior (visitas,
 limite de requisições, snapshot de demo...). Teste novo vai no arquivo do tema

@@ -11,6 +11,27 @@ from apps.core.thumbnails import thumbnail_url
 
 from .models import Place
 
+# Mais do que qualquer lista real de favoritos; acima disso é abuso
+MAX_IDS = 200
+MAX_ID = 2**31
+
+
+def valid_ids(values):
+    """Só IDs possíveis: nada de bool, negativo ou número grande demais para o banco."""
+    return [
+        value
+        for value in values
+        if isinstance(value, int) and not isinstance(value, bool) and 0 < value < MAX_ID
+    ]
+
+
+def parse_ids(raw):
+    """IDs de "1,2,3". ValueError se houver texto ou IDs demais."""
+    parts = [part for part in raw.split(",") if part.strip()]
+    if len(parts) > MAX_IDS:
+        raise ValueError("too many ids")
+    return valid_ids([int(part) for part in parts])
+
 
 def _places():
     return (
@@ -65,7 +86,7 @@ def map_data_api(request):
 def places_by_ids_api(request):
     """Detalhes dos lugares em ?ids=1,2,3 (página de favoritos sem login)"""
     try:
-        ids = [int(i) for i in request.GET.get("ids", "").split(",") if i.strip()]
+        ids = parse_ids(request.GET.get("ids", ""))
     except ValueError:
         return JsonResponse({"error": "Formato de ID inválido"}, status=400)
 

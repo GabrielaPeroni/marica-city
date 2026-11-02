@@ -28,6 +28,19 @@ jobs:
             [ "$code" = 200 ] || exit 1
           done
 
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Check calls, failures and idle work on public pages
+        env:
+          BASE_URL: ${{ env.SITE }}
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          npm run check:browser
+
       - name: Lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:

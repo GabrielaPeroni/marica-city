@@ -74,6 +74,59 @@ jobs:
         run: |
           prettier --config .github/.prettierrc --ignore-path .github/.prettierignore --check "**/*.{js,ts,jsx,tsx,json,yaml,yml,md,html,css}" || (echo "::error::Some files need formatting. Run 'prettier --write .' to fix." && exit 1)
 
+  browser:
+    name: Browser checks
+    runs-on: ubuntu-latest
+    env:
+      DJANGO_SETTINGS_MODULE: config.settings.dev
+      DEBUG: "True"
+      SECRET_KEY: test-secret-key-for-ci
+      GOOGLE_OAUTH_CLIENT_ID: test-client-id-for-ci-only
+      RATELIMIT_ENABLE: "False"
+      BASE_URL: http://localhost:8000
+      CHECK_USER: browser-check
+      CHECK_PASSWORD: browser-check-password
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Install dependencies
+        run: |
+          uv sync --locked
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Install browser
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Start the site with demo content
+        run: |
+          uv run python manage.py migrate --noinput
+          uv run python manage.py load_demo_data
+          uv run python manage.py shell -c "from apps.accounts.models import User; User.objects.create_user('$CHECK_USER', password='$CHECK_PASSWORD', is_staff=True)"
+          uv run python manage.py runserver 8000 --noreload &
+          curl -s --retry 20 --retry-connrefused --retry-delay 1 -o /dev/null "$BASE_URL/healthz/"
+
+      - name: Check calls, failures and idle work on every page
+        run: |
+          npm run check:browser
+
   tests:
     name: Tests
     runs-on: ubuntu-latest
