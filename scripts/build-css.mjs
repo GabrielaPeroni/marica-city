@@ -80,8 +80,13 @@ function copyFonts() {
 
 // Strips the license comment, the lucide class and the whitespace so the tag can inline it.
 function minifySvg(svg) {
-  return svg
-    .replace(/<!--[\s\S]*?-->/g, '')
+  let uncommented = svg;
+  let previous;
+  do {
+    previous = uncommented;
+    uncommented = previous.replace(/<!--[\s\S]*?-->/g, '');
+  } while (uncommented !== previous);
+  return uncommented
     .replace(/\s+class="[^"]*"/, '')
     .replace(/\s+/g, ' ')
     .replace(/>\s+</g, '><')

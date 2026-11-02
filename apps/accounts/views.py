@@ -14,7 +14,7 @@ from django.views.decorators.http import require_POST
 
 from apps.core.decorators import moderator_required
 from apps.core.ratelimit import limit
-from apps.core.utils import is_local_url
+from apps.core.utils import local_url
 
 from . import codes, google
 from .forms import (
@@ -306,7 +306,7 @@ def logout_view(request):
 
     # Volta para a página de origem, ou para a inicial
     next_url = request.POST.get("next") or request.META.get("HTTP_REFERER")
-    return redirect(next_url if is_local_url(request, next_url) else "core:landing")
+    return redirect(local_url(request, next_url, "core:landing"))
 
 
 # Gerenciamento de usuários (painel)

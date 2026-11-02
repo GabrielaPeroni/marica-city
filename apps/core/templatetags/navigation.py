@@ -2,7 +2,7 @@ from urllib.parse import urlparse
 
 from django import template
 
-from apps.core.utils import is_local_url
+from apps.core.utils import local_url
 
 register = template.Library()
 
@@ -19,7 +19,7 @@ def back_url(context, default):
         request.GET.get("next"),
         request.META.get("HTTP_REFERER"),
     ):
-        if not is_local_url(request, candidate):
+        if not local_url(request, candidate):
             continue
         parsed = urlparse(candidate)
         if parsed.path != request.path:

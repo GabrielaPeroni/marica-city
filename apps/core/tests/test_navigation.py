@@ -1,6 +1,8 @@
 from django.template import Context, Template
 from django.test import RequestFactory, SimpleTestCase
 
+from apps.core.utils import local_url
+
 TAG = Template("{% load navigation %}{% back_url '/default/' %}")
 
 
@@ -32,3 +34,21 @@ class BackUrlTagTests(SimpleTestCase):
         same = self.rf.get("/form/", HTTP_REFERER="http://testserver/form/")
         self.assertEqual(render(external), "/default/")
         self.assertEqual(render(same), "/default/")
+
+
+class LocalUrlTests(SimpleTestCase):
+    def test_only_urls_on_this_site_pass(self):
+        request = RequestFactory().get("/")
+        for url in ("/explore/", "http://testserver/explore/"):
+            self.assertEqual(local_url(request, url, "/d/"), url)
+        for url in (
+            None,
+            "",
+            "https://evil.example/",
+            "//evil.example/",
+            "/\\evil.example/",
+            "\\\\evil.example/",
+            "javascript:alert(1)",
+            "http:///evil.example/",
+        ):
+            self.assertEqual(local_url(request, url, "/d/"), "/d/", url)
