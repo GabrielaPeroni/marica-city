@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.11-slim AS builder
+FROM python:3.15-slim AS builder
 
 COPY --from=ghcr.io/astral-sh/uv:0.12.13 /uv /uvx /bin/
 
@@ -22,7 +22,7 @@ RUN SECRET_KEY=build-only \
     DJANGO_SETTINGS_MODULE=config.settings.prod \
     /venv/bin/python manage.py collectstatic --noinput
 
-FROM python:3.11-slim AS runtime
+FROM python:3.15-slim AS runtime
 
 RUN groupadd --system app && useradd --system --gid app --create-home app
 
